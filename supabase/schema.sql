@@ -17,7 +17,9 @@ CREATE TABLE IF NOT EXISTS public.events (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT NOT NULL,
-  date TIMESTAMP WITH TIME ZONE NOT NULL,
+  date DATE NOT NULL,
+  start_time TEXT,
+  end_time TEXT,
   location TEXT NOT NULL,
   organizer TEXT NOT NULL,
   image_url TEXT,
@@ -131,23 +133,37 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- Insert some sample data (optional, remove in production)
-INSERT INTO public.events (title, description, date, location, organizer, image_url)
+INSERT INTO public.events (title, description, date, start_time, end_time, location, organizer, image_url)
 VALUES 
   (
-    'Tech Conference 2025',
-    'La conferencia de tecnología más importante del año',
-    '2025-03-15 09:00:00+00',
-    'Centro de Convenciones Ciudad',
-    'TechOrg',
+    'Conferencia de Tecnología 2024',
+    E'Únase a nosotros en el evento tecnológico más esperado del año. Exploraremos las últimas tendencias en inteligencia artificial, desarrollo de software y ciberseguridad. Este evento es una oportunidad única para aprender de expertos de la industria, participar en talleres prácticos y establecer contactos con profesionales de ideas afines. No te pierdas la oportunidad de ser parte del futuro de la tecnología.\n\nHabrá ponencias magistrales, paneles de discusión y sesiones de networking diseñadas para inspirar y educar. ¡Prepárese para un día lleno de innovación y conocimiento!',
+    '2024-10-15',
+    '09:00',
+    '17:00',
+    'Centro de Convenciones Metropolitano',
+    'Tech Forward Inc.',
     'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop'
   ),
   (
-    'Developer Summit',
-    'Encuentro de desarrolladores con charlas y talleres',
-    '2025-04-20 10:00:00+00',
-    'Hotel Continental',
-    'DevCommunity',
-    'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&auto=format&fit=crop'
+    'Festival de Música Indie',
+    E'Disfruta de una jornada completa con los mejores artistas emergentes de la escena indie. Música en vivo, food trucks gourmet y un ambiente increíble te esperan en este festival imperdible.\n\nContaremos con múltiples escenarios, zonas de descanso y experiencias interactivas para todos los asistentes.',
+    '2024-11-22',
+    '14:00',
+    '23:00',
+    'Parque Central',
+    'Indie Music Collective',
+    'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&auto=format&fit=crop'
+  ),
+  (
+    'Taller de Cocina Italiana',
+    E'Aprende a preparar auténtica pasta italiana de la mano de chefs profesionales. En este taller práctico descubrirás los secretos de la cocina italiana tradicional, desde cómo hacer pasta fresca hasta preparar las salsas más deliciosas.\n\nIncluye todos los ingredientes y utensilios necesarios. Al final podrás degustar tus propias creaciones.',
+    '2024-12-05',
+    '16:00',
+    '19:00',
+    'Escuela de Gastronomía "El Sabor"',
+    'Culinary Academy',
+    'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&auto=format&fit=crop'
   );
 
 -- Insert sample talks for first event
