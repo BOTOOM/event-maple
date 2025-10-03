@@ -10,9 +10,9 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface EventDetailPageProps {
-  params: {
+  params: Promise<{
     eventId: string;
-  };
+  }>;
 }
 
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
@@ -26,7 +26,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   }
 
   // Convertir eventId de string a number (bigint)
-  const eventId = parseInt(params.eventId, 10);
+  const resolvedParams = await params;
+  const eventId = parseInt(resolvedParams.eventId, 10);
   
   if (isNaN(eventId)) {
     notFound();

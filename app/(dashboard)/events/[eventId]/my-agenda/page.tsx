@@ -7,12 +7,12 @@ import { MyAgendaClient } from "@/components/agenda/my-agenda-client";
 import { Talk } from "@/lib/types/talk";
 
 interface MyAgendaPageProps {
-  params: {
+  params: Promise<{
     eventId: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     date?: string;
-  };
+  }>;
 }
 
 export default async function MyAgendaPage({ params, searchParams }: MyAgendaPageProps) {
@@ -25,7 +25,9 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
     redirect("/login");
   }
 
-  const eventId = parseInt(params.eventId, 10);
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const eventId = parseInt(resolvedParams.eventId, 10);
 
   if (isNaN(eventId)) {
     notFound();
@@ -60,7 +62,7 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
   ).sort();
 
   // Determine selected date (from query param or first available)
-  const selectedDate = searchParams.date || uniqueDates[0] || event.start_date;
+  const selectedDate = resolvedSearchParams.date || uniqueDates[0] || event.start_date;
 
   // Fetch user's personal agenda
   const { data: agendaItems } = await supabase

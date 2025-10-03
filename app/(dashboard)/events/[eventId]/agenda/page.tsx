@@ -10,9 +10,9 @@ import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface AgendaPageProps {
-  params: {
+  params: Promise<{
     eventId: string;
-  };
+  }>;
 }
 
 export default async function AgendaPage({ params }: AgendaPageProps) {
@@ -25,7 +25,8 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
     redirect("/login");
   }
 
-  const eventId = parseInt(params.eventId, 10);
+  const resolvedParams = await params;
+  const eventId = parseInt(resolvedParams.eventId, 10);
 
   if (isNaN(eventId)) {
     notFound();

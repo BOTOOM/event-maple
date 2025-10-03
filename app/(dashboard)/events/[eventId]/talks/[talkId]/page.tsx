@@ -10,10 +10,10 @@ import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface TalkDetailPageProps {
-  params: {
+  params: Promise<{
     eventId: string;
     talkId: string;
-  };
+  }>;
 }
 
 export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
@@ -26,8 +26,9 @@ export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
     redirect("/login");
   }
 
-  const eventId = parseInt(params.eventId, 10);
-  const talkId = parseInt(params.talkId, 10);
+  const resolvedParams = await params;
+  const eventId = parseInt(resolvedParams.eventId, 10);
+  const talkId = parseInt(resolvedParams.talkId, 10);
 
   if (isNaN(eventId) || isNaN(talkId)) {
     notFound();
