@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Event, getEventTitle } from "@/lib/types/event";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface EventCardProps {
@@ -12,7 +12,8 @@ interface EventCardProps {
 
 export function EventCard({ event }: EventCardProps) {
   const eventTitle = getEventTitle(event);
-  const formattedDate = format(new Date(event.start_date), "d 'de' MMMM, yyyy", {
+  // Usar parseISO para evitar conversión de timezone que cambia el día
+  const formattedDate = format(parseISO(event.start_date), "d 'de' MMMM, yyyy", {
     locale: es,
   });
 
@@ -58,12 +59,15 @@ export function EventCard({ event }: EventCardProps) {
           )}
         </div>
 
-        <Button asChild className="w-full" size="lg">
-          <Link href={`/events/${event.id}`}>
+        <Link
+          href={`/events/${event.id}`}
+          className="w-full "
+        >
+          <Button asChild className="inline-flex items-center justify-center gap-2 w-full mt-2" size="lg">
             Ver detalles
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </div>
   );

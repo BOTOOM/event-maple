@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/events/favorite-button";
 import { getEventTitle } from "@/lib/types/event";
 import Link from "next/link";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface EventDetailPageProps {
@@ -55,14 +55,14 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
   const isFavorite = !!favoriteData;
 
-  // Usar start_date de tu schema
-  const formattedDate = format(new Date(event.start_date), "d 'de' MMMM, yyyy", {
+  // Usar parseISO para evitar conversión de timezone que cambia el día
+  const formattedDate = format(parseISO(event.start_date), "d 'de' MMMM, yyyy", {
     locale: es,
   });
 
-  // Tu schema no tiene start_time/end_time en events, son date completos
-  const startDate = new Date(event.start_date);
-  const endDate = new Date(event.end_date);
+  // Parsear fechas sin conversión de timezone
+  const startDate = parseISO(event.start_date);
+  const endDate = parseISO(event.end_date);
   const timeRange = `${format(startDate, 'HH:mm')} - ${format(endDate, 'HH:mm')}`;
 
   const eventTitle = getEventTitle(event);
@@ -133,56 +133,90 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             {eventTitle}
           </h1>
 
-          {/* Event Meta */}
-          <div className="space-y-4 mb-8">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Calendar className="h-5 w-5 text-gray-700" />
+          {/* Layout: Info Left + Actions Right (Desktop) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+            {/* Left Column: Event Meta */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-gray-100 rounded-lg">
+                  <Calendar className="h-5 w-5 text-gray-700" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Fecha</p>
+                  <p className="text-base font-medium text-gray-900">
+                    {formattedDate}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Fecha y hora</p>
-                <p className="text-base font-medium text-gray-900">
-                  {formattedDate} | {timeRange}
-                </p>
-              </div>
+
+              {event.location && (
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <MapPin className="h-5 w-5 text-gray-700" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Ubicación</p>
+                    <p className="text-base font-medium text-gray-900">
+                      {event.location}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {event.organizer && (
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Users className="h-5 w-5 text-gray-700" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Organizado por</p>
+                    <p className="text-base font-medium text-gray-900">
+                      {event.organizer}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {event.location && (
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <MapPin className="h-5 w-5 text-gray-700" />
+            {/* Right Column: Actions Panel */}
+            <div className="lg:col-span-1">
+              <div className="bg-gray-50 rounded-lg p-5 space-y-4 border border-gray-200">
+                <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
+                  Acciones Rápidas
+                </h3>
+                
+                <div className="space-y-3">
+                  <Button asChild className="w-full" size="lg">
+                    <Link 
+                      href={`/events/${eventId}/agenda`}
+                      className="inline-flex items-center justify-start gap-2"
+                    >
+                      <CalendarDays className="h-5 w-5" />
+                      Ver Agenda Completa
+                    </Link>
+                  </Button>
+                  
+                  <Button asChild variant="outline" className="w-full" size="lg">
+                    <Link 
+                      href={`/events/${eventId}/my-agenda`}
+                      className="inline-flex items-center justify-start gap-2"
+                    >
+                      <Calendar className="h-5 w-5" />
+                      Mi Agenda Personal
+                    </Link>
+                  </Button>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">Ubicación</p>
-                  <p className="text-base font-medium text-gray-900">
-                    {event.location}
-                  </p>
+
+                {/* Desktop: Add to Favorites */}
+                <div className="pt-3 border-t border-gray-300">
+                  <FavoriteButton
+                    eventId={eventId}
+                    initialIsFavorite={isFavorite}
+                    variant="button"
+                  />
                 </div>
               </div>
-            )}
-
-            {event.organizer && (
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <Users className="h-5 w-5 text-gray-700" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Organizado por</p>
-                  <p className="text-base font-medium text-gray-900">
-                    {event.organizer}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Desktop: Add to Favorites */}
-          <div className="hidden md:block mb-8">
-            <FavoriteButton
-              eventId={eventId}
-              initialIsFavorite={isFavorite}
-              variant="button"
-            />
+            </div>
           </div>
 
           {/* Description */}
@@ -199,29 +233,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             </div>
           )}
 
-          {/* Agenda Section */}
-          <div className="border-t border-gray-200 pt-8 mt-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Agenda del Evento
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Explora las charlas, talleres y actividades programadas para este evento.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-                <Link href={`/events/${eventId}/agenda`}>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                  <CalendarDays className="h-5 w-5 mr-2" />
-                  Ver Agenda Completa
-              </Button>
-                </Link>
-              <Link href={`/events/${eventId}/my-agenda`}>
-              <Button asChild size="lg" className="w-full sm:w-auto">
-                  <Calendar className="h-5 w-5 mr-2" />
-                  Mi Agenda Personal
-              </Button>
-              </Link>
-            </div>
-          </div>
 
           {/* CTA Button */}
           {/* <div className="mt-8">
