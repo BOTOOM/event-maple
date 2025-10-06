@@ -10,7 +10,7 @@ export function Hero() {
           <div
             className="absolute inset-0 opacity-0 sm:opacity-40"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&auto=format&fit=crop")',
+              backgroundImage: 'url("https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/venue.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy92ZW51ZS5qcGciLCJpYXQiOjE3NTk3NzIyMTgsImV4cCI6MTc5MTMwODIxOH0.hdzTkJWumQFp3fiVw3UR2BQAlJFFitaDEh8kT9HrMVw")',
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

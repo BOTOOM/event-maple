@@ -115,6 +115,14 @@ export function ForgotPasswordForm() {
 
   return (
     <div className="w-full max-w-md">
+      {/* Back Button */}
+      <div className="mb-6">
+        <Link href="/login" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+          <ArrowLeft className="h-4 w-4" />
+          <span className="text-sm font-medium">Volver al inicio de sesión</span>
+        </Link>
+      </div>
+
       {/* Logo - Solo en mobile */}
       <div className="flex justify-center mb-8 md:hidden">
         <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
