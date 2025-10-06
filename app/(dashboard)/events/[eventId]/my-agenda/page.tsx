@@ -1,9 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Calendar, AlertCircle } from "lucide-react";
+import { Calendar, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MyAgendaClient } from "@/components/agenda/my-agenda-client";
+import { AgendaHeader } from "@/components/agenda/agenda-header";
 import { Talk } from "@/lib/types/talk";
 
 interface MyAgendaPageProps {
@@ -97,38 +98,9 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            <div className="flex items-center gap-3">
-              <Link href={`/events/${eventId}`}>
-                <Button variant="ghost" size="icon" className="flex-shrink-0">
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-              </Link>
-              <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
-                Mi Agenda
-              </h1>
-            </div>
-
-            <Link href={`/events/${eventId}/agenda`}>
-              <Button variant="outline" size="sm" className="hidden sm:flex">
-                <Calendar className="h-4 w-4 mr-2" />
-                Ver Todas las Charlas
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <AgendaHeader eventId={eventId} eventTitle={eventTitle} />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl">
-        {/* Event Title */}
-        <div className="mb-6">
-          <p className="text-sm text-gray-600 mb-1">Evento</p>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-            {eventTitle}
-          </h2>
-        </div>
 
         {/* Empty State */}
         {hasNoTalks ? (

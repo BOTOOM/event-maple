@@ -1,4 +1,4 @@
-# Próximos Pasos - EventPlanner
+# Próximos Pasos - EventMaple
 
 ## ✅ Completado (Fase 1)
 

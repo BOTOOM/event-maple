@@ -208,27 +208,27 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               Explora las charlas, talleres y actividades programadas para este evento.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                 <Link href={`/events/${eventId}/agenda`}>
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                   <CalendarDays className="h-5 w-5 mr-2" />
                   Ver Agenda Completa
-                </Link>
               </Button>
+                </Link>
+              <Link href={`/events/${eventId}/my-agenda`}>
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href={`/events/${eventId}/my-agenda`}>
                   <Calendar className="h-5 w-5 mr-2" />
                   Mi Agenda Personal
-                </Link>
               </Button>
+              </Link>
             </div>
           </div>
 
           {/* CTA Button */}
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <Button size="lg" className="w-full sm:w-auto">
               Registrarse Ahora
             </Button>
-          </div>
+          </div> */}
         </div>
       </main>
     </div>

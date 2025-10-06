@@ -1,9 +1,10 @@
 "use client";
 
-import { Calendar, Search, Menu } from "lucide-react";
+import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/lib/hooks/use-auth";
 import { useState } from "react";
 
@@ -25,9 +26,13 @@ export function EventsHeader() {
 
           {/* Logo / Title */}
           <Link href="/events" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center md:hidden">
-              <Calendar className="h-5 w-5 text-white" />
-            </div>
+            <Image
+              src="/logo.svg"
+              alt="EventMaple Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 md:w-10 md:h-10"
+            />
             <span className="font-bold text-lg sm:text-xl text-gray-900">
               <span className="hidden md:inline">Gestor de Eventos</span>
               <span className="md:hidden">Eventos</span>

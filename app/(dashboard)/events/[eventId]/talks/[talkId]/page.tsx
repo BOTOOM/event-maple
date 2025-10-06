@@ -14,9 +14,12 @@ interface TalkDetailPageProps {
     eventId: string;
     talkId: string;
   }>;
+  searchParams: Promise<{
+    from?: string;
+  }>;
 }
 
-export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
+export default async function TalkDetailPage({ params, searchParams }: TalkDetailPageProps) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -27,8 +30,17 @@ export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
   }
 
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   const eventId = parseInt(resolvedParams.eventId, 10);
   const talkId = parseInt(resolvedParams.talkId, 10);
+  
+  // Determine back link based on 'from' parameter
+  const backLink = resolvedSearchParams.from === 'my-agenda' 
+    ? `/events/${eventId}/my-agenda` 
+    : `/events/${eventId}/agenda`;
+  const backText = resolvedSearchParams.from === 'my-agenda'
+    ? 'Volver a Mi Agenda'
+    : 'Volver a Agenda';
 
   if (isNaN(eventId) || isNaN(talkId)) {
     notFound();
@@ -74,7 +86,7 @@ export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
       {/* Mobile Header */}
       <div className="md:hidden sticky top-0 z-40 bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-4 h-14">
-          <Link href={`/events/${eventId}/agenda`}>
+          <Link href={backLink}>
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-5 w-5" />
             </Button>
@@ -88,10 +100,10 @@ export default async function TalkDetailPage({ params }: TalkDetailPageProps) {
       <div className="hidden md:block sticky top-0 z-40 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href={`/events/${eventId}/agenda`}>
+            <Link href={backLink}>
               <Button variant="ghost">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver a Agenda
+                {backText}
               </Button>
             </Link>
           </div>

@@ -1,4 +1,4 @@
-# Guía de Configuración - EventPlanner
+# Guía de Configuración - EventMaple
 
 Esta guía te ayudará a configurar el proyecto desde cero.
 

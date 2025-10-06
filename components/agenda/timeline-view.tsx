@@ -16,7 +16,7 @@ export function TimelineView({
   eventId,
   startHour = 7,
   endHour = 20,
-  pixelsPerHour = 80,
+  pixelsPerHour = 140,
 }: TimelineViewProps) {
   const timeSlots = generateTimeSlots(startHour, endHour);
   const totalHeight = (endHour - startHour + 1) * pixelsPerHour;
@@ -28,7 +28,7 @@ export function TimelineView({
         {timeSlots.map((slot) => (
           <div
             key={slot.label}
-            className="absolute left-0 w-full px-2 text-xs font-medium text-gray-600"
+            className="absolute left-0 w-full px-2 text-sm font-medium text-gray-600"
             style={{
               top: `${(slot.hour - startHour) * pixelsPerHour}px`,
               height: `${pixelsPerHour}px`,

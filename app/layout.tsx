@@ -9,8 +9,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "EventPlanner - La forma más inteligente de organizar tu evento",
+  title: "EventMaple - La forma más inteligente de organizar tu evento",
   description: "Tu agenda de eventos, simplificada. Gestiona y disfruta de cada momento sin complicaciones.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

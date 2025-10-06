@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "lucide-react";
+import Image from "next/image";
 
 export function Navbar() {
   return (
@@ -10,12 +10,16 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-primary">
-            <div className="w-8 h-8 sm:w-auto sm:h-auto bg-primary rounded-lg sm:rounded-none flex items-center justify-center sm:bg-transparent">
-              <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-white sm:text-primary" />
-            </div>
-            <span className="font-bold text-lg sm:text-xl">
-              <span className="hidden sm:inline">EventPlanner</span>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.svg"
+              alt="EventMaple Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 sm:w-10 sm:h-10"
+            />
+            <span className="font-bold text-lg sm:text-xl text-gray-900">
+              <span className="hidden sm:inline">EventMaple</span>
               <span className="sm:hidden">EventApp</span>
             </span>
           </Link>
@@ -34,22 +38,26 @@ export function Navbar() {
             >
               Características
             </Link>
-            <Link
+            {/* <Link
               href="#pricing"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               Precios
-            </Link>
+            </Link> */}
           </div>
 
           {/* CTA Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <Button variant="ghost" asChild className="text-sm sm:text-base px-3 sm:px-4">
-              <Link href="/login">
+            <Link href="/login">
+              <Button
+                variant="ghost"
+                asChild
+                className="text-sm sm:text-base px-3 sm:px-4"
+              >
                 <span className="hidden sm:inline">Iniciar Sesión</span>
                 <span className="sm:hidden">Iniciar Sesión</span>
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

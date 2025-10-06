@@ -113,7 +113,7 @@ await signOut(); // Redirige a /
 | OAuth (Google/Apple) | No | Sí |
 | Tabs Login/Register | No | No (páginas separadas) |
 | Hero gradient | Gris oscuro + imagen | Azul-morado |
-| Navbar | EventPlanner | EventApp |
+| Navbar | EventMaple | EventApp |
 
 ## 📋 Validaciones Implementadas
 

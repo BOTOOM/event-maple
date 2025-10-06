@@ -1,17 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Talk } from "@/lib/types/talk";
 import { DateSelector } from "./date-selector";
 import { TimelineView } from "./timeline-view";
-import { detectConflicts, TalkWithConflict } from "@/lib/utils/timeline";
+import { detectConflicts, TalkWithConflict, getTalkColor } from "@/lib/utils/timeline";
 
 interface MyAgendaClientProps {
   talks: Array<Talk & { is_in_my_agenda: boolean }>;
   eventId: number;
   selectedDate: string;
   availableDates: string[];
+}
+
+interface RoomLegend {
+  room: string;
+  colorClasses: string;
+  count: number;
 }
 
 export function MyAgendaClient({
@@ -22,6 +28,18 @@ export function MyAgendaClient({
 }: MyAgendaClientProps) {
   const router = useRouter();
   const [currentDate, setCurrentDate] = useState(selectedDate);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile on mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleDateChange = (newDate: string) => {
     setCurrentDate(newDate);
@@ -31,6 +49,36 @@ export function MyAgendaClient({
 
   // Detect conflicts
   const talksWithConflicts = detectConflicts(talks) as TalkWithConflict[];
+
+  // Generate dynamic legend based on rooms in talks
+  const roomLegends: RoomLegend[] = [];
+  const roomMap = new Map<string, { colorClasses: string; count: number }>();
+
+  // Count talks per room and get colors
+  talks.forEach((talk) => {
+    const room = talk.room || 'Sin sala';
+    const colorClasses = getTalkColor(talk);
+    
+    if (roomMap.has(room)) {
+      roomMap.get(room)!.count++;
+    } else {
+      roomMap.set(room, { colorClasses, count: 1 });
+    }
+  });
+
+  // Convert to array and sort by count (most talks first)
+  roomMap.forEach((data, room) => {
+    roomLegends.push({
+      room,
+      colorClasses: data.colorClasses,
+      count: data.count,
+    });
+  });
+
+  roomLegends.sort((a, b) => b.count - a.count);
+
+  // Adjust pixels per hour based on screen size
+  const pixelsPerHour = isMobile ? 180 : 140;
 
   return (
     <div className="space-y-6">
@@ -55,42 +103,37 @@ export function MyAgendaClient({
               eventId={eventId}
               startHour={7}
               endHour={20}
-              pixelsPerHour={80}
+              pixelsPerHour={pixelsPerHour}
             />
           </div>
         </div>
       </div>
 
-      {/* Legend */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <h4 className="text-sm font-semibold text-gray-900 mb-3">Leyenda</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-gray-200 border-2 border-gray-300"></div>
-            <span className="text-gray-700">Evento Fijo (Registro, Almuerzo)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-blue-100 border-2 border-blue-300"></div>
-            <span className="text-gray-700">Auditorio Principal</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-green-100 border-2 border-green-300"></div>
-            <span className="text-gray-700">Sala 1A (Tech Talks)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-purple-100 border-2 border-purple-300"></div>
-            <span className="text-gray-700">Sala 1B (Workshops)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-pink-100 border-2 border-pink-300"></div>
-            <span className="text-gray-700">Sala 1C (Tech Talks)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-orange-100 border-2 border-orange-300"></div>
-            <span className="text-gray-700">Sala 1D (Workshops Oracle)</span>
+      {/* Dynamic Legend */}
+      {roomLegends.length > 0 && (
+        <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <h4 className="text-sm font-semibold text-gray-900 mb-3">Salas</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+            {roomLegends.map((legend, index) => {
+              // Extract background color from colorClasses
+              const bgColorMatch = legend.colorClasses.match(/bg-(\w+)-(\d+)/);
+              const borderColorMatch = legend.colorClasses.match(/border-(\w+)-(\d+)/);
+              
+              const bgColor = bgColorMatch ? `bg-${bgColorMatch[1]}-${bgColorMatch[2]}` : 'bg-gray-100';
+              const borderColor = borderColorMatch ? `border-${borderColorMatch[1]}-${borderColorMatch[2]}` : 'border-gray-300';
+
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <div className={`w-4 h-4 rounded ${bgColor} border-2 ${borderColor} flex-shrink-0`}></div>
+                  <span className="text-gray-700 truncate">
+                    {legend.room} {legend.count > 1 && `(${legend.count})`}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

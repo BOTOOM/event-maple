@@ -12,7 +12,7 @@ export function Footer() {
           <div className="col-span-1">
             <Link href="/" className="flex items-center gap-2 text-white mb-4">
               <Calendar className="h-6 w-6" />
-              <span className="font-bold text-xl">EventPlanner</span>
+              <span className="font-bold text-xl">EventMaple</span>
             </Link>
             <p className="text-sm text-gray-400">
               La forma más inteligente de organizar tu evento.
@@ -33,11 +33,11 @@ export function Footer() {
                   Características
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="#pricing" className="text-sm hover:text-white transition-colors">
                   Precios
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -76,7 +76,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-sm text-gray-400">
-            © {currentYear} EventPlanner. Todos los derechos reservados.
+            © {currentYear} EventMaple. Todos los derechos reservados.
           </p>
         </div>
       </div>

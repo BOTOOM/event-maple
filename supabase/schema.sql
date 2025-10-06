@@ -1,4 +1,4 @@
--- EventPlanner Database Schema for Supabase
+-- EventMaple Database Schema for Supabase
 -- Run this SQL in your Supabase SQL Editor to create all necessary tables
 
 -- Enable UUID extension

@@ -1,4 +1,4 @@
-# EventPlanner
+# EventMaple
 
 Aplicación web responsiva para gestionar agendas de eventos con autenticación mediante Supabase.
 
