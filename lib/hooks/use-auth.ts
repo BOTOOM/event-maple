@@ -31,9 +31,15 @@ export function useAuth() {
   }, [supabase, router]);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
+    try {
+      await supabase.auth.signOut();
+      // Force navigation to home page
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error signing out:", error);
+      // Still redirect on error
+      window.location.href = "/";
+    }
   };
 
   return {
