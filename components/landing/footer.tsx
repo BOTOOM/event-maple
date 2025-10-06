@@ -42,7 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-white mb-4">Empresa</h3>
+            <h3 className="font-semibold text-white mb-4">El Proyecto</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-sm hover:text-white transition-colors">
@@ -76,7 +76,16 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-sm text-gray-400">
-            © {currentYear} EventMaple. Todos los derechos reservados.
+              Edwar Diaz 
+            © {currentYear} EventMaple. Todos los derechos reservados.  Desarrollado con ❤️ por{" "}
+            <a 
+              href="https://edwardiaz.dev" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 transition-colors font-medium"
+            >
+              Edwar Diaz 
+            </a>
           </p>
         </div>
       </div>
