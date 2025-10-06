@@ -15,7 +15,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       <div
         ref={ref}
         className={cn(
-          "pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-lg border p-4 pr-6 shadow-lg transition-all",
+          "pointer-events-auto relative flex w-full items-start justify-between space-x-4 overflow-hidden rounded-lg border p-4 pr-8 shadow-2xl transition-all animate-in slide-in-from-top-5",
           {
             "border-gray-200 bg-white text-gray-900": variant === "default",
             "border-red-200 bg-red-50 text-red-900": variant === "destructive",
@@ -25,7 +25,7 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         )}
         {...props}
       >
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 min-w-0">{children}</div>
         {onClose && (
           <button
             onClick={onClose}

@@ -11,18 +11,27 @@ export interface CheckboxProps
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, onCheckedChange, ...props }, ref) => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+
+    const handleClick = () => {
+      inputRef.current?.click();
+    };
+
     return (
       <div className="relative inline-flex">
         <input
           type="checkbox"
           className="peer sr-only"
-          ref={ref}
+          ref={inputRef}
           onChange={(e) => onCheckedChange?.(e.target.checked)}
           {...props}
         />
         <div
+          onClick={handleClick}
           className={cn(
-            "h-5 w-5 shrink-0 rounded border border-gray-300 ring-offset-background",
+            "h-5 w-5 shrink-0 rounded border border-gray-300 ring-offset-background cursor-pointer",
             "peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2",
             "peer-checked:bg-primary peer-checked:border-primary peer-checked:text-primary-foreground",
             "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",

@@ -58,14 +58,12 @@ export function RegisterForm() {
       return;
     }
 
-    // En mobile verificar términos, en desktop auto-aceptar
-    const termsAccepted = formData.acceptTerms || true; // Desktop auto-acepta
-    
-    if (!termsAccepted && formData.acceptTerms === false) {
+    // Validar que se aceptaron los términos (obligatorio)
+    if (!formData.acceptTerms) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Debes aceptar los términos y condiciones.",
+        description: "Debes aceptar los términos y condiciones para continuar.",
       });
       setIsLoading(false);
       return;
@@ -93,15 +91,31 @@ export function RegisterForm() {
         return;
       }
 
+      // Toast más explícito y con mayor duración
       toast({
         variant: "success",
-        title: "¡Cuenta creada!",
-        description: "Revisa tu email para confirmar tu cuenta.",
-        duration: 7000,
+        title: "✅ ¡Cuenta creada exitosamente!",
+        description: (
+          <div className="space-y-2">
+            <p className="font-semibold text-base">
+              📧 IMPORTANTE: Revisa tu correo electrónico
+            </p>
+            <p className="text-sm">
+              Te hemos enviado un email a <strong>{formData.email}</strong> con 
+              un enlace para confirmar tu cuenta.
+            </p>
+            <p className="text-sm">
+              No olvides revisar tu carpeta de SPAM si no lo ves en tu bandeja principal.
+            </p>
+          </div>
+        ),
+        duration: 15000, // 15 segundos para que el usuario pueda leer
       });
 
-      // Redirect to login or events depending on email confirmation settings
-      router.push("/login");
+      // Redirect to login after showing the toast
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
     } catch (error) {
       toast({
         variant: "destructive",
@@ -243,22 +257,27 @@ export function RegisterForm() {
           </div>
         </div>
 
-        {/* Checkbox de términos - Solo visible en mobile */}
-        <div className="flex items-start gap-2 md:hidden">
+        {/* Checkbox de términos - Obligatorio para todos */}
+        <div className="flex items-start gap-2">
           <Checkbox
             id="terms"
             name="acceptTerms"
             checked={formData.acceptTerms}
             onCheckedChange={(checked) =>
-              setFormData((prev) => ({ ...prev, acceptTerms: checked }))
+              setFormData((prev) => ({ ...prev, acceptTerms: checked as boolean }))
             }
+            required
           />
-          <label htmlFor="terms" className="text-sm text-gray-600 leading-tight">
+          <label htmlFor="terms" className="text-sm text-gray-600 leading-tight cursor-pointer">
             Acepto los{" "}
-            <Link href="/terms" className="text-primary hover:underline">
+            <Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
               términos y condiciones
             </Link>
-            .
+            {" "}y la{" "}
+            <Link href="/privacy" className="text-primary hover:underline font-medium" target="_blank">
+              política de privacidad
+            </Link>
+            . <span className="text-red-500">*</span>
           </label>
         </div>
 

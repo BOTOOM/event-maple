@@ -4,8 +4,8 @@ import * as React from "react";
 
 interface ToastProps {
   id: string;
-  title?: string;
-  description?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
   variant?: "default" | "destructive" | "success";
   duration?: number;
 }
