@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://eventmaple.com",
+    url: "https://event-maple.edwardiaz.dev/",
     siteName: "EventMaple",
     title: "EventMaple - La forma más inteligente de organizar tu evento",
     description: "Tu agenda de eventos, simplificada. Gestiona y disfruta de cada momento sin complicaciones.",
