@@ -45,7 +45,7 @@ export default function TermsPage() {
             </h2>
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>
-                Al acceder y utilizar EventMaple (en adelante, "la Plataforma" o "el Servicio"), 
+                Al acceder y utilizar EventMaple (en adelante, &ldquo;la Plataforma&rdquo; o &ldquo;el Servicio&rdquo;), 
                 usted acepta cumplir y estar vinculado por estos Términos y Condiciones. 
                 Si no está de acuerdo con alguna parte de estos términos, por favor no utilice 
                 nuestros servicios.
@@ -74,7 +74,7 @@ export default function TermsPage() {
                 <li>Crear y personalizar su agenda personal de eventos</li>
               </ul>
               <p>
-                El servicio se proporciona "tal cual" y puede estar sujeto a modificaciones, 
+                El servicio se proporciona &ldquo;tal cual&rdquo; y puede estar sujeto a modificaciones, 
                 mejoras o interrupciones sin previo aviso.
               </p>
             </div>
@@ -308,7 +308,7 @@ export default function TermsPage() {
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>
                 Nos reservamos el derecho de modificar estos Términos en cualquier momento. 
-                Cuando realicemos cambios, actualizaremos la fecha de "última actualización" 
+                Cuando realicemos cambios, actualizaremos la fecha de &ldquo;última actualización&rdquo; 
                 en la parte superior de esta página.
               </p>
               <p>
