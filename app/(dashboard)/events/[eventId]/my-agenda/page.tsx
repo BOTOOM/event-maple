@@ -115,12 +115,12 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
               Aún no has añadido charlas a tu agenda personal. Explora el
               programa y selecciona las que te interesen.
             </p>
-            <Button asChild>
-              <Link href={`/events/${eventId}/agenda`}>
+            <Link href={`/events/${eventId}/agenda`}>
+              <Button>
                 <Calendar className="h-4 w-4 mr-2" />
                 Explorar Agenda
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         ) : (
           <>

@@ -61,9 +61,9 @@ export function EventCard({ event }: EventCardProps) {
 
         <Link
           href={`/events/${event.id}`}
-          className="w-full "
+          className="w-full"
         >
-          <Button asChild className="inline-flex items-center justify-center gap-2 w-full mt-2" size="lg">
+          <Button className="inline-flex items-center justify-center gap-2 w-full mt-2" size="lg">
             Ver detalles
             <ArrowRight className="h-4 w-4" />
           </Button>

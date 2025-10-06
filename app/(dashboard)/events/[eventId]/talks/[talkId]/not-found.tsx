@@ -15,9 +15,9 @@ export default function TalkNotFound() {
         <p className="text-gray-600 mb-8 max-w-md">
           La charla que buscas no existe o ha sido eliminada.
         </p>
-        <Button asChild size="lg">
-          <Link href="/events">Volver a Eventos</Link>
-        </Button>
+        <Link href="/events">
+          <Button size="lg">Volver a Eventos</Button>
+        </Link>
       </div>
     </div>
   );

@@ -186,25 +186,19 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                 </h3>
                 
                 <div className="space-y-3">
-                  <Button asChild className="w-full" size="lg">
-                    <Link 
-                      href={`/events/${eventId}/agenda`}
-                      className="inline-flex items-center justify-start gap-2"
-                    >
+                  <Link href={`/events/${eventId}/agenda`} className="block">
+                    <Button className="w-full" size="lg">
                       <CalendarDays className="h-5 w-5" />
                       Ver Agenda Completa
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                   
-                  <Button asChild variant="outline" className="w-full" size="lg">
-                    <Link 
-                      href={`/events/${eventId}/my-agenda`}
-                      className="inline-flex items-center justify-start gap-2"
-                    >
+                  <Link href={`/events/${eventId}/my-agenda`} className="block">
+                    <Button variant="outline" className="w-full" size="lg">
                       <Calendar className="h-5 w-5" />
                       Mi Agenda Personal
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Desktop: Add to Favorites */}

@@ -51,7 +51,6 @@ export function Navbar() {
             <Link href="/login">
               <Button
                 variant="ghost"
-                asChild
                 className="text-sm sm:text-base px-3 sm:px-4"
               >
                 <span className="hidden sm:inline">Iniciar Sesión</span>

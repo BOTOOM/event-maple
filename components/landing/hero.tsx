@@ -40,7 +40,7 @@ export function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Link href="/register">
-              <Button size="lg" asChild className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100 sm:bg-primary sm:text-white sm:hover:bg-primary/90">
+              <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100 sm:bg-primary sm:text-white sm:hover:bg-primary/90">
                   <span className="hidden sm:inline">Empieza ahora gratis</span>
                   <span className="sm:hidden">Empezar</span>
               </Button>

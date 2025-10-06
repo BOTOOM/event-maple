@@ -159,20 +159,19 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
             )}
 
             {/* Desktop: Botón "Ver Más" */}
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="mt-4 w-full sm:w-auto"
+            <Link 
+              href={`/events/${eventId}/talks/${talk.id}?from=agenda`}
+              className="inline-block mt-4 w-full sm:w-auto"
             >
-              <Link 
-                href={`/events/${eventId}/talks/${talk.id}?from=agenda`} 
-                className="inline-flex items-center gap-2 whitespace-nowrap"
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full"
               >
                 Ver Más
-                <ChevronRight className="h-5 w-5" />
-              </Link>
-            </Button>
+                <ChevronRight className="h-5 w-5 ml-2" />
+              </Button>
+            </Link>
           </div>
 
           {/* Favorite Button */}
