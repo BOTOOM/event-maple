@@ -73,7 +73,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           {/* Header with filter button */}
           <div className="flex items-center justify-between gap-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              {showPastEvents ? "All Events" : "Upcoming Events"}
+              {showPastEvents ? "Todos los Eventos" : "Próximos Eventos"}
             </h1>
             <Button
               variant="outline"
@@ -82,7 +82,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
               className="lg:hidden"
             >
               <Filter className="h-4 w-4 mr-2" />
-              Filters
+              Filtros
             </Button>
           </div>
 
@@ -90,13 +90,13 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           <EventsSearch
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Search events by name, description, or location..."
+            placeholder="Buscar eventos por nombre, descripción o lugar..."
           />
 
           {/* Results count */}
           {searchQuery && (
             <p className="text-sm text-gray-600">
-              Found {filteredEvents.length} event{filteredEvents.length !== 1 ? "s" : ""}
+              {`Se ${filteredEvents.length !== 1 ? 'encontraron' : 'encontró'} ${filteredEvents.length} evento${filteredEvents.length !== 1 ? 's' : ''}`}
             </p>
           )}
         </div>
@@ -106,9 +106,9 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           <div className="text-center py-12">
             {searchQuery ? (
               <div className="space-y-3">
-                <p className="text-lg font-medium text-gray-900">No events found</p>
+                <p className="text-lg font-medium text-gray-900">No se encontraron eventos</p>
                 <p className="text-gray-600">
-                  Try adjusting your search or filters
+                  Prueba a cambiar tu búsqueda o los filtros
                 </p>
               </div>
             ) : (

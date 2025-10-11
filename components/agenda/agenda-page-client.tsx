@@ -116,13 +116,12 @@ export function AgendaPageClient({
         onShowPastTalksChange={setShowPastTalks}
       />
 
-      {/* Main content */}
       <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="mb-6 space-y-4">
           {/* Header with filter button */}
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-              {showPastTalks ? "All Talks" : "Upcoming Talks"}
+              {showPastTalks ? "Todas las Charlas" : "Charlas Actuales y Futuras"}
             </h2>
             <Button
               variant="outline"
@@ -131,7 +130,7 @@ export function AgendaPageClient({
               className="lg:hidden"
             >
               <Filter className="h-4 w-4 mr-2" />
-              Filters
+              Filtros
             </Button>
           </div>
 
@@ -139,13 +138,13 @@ export function AgendaPageClient({
           <TalksSearch
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Search talks by title, speaker, room, or tags..."
+            placeholder="Buscar charlas por título, ponente, tema..."
           />
 
           {/* Results count */}
           {searchQuery && (
             <p className="text-sm text-gray-600">
-              Found {filteredTalks.length} talk{filteredTalks.length !== 1 ? "s" : ""}
+              {`Se ${filteredTalks.length !== 1 ? 'encontraron' : 'encontró'} ${filteredTalks.length} charla${filteredTalks.length !== 1 ? 's' : ''}`}
             </p>
           )}
         </div>
@@ -155,9 +154,9 @@ export function AgendaPageClient({
           <div className="text-center py-12">
             {searchQuery ? (
               <div className="space-y-3">
-                <p className="text-lg font-medium text-gray-900">No talks found</p>
+                <p className="text-lg font-medium text-gray-900">No se encontraron charlas</p>
                 <p className="text-gray-600">
-                  Try adjusting your search or filters
+                  Prueba a cambiar tu búsqueda o los filtros
                 </p>
               </div>
             ) : (
