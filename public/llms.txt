@@ -1,0 +1,28 @@
+# EventMaple
+
+> La forma más inteligente de organizar tu evento.
+
+EventMaple es una plataforma gratuita y de código abierto diseñada para facilitar la gestión de eventos, conferencias y talleres para la comunidad.
+
+## Misión
+Empoderar a la comunidad para crear, organizar y participar en eventos de forma gratuita y accesible.
+
+## Características Principales
+
+### Para Organizadores
+- Creación ilimitada de eventos (tecnológicos y generales).
+- Gestión de agenda: charlas, talleres, breaks.
+- Difusión comunitaria.
+- Herramientas de planificación gratuitas.
+
+### Para Asistentes
+- Agenda personalizada: marca charlas favoritas.
+- Descubrimiento de eventos.
+- Todo en un solo lugar.
+
+## Acceso
+- Web: https://event-maple.edwardiaz.dev/
+- Registro: Gratuito para todos.
+
+## Tecnologías
+Construido con Next.js, React, TailwindCSS y Supabase.
