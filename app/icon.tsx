@@ -1,20 +1,32 @@
-import { ImageResponse } from 'next/og';
+import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge';
+// Usamos el runtime por defecto para asegurar compatibilidad con generateImageMetadata
+// export const runtime = 'edge'
 
-export const size = {
-  width: 32,
-  height: 32,
-};
+export function generateImageMetadata() {
+  return [
+    {
+      contentType: 'image/png',
+      size: { width: 32, height: 32 },
+      id: '32',
+    },
+    {
+      contentType: 'image/png',
+      size: { width: 192, height: 192 },
+      id: '192',
+    },
+    {
+      contentType: 'image/png',
+      size: { width: 512, height: 512 },
+      id: '512',
+    },
+  ]
+}
 
-export const contentType = 'image/png';
+export default function Icon({ id }: { id: string }) {
+  const size = parseInt(id, 10)
 
-export default async function Icon() {
-  // Fetch the SVG logo from the public directory
-  const logoSvg = await fetch(new URL('/logo.svg', 'http://localhost:3000')).then(
-    (res) => res.text()
-  );
-
+  // Logo SVG incrustado directamente
   return new ImageResponse(
     (
       <div
@@ -24,19 +36,25 @@ export default async function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-        //   backgroundColor: '#221b69',
+          background: 'transparent',
         }}
       >
-        <img 
-          src={`data:image/svg+xml;base64,${Buffer.from(logoSvg).toString('base64')}`}
-          width="64"
-          height="64"
-          alt="Logo"
-        />
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 512 512"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="512" height="512" rx="128" fill="#221B69"/>
+          <path d="M256 128L366.851 320H145.149L256 128Z" fill="white"/>
+          <path d="M320 256L430.851 448H209.149L320 256Z" fill="#4F46E5"/>
+        </svg>
       </div>
     ),
     {
-      ...size,
+      width: size,
+      height: size,
     }
-  );
+  )
 }

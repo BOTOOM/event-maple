@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { ServiceWorkerRegister } from "@/components/service-worker-register";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={inter.className} suppressHydrationWarning>
       <body className="antialiased">
+        <ServiceWorkerRegister />
         {children}
         <Toaster />
       </body>
