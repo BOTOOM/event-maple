@@ -48,7 +48,11 @@ function LoginFormContent() {
         description: "Has iniciado sesión correctamente.",
       });
 
-      router.push(returnUrl || "/events");
+      // Validate returnUrl to prevent open redirect vulnerability
+      const isValidReturnUrl = returnUrl && returnUrl.startsWith("/") && !returnUrl.startsWith("//");
+      const destination = isValidReturnUrl ? returnUrl : "/events";
+
+      router.push(destination);
       router.refresh();
     } catch (error) {
       toast({

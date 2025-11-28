@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/client'
+import { Event } from '@/lib/types/event'
 
 // Nota: En sitemap.ts, createClient debe usarse con cuidado o usar fetch directo si es edge.
 // Pero dado que es build time o request time, usaremos una estrategia simple.
@@ -70,9 +71,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
 
       if (response.ok) {
-        const events = await response.json()
+        const events: Partial<Event>[] = await response.json()
         
-        const eventUrls: MetadataRoute.Sitemap = events.map((event: any) => ({
+        const eventUrls: MetadataRoute.Sitemap = events.map((event) => ({
           url: `${baseUrl}/events/${event.id}`,
           lastModified: new Date(event.start_date || new Date()),
           changeFrequency: 'weekly',
