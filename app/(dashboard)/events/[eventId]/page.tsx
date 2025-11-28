@@ -21,10 +21,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/login");
-  }
-
   // Convertir eventId de string a number (bigint)
   const resolvedParams = await params;
   const eventId = parseInt(resolvedParams.eventId, 10);
@@ -44,16 +40,19 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
     notFound();
   }
 
-  // Check if event is favorite - usando tu tabla users_events
-  const { data: favoriteData } = await supabase
-    .from("users_events")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("event_id", eventId)
-    .eq("favorite", true)
-    .single();
-
-  const isFavorite = !!favoriteData;
+  // Check if event is favorite (only if user is logged in)
+  let isFavorite = false;
+  if (user) {
+    const { data: favoriteData } = await supabase
+      .from("users_events")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("event_id", eventId)
+      .eq("favorite", true)
+      .single();
+      
+    isFavorite = !!favoriteData;
+  }
 
   // Usar parseISO para evitar conversión de timezone que cambia el día
   const formattedDate = format(parseISO(event.start_date), "d 'de' MMMM, yyyy", {

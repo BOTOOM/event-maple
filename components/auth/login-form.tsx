@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Calendar, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "@/lib/hooks/use-toast";
 
 export function LoginForm() {
@@ -17,7 +17,9 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
+  const returnUrl = searchParams.get("returnUrl");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +48,7 @@ export function LoginForm() {
         description: "Has iniciado sesión correctamente.",
       });
 
-      router.push("/events");
+      router.push(returnUrl || "/events");
       router.refresh();
     } catch (error) {
       toast({

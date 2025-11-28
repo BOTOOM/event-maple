@@ -38,7 +38,8 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes
-  const protectedRoutes = ["/events", "/my-agenda", "/admin"];
+  // Note: /events is now public. Specific sub-routes like my-agenda are protected at page level.
+  const protectedRoutes = ["/admin"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     request.nextUrl.pathname.startsWith(route)
   );

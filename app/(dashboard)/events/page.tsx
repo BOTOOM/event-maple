@@ -6,14 +6,7 @@ import { Event } from "@/lib/types/event";
 
 export default async function EventsPage() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/login");
-  }
-
+  
   // Fetch ALL events (filtering will be done client-side)
   const { data: events, error } = await supabase
     .from("events")

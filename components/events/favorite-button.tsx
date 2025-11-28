@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/lib/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface FavoriteButtonProps {
   eventId: number; // bigint en tu schema
@@ -24,6 +24,7 @@ export function FavoriteButton({
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
   const router = useRouter();
+  const pathname = usePathname();
 
   const toggleFavorite = async () => {
     setIsLoading(true);
@@ -34,11 +35,9 @@ export function FavoriteButton({
       } = await supabase.auth.getUser();
 
       if (!user) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Debes iniciar sesión para agregar favoritos.",
-        });
+        // Redirigir al login con returnUrl
+        const returnUrl = encodeURIComponent(pathname);
+        router.push(`/login?returnUrl=${returnUrl}`);
         return;
       }
 

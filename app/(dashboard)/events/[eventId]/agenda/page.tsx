@@ -16,10 +16,6 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect("/login");
-  }
-
   const resolvedParams = await params;
   const eventId = parseInt(resolvedParams.eventId, 10);
 
@@ -50,14 +46,18 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
     console.error("Error fetching talks:", talksError);
   }
 
-  // Fetch user's personal agenda
-  const { data: agendaItems } = await supabase
-    .from("personal_agenda")
-    .select("talk_id")
-    .eq("user_id", user.id)
-    .eq("event_id", eventId);
-
-  const agendaTalkIds = new Set(agendaItems?.map((item) => item.talk_id) || []);
+  // Fetch user's personal agenda only if logged in
+  let agendaTalkIds = new Set<number>();
+  
+  if (user) {
+    const { data: agendaItems } = await supabase
+      .from("personal_agenda")
+      .select("talk_id")
+      .eq("user_id", user.id)
+      .eq("event_id", eventId);
+      
+    agendaTalkIds = new Set(agendaItems?.map((item) => item.talk_id) || []);
+  }
 
   const eventTitle = event.title || event.name;
 
