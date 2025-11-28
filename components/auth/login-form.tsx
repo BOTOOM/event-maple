@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -8,16 +8,18 @@ import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Calendar, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "@/lib/hooks/use-toast";
 
-export function LoginForm() {
+function LoginFormContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
+  const returnUrl = searchParams.get("returnUrl");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +48,11 @@ export function LoginForm() {
         description: "Has iniciado sesión correctamente.",
       });
 
-      router.push("/events");
+      // Validate returnUrl to prevent open redirect vulnerability
+      const isValidReturnUrl = returnUrl && returnUrl.startsWith("/") && !returnUrl.startsWith("//");
+      const destination = isValidReturnUrl ? returnUrl : "/events";
+
+      router.push(destination);
       router.refresh();
     } catch (error) {
       toast({
@@ -174,5 +180,13 @@ export function LoginForm() {
 
       </form>
     </div>
+  );
+}
+
+export function LoginForm() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]">Cargando...</div>}>
+      <LoginFormContent />
+    </Suspense>
   );
 }

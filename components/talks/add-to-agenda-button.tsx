@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/lib/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 interface AddToAgendaButtonProps {
@@ -26,6 +26,7 @@ export function AddToAgendaButton({
   const [isInAgenda, setIsInAgenda] = useState(initialIsInAgenda);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const supabase = createClient();
 
   const handleToggle = async (e: React.MouseEvent) => {
@@ -40,11 +41,9 @@ export function AddToAgendaButton({
       } = await supabase.auth.getUser();
 
       if (!user) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Debes iniciar sesión para agregar charlas a tu agenda.",
-        });
+        // Redirigir al login con returnUrl
+        const returnUrl = encodeURIComponent(pathname);
+        router.push(`/login?returnUrl=${returnUrl}`);
         return;
       }
 

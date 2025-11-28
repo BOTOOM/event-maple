@@ -27,6 +27,12 @@ export function Navbar() {
           {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-8">
             <Link
+              href="/events"
+              className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
+            >
+              Explorar Eventos
+            </Link>
+            <Link
               href="#benefits"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
