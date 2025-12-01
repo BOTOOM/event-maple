@@ -3,6 +3,7 @@
 import { X, Filter, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 
 interface TalksFilterSidebarProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ export function TalksFilterSidebar({
   showPastTalks,
   onShowPastTalksChange,
 }: TalksFilterSidebarProps) {
+  const t = useTranslations("Events.FullAgenda.filters");
+
   return (
     <>
       {/* Overlay for mobile */}
@@ -42,7 +45,7 @@ export function TalksFilterSidebar({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter className="h-5 w-5 text-primary" />
-              <h2 className="font-semibold text-gray-900">Filtros</h2>
+              <h2 className="font-semibold text-gray-900">{t("title")}</h2>
             </div>
             <Button
               variant="ghost"
@@ -58,7 +61,7 @@ export function TalksFilterSidebar({
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
               <Clock className="h-4 w-4" />
-              <span>Filtro de Hora</span>
+              <span>{t("timeFilter")}</span>
             </div>
 
             {/* Toggle for Past Talks */}
@@ -67,7 +70,7 @@ export function TalksFilterSidebar({
                 htmlFor="show-past-talks"
                 className="text-sm font-medium text-gray-700 cursor-pointer"
               >
-                Mostrar charlas pasadas
+                {t("showPast")}
               </Label>
               <button
                 id="show-past-talks"
@@ -92,8 +95,8 @@ export function TalksFilterSidebar({
             {/* Info text */}
             <p className="text-xs text-gray-500 leading-relaxed">
               {showPastTalks
-                ? "Mostrando todas las charlas, incluidas las pasadas"
-                : "Mostrando solo charlas actuales y futuras"}
+                ? t("showPastDescOn")
+                : t("showPastDescOff")}
             </p>
           </div>
 
@@ -102,7 +105,7 @@ export function TalksFilterSidebar({
 
           {/* Future: Add more filters here */}
           <div className="text-xs text-gray-400 italic">
-            Más filtros próximamente...
+            {t("moreSoon")}
           </div>
         </div>
       </aside>

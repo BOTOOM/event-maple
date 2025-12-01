@@ -1,10 +1,22 @@
-"use client";
-
+import { Metadata } from "next";
 import { ArrowLeft, Mail, Github, Globe, Code2, Coffee } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Static.Contact.metadata" });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default function ContactPage() {
+  const t = useTranslations("Static.Contact");
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl">
@@ -15,7 +27,7 @@ export default function ContactPage() {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm font-medium">Volver al inicio</span>
+            <span className="text-sm font-medium">{t("back")}</span>
           </Link>
         </div>
 
@@ -25,10 +37,10 @@ export default function ContactPage() {
             <Mail className="h-12 w-12 text-primary" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Contacto
+            {t("header.title")}
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            ¿Tienes preguntas, sugerencias o simplemente quieres conversar? ¡Me encantaría escucharte!
+            {t("header.subtitle")}
           </p>
         </div>
 
@@ -49,7 +61,7 @@ export default function ContactPage() {
             <h2 className="text-3xl font-bold mb-2">Edwar Díaz</h2>
             <div className="flex items-center justify-center gap-2 text-white/90">
               <Code2 className="h-5 w-5" />
-              <p className="text-lg">Desarrollador de EventMaple</p>
+              <p className="text-lg">{t("developer.role")}</p>
             </div>
           </div>
 
@@ -57,16 +69,14 @@ export default function ContactPage() {
           <div className="px-8 py-10">
             <div className="mb-8">
               <p className="text-gray-700 text-center leading-relaxed text-lg">
-                Hola! 👋 Soy Edwar, el desarrollador detrás de EventMaple. Creé este 
-                proyecto con el objetivo de ayudar a la comunidad a gestionar eventos 
-                de manera más eficiente y accesible.
+                {t("intro")}
               </p>
             </div>
 
             {/* Contact Methods */}
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
-                Formas de Contactarme
+                {t("methods.title")}
               </h3>
 
               {/* Email */}
@@ -79,13 +89,13 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                    Correo Electrónico
+                    {t("methods.email.title")}
                   </h4>
                   <p className="text-primary font-medium group-hover:underline">
                     contact@edwardiaz.dev
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    Haz clic para enviar un email
+                    {t("methods.email.desc")}
                   </p>
                 </div>
               </a>
@@ -102,13 +112,13 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                    GitHub
+                    {t("methods.github.title")}
                   </h4>
                   <p className="text-gray-700 font-medium group-hover:text-gray-900">
                     @BOTOOM
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    Revisa mis proyectos y código
+                    {t("methods.github.desc")}
                   </p>
                 </div>
               </a>
@@ -125,13 +135,13 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-lg font-semibold text-gray-900 mb-1">
-                    Portafolio Web
+                    {t("methods.portfolio.title")}
                   </h4>
                   <p className="text-primary font-medium group-hover:underline">
                     edwardiaz.dev
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    Conoce más sobre mi trabajo y experiencia
+                    {t("methods.portfolio.desc")}
                   </p>
                 </div>
               </a>
@@ -142,7 +152,7 @@ export default function ContactPage() {
               <div className="flex items-center gap-3 mb-3">
                 <Coffee className="h-5 w-5 text-primary" />
                 <h4 className="font-semibold text-gray-900">
-                  ¿Prefieres copiar el email?
+                  {t("copyEmail.title")}
                 </h4>
               </div>
               <div className="flex items-center gap-3">
@@ -154,16 +164,17 @@ export default function ContactPage() {
                     navigator.clipboard.writeText("contact@edwardiaz.dev");
                     const btn = document.getElementById("copy-btn");
                     if (btn) {
-                      btn.textContent = "✓ Copiado";
+                      const originalText = btn.textContent;
+                      btn.textContent = t("copyEmail.copied");
                       setTimeout(() => {
-                        btn.textContent = "Copiar";
+                        btn.textContent = originalText;
                       }, 2000);
                     }
                   }}
                   id="copy-btn"
                   className="px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium whitespace-nowrap"
                 >
-                  Copiar
+                  {t("copyEmail.button")}
                 </button>
               </div>
             </div>
@@ -173,38 +184,35 @@ export default function ContactPage() {
         {/* Additional Info */}
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 mb-8">
           <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
-            Sobre el Proyecto
+            {t("aboutProject.title")}
           </h3>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              EventMaple es un proyecto de código abierto creado con el propósito de ayudar 
-              a la comunidad a gestionar eventos de manera más eficiente. Si tienes ideas, 
-              encuentras algún problema o simplemente quieres contribuir, ¡tu feedback es 
-              bienvenido!
+              {t("aboutProject.text")}
             </p>
             <div className="grid md:grid-cols-2 gap-4 mt-6">
               <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">💡 ¿Tienes una idea?</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.idea.title")}</h4>
                 <p className="text-sm text-gray-600">
-                  Comparte tus sugerencias para mejorar EventMaple
+                  {t("aboutProject.idea.desc")}
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">🐛 ¿Encontraste un bug?</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.bug.title")}</h4>
                 <p className="text-sm text-gray-600">
-                  Ayúdame a mejorar reportando cualquier problema
+                  {t("aboutProject.bug.desc")}
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">🤝 ¿Quieres colaborar?</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.collab.title")}</h4>
                 <p className="text-sm text-gray-600">
-                  Siempre estoy abierto a colaboraciones y contribuciones
+                  {t("aboutProject.collab.desc")}
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">📝 ¿Tienes preguntas?</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.questions.title")}</h4>
                 <p className="text-sm text-gray-600">
-                  No dudes en contactarme por cualquier consulta
+                  {t("aboutProject.questions.desc")}
                 </p>
               </div>
             </div>
@@ -214,16 +222,16 @@ export default function ContactPage() {
         {/* CTA */}
         <div className="text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl p-8 shadow-xl">
           <h3 className="text-2xl font-bold mb-3">
-            ¡Gracias por usar EventMaple!
+            {t("cta.title")}
           </h3>
           <p className="text-gray-300 mb-6">
-            Tu apoyo y feedback son fundamentales para mejorar esta plataforma
+            {t("cta.text")}
           </p>
           <Link
             href="/about"
             className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
           >
-            Conoce más sobre el proyecto
+            {t("cta.button")}
           </Link>
         </div>
 
@@ -233,7 +241,7 @@ export default function ContactPage() {
             href="/"
             className="text-gray-600 hover:text-gray-900 text-sm font-medium"
           >
-            ← Volver al inicio
+            ← {t("back")}
           </Link>
         </div>
       </div>

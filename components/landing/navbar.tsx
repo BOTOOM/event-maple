@@ -4,6 +4,7 @@ import { Link } from "@/lib/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function Navbar() {
   const t = useTranslations("Navbar");
@@ -57,6 +58,7 @@ export function Navbar() {
 
           {/* CTA Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher />
             <Link href="/login">
               <Button
                 variant="ghost"

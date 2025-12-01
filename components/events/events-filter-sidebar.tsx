@@ -3,6 +3,7 @@
 import { X, Filter, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 
 interface EventsFilterSidebarProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ export function EventsFilterSidebar({
   showPastEvents,
   onShowPastEventsChange,
 }: EventsFilterSidebarProps) {
+  const t = useTranslations("Events.List.filters");
+
   return (
     <>
       {/* Overlay for mobile */}
@@ -42,7 +45,7 @@ export function EventsFilterSidebar({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter className="h-5 w-5 text-primary" />
-              <h2 className="font-semibold text-gray-900">Filtros</h2>
+              <h2 className="font-semibold text-gray-900">{t("button")}</h2>
             </div>
             <Button
               variant="ghost"
@@ -58,7 +61,7 @@ export function EventsFilterSidebar({
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
               <Calendar className="h-4 w-4" />
-              <span>Rango de Fechas</span>
+              <span>{t("dateRange")}</span>
             </div>
 
             {/* Toggle for Past Events */}
@@ -67,7 +70,7 @@ export function EventsFilterSidebar({
                 htmlFor="show-past-events"
                 className="text-sm font-medium text-gray-700 cursor-pointer"
               >
-                Mostrar eventos pasados
+                {t("showPast")}
               </Label>
               <button
                 id="show-past-events"
@@ -92,8 +95,8 @@ export function EventsFilterSidebar({
             {/* Info text */}
             <p className="text-xs text-gray-500 leading-relaxed">
               {showPastEvents
-                ? "Mostrando todos los eventos, incluidos los pasados"
-                : "Mostrando solo eventos de hoy y futuros"}
+                ? t("showingAll")
+                : t("showingToday")}
             </p>
           </div>
 
@@ -102,7 +105,7 @@ export function EventsFilterSidebar({
 
           {/* Future: Add more filters here */}
           <div className="text-xs text-gray-400 italic">
-            Más filtros próximamente...
+            {t("moreSoon")}
           </div>
         </div>
       </aside>

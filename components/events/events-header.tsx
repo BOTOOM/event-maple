@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useAuth } from "@/lib/hooks/use-auth";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 export function EventsHeader() {
   const { user, signOut } = useAuth();
@@ -47,12 +48,16 @@ export function EventsHeader() {
           </div>
 
           {/* Mobile: Search Icon */}
-          <button className="md:hidden p-2 -mr-2">
-            <Search className="h-5 w-5 text-gray-700" />
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
+            <button className="p-2 -mr-2">
+              <Search className="h-5 w-5 text-gray-700" />
+            </button>
+          </div>
 
           {/* Desktop: User Menu */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <span className="text-sm text-gray-600">
               {user?.email}
             </span>

@@ -8,8 +8,8 @@ import { EmptyTalks } from "@/components/talks/empty-talks";
 import { TalksFilterSidebar } from "@/components/talks/talks-filter-sidebar";
 import { TalksSearch } from "@/components/talks/talks-search";
 import { Talk } from "@/lib/types/talk";
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { parseISO } from "date-fns";
+import { useTranslations, useFormatter } from "next-intl";
 
 interface AgendaPageClientProps {
   talks: Talk[];
@@ -22,6 +22,8 @@ export function AgendaPageClient({
   eventId,
   agendaTalkIds,
 }: AgendaPageClientProps) {
+  const t = useTranslations("Events.FullAgenda");
+  const format = useFormatter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showPastTalks, setShowPastTalks] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,9 +91,10 @@ export function AgendaPageClient({
   const formatDateHeader = (dateStr: string) => {
     try {
       const date = parseISO(dateStr);
-      const dayOfWeek = format(date, "EEEE", { locale: es });
-      const dayMonth = format(date, "d 'de' MMMM", { locale: es });
-      return `${dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1)} - ${dayMonth}`;
+      // Capitalize first letter of weekday
+      const weekday = format.dateTime(date, { weekday: "long" });
+      const dayMonth = format.dateTime(date, { day: "numeric", month: "long" });
+      return `${weekday.charAt(0).toUpperCase() + weekday.slice(1)} - ${dayMonth}`;
     } catch {
       return dateStr;
     }
@@ -121,7 +124,7 @@ export function AgendaPageClient({
           {/* Header with filter button */}
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-              {showPastTalks ? "Todas las Charlas" : "Charlas Actuales y Futuras"}
+              {showPastTalks ? t("header.allTalks") : t("header.futureTalks")}
             </h2>
             <Button
               variant="outline"
@@ -130,7 +133,7 @@ export function AgendaPageClient({
               className="lg:hidden"
             >
               <Filter className="h-4 w-4 mr-2" />
-              Filtros
+              {t("header.filters")}
             </Button>
           </div>
 
@@ -138,13 +141,13 @@ export function AgendaPageClient({
           <TalksSearch
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Buscar charlas por título, ponente, tema..."
+            placeholder={t("search.placeholder")}
           />
 
           {/* Results count */}
           {searchQuery && (
             <p className="text-sm text-gray-600">
-              {`Se ${filteredTalks.length !== 1 ? 'encontraron' : 'encontró'} ${filteredTalks.length} charla${filteredTalks.length !== 1 ? 's' : ''}`}
+              {t("results.count", { count: filteredTalks.length })}
             </p>
           )}
         </div>
@@ -154,9 +157,9 @@ export function AgendaPageClient({
           <div className="text-center py-12">
             {searchQuery ? (
               <div className="space-y-3">
-                <p className="text-lg font-medium text-gray-900">No se encontraron charlas</p>
+                <p className="text-lg font-medium text-gray-900">{t("results.notFound")}</p>
                 <p className="text-gray-600">
-                  Prueba a cambiar tu búsqueda o los filtros
+                  {t("results.notFoundDesc")}
                 </p>
               </div>
             ) : (

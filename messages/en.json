@@ -9,6 +9,132 @@
       "login": "Sign In"
     }
   },
+  "Static": {
+    "About": {
+      "metadata": {
+        "title": "About EventMaple - Manage your events intelligently",
+        "description": "Discover how EventMaple helps the community manage events and personalized agendas efficiently and for free."
+      },
+      "back": "Back to home",
+      "header": {
+        "title": "About EventMaple",
+        "subtitle": "A project created with passion to help the community manage their events"
+      },
+      "mission": {
+        "title": "Our Mission",
+        "text1": "EventMaple was born with a <strong>clear and simple purpose</strong>: to empower the community to create, organize, and participate in events of any kind, completely free and accessible to everyone.",
+        "text2": "Whether it's a tech event, a conference, a community workshop, or any other type of gathering, EventMaple gives you the tools you need for both organizers and attendees to manage all information in one place."
+      },
+      "offer": {
+        "title": "What We Offer?",
+        "organizers": {
+          "title": "For Organizers",
+          "items": {
+            "0": "Create events of any kind, tech or non-tech",
+            "1": "Add talks, workshops, and activities within each event",
+            "2": "Share all event information with the community",
+            "3": "Facilitate activity organization and planning"
+          }
+        },
+        "attendees": {
+          "title": "For Attendees",
+          "items": {
+            "0": "Explore events and discover talks that interest you",
+            "1": "Manage your personal event agenda tailored to you",
+            "2": "Mark talks and activities you want to attend",
+            "3": "Keep everything organized in one place, for multiple events"
+          }
+        }
+      },
+      "vision": {
+        "title": "Made for the Community",
+        "text1": "EventMaple is designed with <strong>you</strong> and the whole community in mind. We believe managing events shouldn't be complicated or expensive. That's why we offer a completely free platform that puts the power of organization in your hands.",
+        "text2": "Whether you're an organizer looking to facilitate your attendees' experience, or a participant wanting to make the most of every event, EventMaple is here to help you keep everything structured, accessible, and under control.",
+        "highlight": "💡 <strong>Our vision:</strong> A world where any person or group can organize and participate in events simply, intuitively, and effectively, strengthening community ties and facilitating access to shared knowledge and experiences."
+      },
+      "values": {
+        "title": "Our Values",
+        "community": {
+          "title": "Community First",
+          "desc": "Everything we do is designed to serve and empower the community"
+        },
+        "simplicity": {
+          "title": "Simplicity",
+          "desc": "An easy-to-use, intuitive, and accessible tool for everyone"
+        },
+        "free": {
+          "title": "Always Free",
+          "desc": "We believe in free access to knowledge and digital tools"
+        }
+      },
+      "cta": {
+        "title": "Ready to Start?",
+        "text": "Join EventMaple and start managing your events intelligently",
+        "createAccount": "Create Free Account",
+        "explore": "Explore Events"
+      }
+    },
+    "Contact": {
+      "metadata": {
+          "title": "Contact - EventMaple",
+          "description": "Get in touch with us for questions, suggestions, or feedback."
+      },
+      "back": "Back to home",
+      "header": {
+          "title": "Contact",
+          "subtitle": "Have questions, suggestions, or just want to chat? I'd love to hear from you!"
+      },
+      "developer": {
+          "role": "EventMaple Developer"
+      },
+      "intro": "Hi! 👋 I'm Edwar, the developer behind EventMaple. I created this project with the goal of helping the community manage events more efficiently and accessibly.",
+      "methods": {
+          "title": "Ways to Contact Me",
+          "email": {
+              "title": "Email",
+              "desc": "Click to send an email"
+          },
+          "github": {
+              "title": "GitHub",
+              "desc": "Check out my projects and code"
+          },
+          "portfolio": {
+              "title": "Web Portfolio",
+              "desc": "Learn more about my work and experience"
+          }
+      },
+      "copyEmail": {
+          "title": "Prefer to copy the email?",
+          "button": "Copy",
+          "copied": "✓ Copied"
+      },
+      "aboutProject": {
+          "title": "About the Project",
+          "text": "EventMaple is an open-source project created to help the community manage events efficiently. If you have ideas, find a bug, or want to contribute, your feedback is welcome!",
+          "idea": {
+              "title": "💡 Have an idea?",
+              "desc": "Share your suggestions to improve EventMaple"
+          },
+          "bug": {
+              "title": "🐛 Found a bug?",
+              "desc": "Help me improve by reporting any issues"
+          },
+          "collab": {
+              "title": "🤝 Want to collaborate?",
+              "desc": "I'm always open to collaborations and contributions"
+          },
+          "questions": {
+              "title": "📝 Have questions?",
+              "desc": "Don't hesitate to contact me for any inquiries"
+          }
+      },
+      "cta": {
+          "title": "Thanks for using EventMaple!",
+          "text": "Your support and feedback are fundamental to improving this platform",
+          "button": "Learn more about the project"
+      }
+    }
+  },
   "Metadata": {
     "title": "EventMaple - The smartest way to organize your event",
     "description": "Manage your events, agenda, and notifications in one place."
@@ -169,13 +295,30 @@
         "fullAgenda": "Full Agenda"
       }
     },
+    "Favorite": {
+      "add": "Add to favorites",
+      "remove": "Remove from favorites",
+      "added": "In favorites",
+      "toast": {
+        "addedTitle": "Added to favorites",
+        "addedDesc": "Event added to your favorites.",
+        "removedTitle": "Removed from favorites",
+        "removedDesc": "Event removed from your favorites.",
+        "errorTitle": "Error",
+        "errorDesc": "Could not update favorites."
+      }
+    },
     "List": {
       "titleUpcoming": "Upcoming Events",
       "titleAll": "All Events",
       "searchPlaceholder": "Search events by name, description or location...",
       "filters": {
         "button": "Filters",
-        "showPast": "Show past events"
+        "dateRange": "Date Range",
+        "showPast": "Show past events",
+        "showingToday": "Showing only today and future events",
+        "showingAll": "Showing all events, including past ones",
+        "moreSoon": "More filters coming soon..."
       },
       "results": {
         "count": "Found {count} event(s)",
@@ -204,9 +347,33 @@
         "title": "Quick Actions",
         "fullAgenda": "View Full Agenda",
         "myAgenda": "My Personal Agenda",
-        "register": "Register Now"
+        "register": "Register Now",
+        "addToFavorites": "Add to favorites"
       },
       "notFound": "Event not found"
+    },
+    "FullAgenda": {
+      "header": {
+        "allTalks": "All Talks",
+        "futureTalks": "Current and Future Talks",
+        "filters": "Filters"
+      },
+      "search": {
+        "placeholder": "Search talks by title, speaker, topic..."
+      },
+      "results": {
+        "count": "Found {count} talk(s)",
+        "notFound": "No talks found",
+        "notFoundDesc": "Try changing your search or filters"
+      },
+      "filters": {
+        "title": "Filters",
+        "timeFilter": "Time Filter",
+        "showPast": "Show past talks",
+        "showPastDescOn": "Showing all talks, including past ones",
+        "showPastDescOff": "Showing only current and future talks",
+        "moreSoon": "More filters coming soon..."
+      }
     },
     "MyAgenda": {
       "title": "My Agenda",
