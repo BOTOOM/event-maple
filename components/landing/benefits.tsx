@@ -1,30 +1,31 @@
 import { Clock, Calendar } from "lucide-react";
-
-const benefits = [
-  {
-    icon: Clock,
-    title: "Ahorra Tiempo",
-    description:
-      "Optimiza tu tiempo con nuestras herramientas de programación intuitivas y crea un calendario.",
-  },
-  {
-    icon: Calendar,
-    title: "Mantente Organizado",
-    description:
-      "Mantén todo en orden y no te pierdas ninguna sesión o evento importante.",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function Benefits() {
+  const t = useTranslations("Landing.Benefits");
+
+  const benefits = [
+    {
+      icon: Clock,
+      title: t("items.time.title"),
+      description: t("items.time.description"),
+    },
+    {
+      icon: Calendar,
+      title: t("items.organized.title"),
+      description: t("items.organized.description"),
+    },
+  ];
+
   return (
     <section id="benefits" className="py-20 sm:py-28 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Beneficios Clave
+            {t("title")}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Descubre las ventajas de usar nuestra plataforma para una experiencia de evento inigualable.
+            {t("subtitle")}
           </p>
         </div>
 

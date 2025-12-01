@@ -6,12 +6,16 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff, ArrowLeft, Calendar } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "@/lib/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 export function RegisterForm() {
+  const t = useTranslations("Auth.Register");
+  const tCommon = useTranslations("Auth.common");
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +46,7 @@ export function RegisterForm() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Las contraseñas no coinciden.",
+        description: t("errors.passwordMismatch"),
       });
       setIsLoading(false);
       return;
@@ -52,7 +56,7 @@ export function RegisterForm() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "La contraseña debe tener al menos 6 caracteres.",
+        description: t("errors.passwordTooShort"),
       });
       setIsLoading(false);
       return;
@@ -63,7 +67,7 @@ export function RegisterForm() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Debes aceptar los términos y condiciones para continuar.",
+        description: t("errors.termsRequired"),
       });
       setIsLoading(false);
       return;
@@ -83,9 +87,9 @@ export function RegisterForm() {
       if (error) {
         toast({
           variant: "destructive",
-          title: "Error al registrarse",
+          title: "Error",
           description: error.message === "User already registered"
-            ? "Este email ya está registrado."
+            ? t("errors.userAlreadyRegistered")
             : error.message,
         });
         return;
@@ -94,18 +98,20 @@ export function RegisterForm() {
       // Toast más explícito y con mayor duración
       toast({
         variant: "success",
-        title: "✅ ¡Cuenta creada exitosamente!",
+        title: t("success.title"),
         description: (
           <div className="space-y-2">
             <p className="font-semibold text-base">
-              📧 IMPORTANTE: Revisa tu correo electrónico
+              {t("success.important")}
             </p>
             <p className="text-sm">
-              Te hemos enviado un email a <strong>{formData.email}</strong> con 
-              un enlace para confirmar tu cuenta.
+              {t.rich("success.message", {
+                email: formData.email,
+                strong: (chunks) => <strong>{chunks}</strong>
+              })}
             </p>
             <p className="text-sm">
-              No olvides revisar tu carpeta de SPAM si no lo ves en tu bandeja principal.
+              {t("success.spam")}
             </p>
           </div>
         ),
@@ -120,7 +126,7 @@ export function RegisterForm() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Ocurrió un error inesperado. Intenta nuevamente.",
+        description: tCommon("errors.generic"),
       });
     } finally {
       setIsLoading(false);
@@ -133,7 +139,7 @@ export function RegisterForm() {
       <div className="mb-6">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
           <ArrowLeft className="h-4 w-4" />
-          <span className="text-sm font-medium">Volver al inicio</span>
+          <span className="text-sm font-medium">{tCommon("backToHome")}</span>
         </Link>
       </div>
 
@@ -146,15 +152,15 @@ export function RegisterForm() {
 
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-          <span className="hidden md:inline">Crea tu cuenta</span>
-          <span className="md:hidden">Crear una nueva cuenta</span>
+          <span className="hidden md:inline">{t("title")}</span>
+          <span className="md:hidden">{t("titleMobile")}</span>
         </h1>
         <p className="text-gray-600">
           <span className="hidden md:inline">
-            Accede a la agenda completa del evento
+            {t("subtitle")}
           </span>
           <span className="md:hidden">
-            Regístrate para gestionar la agenda de tu evento.
+            {t("subtitleMobile")}
           </span>
         </p>
       </div>
@@ -162,14 +168,14 @@ export function RegisterForm() {
       <form onSubmit={handleRegister} className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="name" className="text-gray-900">
-            <span className="hidden md:inline">Nombre</span>
-            <span className="md:hidden">Nombre completo</span>
+            <span className="hidden md:inline">{t("name")}</span>
+            <span className="md:hidden">{t("nameMobile")}</span>
           </Label>
           <Input
             id="name"
             name="name"
             type="text"
-            placeholder="Introduzca su nombre completo"
+            placeholder={t("namePlaceholder")}
             required
             disabled={isLoading}
             value={formData.name}
@@ -179,14 +185,13 @@ export function RegisterForm() {
 
         <div className="space-y-2">
           <Label htmlFor="email" className="text-gray-900">
-            <span className="hidden md:inline">Email</span>
-            <span className="md:hidden">Correo electrónico</span>
+            {tCommon("email")}
           </Label>
           <Input
             id="email"
             name="email"
             type="email"
-            placeholder="Introduzca su correo electrónico"
+            placeholder={t("emailPlaceholder")}
             required
             disabled={isLoading}
             value={formData.email}
@@ -196,14 +201,14 @@ export function RegisterForm() {
 
         <div className="space-y-2">
           <Label htmlFor="password" className="text-gray-900">
-            Contraseña
+            {tCommon("password")}
           </Label>
           <div className="relative">
             <Input
               id="password"
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Introduzca su contraseña"
+              placeholder={t("passwordPlaceholder")}
               required
               disabled={isLoading}
               className="pr-10"
@@ -228,14 +233,14 @@ export function RegisterForm() {
         {/* Confirmar contraseña */}
         <div className="space-y-2">
           <Label htmlFor="confirmPassword" className="text-gray-900">
-            Confirmar contraseña
+            {tCommon("confirmPassword")}
           </Label>
           <div className="relative">
             <Input
               id="confirmPassword"
               name="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirme su contraseña"
+              placeholder={t("confirmPlaceholder")}
               required
               disabled={isLoading}
               className="pr-10"
@@ -269,15 +274,19 @@ export function RegisterForm() {
             required
           />
           <label htmlFor="terms" className="text-sm text-gray-600 leading-tight cursor-pointer">
-            Acepto los{" "}
-            <Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
-              términos y condiciones
-            </Link>
-            {" "}y la{" "}
-            <Link href="/privacy" className="text-primary hover:underline font-medium" target="_blank">
-              política de privacidad
-            </Link>
-            . <span className="text-red-500">*</span>
+            {t.rich("terms", {
+              terms: (chunks) => (
+                <Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
+                  {chunks}
+                </Link>
+              ),
+              privacy: (chunks) => (
+                <Link href="/privacy" className="text-primary hover:underline font-medium" target="_blank">
+                  {chunks}
+                </Link>
+              )
+            })}
+            <span className="text-red-500"> *</span>
           </label>
         </div>
 
@@ -288,20 +297,20 @@ export function RegisterForm() {
           disabled={isLoading}
         >
           {isLoading ? (
-            "Creando cuenta..."
+            t("submitting")
           ) : (
             <>
-              <span className="hidden md:inline">Registrarse</span>
-              <span className="md:hidden">Crear Cuenta</span>
+              <span className="hidden md:inline">{t("submit")}</span>
+              <span className="md:hidden">{t("submitMobile")}</span>
             </>
           )}
         </Button>
 
         <div className="text-center text-sm text-gray-600">
-          ¿Ya tienes una cuenta?{" "}
+          {t("alreadyAccount")}{" "}
           <Link href="/login" className="text-primary hover:underline font-medium">
-            <span className="hidden md:inline">Inicia sesión aquí</span>
-            <span className="md:hidden">Iniciar sesión</span>
+            <span className="hidden md:inline">{t("loginLink")}</span>
+            <span className="md:hidden">{t("loginLinkMobile")}</span>
           </Link>
         </div>
       </form>

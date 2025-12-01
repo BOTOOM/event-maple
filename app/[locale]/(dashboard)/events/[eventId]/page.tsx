@@ -1,18 +1,18 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar, MapPin, Users, ArrowLeft, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FavoriteButton } from "@/components/events/favorite-button";
 import { getEventTitle } from "@/lib/types/event";
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { Link } from "@/lib/i18n/navigation";
 import { Metadata, ResolvingMetadata } from "next";
+import { getFormatter, getTranslations } from "next-intl/server";
 
 interface EventDetailPageProps {
   params: Promise<{
     eventId: string;
+    locale: string;
   }>;
 }
 
@@ -23,10 +23,11 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const resolvedParams = await params;
   const eventId = parseInt(resolvedParams.eventId, 10);
+  const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.Detail'});
   
   if (isNaN(eventId)) {
     return {
-      title: "Evento no encontrado",
+      title: t("notFound"),
     };
   }
 
@@ -39,7 +40,7 @@ export async function generateMetadata(
 
   if (!event) {
     return {
-      title: "Evento no encontrado",
+      title: t("notFound"),
     };
   }
 
@@ -48,7 +49,7 @@ export async function generateMetadata(
 
   return {
     title: `${eventTitle} | EventMaple`,
-    description: event.description?.substring(0, 160) || `Detalles del evento ${eventTitle}`,
+    description: event.description?.substring(0, 160) || `${t("about")} ${eventTitle}`,
     openGraph: {
       title: eventTitle,
       description: event.description?.substring(0, 160),
@@ -67,6 +68,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
   // Convertir eventId de string a number (bigint)
   const resolvedParams = await params;
   const eventId = parseInt(resolvedParams.eventId, 10);
+  const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.Detail'});
+  const format = await getFormatter({locale: resolvedParams.locale});
   
   if (isNaN(eventId)) {
     notFound();
@@ -123,15 +126,12 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
     isFavorite = !!favoriteData;
   }
 
-  // Usar parseISO para evitar conversión de timezone que cambia el día
-  const formattedDate = format(parseISO(event.start_date), "d 'de' MMMM, yyyy", {
-    locale: es,
+  // Formatear fecha con next-intl
+  const formattedDate = format.dateTime(new Date(event.start_date), {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
-
-  // Parsear fechas sin conversión de timezone
-  const startDate = parseISO(event.start_date);
-  const endDate = parseISO(event.end_date);
-  const timeRange = `${format(startDate, 'HH:mm')} - ${format(endDate, 'HH:mm')}`;
 
   const eventTitle = getEventTitle(event);
 
@@ -151,7 +151,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <span className="font-semibold text-gray-900">Detalles del Evento</span>
+          <span className="font-semibold text-gray-900">{t("titleMobile")}</span>
           <FavoriteButton eventId={eventId} initialIsFavorite={isFavorite} />
         </div>
       </div>
@@ -163,7 +163,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             <Link href="/events">
               <Button variant="ghost">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver a Eventos
+                {t("back")}
               </Button>
             </Link>
           </div>
@@ -216,7 +216,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                   <Calendar className="h-5 w-5 text-gray-700" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Fecha</p>
+                  <p className="text-sm text-gray-500">{t("date")}</p>
                   <p className="text-base font-medium text-gray-900">
                     {formattedDate}
                   </p>
@@ -229,7 +229,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                     <MapPin className="h-5 w-5 text-gray-700" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Ubicación</p>
+                    <p className="text-sm text-gray-500">{t("location")}</p>
                     <p className="text-base font-medium text-gray-900">
                       {event.location}
                     </p>
@@ -243,7 +243,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
                     <Users className="h-5 w-5 text-gray-700" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Organizado por</p>
+                    <p className="text-sm text-gray-500">{t("organizer")}</p>
                     <p className="text-base font-medium text-gray-900">
                       {event.organizer}
                     </p>
@@ -256,21 +256,21 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
             <div className="lg:col-span-1">
               <div className="bg-gray-50 rounded-lg p-5 space-y-4 border border-gray-200">
                 <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
-                  Acciones Rápidas
+                  {t("actions.title")}
                 </h3>
                 
                 <div className="space-y-3">
                   <Link href={`/events/${eventId}/agenda`} className="block">
                     <Button className="w-full" size="lg">
-                      <CalendarDays className="h-5 w-5" />
-                      Ver Agenda Completa
+                      <CalendarDays className="h-5 w-5 mr-2" />
+                      {t("actions.fullAgenda")}
                     </Button>
                   </Link>
                   
                   <Link href={`/events/${eventId}/my-agenda`} className="block">
                     <Button variant="outline" className="w-full" size="lg">
-                      <Calendar className="h-5 w-5" />
-                      Mi Agenda Personal
+                      <Calendar className="h-5 w-5 mr-2" />
+                      {t("actions.myAgenda")}
                     </Button>
                   </Link>
                 </div>
@@ -291,7 +291,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
           {event.description && (
             <div className="border-t border-gray-200 pt-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Acerca del evento
+                {t("about")}
               </h2>
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-700 leading-relaxed whitespace-pre-line">
@@ -300,14 +300,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
               </div>
             </div>
           )}
-
-
-          {/* CTA Button */}
-          {/* <div className="mt-8">
-            <Button size="lg" className="w-full sm:w-auto">
-              Registrarse Ahora
-            </Button>
-          </div> */}
         </div>
       </main>
     </div>

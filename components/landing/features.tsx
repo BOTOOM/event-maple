@@ -1,40 +1,43 @@
 import { MapPin } from "lucide-react";
 import Image from "next/image";
-
-const features = [
-  {
-    title: "Agenda Personalizada",
-    description: "Crea y gestiona tu propia agenda personalizada con las sesiones que más te interesen.",
-    badge: null,
-    image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/task.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy90YXNrLmpwZyIsImlhdCI6MTc1OTc3MTc4OSwiZXhwIjoxNzkxMzA3Nzg5fQ.iByl0xSfKRnxn106h5oFAquGlwfHEa4Ej_v_hSn3gJk",
-    alt: "Agenda móvil personalizada",
-  },
-  {
-    title: "Notificaciones en Tiempo Real",
-    description: "Recibe actualizaciones y recordatorios instantáneos sobre tus sesiones y cambios del evento.",
-    badge: "PRÓXIMAMENTE",
-    image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/notify.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy9ub3RpZnkuanBnIiwiaWF0IjoxNzU5NzcxODE2LCJleHAiOjE3OTEzMDc4MTZ9.mrnCK8gjwBvLCbkMkvV7XzooJThEA9pzYnYsFb6nRBc",
-    alt: "Panel de notificaciones",
-  },
-  {
-    title: "Mapas del Evento",
-    description: "Navega por el recinto del evento con nuestros mapas interactivos y encuentra tu camino fácilmente.",
-    badge: "PRÓXIMAMENTE",
-    image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/map.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy9tYXAuanBnIiwiaWF0IjoxNzU5NzcxNTEwLCJleHAiOjE3OTEzMDc1MTB9.N8wtTKwx4W-OIleN_p6IAykASg6ayMwFENd4HK9tG-A",
-    alt: "Mapa interactivo del evento",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function Features() {
+  const t = useTranslations("Landing.Features");
+
+  const features = [
+    {
+      title: t("items.agenda.title"),
+      description: t("items.agenda.description"),
+      badge: null,
+      image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/task.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy90YXNrLmpwZyIsImlhdCI6MTc1OTc3MTc4OSwiZXhwIjoxNzkxMzA3Nzg5fQ.iByl0xSfKRnxn106h5oFAquGlwfHEa4Ej_v_hSn3gJk",
+      alt: t("items.agenda.alt"),
+    },
+    {
+      title: t("items.notifications.title"),
+      description: t("items.notifications.description"),
+      badge: t("badges.comingSoon"),
+      image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/notify.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy9ub3RpZnkuanBnIiwiaWF0IjoxNzU5NzcxODE2LCJleHAiOjE3OTEzMDc4MTZ9.mrnCK8gjwBvLCbkMkvV7XzooJThEA9pzYnYsFb6nRBc",
+      alt: t("items.notifications.alt"),
+    },
+    {
+      title: t("items.maps.title"),
+      description: t("items.maps.description"),
+      badge: t("badges.comingSoon"),
+      image: "https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/map.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy9tYXAuanBnIiwiaWF0IjoxNzU5NzcxNTEwLCJleHAiOjE3OTEzMDc1MTB9.N8wtTKwx4W-OIleN_p6IAykASg6ayMwFENd4HK9tG-A",
+      alt: t("items.maps.alt"),
+    },
+  ];
+
   return (
     <section id="features" className="py-20 sm:py-28 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Características Principales
+            {t("title")}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explora las funcionalidades que hacen de nuestra app la mejor opción para tu evento.
+            {t("subtitle")}
           </p>
         </div>
 

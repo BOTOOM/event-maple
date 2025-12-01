@@ -8,12 +8,14 @@ import { EmptyEvents } from "@/components/events/empty-events";
 import { EventsFilterSidebar } from "@/components/events/events-filter-sidebar";
 import { EventsSearch } from "@/components/events/events-search";
 import { Event } from "@/lib/types/event";
+import { useTranslations } from "next-intl";
 
 interface EventsPageClientProps {
   initialEvents: Event[];
 }
 
 export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
+  const t = useTranslations("Events.List");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showPastEvents, setShowPastEvents] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,7 +75,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           {/* Header with filter button */}
           <div className="flex items-center justify-between gap-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              {showPastEvents ? "Todos los Eventos" : "Próximos Eventos"}
+              {showPastEvents ? t("titleAll") : t("titleUpcoming")}
             </h1>
             <Button
               variant="outline"
@@ -82,7 +84,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
               className="lg:hidden"
             >
               <Filter className="h-4 w-4 mr-2" />
-              Filtros
+              {t("filters.button")}
             </Button>
           </div>
 
@@ -90,13 +92,13 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           <EventsSearch
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Buscar eventos por nombre, descripción o lugar..."
+            placeholder={t("searchPlaceholder")}
           />
 
           {/* Results count */}
           {searchQuery && (
             <p className="text-sm text-gray-600">
-              {`Se ${filteredEvents.length !== 1 ? 'encontraron' : 'encontró'} ${filteredEvents.length} evento${filteredEvents.length !== 1 ? 's' : ''}`}
+              {t("results.count", { count: filteredEvents.length })}
             </p>
           )}
         </div>
@@ -106,9 +108,9 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
           <div className="text-center py-12">
             {searchQuery ? (
               <div className="space-y-3">
-                <p className="text-lg font-medium text-gray-900">No se encontraron eventos</p>
+                <p className="text-lg font-medium text-gray-900">{t("results.notFound")}</p>
                 <p className="text-gray-600">
-                  Prueba a cambiar tu búsqueda o los filtros
+                  {t("results.notFoundDesc")}
                 </p>
               </div>
             ) : (

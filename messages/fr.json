@@ -1,6 +1,22 @@
 {
-  "HomePage": {
-    "title": "Event Maple",
-    "welcome": "Bienvenue à Event Maple"
+  "Navbar": {
+    "links": {
+      "events": "Explorer les événements",
+      "benefits": "Avantages",
+      "features": "Fonctionnalités"
+    },
+    "actions": {
+      "login": "Se connecter"
+    }
+  },
+  "Landing": {
+    "Hero": {
+      "title": "La façon la plus intelligente d'organiser votre événement.",
+      "titleMobile": "Organisez votre expérience événementielle.",
+      "subtitle": "Votre agenda d'événements, simplifié. Gérez et profitez de chaque instant sans complications.",
+      "subtitleMobile": "Créez votre agenda d'événements, recevez des notifications et ne manquez aucune activité.",
+      "cta": "Commencez maintenant gratuitement",
+      "ctaMobile": "Commencer"
+    }
   }
 }

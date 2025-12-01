@@ -5,11 +5,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowLeft, Mail, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/lib/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 export function ForgotPasswordForm() {
+  const t = useTranslations("Auth.ForgotPassword");
+  const tCommon = useTranslations("Auth.common");
+
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
@@ -36,14 +40,14 @@ export function ForgotPasswordForm() {
       setEmailSent(true);
       toast({
         variant: "success",
-        title: "¡Correo enviado!",
-        description: "Revisa tu bandeja de entrada para restablecer tu contraseña.",
+        title: t("success.title"),
+        description: t("success.checkInbox"),
       });
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Ocurrió un error inesperado. Intenta nuevamente.",
+        description: tCommon("errors.generic"),
       });
     } finally {
       setIsLoading(false);
@@ -70,10 +74,10 @@ export function ForgotPasswordForm() {
 
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              ¡Correo Enviado!
+              {t("success.title")}
             </h1>
             <p className="text-gray-600">
-              Hemos enviado un enlace de recuperación a:
+              {t("success.message")}
             </p>
             <p className="text-primary font-medium mt-2">{email}</p>
           </div>
@@ -82,10 +86,9 @@ export function ForgotPasswordForm() {
             <div className="flex gap-3">
               <Mail className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div className="text-sm text-gray-700">
-                <p className="font-medium mb-1">Revisa tu bandeja de entrada</p>
+                <p className="font-medium mb-1">{t("success.checkInbox")}</p>
                 <p>
-                  El enlace de recuperación es válido por 1 hora. Si no encuentras
-                  el correo, verifica tu carpeta de spam.
+                  {t("success.validity")}
                 </p>
               </div>
             </div>
@@ -98,13 +101,13 @@ export function ForgotPasswordForm() {
               className="w-full"
               size="lg"
             >
-              Volver a enviar correo
+              {t("success.resend")}
             </Button>
 
             <Link href="/login" className="block">
               <Button variant="ghost" className="w-full" size="lg">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver a iniciar sesión
+                {t("success.backToLogin")}
               </Button>
             </Link>
           </div>
@@ -119,7 +122,7 @@ export function ForgotPasswordForm() {
       <div className="mb-6">
         <Link href="/login" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
           <ArrowLeft className="h-4 w-4" />
-          <span className="text-sm font-medium">Volver al inicio de sesión</span>
+          <span className="text-sm font-medium">{t("backToLogin")}</span>
         </Link>
       </div>
 
@@ -132,23 +135,22 @@ export function ForgotPasswordForm() {
 
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-          Recupera tu Contraseña
+          {t("title")}
         </h1>
         <p className="text-gray-600">
-          Ingresa tu correo electrónico y te enviaremos un enlace para
-          restablecer tu contraseña.
+          {t("subtitle")}
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-gray-900">
-            Correo electrónico
+            {tCommon("email")}
           </Label>
           <Input
             id="email"
             type="email"
-            placeholder="tu.correo@ejemplo.com"
+            placeholder={t("emailPlaceholder")}
             required
             disabled={isLoading}
             value={email}
@@ -163,7 +165,7 @@ export function ForgotPasswordForm() {
           size="lg"
           disabled={isLoading}
         >
-          {isLoading ? "Enviando..." : "Enviar Enlace"}
+          {isLoading ? t("submitting") : t("submit")}
         </Button>
 
         <div className="text-center text-sm">
@@ -172,7 +174,7 @@ export function ForgotPasswordForm() {
             className="text-primary hover:underline font-medium inline-flex items-center gap-1"
           >
             <ArrowLeft className="h-4 w-4" />
-            ¿Recuerdas tu contraseña? Inicia sesión
+            {t("rememberPassword")}
           </Link>
         </div>
       </form>

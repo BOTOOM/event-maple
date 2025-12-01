@@ -1,6 +1,233 @@
 {
-  "HomePage": {
-    "title": "Event Maple",
-    "welcome": "Bienvenido a Event Maple"
+  "Navbar": {
+    "links": {
+      "events": "Explorar Eventos",
+      "benefits": "Beneficios",
+      "features": "Características"
+    },
+    "actions": {
+      "login": "Iniciar Sesión"
+    }
+  },
+  "Metadata": {
+    "title": "EventMaple - La forma más inteligente de organizar tu evento",
+    "description": "Gestiona tus eventos, agenda y notificaciones en un solo lugar."
+  },
+  "Landing": {
+    "Hero": {
+      "title": "La forma más inteligente de organizar tu evento.",
+      "titleMobile": "Organiza tu experiencia en el evento.",
+      "subtitle": "Tu agenda de eventos, simplificada. Gestiona y disfruta de cada momento sin complicaciones.",
+      "subtitleMobile": "Crea tu agenda de eventos, recibe notificaciones y no te pierdas ninguna actividad.",
+      "cta": "Empieza ahora gratis",
+      "ctaMobile": "Empezar"
+    },
+    "Benefits": {
+      "title": "Beneficios Clave",
+      "subtitle": "Descubre las ventajas de usar nuestra plataforma para una experiencia de evento inigualable.",
+      "items": {
+        "time": {
+          "title": "Ahorra Tiempo",
+          "description": "Optimiza tu tiempo con nuestras herramientas de programación intuitivas y crea un calendario."
+        },
+        "organized": {
+          "title": "Mantente Organizado",
+          "description": "Mantén todo en orden y no te pierdas ninguna sesión o evento importante."
+        }
+      }
+    },
+    "Features": {
+      "title": "Características Principales",
+      "subtitle": "Explora las funcionalidades que hacen de nuestra app la mejor opción para tu evento.",
+      "badges": {
+        "comingSoon": "PRÓXIMAMENTE"
+      },
+      "items": {
+        "agenda": {
+          "title": "Agenda Personalizada",
+          "description": "Crea y gestiona tu propia agenda personalizada con las sesiones que más te interesen.",
+          "alt": "Agenda móvil personalizada"
+        },
+        "notifications": {
+          "title": "Notificaciones en Tiempo Real",
+          "description": "Recibe actualizaciones y recordatorios instantáneos sobre tus sesiones y cambios del evento.",
+          "alt": "Panel de notificaciones"
+        },
+        "maps": {
+          "title": "Mapas del Evento",
+          "description": "Navega por el recinto del evento con nuestros mapas interactivos y encuentra tu camino fácilmente.",
+          "alt": "Mapa interactivo del evento"
+        }
+      }
+    },
+    "Footer": {
+      "brand": {
+        "tagline": "La forma más inteligente de organizar tu evento."
+      },
+      "columns": {
+        "product": "Producto",
+        "project": "El Proyecto",
+        "legal": "Legal"
+      },
+      "links": {
+        "benefits": "Beneficios",
+        "features": "Características",
+        "about": "Acerca de",
+        "contact": "Contacto",
+        "terms": "Términos de Servicio",
+        "privacy": "Política de Privacidad"
+      },
+      "copyright": "© {year} EventMaple. Todos los derechos reservados. Desarrollado con ❤️ por"
+    }
+  },
+  "Auth": {
+    "common": {
+      "backToHome": "Volver al inicio",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "or": "o",
+      "errors": {
+        "generic": "Ocurrió un error inesperado. Intenta nuevamente.",
+        "invalidCredentials": "Credenciales inválidas. Verifica tu email y contraseña."
+      }
+    },
+    "Login": {
+      "title": "Bienvenido",
+      "subtitle": "Inicia sesión en tu cuenta para continuar",
+      "emailPlaceholder": "Introduce tu correo electrónico",
+      "passwordPlaceholder": "Introduce tu contraseña",
+      "forgotPassword": "¿Olvidé mi contraseña?",
+      "submit": "Iniciar sesión",
+      "submitting": "Iniciando sesión...",
+      "noAccount": "¿No tienes una cuenta?",
+      "registerLink": "Regístrate",
+      "successTitle": "¡Bienvenido!",
+      "successDesc": "Has iniciado sesión correctamente.",
+      "errorTitle": "Error al iniciar sesión"
+    },
+    "Register": {
+      "title": "Crea tu cuenta",
+      "titleMobile": "Crear una nueva cuenta",
+      "subtitle": "Accede a la agenda completa del evento",
+      "subtitleMobile": "Regístrate para gestionar la agenda de tu evento.",
+      "name": "Nombre",
+      "nameMobile": "Nombre completo",
+      "namePlaceholder": "Introduzca su nombre completo",
+      "emailPlaceholder": "Introduzca su correo electrónico",
+      "passwordPlaceholder": "Introduzca su contraseña",
+      "confirmPlaceholder": "Confirme su contraseña",
+      "terms": "Acepto los <terms>términos y condiciones</terms> y la <privacy>política de privacidad</privacy>.",
+      "submit": "Registrarse",
+      "submitting": "Creando cuenta...",
+      "submitMobile": "Crear Cuenta",
+      "alreadyAccount": "¿Ya tienes una cuenta?",
+      "loginLink": "Inicia sesión aquí",
+      "loginLinkMobile": "Iniciar sesión",
+      "errors": {
+        "passwordMismatch": "Las contraseñas no coinciden.",
+        "passwordTooShort": "La contraseña debe tener al menos 6 caracteres.",
+        "termsRequired": "Debes aceptar los términos y condiciones para continuar.",
+        "userAlreadyRegistered": "Este email ya está registrado."
+      },
+      "success": {
+        "title": "✅ ¡Cuenta creada exitosamente!",
+        "important": "📧 IMPORTANTE: Revisa tu correo electrónico",
+        "message": "Te hemos enviado un email a <strong>{email}</strong> con un enlace para confirmar tu cuenta.",
+        "spam": "No olvides revisar tu carpeta de SPAM si no lo ves en tu bandeja principal."
+      }
+    },
+    "ForgotPassword": {
+      "backToLogin": "Volver al inicio de sesión",
+      "title": "Recupera tu Contraseña",
+      "subtitle": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+      "emailPlaceholder": "tu.correo@ejemplo.com",
+      "submit": "Enviar Enlace",
+      "submitting": "Enviando...",
+      "rememberPassword": "¿Recuerdas tu contraseña? Inicia sesión",
+      "success": {
+        "title": "¡Correo Enviado!",
+        "message": "Hemos enviado un enlace de recuperación a:",
+        "checkInbox": "Revisa tu bandeja de entrada",
+        "validity": "El enlace de recuperación es válido por 1 hora. Si no encuentras el correo, verifica tu carpeta de spam.",
+        "resend": "Volver a enviar correo",
+        "backToLogin": "Volver a iniciar sesión"
+      }
+    }
+  },
+  "Events": {
+    "Header": {
+      "title": "Gestor de Eventos",
+      "titleMobile": "Eventos",
+      "backToEvent": "Volver al Evento",
+      "userMenu": {
+        "signOut": "Cerrar Sesión"
+      },
+      "nav": {
+        "events": "Eventos",
+        "myAgenda": "Mi Agenda",
+        "fullAgenda": "Agenda Completa"
+      }
+    },
+    "List": {
+      "titleUpcoming": "Próximos Eventos",
+      "titleAll": "Todos los Eventos",
+      "searchPlaceholder": "Buscar eventos por nombre, descripción o lugar...",
+      "filters": {
+        "button": "Filtros",
+        "showPast": "Mostrar eventos pasados"
+      },
+      "results": {
+        "count": "Se encontró {count} evento(s)",
+        "notFound": "No se encontraron eventos",
+        "notFoundDesc": "Prueba a cambiar tu búsqueda o los filtros"
+      },
+      "empty": {
+        "title": "No hay eventos disponibles",
+        "description": "No hay eventos programados en este momento.",
+        "action": "Crear tu primer evento"
+      }
+    },
+    "Card": {
+      "viewDetails": "Ver detalles",
+      "noImage": "Sin imagen disponible"
+    },
+    "Detail": {
+      "back": "Volver a Eventos",
+      "backMobile": "Eventos",
+      "titleMobile": "Detalles del Evento",
+      "date": "Fecha",
+      "location": "Ubicación",
+      "organizer": "Organizado por",
+      "about": "Acerca del evento",
+      "actions": {
+        "title": "Acciones Rápidas",
+        "fullAgenda": "Ver Agenda Completa",
+        "myAgenda": "Mi Agenda Personal",
+        "register": "Registrarse Ahora"
+      },
+      "notFound": "Evento no encontrado"
+    },
+    "MyAgenda": {
+      "title": "Mi Agenda",
+      "subtitle": "Gestiona tu horario personalizado",
+      "subtitleMyAgenda": "Tu agenda personalizada",
+      "subtitleAllTalks": "Todas las charlas",
+      "timeline": {
+        "title": "Horario del Día"
+      },
+      "legend": {
+        "rooms": "Salas"
+      },
+      "empty": {
+        "title": "Tu agenda está vacía",
+        "description": "Aún no has añadido charlas a tu agenda personal. Explora el programa y selecciona las que te interesen.",
+        "action": "Explorar Agenda"
+      },
+      "conflicts": {
+        "title": "Posibles conflictos de horario",
+        "description": "Algunas charlas en tu agenda se solapan en horario. Revisa el timeline para identificar los conflictos."
+      }
+    }
   }
 }

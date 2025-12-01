@@ -1,15 +1,17 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect, notFound } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { Calendar, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MyAgendaClient } from "@/components/agenda/my-agenda-client";
 import { AgendaHeader } from "@/components/agenda/agenda-header";
 import { Talk } from "@/lib/types/talk";
+import { getTranslations } from "next-intl/server";
 
 interface MyAgendaPageProps {
   params: Promise<{
     eventId: string;
+    locale: string;
   }>;
   searchParams: Promise<{
     date?: string;
@@ -29,6 +31,7 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const eventId = parseInt(resolvedParams.eventId, 10);
+  const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.MyAgenda'});
 
   if (isNaN(eventId)) {
     notFound();
@@ -109,16 +112,15 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
               <Calendar className="h-8 w-8 text-blue-600" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Tu agenda está vacía
+              {t("empty.title")}
             </h3>
             <p className="text-gray-600 max-w-md mx-auto mb-6">
-              Aún no has añadido charlas a tu agenda personal. Explora el
-              programa y selecciona las que te interesen.
+              {t("empty.description")}
             </p>
             <Link href={`/events/${eventId}/agenda`}>
               <Button>
                 <Calendar className="h-4 w-4 mr-2" />
-                Explorar Agenda
+                {t("empty.action")}
               </Button>
             </Link>
           </div>
@@ -130,11 +132,10 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
                 <AlertCircle className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-orange-900 mb-1">
-                    Posibles conflictos de horario
+                    {t("conflicts.title")}
                   </p>
                   <p className="text-sm text-orange-700">
-                    Algunas charlas en tu agenda se solapan en horario. Revisa el
-                    timeline para identificar los conflictos.
+                    {t("conflicts.description")}
                   </p>
                 </div>
               </div>

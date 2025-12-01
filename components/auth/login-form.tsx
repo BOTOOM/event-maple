@@ -6,12 +6,16 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Calendar, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "@/lib/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 function LoginFormContent() {
+  const t = useTranslations("Auth.Login");
+  const tCommon = useTranslations("Auth.common");
+  
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,9 +38,9 @@ function LoginFormContent() {
       if (error) {
         toast({
           variant: "destructive",
-          title: "Error al iniciar sesión",
+          title: t("errorTitle"),
           description: error.message === "Invalid login credentials"
-            ? "Credenciales inválidas. Verifica tu email y contraseña."
+            ? tCommon("errors.invalidCredentials")
             : error.message,
         });
         return;
@@ -44,8 +48,8 @@ function LoginFormContent() {
 
       toast({
         variant: "success",
-        title: "¡Bienvenido!",
-        description: "Has iniciado sesión correctamente.",
+        title: t("successTitle"),
+        description: t("successDesc"),
       });
 
       // Validate returnUrl to prevent open redirect vulnerability
@@ -58,7 +62,7 @@ function LoginFormContent() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Ocurrió un error inesperado. Intenta nuevamente.",
+        description: tCommon("errors.generic"),
       });
     } finally {
       setIsLoading(false);
@@ -88,7 +92,7 @@ function LoginFormContent() {
       <div className="mb-6">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
           <ArrowLeft className="h-4 w-4" />
-          <span className="text-sm font-medium">Volver al inicio</span>
+          <span className="text-sm font-medium">{tCommon("backToHome")}</span>
         </Link>
       </div>
 
@@ -101,22 +105,22 @@ function LoginFormContent() {
 
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-          Bienvenido
+          {t("title")}
         </h1>
         <p className="text-gray-600">
-          Inicia sesión en tu cuenta para continuar
+          {t("subtitle")}
         </p>
       </div>
 
       <form onSubmit={handleLogin} className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-gray-900">
-            Correo electrónico
+            {tCommon("email")}
           </Label>
           <Input
             id="email"
             type="email"
-            placeholder="Introduce tu correo electrónico"
+            placeholder={t("emailPlaceholder")}
             required
             disabled={isLoading}
             value={email}
@@ -127,20 +131,20 @@ function LoginFormContent() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label htmlFor="password" className="text-gray-900">
-              Contraseña
+              {tCommon("password")}
             </Label>
             <Link
               href="/forgot-password"
               className="text-sm text-primary hover:underline"
             >
-              ¿Olvidé mi contraseña?
+              {t("forgotPassword")}
             </Link>
           </div>
           <div className="relative">
             <Input
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Introduce tu contraseña"
+              placeholder={t("passwordPlaceholder")}
               required
               disabled={isLoading}
               className="pr-10"
@@ -168,13 +172,13 @@ function LoginFormContent() {
           size="lg"
           disabled={isLoading}
         >
-          {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+          {isLoading ? t("submitting") : t("submit")}
         </Button>
 
         <div className="text-center text-sm text-gray-600">
-          ¿No tienes una cuenta?{" "}
+          {t("noAccount")}{" "}
           <Link href="/register" className="text-primary hover:underline font-medium">
-            Regístrate
+            {t("registerLink")}
           </Link>
         </div>
 

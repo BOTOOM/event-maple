@@ -3,14 +3,16 @@
 import { Search, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import Image from "next/image";
 import { useAuth } from "@/lib/hooks/use-auth";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function EventsHeader() {
   const { user, signOut } = useAuth();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const t = useTranslations("Events.Header");
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
@@ -34,8 +36,8 @@ export function EventsHeader() {
               className="w-8 h-8 md:w-10 md:h-10"
             />
             <span className="font-bold text-lg sm:text-xl text-gray-900">
-              <span className="hidden md:inline">Gestor de Eventos</span>
-              <span className="md:hidden">Eventos</span>
+              <span className="hidden md:inline">{t("title")}</span>
+              <span className="md:hidden">{t("titleMobile")}</span>
             </span>
           </Link>
 
@@ -55,7 +57,7 @@ export function EventsHeader() {
               {user?.email}
             </span>
             <Button variant="outline" onClick={signOut}>
-              Cerrar Sesión
+              {t("userMenu.signOut")}
             </Button>
           </div>
         </div>
@@ -70,14 +72,14 @@ export function EventsHeader() {
               className="block py-2 text-gray-700 hover:text-primary"
               onClick={() => setShowMobileMenu(false)}
             >
-              Eventos
+              {t("nav.events")}
             </Link>
             <Link
               href="/my-agenda"
               className="block py-2 text-gray-700 hover:text-primary"
               onClick={() => setShowMobileMenu(false)}
             >
-              Mi Agenda
+              {t("nav.myAgenda")}
             </Link>
             <div className="pt-2 border-t border-gray-200">
               <p className="text-xs text-gray-500 mb-2">{user?.email}</p>
@@ -87,7 +89,7 @@ export function EventsHeader() {
                 onClick={signOut}
                 className="w-full justify-start"
               >
-                Cerrar Sesión
+                {t("userMenu.signOut")}
               </Button>
             </div>
           </div>

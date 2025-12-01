@@ -1,20 +1,24 @@
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import Image from "next/image";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Event, getEventTitle } from "@/lib/types/event";
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { useFormatter, useTranslations } from "next-intl";
 
 interface EventCardProps {
   event: Event;
 }
 
 export function EventCard({ event }: EventCardProps) {
+  const t = useTranslations("Events.Card");
+  const format = useFormatter();
   const eventTitle = getEventTitle(event);
-  // Usar parseISO para evitar conversión de timezone que cambia el día
-  const formattedDate = format(parseISO(event.start_date), "d 'de' MMMM, yyyy", {
-    locale: es,
+  
+  // Usar next-intl formatter
+  const formattedDate = format.dateTime(new Date(event.start_date), {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
 
   return (
@@ -31,7 +35,7 @@ export function EventCard({ event }: EventCardProps) {
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-white/20 text-sm">
             <span className="text-center px-4">
-              Sin imagen disponible
+              {t("noImage")}
               <br />
               {eventTitle}
             </span>
@@ -64,7 +68,7 @@ export function EventCard({ event }: EventCardProps) {
           className="w-full"
         >
           <Button className="inline-flex items-center justify-center gap-2 w-full mt-2" size="lg">
-            Ver detalles
+            {t("viewDetails")}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
