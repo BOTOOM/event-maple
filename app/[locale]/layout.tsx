@@ -32,6 +32,7 @@ export async function generateMetadata(
       template: "%s | EventMaple",
     },
     description: t('description'),
+    manifest: '/manifest.webmanifest',
     keywords: [
       "Gestión de eventos",
       "Agenda de conferencias",
@@ -53,17 +54,6 @@ export async function generateMetadata(
         'fr': '/fr',
         'pt': '/pt',
       },
-    },
-    icons: {
-      icon: [
-        { url: "/icon?size=32", type: "image/png", sizes: "32x32" },
-        { url: "/icon?size=192", type: "image/png", sizes: "192x192" },
-        { url: "/favicon.ico", sizes: "any" },
-      ],
-      shortcut: "/favicon.ico",
-      apple: [
-        { url: "/icon?size=180", type: "image/png", sizes: "180x180" },
-      ],
     },
     openGraph: {
       type: "website",

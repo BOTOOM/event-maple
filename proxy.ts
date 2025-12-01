@@ -16,7 +16,7 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Matcher optimizado para excluir archivos estáticos y rutas de API
-    "/((?!api|_next/static|_next/image|_vercel|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"
+    // Matcher optimizado para excluir archivos estáticos, rutas de API, manifest y generador de iconos
+    "/((?!api|_next/static|_next/image|_vercel|favicon.ico|manifest.webmanifest|icon|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"
   ],
 };
