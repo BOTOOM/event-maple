@@ -5,7 +5,7 @@ import { updateSession } from "@/lib/supabase/middleware";
 
 const intlMiddleware = createMiddleware(routing);
 
-export async function proxy(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   // 1. Ejecutar next-intl middleware primero para manejar el routing de idiomas
   const response = intlMiddleware(request);
   
