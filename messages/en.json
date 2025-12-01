@@ -396,5 +396,20 @@
         "description": "Some talks in your agenda overlap. Check the timeline to identify conflicts."
       }
     }
+  },
+  "Errors": {
+    "NotFound": {
+      "title": "404",
+      "subtitle": "Page not found",
+      "description": "It seems you've lost your way. The link you followed might be broken or the page has been removed.",
+      "button": "Back to home"
+    },
+    "General": {
+      "title": "Oops, something went wrong",
+      "description": "It seems we've encountered an unexpected error. Our team has been notified. You can try going back to the home page.",
+      "retry": "Try again",
+      "home": "Back to Home",
+      "support": "If the problem persists, contact support."
+    }
   }
 }

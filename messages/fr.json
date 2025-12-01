@@ -9,6 +9,132 @@
       "login": "Se connecter"
     }
   },
+  "Static": {
+    "About": {
+      "metadata": {
+        "title": "À propos d'EventMaple - Gérez vos événements intelligemment",
+        "description": "Découvrez comment EventMaple aide la communauté à gérer efficacement et gratuitement des événements et des agendas personnalisés."
+      },
+      "back": "Retour à l'accueil",
+      "header": {
+        "title": "À propos d'EventMaple",
+        "subtitle": "Un projet créé avec passion pour aider la communauté à gérer ses événements"
+      },
+      "mission": {
+        "title": "Notre Mission",
+        "text1": "EventMaple est né avec un <strong>objectif clair et simple</strong> : permettre à la communauté de créer, organiser et participer à des événements de tout type, totalement gratuitement et accessible à tous.",
+        "text2": "Qu'il s'agisse d'un événement technologique, d'une conférence, d'un atelier communautaire ou de tout autre type de rassemblement, EventMaple vous donne les outils dont vous avez besoin pour que les organisateurs et les participants puissent gérer toutes les informations en un seul endroit."
+      },
+      "offer": {
+        "title": "Que Proposons-nous ?",
+        "organizers": {
+          "title": "Pour les Organisateurs",
+          "items": {
+            "0": "Créez des événements de tout type, technologiques ou non",
+            "1": "Ajoutez des conférences, des ateliers et des activités au sein de chaque événement",
+            "2": "Partagez toutes les informations de l'événement avec la communauté",
+            "3": "Facilitez l'organisation et la planification des activités"
+          }
+        },
+        "attendees": {
+          "title": "Pour les Participants",
+          "items": {
+            "0": "Explorez des événements et découvrez des conférences qui vous intéressent",
+            "1": "Gérez votre agenda d'événements personnel adapté à vous",
+            "2": "Marquez les conférences et activités auxquelles vous souhaitez assister",
+            "3": "Gardez tout organisé en un seul endroit, pour plusieurs événements"
+          }
+        }
+      },
+      "vision": {
+        "title": "Fait pour la Communauté",
+        "text1": "EventMaple est conçu en pensant à <strong>vous</strong> et à toute la communauté. Nous pensons que la gestion d'événements ne devrait pas être compliquée ou coûteuse. C'est pourquoi nous offrons une plateforme totalement gratuite qui met le pouvoir de l'organisation entre vos mains.",
+        "text2": "Que vous soyez un organisateur cherchant à faciliter l'expérience de vos participants, ou un participant voulant tirer le meilleur parti de chaque événement, EventMaple est là pour vous aider à garder tout structuré, accessible et sous contrôle.",
+        "highlight": "💡 <strong>Notre vision :</strong> Un monde où toute personne ou groupe peut organiser et participer à des événements de manière simple, intuitive et efficace, renforçant les liens communautaires et facilitant l'accès aux connaissances et expériences partagées."
+      },
+      "values": {
+        "title": "Nos Valeurs",
+        "community": {
+          "title": "La Communauté d'Abord",
+          "desc": "Tout ce que nous faisons est conçu pour servir et autonomiser la communauté"
+        },
+        "simplicity": {
+          "title": "Simplicité",
+          "desc": "Un outil facile à utiliser, intuitif et accessible pour tous"
+        },
+        "free": {
+          "title": "Toujours Gratuit",
+          "desc": "Nous croyons en l'accès gratuit à la connaissance et aux outils numériques"
+        }
+      },
+      "cta": {
+        "title": "Prêt à Commencer ?",
+        "text": "Rejoignez EventMaple et commencez à gérer vos événements intelligemment",
+        "createAccount": "Créer un Compte Gratuit",
+        "explore": "Explorer les Événements"
+      }
+    },
+    "Contact": {
+      "metadata": {
+          "title": "Contact - EventMaple",
+          "description": "Contactez-nous pour toute question, suggestion ou commentaire."
+      },
+      "back": "Retour à l'accueil",
+      "header": {
+          "title": "Contact",
+          "subtitle": "Des questions, des suggestions ou simplement envie de discuter ? J'aimerais avoir de vos nouvelles !"
+      },
+      "developer": {
+          "role": "Développeur EventMaple"
+      },
+      "intro": "Salut ! 👋 Je suis Edwar, le développeur derrière EventMaple. J'ai créé ce projet dans le but d'aider la communauté à gérer les événements de manière plus efficace et accessible.",
+      "methods": {
+          "title": "Moyens de me contacter",
+          "email": {
+              "title": "Email",
+              "desc": "Cliquez pour envoyer un email"
+          },
+          "github": {
+              "title": "GitHub",
+              "desc": "Consultez mes projets et mon code"
+          },
+          "portfolio": {
+              "title": "Portfolio Web",
+              "desc": "En savoir plus sur mon travail et mon expérience"
+          }
+      },
+      "copyEmail": {
+          "title": "Préférer copier l'email ?",
+          "button": "Copier",
+          "copied": "✓ Copié"
+      },
+      "aboutProject": {
+          "title": "À propos du Projet",
+          "text": "EventMaple est un projet open-source créé pour aider la communauté à gérer efficacement les événements. Si vous avez des idées, trouvez un bug ou souhaitez contribuer, vos commentaires sont les bienvenus !",
+          "idea": {
+              "title": "💡 Vous avez une idée ?",
+              "desc": "Partagez vos suggestions pour améliorer EventMaple"
+          },
+          "bug": {
+              "title": "🐛 Trouvé un bug ?",
+              "desc": "Aidez-moi à m'améliorer en signalant tout problème"
+          },
+          "collab": {
+              "title": "🤝 Envie de collaborer ?",
+              "desc": "Je suis toujours ouvert aux collaborations et contributions"
+          },
+          "questions": {
+              "title": "📝 Des questions ?",
+              "desc": "N'hésitez pas à me contacter pour toute demande"
+          }
+      },
+      "cta": {
+          "title": "Merci d'utiliser EventMaple !",
+          "text": "Votre soutien et vos retours sont fondamentaux pour améliorer cette plateforme",
+          "button": "En savoir plus sur le projet"
+      }
+    }
+  },
   "Metadata": {
     "title": "EventMaple - La façon la plus intelligente d'organiser votre événement",
     "description": "Gérez vos événements, votre agenda et vos notifications en un seul endroit."
@@ -169,13 +295,30 @@
         "fullAgenda": "Agenda Complet"
       }
     },
+    "Favorite": {
+      "add": "Ajouter aux favoris",
+      "remove": "Retirer des favoris",
+      "added": "Dans les favoris",
+      "toast": {
+        "addedTitle": "Ajouté aux favoris",
+        "addedDesc": "Événement ajouté à vos favoris.",
+        "removedTitle": "Retiré des favoris",
+        "removedDesc": "Événement retiré de vos favoris.",
+        "errorTitle": "Erreur",
+        "errorDesc": "Impossible de mettre à jour les favoris."
+      }
+    },
     "List": {
       "titleUpcoming": "Événements à Venir",
       "titleAll": "Tous les Événements",
       "searchPlaceholder": "Rechercher des événements par nom, description ou lieu...",
       "filters": {
         "button": "Filtres",
-        "showPast": "Afficher les événements passés"
+        "dateRange": "Plage de dates",
+        "showPast": "Afficher les événements passés",
+        "showingToday": "Affichage des événements d'aujourd'hui et futurs",
+        "showingAll": "Affichage de tous les événements, y compris passés",
+        "moreSoon": "Plus de filtres bientôt..."
       },
       "results": {
         "count": "{count} événement(s) trouvé(s)",
@@ -204,9 +347,33 @@
         "title": "Actions Rapides",
         "fullAgenda": "Voir l'Agenda Complet",
         "myAgenda": "Mon Agenda Personnel",
-        "register": "S'inscrire Maintenant"
+        "register": "S'inscrire Maintenant",
+        "addToFavorites": "Ajouter aux favoris"
       },
       "notFound": "Événement non trouvé"
+    },
+    "FullAgenda": {
+      "header": {
+        "allTalks": "Toutes les Conférences",
+        "futureTalks": "Conférences Actuelles et Futures",
+        "filters": "Filtres"
+      },
+      "search": {
+        "placeholder": "Rechercher des conférences par titre, conférencier, sujet..."
+      },
+      "results": {
+        "count": "{count} conférence(s) trouvée(s)",
+        "notFound": "Aucune conférence trouvée",
+        "notFoundDesc": "Essayez de modifier votre recherche ou vos filtres"
+      },
+      "filters": {
+        "title": "Filtres",
+        "timeFilter": "Filtre de Temps",
+        "showPast": "Afficher les conférences passées",
+        "showPastDescOn": "Affichage de toutes les conférences, y compris passées",
+        "showPastDescOff": "Affichage uniquement des conférences actuelles et futures",
+        "moreSoon": "Plus de filtres bientôt..."
+      }
     },
     "MyAgenda": {
       "title": "Mon Agenda",
@@ -228,6 +395,21 @@
         "title": "Conflits d'horaire possibles",
         "description": "Certaines conférences dans votre agenda se chevauchent. Vérifiez la chronologie pour identifier les conflits."
       }
+    }
+  },
+  "Errors": {
+    "NotFound": {
+      "title": "404",
+      "subtitle": "Page non trouvée",
+      "description": "Il semble que vous vous soyez perdu. Le lien que vous avez suivi est peut-être rompu ou la page a été supprimée.",
+      "button": "Retour à l'accueil"
+    },
+    "General": {
+      "title": "Oups, quelque chose s'est mal passé",
+      "description": "Il semble que nous ayons rencontré une erreur inattendue. Notre équipe a été notifiée. Vous pouvez essayer de retourner à la page d'accueil.",
+      "retry": "Réessayer",
+      "home": "Retour à l'accueil",
+      "support": "Si le problème persiste, contactez le support."
     }
   }
 }

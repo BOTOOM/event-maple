@@ -4,6 +4,7 @@ import { Link } from "@/lib/i18n/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { CopyEmailButton } from "@/components/contact/copy-email-button";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -159,23 +160,11 @@ export default function ContactPage() {
                 <code className="flex-1 px-4 py-3 bg-white rounded-lg text-gray-800 font-mono text-sm border border-gray-200">
                   contact@edwardiaz.dev
                 </code>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText("contact@edwardiaz.dev");
-                    const btn = document.getElementById("copy-btn");
-                    if (btn) {
-                      const originalText = btn.textContent;
-                      btn.textContent = t("copyEmail.copied");
-                      setTimeout(() => {
-                        btn.textContent = originalText;
-                      }, 2000);
-                    }
-                  }}
-                  id="copy-btn"
-                  className="px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium whitespace-nowrap"
-                >
-                  {t("copyEmail.button")}
-                </button>
+                <CopyEmailButton
+                  email="contact@edwardiaz.dev"
+                  buttonText={t("copyEmail.button")}
+                  copiedText={t("copyEmail.copied")}
+                />
               </div>
             </div>
           </div>

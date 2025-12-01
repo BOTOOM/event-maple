@@ -229,5 +229,20 @@
         "description": "Algunas charlas en tu agenda se solapan en horario. Revisa el timeline para identificar los conflictos."
       }
     }
+  },
+  "Errors": {
+    "NotFound": {
+      "title": "404",
+      "subtitle": "Página no encontrada",
+      "description": "Parece que te has perdido. El enlace que seguiste puede estar roto o la página ha sido eliminada.",
+      "button": "Volver al inicio"
+    },
+    "General": {
+      "title": "Oops, algo salió mal",
+      "description": "Parece que hemos encontrado un error inesperado. Nuestro equipo ya ha sido notificado. Puedes intentar volver a la página de inicio.",
+      "retry": "Intentar de nuevo",
+      "home": "Volver al Inicio",
+      "support": "Si el problema persiste, contacta a soporte."
+    }
   }
 }
