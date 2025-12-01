@@ -9,6 +9,10 @@
       "login": "Entrar"
     }
   },
+  "Metadata": {
+    "title": "EventMaple - A maneira mais inteligente de organizar seu evento",
+    "description": "Gerencie seus eventos, agenda e notificações em um só lugar."
+  },
   "Landing": {
     "Hero": {
       "title": "A maneira mais inteligente de organizar seu evento.",
@@ -17,6 +21,213 @@
       "subtitleMobile": "Crie sua agenda de eventos, receba notificações e não perca nenhuma atividade.",
       "cta": "Comece agora grátis",
       "ctaMobile": "Começar"
+    },
+    "Benefits": {
+      "title": "Principais Benefícios",
+      "subtitle": "Descubra as vantagens de usar nossa plataforma para uma experiência de evento inigualável.",
+      "items": {
+        "time": {
+          "title": "Economize Tempo",
+          "description": "Otimize seu tempo com nossas ferramentas de agendamento intuitivas e crie um calendário."
+        },
+        "organized": {
+          "title": "Mantenha-se Organizado",
+          "description": "Mantenha tudo em ordem e não perca nenhuma sessão ou evento importante."
+        }
+      }
+    },
+    "Features": {
+      "title": "Principais Recursos",
+      "subtitle": "Explore os recursos que tornam nosso aplicativo a melhor opção para o seu evento.",
+      "badges": {
+        "comingSoon": "EM BREVE"
+      },
+      "items": {
+        "agenda": {
+          "title": "Agenda Personalizada",
+          "description": "Crie e gerencie sua própria agenda personalizada com as sessões que mais lhe interessam.",
+          "alt": "Agenda móvel personalizada"
+        },
+        "notifications": {
+          "title": "Notificações em Tempo Real",
+          "description": "Receba atualizações instantâneas e lembretes sobre suas sessões e mudanças no evento.",
+          "alt": "Painel de notificações"
+        },
+        "maps": {
+          "title": "Mapas do Evento",
+          "description": "Navegue pelo local do evento com nossos mapas interativos e encontre seu caminho facilmente.",
+          "alt": "Mapa interativo do evento"
+        }
+      }
+    },
+    "Footer": {
+      "brand": {
+        "tagline": "A maneira mais inteligente de organizar seu evento."
+      },
+      "columns": {
+        "product": "Produto",
+        "project": "O Projeto",
+        "legal": "Legal"
+      },
+      "links": {
+        "benefits": "Benefícios",
+        "features": "Recursos",
+        "about": "Sobre",
+        "contact": "Contato",
+        "terms": "Termos de Serviço",
+        "privacy": "Política de Privacidade"
+      },
+      "copyright": "© {year} EventMaple. Todos os direitos reservados. Desenvolvido com ❤️ por"
+    }
+  },
+  "Auth": {
+    "common": {
+      "backToHome": "Voltar ao início",
+      "email": "Email",
+      "password": "Senha",
+      "confirmPassword": "Confirmar senha",
+      "or": "ou",
+      "errors": {
+        "generic": "Ocorreu um erro inesperado. Tente novamente.",
+        "invalidCredentials": "Credenciais inválidas. Verifique seu email e senha."
+      }
+    },
+    "Login": {
+      "title": "Bem-vindo",
+      "subtitle": "Faça login na sua conta para continuar",
+      "emailPlaceholder": "Digite seu email",
+      "passwordPlaceholder": "Digite sua senha",
+      "forgotPassword": "Esqueceu a senha?",
+      "submit": "Entrar",
+      "submitting": "Entrando...",
+      "noAccount": "Não tem uma conta?",
+      "registerLink": "Cadastre-se",
+      "successTitle": "Bem-vindo!",
+      "successDesc": "Você entrou com sucesso.",
+      "errorTitle": "Erro ao entrar"
+    },
+    "Register": {
+      "title": "Crie sua conta",
+      "titleMobile": "Criar nova conta",
+      "subtitle": "Acesse a agenda completa do evento",
+      "subtitleMobile": "Cadastre-se para gerenciar sua agenda de eventos.",
+      "name": "Nome",
+      "nameMobile": "Nome completo",
+      "namePlaceholder": "Digite seu nome completo",
+      "emailPlaceholder": "Digite seu email",
+      "passwordPlaceholder": "Digite sua senha",
+      "confirmPlaceholder": "Confirme sua senha",
+      "terms": "Aceito os <terms>termos e condições</terms> e a <privacy>política de privacidade</privacy>.",
+      "submit": "Cadastrar",
+      "submitting": "Criando conta...",
+      "submitMobile": "Criar Conta",
+      "alreadyAccount": "Já tem uma conta?",
+      "loginLink": "Entre aqui",
+      "loginLinkMobile": "Entrar",
+      "errors": {
+        "passwordMismatch": "As senhas não coincidem.",
+        "passwordTooShort": "A senha deve ter pelo menos 6 caracteres.",
+        "termsRequired": "Você deve aceitar os termos e condições para continuar.",
+        "userAlreadyRegistered": "Este email já está registrado."
+      },
+      "success": {
+        "title": "✅ Conta criada com sucesso!",
+        "important": "📧 IMPORTANTE: Verifique seu email",
+        "message": "Enviamos um email para <strong>{email}</strong> com um link para confirmar sua conta.",
+        "spam": "Não se esqueça de verificar sua pasta de SPAM se não o vir na caixa de entrada principal."
+      }
+    },
+    "ForgotPassword": {
+      "backToLogin": "Voltar ao login",
+      "title": "Recupere sua Senha",
+      "subtitle": "Digite seu email e enviaremos um link para redefinir sua senha.",
+      "emailPlaceholder": "seu.email@exemplo.com",
+      "submit": "Enviar Link",
+      "submitting": "Enviando...",
+      "rememberPassword": "Lembrou sua senha? Entrar",
+      "success": {
+        "title": "Email Enviado!",
+        "message": "Enviamos um link de recuperação para:",
+        "checkInbox": "Verifique sua caixa de entrada",
+        "validity": "O link de recuperação é válido por 1 hora. Se não encontrar o email, verifique sua pasta de spam.",
+        "resend": "Reenviar email",
+        "backToLogin": "Voltar ao login"
+      }
+    }
+  },
+  "Events": {
+    "Header": {
+      "title": "Gerenciador de Eventos",
+      "titleMobile": "Eventos",
+      "backToEvent": "Voltar ao Evento",
+      "userMenu": {
+        "signOut": "Sair"
+      },
+      "nav": {
+        "events": "Eventos",
+        "myAgenda": "Minha Agenda",
+        "fullAgenda": "Agenda Completa"
+      }
+    },
+    "List": {
+      "titleUpcoming": "Próximos Eventos",
+      "titleAll": "Todos os Eventos",
+      "searchPlaceholder": "Pesquisar eventos por nome, descrição ou local...",
+      "filters": {
+        "button": "Filtros",
+        "showPast": "Mostrar eventos passados"
+      },
+      "results": {
+        "count": "Encontrado(s) {count} evento(s)",
+        "notFound": "Nenhum evento encontrado",
+        "notFoundDesc": "Tente alterar sua pesquisa ou filtros"
+      },
+      "empty": {
+        "title": "Nenhum evento disponível",
+        "description": "Não há eventos agendados no momento.",
+        "action": "Crie seu primeiro evento"
+      }
+    },
+    "Card": {
+      "viewDetails": "Ver detalhes",
+      "noImage": "Sem imagem disponível"
+    },
+    "Detail": {
+      "back": "Voltar para Eventos",
+      "backMobile": "Eventos",
+      "titleMobile": "Detalhes do Evento",
+      "date": "Data",
+      "location": "Localização",
+      "organizer": "Organizado por",
+      "about": "Sobre o evento",
+      "actions": {
+        "title": "Ações Rápidas",
+        "fullAgenda": "Ver Agenda Completa",
+        "myAgenda": "Minha Agenda Pessoal",
+        "register": "Inscreva-se Agora"
+      },
+      "notFound": "Evento não encontrado"
+    },
+    "MyAgenda": {
+      "title": "Minha Agenda",
+      "subtitle": "Gerencie sua programação personalizada",
+      "subtitleMyAgenda": "Sua agenda personalizada",
+      "subtitleAllTalks": "Todas as palestras",
+      "timeline": {
+        "title": "Programação do Dia"
+      },
+      "legend": {
+        "rooms": "Salas"
+      },
+      "empty": {
+        "title": "Sua agenda está vazia",
+        "description": "Você ainda não adicionou nenhuma palestra à sua agenda pessoal. Explore o programa e selecione as que lhe interessam.",
+        "action": "Explorar Agenda"
+      },
+      "conflicts": {
+        "title": "Possíveis conflitos de horário",
+        "description": "Algumas palestras na sua agenda se sobrepõem. Verifique a linha do tempo para identificar conflitos."
+      }
     }
   }
 }
