@@ -13,7 +13,7 @@ export function Hero() {
           <div
             className="absolute inset-0 opacity-0 sm:opacity-40"
             style={{
-              backgroundImage: 'url("https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/venue.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy92ZW51ZS5qcGciLCJpYXQiOjE3NTk3NzIyMTgsImV4cCI6MTc5MTMwODIxOH0.hdzTkJWumQFp3fiVw3UR2BQAlJFFitaDEh8kT9HrMVw")',
+              backgroundImage: 'url("https://res.cloudinary.com/dultmjgbm/image/upload/v1764632374/venue_gzrzpu.jpg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
