@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { languages } from "@/lib/i18n/config";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
@@ -23,13 +24,6 @@ export function LanguageSwitcher() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const languages = [
-    { code: "en", label: "English", flag: "🇺🇸" },
-    { code: "es", label: "Español", flag: "🇪🇸" },
-    { code: "pt", label: "Português", flag: "🇧🇷" },
-    { code: "fr", label: "Français", flag: "🇫🇷" },
-  ];
 
   const handleLanguageChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });

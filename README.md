@@ -5,7 +5,7 @@
 ### The smartest way to organize your event
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-15.5-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38bdf8)](https://tailwindcss.com/)
 
@@ -42,21 +42,25 @@ To empower the community to create, organize, and participate in events complete
 - ✅ **Secure authentication** with Supabase (email/password)
 - ✅ **Event management** - Create and explore all types of events
 - ✅ **Personalized agenda** - Mark and manage your favorite talks
+- ✅ **Internationalization (i18n)** - Multi-language support (EN, ES, FR, PT)
+- ✅ **SEO Optimized** - Dynamic metadata, sitemap, and robots.txt
+- ✅ **PWA Ready** - Installable as an app with offline capabilities
+- ✅ **Custom Error Handling** - User-friendly 404 and 500 pages
 - ✅ **Responsive design** - Optimized for mobile, tablet, and desktop
-- ✅ **Server-Side Rendering (SSR)** - Optimal performance with Next.js 15
+- ✅ **Server-Side Rendering (SSR)** - Optimal performance with Next.js 16
 - ✅ **Modern interface** - Intuitive and attractive UI/UX
-- ✅ **Talk management** - View schedules and activity details
 - ✅ **100% Free** - No hidden charges or limitations
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Next.js 15.5.4** - React Framework with App Router
+- **Next.js 16** - React Framework with App Router
 - **TypeScript** - Static typing
 - **Tailwind CSS** - Utility-first styling
 - **shadcn/ui** - UI Components
 - **Supabase** - Authentication and database
+- **next-intl** - Internationalization routing and translations
 - **Lucide React** - Icons
 - **date-fns** - Date handling
 - **Zustand** - Global state management
@@ -97,16 +101,20 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 event-maple/
 ├── app/                      # Next.js App Router
-│   ├── (auth)/              # Authentication route group
-│   ├── (dashboard)/         # Protected route group
-│   ├── page.tsx             # Landing page
-│   └── layout.tsx           # Root layout
+│   ├── [locale]/            # Internationalized routes
+│   │   ├── (auth)/          # Authentication route group
+│   │   ├── (dashboard)/     # Protected route group
+│   │   ├── page.tsx         # Landing page
+│   │   └── layout.tsx       # Root layout
+│   └── api/                 # API Routes
 ├── components/              # React Components
 │   ├── ui/                  # shadcn components
 │   ├── landing/             # Landing components
 │   ├── auth/                # Authentication components
 │   └── shared/              # Shared components
+├── messages/                # Translation files (en, es, fr, pt)
 ├── lib/                     # Utilities and configuration
+│   ├── i18n/                # Internationalization config
 │   ├── supabase/            # Supabase client
 │   └── utils.ts             # Helpers
 └── public/                  # Static files

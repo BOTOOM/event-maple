@@ -17,7 +17,7 @@ export default getRequestConfig(async ({requestLocale}) => {
     messages = { ...messages, ...legalMessages };
   } catch (error) {
     // Legal messages might not exist for all locales or might fail to load
-    console.warn(`Could not load legal messages for locale: ${locale}`);
+    console.warn(`Could not load legal messages for locale: ${locale}`, error);
   }
 
   return {
