@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { CopyEmailButton } from "@/components/contact/copy-email-button";
+import { InfoCard, InfoCardGrid } from "@/components/ui/info-card";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -179,32 +180,24 @@ export default function ContactPage() {
             <p>
               {t("aboutProject.text")}
             </p>
-            <div className="grid md:grid-cols-2 gap-4 mt-6">
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.idea.title")}</h4>
-                <p className="text-sm text-gray-600">
-                  {t("aboutProject.idea.desc")}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.bug.title")}</h4>
-                <p className="text-sm text-gray-600">
-                  {t("aboutProject.bug.desc")}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.collab.title")}</h4>
-                <p className="text-sm text-gray-600">
-                  {t("aboutProject.collab.desc")}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-2">{t("aboutProject.questions.title")}</h4>
-                <p className="text-sm text-gray-600">
-                  {t("aboutProject.questions.desc")}
-                </p>
-              </div>
-            </div>
+            <InfoCardGrid columns={2} className="mt-6">
+              <InfoCard 
+                title={t("aboutProject.idea.title")} 
+                description={t("aboutProject.idea.desc")} 
+              />
+              <InfoCard 
+                title={t("aboutProject.bug.title")} 
+                description={t("aboutProject.bug.desc")} 
+              />
+              <InfoCard 
+                title={t("aboutProject.collab.title")} 
+                description={t("aboutProject.collab.desc")} 
+              />
+              <InfoCard 
+                title={t("aboutProject.questions.title")} 
+                description={t("aboutProject.questions.desc")} 
+              />
+            </InfoCardGrid>
           </div>
         </div>
 
