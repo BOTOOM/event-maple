@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+// Metadata type is used via generateMetadata return type inference
 import { ArrowLeft, Target, Users, Calendar, Heart, Sparkles, CheckCircle } from "lucide-react";
 import { Link } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import "./globals.css";
 
 // El layout raíz es necesario, pero el contenido principal vive en [locale]/layout.tsx
-export default function RootLayout({children}: {children: ReactNode}) {
+export default function RootLayout({children}: Readonly<{children: ReactNode}>) {
   return (
     <html lang="en">
       <body>

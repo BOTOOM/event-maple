@@ -31,8 +31,8 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const eventId = parseInt(resolvedParams.eventId, 10);
-  const talkId = parseInt(resolvedParams.talkId, 10);
+  const eventId = Number.parseInt(resolvedParams.eventId, 10);
+  const talkId = Number.parseInt(resolvedParams.talkId, 10);
   
   // Determine back link based on 'from' parameter
   const backLink = resolvedSearchParams.from === 'my-agenda' 
@@ -42,7 +42,7 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
     ? 'Volver a Mi Agenda'
     : 'Volver a Agenda';
 
-  if (isNaN(eventId) || isNaN(talkId)) {
+  if (Number.isNaN(eventId) || Number.isNaN(talkId)) {
     notFound();
   }
 
@@ -118,10 +118,9 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 
         {/* Tags & Level */}
         <div className="flex flex-wrap items-center gap-2 mb-6">
-          {talk.tags &&
-            talk.tags.map((tag: string, index: number) => (
+          {talk.tags?.map((tag: string) => (
               <span
-                key={index}
+                key={tag}
                 className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full"
               >
                 {tag}

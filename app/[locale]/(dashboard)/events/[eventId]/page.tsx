@@ -22,10 +22,10 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const resolvedParams = await params;
-  const eventId = parseInt(resolvedParams.eventId, 10);
+  const eventId = Number.parseInt(resolvedParams.eventId, 10);
   const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.Detail'});
   
-  if (isNaN(eventId)) {
+  if (Number.isNaN(eventId)) {
     return {
       title: t("notFound"),
     };
@@ -67,11 +67,11 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
   // Convertir eventId de string a number (bigint)
   const resolvedParams = await params;
-  const eventId = parseInt(resolvedParams.eventId, 10);
+  const eventId = Number.parseInt(resolvedParams.eventId, 10);
   const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.Detail'});
   const format = await getFormatter({locale: resolvedParams.locale});
   
-  if (isNaN(eventId)) {
+  if (Number.isNaN(eventId)) {
     notFound();
   }
 

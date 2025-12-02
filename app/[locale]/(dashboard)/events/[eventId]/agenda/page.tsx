@@ -1,8 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import { AgendaHeader } from "@/components/agenda/agenda-header";
 import { AgendaPageClient } from "@/components/agenda/agenda-page-client";
-import { Talk } from "@/lib/types/talk";
 
 interface AgendaPageProps {
   params: Promise<{
@@ -17,9 +16,9 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
   } = await supabase.auth.getUser();
 
   const resolvedParams = await params;
-  const eventId = parseInt(resolvedParams.eventId, 10);
+  const eventId = Number.parseInt(resolvedParams.eventId, 10);
 
-  if (isNaN(eventId)) {
+  if (Number.isNaN(eventId)) {
     notFound();
   }
 

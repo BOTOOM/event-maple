@@ -7,13 +7,13 @@ import Image from 'next/image';
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
-}: {
+}: Readonly<{
   error: Error & {digest?: string};
   reset: () => void;
-}) {
+}>) {
   const t = useTranslations('Errors.General');
 
   useEffect(() => {

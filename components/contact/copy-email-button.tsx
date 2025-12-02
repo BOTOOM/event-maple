@@ -15,7 +15,7 @@ export function CopyEmailButton({
   buttonText,
   copiedText,
   className,
-}: CopyEmailButtonProps) {
+}: Readonly<CopyEmailButtonProps>) {
   const [hasCopied, setHasCopied] = useState(false);
 
   const handleCopy = async () => {

@@ -6,7 +6,7 @@ export default getRequestConfig(async ({requestLocale}) => {
   let locale = await requestLocale;
 
   // Ensure that a valid locale is used
-  if (!locale || !routing.locales.includes(locale as any)) {
+  if (!locale || !routing.locales.includes(locale as typeof routing.locales[number])) {
     locale = routing.defaultLocale;
   }
 
@@ -15,9 +15,8 @@ export default getRequestConfig(async ({requestLocale}) => {
   try {
     const legalMessages = (await import(`../../messages/legal_${locale}.json`)).default;
     messages = { ...messages, ...legalMessages };
-  } catch (error) {
-    // Legal messages might not exist for all locales or might fail to load
-    console.warn(`Could not load legal messages for locale: ${locale}`, error);
+  } catch {
+    // Legal messages might not exist for all locales
   }
 
   return {

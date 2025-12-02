@@ -12,6 +12,19 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/lib/hooks/use-toast";
 import { useTranslations } from "next-intl";
 
+// Render functions for t.rich() - extracted to avoid inline component definitions
+const StrongText = (chunks: React.ReactNode) => <strong>{chunks}</strong>;
+const TermsLink = (chunks: React.ReactNode) => (
+  <Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
+    {chunks}
+  </Link>
+);
+const PrivacyLink = (chunks: React.ReactNode) => (
+  <Link href="/privacy" className="text-primary hover:underline font-medium" target="_blank">
+    {chunks}
+  </Link>
+);
+
 export function RegisterForm() {
   const t = useTranslations("Auth.Register");
   const tCommon = useTranslations("Auth.common");
@@ -107,7 +120,7 @@ export function RegisterForm() {
             <p className="text-sm">
               {t.rich("success.message", {
                 email: formData.email,
-                strong: (chunks) => <strong>{chunks}</strong>
+                strong: StrongText
               })}
             </p>
             <p className="text-sm">
@@ -275,16 +288,8 @@ export function RegisterForm() {
           />
           <label htmlFor="terms" className="text-sm text-gray-600 leading-tight cursor-pointer">
             {t.rich("terms", {
-              terms: (chunks) => (
-                <Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
-                  {chunks}
-                </Link>
-              ),
-              privacy: (chunks) => (
-                <Link href="/privacy" className="text-primary hover:underline font-medium" target="_blank">
-                  {chunks}
-                </Link>
-              )
+              terms: TermsLink,
+              privacy: PrivacyLink
             })}
             <span className="text-red-500"> *</span>
           </label>

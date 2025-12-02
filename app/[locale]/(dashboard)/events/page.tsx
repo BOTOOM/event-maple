@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import { EventsHeader } from "@/components/events/events-header";
 import { EventsPageClient } from "@/components/events/events-page-client";
-import { Event } from "@/lib/types/event";
 
 export default async function EventsPage() {
   const supabase = await createClient();

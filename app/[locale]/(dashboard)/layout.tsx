@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout({ children }: Readonly<{ children: ReactNode }>) {
   return <>{children}</>;
 }

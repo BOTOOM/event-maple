@@ -30,10 +30,10 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const eventId = parseInt(resolvedParams.eventId, 10);
+  const eventId = Number.parseInt(resolvedParams.eventId, 10);
   const t = await getTranslations({locale: resolvedParams.locale, namespace: 'Events.MyAgenda'});
 
-  if (isNaN(eventId)) {
+  if (Number.isNaN(eventId)) {
     notFound();
   }
 
@@ -63,7 +63,7 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
   // Get unique dates
   const uniqueDates = Array.from(
     new Set(allTalks?.map((talk) => talk.date) || [])
-  ).sort();
+  ).sort((a, b) => a.localeCompare(b));
 
   // Determine selected date (from query param or first available)
   const selectedDate = resolvedSearchParams.date || uniqueDates[0] || event.start_date;
