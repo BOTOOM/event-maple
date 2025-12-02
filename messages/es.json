@@ -161,8 +161,10 @@
       "titleMobile": "Eventos",
       "backToEvent": "Volver al Evento",
       "userMenu": {
+        "signIn": "Iniciar Sesión",
         "signOut": "Cerrar Sesión"
       },
+      "home": "Inicio",
       "nav": {
         "events": "Eventos",
         "myAgenda": "Mi Agenda",
@@ -227,6 +229,39 @@
       "conflicts": {
         "title": "Posibles conflictos de horario",
         "description": "Algunas charlas en tu agenda se solapan en horario. Revisa el timeline para identificar los conflictos."
+      }
+    },
+    "TalkCard": {
+      "viewMore": "Ver Más",
+      "locationPending": "Ubicación por confirmar"
+    },
+    "TalkDetail": {
+      "backToAgenda": "Volver a Agenda",
+      "backToMyAgenda": "Volver a Mi Agenda",
+      "mobileTitle": "Detalles de la Charla",
+      "dateTime": "Fecha y hora",
+      "location": "Ubicación",
+      "speaker": "Ponente",
+      "capacity": "Capacidad",
+      "capacityValue": "{count} asistentes",
+      "aboutSpeaker": "Sobre el Ponente",
+      "description": "Descripción",
+      "noDescription": "Sin descripción disponible.",
+      "addToAgenda": "Añadir a mi agenda",
+      "removeFromAgenda": "Quitar de mi agenda"
+    },
+    "AgendaButton": {
+      "add": "Añadir a mi agenda",
+      "inAgenda": "En mi agenda",
+      "addAriaLabel": "Añadir a agenda",
+      "removeAriaLabel": "Quitar de agenda",
+      "toast": {
+        "addedTitle": "Añadido a tu agenda",
+        "addedDesc": "La charla fue agregada a tu agenda personal.",
+        "removedTitle": "Eliminado de tu agenda",
+        "removedDesc": "La charla fue removida de tu agenda personal.",
+        "errorTitle": "Error",
+        "errorDesc": "No se pudo actualizar tu agenda. Intenta de nuevo."
       }
     }
   },

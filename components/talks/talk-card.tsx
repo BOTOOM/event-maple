@@ -6,6 +6,7 @@ import { Talk, formatTalkTime, formatTalkLocation } from "@/lib/types/talk";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface TalkCardProps {
   talk: Talk;
@@ -14,16 +15,17 @@ interface TalkCardProps {
 }
 
 // Extracted components to reduce duplication
-function TalkMeta({ timeRange, location, speakerName, className = "text-xs" }: {
+function TalkMeta({ timeRange, location, speakerName, className = "text-xs", locationPending }: {
   readonly timeRange: string;
   readonly location: string;
   readonly speakerName?: string;
   readonly className?: string;
+  readonly locationPending: string;
 }) {
   return (
     <div className={`flex flex-wrap items-center gap-3 mt-3 ${className} text-gray-500`}>
       <span className="font-medium text-blue-600">{timeRange}</span>
-      {location !== "Ubicación por confirmar" && (
+      {location !== locationPending && (
         <div className="flex items-center gap-1">
           <MapPin className="h-3.5 w-3.5" />
           <span>{location}</span>
@@ -64,6 +66,8 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
   const timeRange = formatTalkTime(talk.start_time, talk.end_time);
   const location = formatTalkLocation(talk.room, talk.floor);
   const router = useRouter();
+  const t = useTranslations("Events.TalkCard");
+  const locationPending = t("locationPending");
 
   const handleCardClick = () => {
     router.push(`/events/${eventId}/talks/${talk.id}`);
@@ -94,7 +98,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
               </p>
             )}
 
-            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} />
+            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} locationPending={locationPending} />
             <TalkTags tags={talk.tags ?? undefined} />
           </div>
 
@@ -134,7 +138,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
               </p>
             )}
 
-            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} className="text-sm" />
+            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} className="text-sm" locationPending={locationPending} />
             <TalkTags tags={talk.tags ?? undefined} />
 
             {/* Desktop: Botón "Ver Más" */}
@@ -147,7 +151,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
                 size="lg"
                 className="w-full"
               >
-                Ver Más
+                {t("viewMore")}
                 <ChevronRight className="h-5 w-5 ml-2" />
               </Button>
             </Link>

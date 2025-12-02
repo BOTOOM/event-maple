@@ -287,8 +287,10 @@
       "titleMobile": "Eventos",
       "backToEvent": "Voltar ao Evento",
       "userMenu": {
+        "signIn": "Entrar",
         "signOut": "Sair"
       },
+      "home": "Início",
       "nav": {
         "events": "Eventos",
         "myAgenda": "Minha Agenda",
@@ -394,6 +396,39 @@
       "conflicts": {
         "title": "Possíveis conflitos de horário",
         "description": "Algumas palestras na sua agenda se sobrepõem. Verifique a linha do tempo para identificar conflitos."
+      }
+    },
+    "TalkCard": {
+      "viewMore": "Ver Mais",
+      "locationPending": "Local a confirmar"
+    },
+    "TalkDetail": {
+      "backToAgenda": "Voltar para Agenda",
+      "backToMyAgenda": "Voltar para Minha Agenda",
+      "mobileTitle": "Detalhes da Palestra",
+      "dateTime": "Data e hora",
+      "location": "Local",
+      "speaker": "Palestrante",
+      "capacity": "Capacidade",
+      "capacityValue": "{count} participantes",
+      "aboutSpeaker": "Sobre o Palestrante",
+      "description": "Descrição",
+      "noDescription": "Nenhuma descrição disponível.",
+      "addToAgenda": "Adicionar à minha agenda",
+      "removeFromAgenda": "Remover da minha agenda"
+    },
+    "AgendaButton": {
+      "add": "Adicionar à minha agenda",
+      "inAgenda": "Na minha agenda",
+      "addAriaLabel": "Adicionar à agenda",
+      "removeAriaLabel": "Remover da agenda",
+      "toast": {
+        "addedTitle": "Adicionado à sua agenda",
+        "addedDesc": "A palestra foi adicionada à sua agenda pessoal.",
+        "removedTitle": "Removido da sua agenda",
+        "removedDesc": "A palestra foi removida da sua agenda pessoal.",
+        "errorTitle": "Erro",
+        "errorDesc": "Não foi possível atualizar sua agenda. Tente novamente."
       }
     }
   },

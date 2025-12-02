@@ -287,8 +287,10 @@
       "titleMobile": "Events",
       "backToEvent": "Back to Event",
       "userMenu": {
+        "signIn": "Sign In",
         "signOut": "Sign Out"
       },
+      "home": "Home",
       "nav": {
         "events": "Events",
         "myAgenda": "My Agenda",
@@ -394,6 +396,39 @@
       "conflicts": {
         "title": "Possible schedule conflicts",
         "description": "Some talks in your agenda overlap. Check the timeline to identify conflicts."
+      }
+    },
+    "TalkCard": {
+      "viewMore": "View More",
+      "locationPending": "Location to be confirmed"
+    },
+    "TalkDetail": {
+      "backToAgenda": "Back to Agenda",
+      "backToMyAgenda": "Back to My Agenda",
+      "mobileTitle": "Talk Details",
+      "dateTime": "Date and time",
+      "location": "Location",
+      "speaker": "Speaker",
+      "capacity": "Capacity",
+      "capacityValue": "{count} attendees",
+      "aboutSpeaker": "About the Speaker",
+      "description": "Description",
+      "noDescription": "No description available.",
+      "addToAgenda": "Add to my agenda",
+      "removeFromAgenda": "Remove from my agenda"
+    },
+    "AgendaButton": {
+      "add": "Add to my agenda",
+      "inAgenda": "In my agenda",
+      "addAriaLabel": "Add to agenda",
+      "removeAriaLabel": "Remove from agenda",
+      "toast": {
+        "addedTitle": "Added to your agenda",
+        "addedDesc": "The talk was added to your personal agenda.",
+        "removedTitle": "Removed from your agenda",
+        "removedDesc": "The talk was removed from your personal agenda.",
+        "errorTitle": "Error",
+        "errorDesc": "Could not update your agenda. Please try again."
       }
     }
   },

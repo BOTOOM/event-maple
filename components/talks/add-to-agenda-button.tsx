@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/lib/hooks/use-toast";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface AddToAgendaButtonProps {
   talkId: number;
@@ -28,6 +29,7 @@ export function AddToAgendaButton({
   const router = useRouter();
   const pathname = usePathname();
   const supabase = createClient();
+  const t = useTranslations("Events.AgendaButton");
 
   const handleToggle = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -60,8 +62,8 @@ export function AddToAgendaButton({
         setIsInAgenda(false);
         toast({
           variant: "default",
-          title: "Eliminado de tu agenda",
-          description: "La charla fue removida de tu agenda personal.",
+          title: t("toast.removedTitle"),
+          description: t("toast.removedDesc"),
         });
       } else {
         // Add to agenda
@@ -76,8 +78,8 @@ export function AddToAgendaButton({
         setIsInAgenda(true);
         toast({
           variant: "success",
-          title: "Añadido a tu agenda",
-          description: "La charla fue agregada a tu agenda personal.",
+          title: t("toast.addedTitle"),
+          description: t("toast.addedDesc"),
         });
       }
 
@@ -86,8 +88,8 @@ export function AddToAgendaButton({
       console.error("Error toggling agenda:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "No se pudo actualizar tu agenda. Intenta de nuevo.",
+        title: t("toast.errorTitle"),
+        description: t("toast.errorDesc"),
       });
     } finally {
       setIsLoading(false);
@@ -112,7 +114,7 @@ export function AddToAgendaButton({
             isInAgenda && "fill-white"
           )}
         />
-        {isInAgenda ? "En mi agenda" : "Añadir a mi agenda"}
+        {isInAgenda ? t("inAgenda") : t("add")}
       </Button>
     );
   }
@@ -125,7 +127,7 @@ export function AddToAgendaButton({
         "p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0",
         className
       )}
-      aria-label={isInAgenda ? "Quitar de agenda" : "Añadir a agenda"}
+      aria-label={isInAgenda ? t("removeAriaLabel") : t("addAriaLabel")}
     >
       <Heart
         className={cn(

@@ -58,12 +58,29 @@ export function EventsHeader() {
           {/* Desktop: User Menu */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageSwitcher />
-            <span className="text-sm text-gray-600">
-              {user?.email}
-            </span>
-            <Button variant="outline" onClick={signOut}>
-              {t("userMenu.signOut")}
-            </Button>
+            {user ? (
+              <>
+                <span className="text-sm text-gray-600">
+                  {user.email}
+                </span>
+                <Button variant="outline" onClick={signOut}>
+                  {t("userMenu.signOut")}
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/">
+                  <Button variant="ghost">
+                    {t("home")}
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button variant="outline">
+                    {t("userMenu.signIn")}
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -87,15 +104,38 @@ export function EventsHeader() {
               {t("nav.myAgenda")}
             </Link>
             <div className="pt-2 border-t border-gray-200">
-              <p className="text-xs text-gray-500 mb-2">{user?.email}</p>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={signOut}
-                className="w-full justify-start"
-              >
-                {t("userMenu.signOut")}
-              </Button>
+              {user ? (
+                <>
+                  <p className="text-xs text-gray-500 mb-2">{user.email}</p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={signOut}
+                    className="w-full justify-start"
+                  >
+                    {t("userMenu.signOut")}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/"
+                    className="block py-2 text-gray-700 hover:text-primary"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {t("home")}
+                  </Link>
+                  <Link href="/login" onClick={() => setShowMobileMenu(false)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full"
+                    >
+                      {t("userMenu.signIn")}
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -7,12 +7,14 @@ import { PageHeader } from "@/components/ui/page-header";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { formatTalkTime, formatTalkLocation } from "@/lib/types/talk";
 import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, fr, ptBR } from "date-fns/locale";
+import { getTranslations, getLocale } from "next-intl/server";
 
 interface TalkDetailPageProps {
   params: Promise<{
     eventId: string;
     talkId: string;
+    locale: string;
   }>;
   searchParams: Promise<{
     from?: string;
@@ -33,14 +35,16 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
   const resolvedSearchParams = await searchParams;
   const eventId = Number.parseInt(resolvedParams.eventId, 10);
   const talkId = Number.parseInt(resolvedParams.talkId, 10);
+  const locale = await getLocale();
+  const t = await getTranslations("Events.TalkDetail");
   
   // Determine back link based on 'from' parameter
   const backLink = resolvedSearchParams.from === 'my-agenda' 
     ? `/events/${eventId}/my-agenda` 
     : `/events/${eventId}/agenda`;
   const backText = resolvedSearchParams.from === 'my-agenda'
-    ? 'Volver a Mi Agenda'
-    : 'Volver a Agenda';
+    ? t('backToMyAgenda')
+    : t('backToAgenda');
 
   if (Number.isNaN(eventId) || Number.isNaN(talkId)) {
     notFound();
@@ -71,22 +75,38 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
   const timeRange = formatTalkTime(talk.start_time, talk.end_time);
   const location = formatTalkLocation(talk.room, talk.floor);
 
-  // Format date
+  // Format date based on locale
   const formatDate = () => {
     try {
       const date = parseISO(talk.date);
-      return format(date, "d 'de' MMMM, yyyy", { locale: es });
+      const localeMap: Record<string, { locale: typeof enUS; format: string }> = {
+        en: { locale: enUS, format: "MMMM d, yyyy" },
+        es: { locale: es, format: "d 'de' MMMM, yyyy" },
+        fr: { locale: fr, format: "d MMMM yyyy" },
+        pt: { locale: ptBR, format: "d 'de' MMMM 'de' yyyy" },
+      };
+      const config = localeMap[locale] || localeMap.en;
+      return format(date, config.format, { locale: config.locale });
     } catch {
       return talk.date;
     }
   };
+
+  // Get locationPending from translations
+  const locationPendingMap: Record<string, string> = {
+    en: "Location to be confirmed",
+    es: "Ubicación por confirmar",
+    fr: "Lieu à confirmer",
+    pt: "Local a confirmar",
+  };
+  const locationPending = locationPendingMap[locale] || locationPendingMap.en;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
         backHref={backLink}
         backText={backText}
-        mobileTitle="Detalles de la Charla"
+        mobileTitle={t("mobileTitle")}
       />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl">
@@ -118,28 +138,28 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
           <div className="space-y-4">
             <InfoRow
               icon={<Calendar className="h-5 w-5 text-gray-700" />}
-              label="Fecha y hora"
+              label={t("dateTime")}
               value={`${formatDate()} | ${timeRange}`}
             />
-            {location !== "Ubicación por confirmar" && (
+            {location !== locationPending && (
               <InfoRow
                 icon={<MapPin className="h-5 w-5 text-gray-700" />}
-                label="Ubicación"
+                label={t("location")}
                 value={location}
               />
             )}
             {talk.speaker_name && (
               <InfoRow
                 icon={<User className="h-5 w-5 text-gray-700" />}
-                label="Ponente"
+                label={t("speaker")}
                 value={talk.speaker_name}
               />
             )}
             {talk.capacity && (
               <InfoRow
                 icon={<Users className="h-5 w-5 text-gray-700" />}
-                label="Capacidad"
-                value={`${talk.capacity} asistentes`}
+                label={t("capacity")}
+                value={t("capacityValue", { count: talk.capacity })}
               />
             )}
           </div>
@@ -149,7 +169,7 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
         {talk.speaker_name && (talk.speaker_bio || talk.speaker_photo) && (
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Sobre el Ponente
+              {t("aboutSpeaker")}
             </h2>
             <div className="flex items-start gap-4">
               {talk.speaker_photo && (
@@ -176,10 +196,10 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 
         {/* Description */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Descripción</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t("description")}</h2>
           <div className="prose prose-gray max-w-none">
             <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-              {talk.detailed_description || talk.short_description || "Sin descripción disponible."}
+              {talk.detailed_description || talk.short_description || t("noDescription")}
             </p>
           </div>
         </div>

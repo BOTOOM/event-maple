@@ -287,8 +287,10 @@
       "titleMobile": "Événements",
       "backToEvent": "Retour à l'Événement",
       "userMenu": {
+        "signIn": "Se connecter",
         "signOut": "Se déconnecter"
       },
+      "home": "Accueil",
       "nav": {
         "events": "Événements",
         "myAgenda": "Mon Agenda",
@@ -394,6 +396,39 @@
       "conflicts": {
         "title": "Conflits d'horaire possibles",
         "description": "Certaines conférences dans votre agenda se chevauchent. Vérifiez la chronologie pour identifier les conflits."
+      }
+    },
+    "TalkCard": {
+      "viewMore": "Voir Plus",
+      "locationPending": "Lieu à confirmer"
+    },
+    "TalkDetail": {
+      "backToAgenda": "Retour à l'Agenda",
+      "backToMyAgenda": "Retour à Mon Agenda",
+      "mobileTitle": "Détails de la Conférence",
+      "dateTime": "Date et heure",
+      "location": "Lieu",
+      "speaker": "Conférencier",
+      "capacity": "Capacité",
+      "capacityValue": "{count} participants",
+      "aboutSpeaker": "À propos du Conférencier",
+      "description": "Description",
+      "noDescription": "Aucune description disponible.",
+      "addToAgenda": "Ajouter à mon agenda",
+      "removeFromAgenda": "Retirer de mon agenda"
+    },
+    "AgendaButton": {
+      "add": "Ajouter à mon agenda",
+      "inAgenda": "Dans mon agenda",
+      "addAriaLabel": "Ajouter à l'agenda",
+      "removeAriaLabel": "Retirer de l'agenda",
+      "toast": {
+        "addedTitle": "Ajouté à votre agenda",
+        "addedDesc": "La conférence a été ajoutée à votre agenda personnel.",
+        "removedTitle": "Retiré de votre agenda",
+        "removedDesc": "La conférence a été retirée de votre agenda personnel.",
+        "errorTitle": "Erreur",
+        "errorDesc": "Impossible de mettre à jour votre agenda. Veuillez réessayer."
       }
     }
   },
