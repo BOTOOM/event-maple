@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/lib/hooks/use-toast";
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface FavoriteButtonProps {
   eventId: number; // bigint en tu schema
@@ -20,6 +21,7 @@ export function FavoriteButton({
   className,
   variant = "icon",
 }: FavoriteButtonProps) {
+  const t = useTranslations("Events.Favorite");
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
@@ -54,8 +56,8 @@ export function FavoriteButton({
         setIsFavorite(false);
         toast({
           variant: "default",
-          title: "Eliminado de favoritos",
-          description: "El evento fue removido de tus favoritos.",
+          title: t("toast.removedTitle"),
+          description: t("toast.removedDesc"),
         });
       } else {
         // Add to favorites - usando tu tabla users_events
@@ -72,8 +74,8 @@ export function FavoriteButton({
         setIsFavorite(true);
         toast({
           variant: "success",
-          title: "Añadido a favoritos",
-          description: "El evento fue agregado a tus favoritos.",
+          title: t("toast.addedTitle"),
+          description: t("toast.addedDesc"),
         });
       }
 
@@ -82,8 +84,8 @@ export function FavoriteButton({
       console.error("Error toggling favorite:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "No se pudo actualizar los favoritos.",
+        title: t("toast.errorTitle"),
+        description: t("toast.errorDesc"),
       });
     } finally {
       setIsLoading(false);
@@ -107,7 +109,7 @@ export function FavoriteButton({
             isFavorite && "fill-red-500 text-red-500"
           )}
         />
-        <span>{isFavorite ? "En favoritos" : "Añadir a favoritos"}</span>
+        <span>{isFavorite ? t("added") : t("add")}</span>
       </button>
     );
   }
@@ -121,7 +123,7 @@ export function FavoriteButton({
         isLoading && "opacity-50 cursor-not-allowed",
         className
       )}
-      aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+      aria-label={isFavorite ? t("remove") : t("add")}
     >
       <Heart
         className={cn(

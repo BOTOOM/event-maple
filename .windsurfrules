@@ -1,0 +1,43 @@
+# Project Rules: Event Maple
+
+<i18n_strategy>
+  ## Internationalization (i18n) with next-intl
+  - **Library**: Use `next-intl` exclusively. No other i18n libraries allowed.
+  - **Structure**: All routes must be under `/app/[locale]/...`.
+  - **Locales**: Default English (`en`), Others: Spanish (`es`), Portuguese (`pt`), French (`fr`).
+  - **Middleware**: Use `next-intl` middleware for locale detection and redirection.
+</i18n_strategy>
+
+<translation_management>
+  ## Translation Management (JSON)
+  - **Location**: `messages/{locale}.json`.
+  - **No Hardcoding**: NEVER write visible text directly in `.tsx` files. ALWAYS use `useTranslations`.
+  - **Organization**: Nest keys by feature/page (e.g., `HomePage.title`, `Events.card.button`).
+  
+  ## Component Workflow
+  - **CRITICAL**: Every time a new component is created or an existing one is edited, ALWAYS verify i18n compliance.
+  - **Immediate Action**: Extract any new text to the corresponding `messages/{locale}.json` files immediately.
+  - **Verification**: Ensure no "hardcoded" strings remain in the rendered output.
+</translation_management>
+
+<seo_guidelines>
+  ## SEO & Metadata
+  - **Hreflang**: Implement `alternates` in [generateMetadata](cci:1://file:///home/botom/Projects/Personal/event-planner/app/%28dashboard%29/events/%5BeventId%5D/page.tsx:18:0-58:1) for all supported locales.
+  - **Canonicals**: Canonical URL must match the current locale.
+  - **Root**: Root `/` must redirect (307) to the detected locale without rendering duplicate content.
+  - **Sitemap**: Generate dynamic routes for all locales in [sitemap.ts](cci:7://file:///home/botom/Projects/Personal/event-planner/app/sitemap.ts:0:0-0:0).
+</seo_guidelines>
+
+<development_standards>
+  ## Navigation
+  - **Link Component**: Use `Link` from `@/i18n/navigation` (wrapper), NOT `next/link`.
+  - **Redirects**: Use `redirect` from `@/i18n/navigation`.
+  
+  ## Components
+  - **Server Components**: Prefer `await getTranslations` here for better performance.
+  - **Client Components**: Use `useTranslations` and provide messages via `NextIntlClientProvider`.
+  
+  ## Database (Supabase)
+  - Maintain current structure for dynamic content (events) for now.
+  - Future: Localized columns in DB (e.g., `description_en`).
+</development_standards>

@@ -6,6 +6,7 @@ import { Talk, formatTalkTime, formatTalkLocation } from "@/lib/types/talk";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface TalkCardProps {
   talk: Talk;
@@ -13,10 +14,60 @@ interface TalkCardProps {
   isInAgenda?: boolean;
 }
 
+// Extracted components to reduce duplication
+function TalkMeta({ timeRange, location, speakerName, className = "text-xs", locationPending }: {
+  readonly timeRange: string;
+  readonly location: string;
+  readonly speakerName?: string;
+  readonly className?: string;
+  readonly locationPending: string;
+}) {
+  return (
+    <div className={`flex flex-wrap items-center gap-3 mt-3 ${className} text-gray-500`}>
+      <span className="font-medium text-blue-600">{timeRange}</span>
+      {location !== locationPending && (
+        <div className="flex items-center gap-1">
+          <MapPin className="h-3.5 w-3.5" />
+          <span>{location}</span>
+        </div>
+      )}
+      {speakerName && (
+        <div className="flex items-center gap-1">
+          <User className="h-3.5 w-3.5" />
+          <span>{speakerName}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TalkTags({ tags }: { readonly tags?: string[] }) {
+  if (!tags || tags.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5 mt-3">
+      {tags.slice(0, 3).map((tag) => (
+        <span
+          key={tag}
+          className="inline-block px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full"
+        >
+          {tag}
+        </span>
+      ))}
+      {tags.length > 3 && (
+        <span className="inline-block px-2 py-0.5 text-gray-500 text-xs">
+          +{tags.length - 3}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
   const timeRange = formatTalkTime(talk.start_time, talk.end_time);
   const location = formatTalkLocation(talk.room, talk.floor);
   const router = useRouter();
+  const t = useTranslations("Events.TalkCard");
+  const locationPending = t("locationPending");
 
   const handleCardClick = () => {
     router.push(`/events/${eventId}/talks/${talk.id}`);
@@ -47,42 +98,8 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500">
-              <span className="font-medium text-blue-600">{timeRange}</span>
-
-              {location !== "Ubicación por confirmar" && (
-                <div className="flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5" />
-                  <span>{location}</span>
-                </div>
-              )}
-
-              {talk.speaker_name && (
-                <div className="flex items-center gap-1">
-                  <User className="h-3.5 w-3.5" />
-                  <span>{talk.speaker_name}</span>
-                </div>
-              )}
-            </div>
-
-            {/* Tags */}
-            {talk.tags && talk.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {talk.tags.slice(0, 3).map((tag, index) => (
-                  <span
-                    key={index}
-                    className="inline-block px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {talk.tags.length > 3 && (
-                  <span className="inline-block px-2 py-0.5 text-gray-500 text-xs">
-                    +{talk.tags.length - 3}
-                  </span>
-                )}
-              </div>
-            )}
+            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} locationPending={locationPending} />
+            <TalkTags tags={talk.tags ?? undefined} />
           </div>
 
           {/* Favorite Button - Previene propagación */}
@@ -121,42 +138,8 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-3 mt-3 text-sm text-gray-500">
-              <span className="font-medium text-blue-600">{timeRange}</span>
-
-              {location !== "Ubicación por confirmar" && (
-                <div className="flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5" />
-                  <span>{location}</span>
-                </div>
-              )}
-
-              {talk.speaker_name && (
-                <div className="flex items-center gap-1">
-                  <User className="h-3.5 w-3.5" />
-                  <span>{talk.speaker_name}</span>
-                </div>
-              )}
-            </div>
-
-            {/* Tags */}
-            {talk.tags && talk.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {talk.tags.slice(0, 3).map((tag, index) => (
-                  <span
-                    key={index}
-                    className="inline-block px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {talk.tags.length > 3 && (
-                  <span className="inline-block px-2 py-0.5 text-gray-500 text-xs">
-                    +{talk.tags.length - 3}
-                  </span>
-                )}
-              </div>
-            )}
+            <TalkMeta timeRange={timeRange} location={location} speakerName={talk.speaker_name ?? undefined} className="text-sm" locationPending={locationPending} />
+            <TalkTags tags={talk.tags ?? undefined} />
 
             {/* Desktop: Botón "Ver Más" */}
             <Link 
@@ -168,7 +151,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
                 size="lg"
                 className="w-full"
               >
-                Ver Más
+                {t("viewMore")}
                 <ChevronRight className="h-5 w-5 ml-2" />
               </Button>
             </Link>

@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("Landing.Hero");
+
   return (
     <section className="relative pt-20 pb-12 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +13,7 @@ export function Hero() {
           <div
             className="absolute inset-0 opacity-0 sm:opacity-40"
             style={{
-              backgroundImage: 'url("https://tfpdrgwwxdexsflpxmce.supabase.co/storage/v1/object/sign/event-images/banners/venue.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wODc1NTFjNy05YzA1LTQ2ZWQtOTAzNC04NmI1ZWFiNTUzNTEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJldmVudC1pbWFnZXMvYmFubmVycy92ZW51ZS5qcGciLCJpYXQiOjE3NTk3NzIyMTgsImV4cCI6MTc5MTMwODIxOH0.hdzTkJWumQFp3fiVw3UR2BQAlJFFitaDEh8kT9HrMVw")',
+              backgroundImage: 'url("https://res.cloudinary.com/dultmjgbm/image/upload/v1764632374/venue_gzrzpu.jpg")',
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -20,20 +23,18 @@ export function Hero() {
           <div className="relative z-10 px-6 sm:px-8 lg:px-20 py-16 sm:py-20 lg:py-32 text-center sm:text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               <span className="hidden sm:inline">
-                La forma más inteligente de organizar
-                <br className="hidden sm:block" /> tu evento.
+                {t("title")}
               </span>
               <span className="sm:hidden">
-                Organiza tu experiencia en el evento.
+                {t("titleMobile")}
               </span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-white/90 sm:text-gray-200 mb-8 sm:mb-10 max-w-2xl sm:max-w-3xl mx-auto">
               <span className="hidden sm:inline">
-                Tu agenda de eventos, simplificada. Gestiona y disfruta de cada momento sin
-                complicaciones.
+                {t("subtitle")}
               </span>
               <span className="sm:hidden">
-                Crea tu agenda de eventos, recibe notificaciones y no te pierdas ninguna actividad.
+                {t("subtitleMobile")}
               </span>
             </p>
 
@@ -41,8 +42,8 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Link href="/register">
               <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100 sm:bg-primary sm:text-white sm:hover:bg-primary/90">
-                  <span className="hidden sm:inline">Empieza ahora gratis</span>
-                  <span className="sm:hidden">Empezar</span>
+                  <span className="hidden sm:inline">{t("cta")}</span>
+                  <span className="sm:hidden">{t("ctaMobile")}</span>
               </Button>
                 </Link>
               {/* <Button

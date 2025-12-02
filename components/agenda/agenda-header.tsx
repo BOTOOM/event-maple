@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/lib/i18n/navigation";
 import { usePathname } from "next/navigation";
 import { ArrowLeft, Calendar, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface AgendaHeaderProps {
   eventId: number;
@@ -14,6 +15,8 @@ interface AgendaHeaderProps {
 export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
   const pathname = usePathname();
   const isMyAgenda = pathname?.includes("/my-agenda");
+  const t = useTranslations("Events.Header");
+  const tMyAgenda = useTranslations("Events.MyAgenda");
 
   return (
     <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
@@ -26,7 +29,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
             </Button>
           </Link>
           <span className="font-semibold text-gray-900 truncate max-w-[60%]">
-            {isMyAgenda ? "Mi Agenda" : "Agenda"}
+            {isMyAgenda ? t("nav.myAgenda") : t("nav.fullAgenda")}
           </span>
           <div className="w-10" /> {/* Spacer */}
         </div>
@@ -37,7 +40,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
             <Link href={`/events/${eventId}`}>
               <Button variant="ghost">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver al Evento
+                {t("backToEvent")}
               </Button>
             </Link>
             <div className="h-8 w-px bg-gray-300" />
@@ -46,7 +49,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
                 {eventTitle}
               </h1>
               <p className="text-sm text-gray-500">
-                {isMyAgenda ? "Tu agenda personalizada" : "Todas las charlas"}
+                {isMyAgenda ? tMyAgenda("subtitleMyAgenda") : tMyAgenda("subtitleAllTalks")}
               </p>
             </div>
           </div>
@@ -62,7 +65,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
                 )}
               >
                 <Calendar className="h-4 w-4" />
-                Agenda Completa
+                {t("nav.fullAgenda")}
               </Button>
             </Link>
             <Link href={`/events/${eventId}/my-agenda`}>
@@ -74,7 +77,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
                 )}
               >
                 <CalendarCheck className="h-4 w-4" />
-                Mi Agenda
+                {t("nav.myAgenda")}
               </Button>
             </Link>
           </div>
@@ -91,7 +94,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
                 : "border-transparent text-gray-500 hover:text-gray-700"
             )}
           >
-            Agenda Completa
+            {t("nav.fullAgenda")}
           </Link>
           <Link
             href={`/events/${eventId}/my-agenda`}
@@ -102,7 +105,7 @@ export function AgendaHeader({ eventId, eventTitle }: AgendaHeaderProps) {
                 : "border-transparent text-gray-500 hover:text-gray-700"
             )}
           >
-            Mi Agenda
+            {t("nav.myAgenda")}
           </Link>
         </div>
       </div>

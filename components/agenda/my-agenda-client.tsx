@@ -6,6 +6,7 @@ import { Talk } from "@/lib/types/talk";
 import { DateSelector } from "./date-selector";
 import { TimelineView } from "./timeline-view";
 import { detectConflicts, TalkWithConflict, getTalkColor } from "@/lib/utils/timeline";
+import { useTranslations } from "next-intl";
 
 interface MyAgendaClientProps {
   talks: Array<Talk & { is_in_my_agenda: boolean }>;
@@ -29,6 +30,7 @@ export function MyAgendaClient({
   const router = useRouter();
   const [currentDate, setCurrentDate] = useState(selectedDate);
   const [isMobile, setIsMobile] = useState(false);
+  const t = useTranslations("Events.MyAgenda");
 
   // Detect mobile on mount and window resize
   useEffect(() => {
@@ -94,7 +96,7 @@ export function MyAgendaClient({
       {/* Timeline */}
       <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Horario del Día
+          {t("timeline.title")}
         </h3>
         <div className="overflow-x-auto">
           <div className="min-w-[600px]">
@@ -112,7 +114,7 @@ export function MyAgendaClient({
       {/* Dynamic Legend */}
       {roomLegends.length > 0 && (
         <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <h4 className="text-sm font-semibold text-gray-900 mb-3">Salas</h4>
+          <h4 className="text-sm font-semibold text-gray-900 mb-3">{t("legend.rooms")}</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
             {roomLegends.map((legend, index) => {
               // Extract background color from colorClasses
