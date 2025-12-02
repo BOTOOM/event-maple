@@ -11,9 +11,9 @@ import { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 
 interface EventDetailPageProps {
-  params: Promise<{
-    eventId: string;
-    locale: string;
+  readonly params: Promise<{
+    readonly eventId: string;
+    readonly locale: string;
   }>;
 }
 

@@ -27,13 +27,13 @@ interface LegalListProps {
 export function LegalList({ items, useHtml = false }: LegalListProps) {
   return (
     <ul className="list-disc pl-6 space-y-2">
-      {items.map((item, index) => (
+      {items.map((item) =>
         useHtml ? (
-          <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+          <li key={item} dangerouslySetInnerHTML={{ __html: item }} />
         ) : (
-          <li key={index}>{item}</li>
+          <li key={item}>{item}</li>
         )
-      ))}
+      )}
     </ul>
   );
 }

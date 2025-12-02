@@ -9,12 +9,12 @@ import { Talk } from "@/lib/types/talk";
 import { getTranslations } from "next-intl/server";
 
 interface MyAgendaPageProps {
-  params: Promise<{
-    eventId: string;
-    locale: string;
+  readonly params: Promise<{
+    readonly eventId: string;
+    readonly locale: string;
   }>;
-  searchParams: Promise<{
-    date?: string;
+  readonly searchParams: Promise<{
+    readonly date?: string;
   }>;
 }
 

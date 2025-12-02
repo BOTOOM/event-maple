@@ -4,8 +4,8 @@ import { AgendaHeader } from "@/components/agenda/agenda-header";
 import { AgendaPageClient } from "@/components/agenda/agenda-page-client";
 
 interface AgendaPageProps {
-  params: Promise<{
-    eventId: string;
+  readonly params: Promise<{
+    readonly eventId: string;
   }>;
 }
 

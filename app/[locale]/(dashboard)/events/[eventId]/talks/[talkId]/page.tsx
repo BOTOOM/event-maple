@@ -11,13 +11,13 @@ import { es, enUS, fr, ptBR } from "date-fns/locale";
 import { getTranslations, getLocale } from "next-intl/server";
 
 interface TalkDetailPageProps {
-  params: Promise<{
-    eventId: string;
-    talkId: string;
-    locale: string;
+  readonly params: Promise<{
+    readonly eventId: string;
+    readonly talkId: string;
+    readonly locale: string;
   }>;
-  searchParams: Promise<{
-    from?: string;
+  readonly searchParams: Promise<{
+    readonly from?: string;
   }>;
 }
 

@@ -90,9 +90,11 @@ export function FilterSidebar({
     <>
       {/* Overlay for mobile */}
       {isOpen && (
-        <div
+        <button
+          type="button"
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={onClose}
+          aria-label="Close filters overlay"
         />
       )}
 
