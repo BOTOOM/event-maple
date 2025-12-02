@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Eye, EyeOff, ArrowLeft, Calendar } from "lucide-react";
+import { PasswordInput } from "@/components/ui/password-input";
+import { ArrowLeft, Calendar } from "lucide-react";
 import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -29,8 +30,6 @@ export function RegisterForm() {
   const t = useTranslations("Auth.Register");
   const tCommon = useTranslations("Auth.common");
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -87,7 +86,7 @@ export function RegisterForm() {
     }
 
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -135,7 +134,7 @@ export function RegisterForm() {
       setTimeout(() => {
         router.push("/login");
       }, 1000);
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Error",
@@ -216,31 +215,15 @@ export function RegisterForm() {
           <Label htmlFor="password" className="text-gray-900">
             {tCommon("password")}
           </Label>
-          <div className="relative">
-            <Input
-              id="password"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              placeholder={t("passwordPlaceholder")}
-              required
-              disabled={isLoading}
-              className="pr-10"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              tabIndex={-1}
-            >
-              {showPassword ? (
-                <EyeOff className="h-5 w-5" />
-              ) : (
-                <Eye className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+          <PasswordInput
+            id="password"
+            name="password"
+            placeholder={t("passwordPlaceholder")}
+            required
+            disabled={isLoading}
+            value={formData.password}
+            onChange={handleChange}
+          />
         </div>
 
         {/* Confirmar contraseña */}
@@ -248,31 +231,15 @@ export function RegisterForm() {
           <Label htmlFor="confirmPassword" className="text-gray-900">
             {tCommon("confirmPassword")}
           </Label>
-          <div className="relative">
-            <Input
-              id="confirmPassword"
-              name="confirmPassword"
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder={t("confirmPlaceholder")}
-              required
-              disabled={isLoading}
-              className="pr-10"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              tabIndex={-1}
-            >
-              {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5" />
-              ) : (
-                <Eye className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+          <PasswordInput
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder={t("confirmPlaceholder")}
+            required
+            disabled={isLoading}
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
         </div>
 
         {/* Checkbox de términos - Obligatorio para todos */}

@@ -4,8 +4,8 @@ import { useState, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Eye, EyeOff, Calendar, ArrowLeft } from "lucide-react";
+import { PasswordInput } from "@/components/ui/password-input";
+import { Calendar, ArrowLeft } from "lucide-react";
 import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,7 +16,6 @@ function LoginFormContent() {
   const t = useTranslations("Auth.Login");
   const tCommon = useTranslations("Auth.common");
   
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +29,7 @@ function LoginFormContent() {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -58,7 +57,7 @@ function LoginFormContent() {
 
       router.push(destination);
       router.refresh();
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Error",
@@ -69,11 +68,13 @@ function LoginFormContent() {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  // Google login handler - currently disabled but kept for future use
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${globalThis.location.origin}/auth/callback`,
       },
     });
 
@@ -140,30 +141,14 @@ function LoginFormContent() {
               {t("forgotPassword")}
             </Link>
           </div>
-          <div className="relative">
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder={t("passwordPlaceholder")}
-              required
-              disabled={isLoading}
-              className="pr-10"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              tabIndex={-1}
-            >
-              {showPassword ? (
-                <EyeOff className="h-5 w-5" />
-              ) : (
-                <Eye className="h-5 w-5" />
-              )}
-            </button>
-          </div>
+          <PasswordInput
+            id="password"
+            placeholder={t("passwordPlaceholder")}
+            required
+            disabled={isLoading}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <Button

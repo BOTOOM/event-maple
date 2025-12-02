@@ -5,12 +5,9 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { SectionHeader } from "@/components/ui/section-header";
 import { LegalPageLayout } from "@/components/ui/legal-page-layout";
-import { 
-  LegalSection, 
-  LegalList, 
-  LegalAlert, 
-  LegalFooterSection 
-} from "@/components/ui/legal-section";
+import { LegalFooterSection } from "@/components/ui/legal-section";
+import { UsageGrid, RightsGrid } from "@/components/ui/usage-grid";
+import { FeatureList } from "@/components/ui/feature-list";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -115,48 +112,27 @@ export default function PrivacyPage() {
             />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.usage.intro")}</p>
-              <div className="grid md:grid-cols-2 gap-4 mt-4">
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {t("sections.usage.operation.title")}
-                  </h4>
-                  <ul className="text-sm space-y-1">
-                    {[0, 1, 2, 3].map((i) => (
-                      <li key={i}>• {t(`sections.usage.operation.items.${i}`)}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {t("sections.usage.communications.title")}
-                  </h4>
-                  <ul className="text-sm space-y-1">
-                    {[0, 1, 2, 3].map((i) => (
-                      <li key={i}>• {t(`sections.usage.communications.items.${i}`)}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {t("sections.usage.improvement.title")}
-                  </h4>
-                  <ul className="text-sm space-y-1">
-                    {[0, 1, 2, 3].map((i) => (
-                      <li key={i}>• {t(`sections.usage.improvement.items.${i}`)}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    {t("sections.usage.security.title")}
-                  </h4>
-                  <ul className="text-sm space-y-1">
-                    {[0, 1, 2, 3].map((i) => (
-                      <li key={i}>• {t(`sections.usage.security.items.${i}`)}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <UsageGrid
+                items={[
+                  {
+                    title: t("sections.usage.operation.title"),
+                    items: [0, 1, 2, 3].map((i) => t(`sections.usage.operation.items.${i}`)),
+                  },
+                  {
+                    title: t("sections.usage.communications.title"),
+                    items: [0, 1, 2, 3].map((i) => t(`sections.usage.communications.items.${i}`)),
+                  },
+                  {
+                    title: t("sections.usage.improvement.title"),
+                    items: [0, 1, 2, 3].map((i) => t(`sections.usage.improvement.items.${i}`)),
+                  },
+                  {
+                    title: t("sections.usage.security.title"),
+                    items: [0, 1, 2, 3].map((i) => t(`sections.usage.security.items.${i}`)),
+                  },
+                ]}
+                className="mt-4"
+              />
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
                 <p className="text-sm text-yellow-900" dangerouslySetInnerHTML={{ __html: t.raw("sections.usage.commitment") }} />
               </div>
@@ -171,44 +147,15 @@ export default function PrivacyPage() {
             />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.storage.intro")}</p>
-              <div className="space-y-3 mt-4">
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 p-1.5 bg-green-100 rounded">
-                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{t("sections.storage.encryption.title")}</h4>
-                    <p className="text-sm">{t("sections.storage.encryption.text")}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 p-1.5 bg-green-100 rounded">
-                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{t("sections.storage.infrastructure.title")}</h4>
-                    <p className="text-sm">{t("sections.storage.infrastructure.text")}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 p-1.5 bg-green-100 rounded">
-                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{t("sections.storage.access.title")}</h4>
-                    <p className="text-sm">{t("sections.storage.access.text")}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 p-1.5 bg-green-100 rounded">
-                    <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{t("sections.storage.minimization.title")}</h4>
-                    <p className="text-sm">{t("sections.storage.minimization.text")}</p>
-                  </div>
-                </div>
-              </div>
+              <FeatureList
+                items={[
+                  { title: t("sections.storage.encryption.title"), description: t("sections.storage.encryption.text") },
+                  { title: t("sections.storage.infrastructure.title"), description: t("sections.storage.infrastructure.text") },
+                  { title: t("sections.storage.access.title"), description: t("sections.storage.access.text") },
+                  { title: t("sections.storage.minimization.title"), description: t("sections.storage.minimization.text") },
+                ]}
+                className="mt-4"
+              />
               <p className="text-sm text-gray-600 mt-4" dangerouslySetInnerHTML={{ __html: t.raw("sections.storage.important") }} />
             </div>
           </section>
@@ -254,24 +201,15 @@ export default function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.rights.intro")}</p>
-              <div className="grid md:grid-cols-2 gap-3 mt-4">
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">{t("sections.rights.access.title")}</h4>
-                  <p className="text-sm">{t("sections.rights.access.desc")}</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">{t("sections.rights.rectification.title")}</h4>
-                  <p className="text-sm">{t("sections.rights.rectification.desc")}</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">{t("sections.rights.deletion.title")}</h4>
-                  <p className="text-sm">{t("sections.rights.deletion.desc")}</p>
-                </div>
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">{t("sections.rights.portability.title")}</h4>
-                  <p className="text-sm">{t("sections.rights.portability.desc")}</p>
-                </div>
-              </div>
+              <RightsGrid
+                items={[
+                  { title: t("sections.rights.access.title"), description: t("sections.rights.access.desc") },
+                  { title: t("sections.rights.rectification.title"), description: t("sections.rights.rectification.desc") },
+                  { title: t("sections.rights.deletion.title"), description: t("sections.rights.deletion.desc") },
+                  { title: t("sections.rights.portability.title"), description: t("sections.rights.portability.desc") },
+                ]}
+                className="mt-4"
+              />
               <p className="mt-4">{t("sections.rights.contact")}</p>
             </div>
           </section>
