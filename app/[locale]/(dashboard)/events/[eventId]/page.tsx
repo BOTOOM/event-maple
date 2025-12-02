@@ -1,8 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Calendar, MapPin, Users, ArrowLeft, CalendarDays } from "lucide-react";
+import { Calendar, MapPin, Users, CalendarDays, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { InfoRow } from "@/components/ui/info-row";
 import { FavoriteButton } from "@/components/events/favorite-button";
 import { getEventTitle } from "@/lib/types/event";
 import { Link } from "@/lib/i18n/navigation";
@@ -211,44 +212,24 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
             {/* Left Column: Event Meta */}
             <div className="lg:col-span-2 space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <Calendar className="h-5 w-5 text-gray-700" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{t("date")}</p>
-                  <p className="text-base font-medium text-gray-900">
-                    {formattedDate}
-                  </p>
-                </div>
-              </div>
-
+              <InfoRow
+                icon={<Calendar className="h-5 w-5 text-gray-700" />}
+                label={t("date")}
+                value={formattedDate}
+              />
               {event.location && (
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <MapPin className="h-5 w-5 text-gray-700" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">{t("location")}</p>
-                    <p className="text-base font-medium text-gray-900">
-                      {event.location}
-                    </p>
-                  </div>
-                </div>
+                <InfoRow
+                  icon={<MapPin className="h-5 w-5 text-gray-700" />}
+                  label={t("location")}
+                  value={event.location}
+                />
               )}
-
               {event.organizer && (
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-gray-100 rounded-lg">
-                    <Users className="h-5 w-5 text-gray-700" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">{t("organizer")}</p>
-                    <p className="text-base font-medium text-gray-900">
-                      {event.organizer}
-                    </p>
-                  </div>
-                </div>
+                <InfoRow
+                  icon={<Users className="h-5 w-5 text-gray-700" />}
+                  label={t("organizer")}
+                  value={event.organizer}
+                />
               )}
             </div>
 

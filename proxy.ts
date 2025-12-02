@@ -17,6 +17,7 @@ export default async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Matcher optimizado para excluir archivos estáticos, rutas de API, manifest y generador de iconos
-    String.raw`/((?!api|_next/static|_next/image|_vercel|favicon.ico|manifest.webmanifest|icon|.*\.(?:svg|png|jpg|jpeg|gif|webp)$).*)`
+    // eslint-disable-next-line no-useless-escape
+    "/((?!api|_next/static|_next/image|_vercel|favicon.ico|manifest.webmanifest|icon|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"
   ],
 };

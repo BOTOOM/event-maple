@@ -1,9 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect, notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Calendar, MapPin, User, Users, Award } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, User, Users, Award } from "lucide-react";
+import { InfoRow } from "@/components/ui/info-row";
+import { PageHeader } from "@/components/ui/page-header";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { formatTalkTime, formatTalkLocation } from "@/lib/types/talk";
 import { format, parseISO } from "date-fns";
@@ -83,32 +83,11 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobile Header */}
-      <div className="md:hidden sticky top-0 z-40 bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-4 h-14">
-          <Link href={backLink}>
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <span className="font-semibold text-gray-900">Detalles de la Charla</span>
-          <div className="w-10" /> {/* Spacer */}
-        </div>
-      </div>
-
-      {/* Desktop Header */}
-      <div className="hidden md:block sticky top-0 z-40 bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href={backLink}>
-              <Button variant="ghost">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                {backText}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        backHref={backLink}
+        backText={backText}
+        mobileTitle="Detalles de la Charla"
+      />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl">
         {/* Title */}
@@ -137,56 +116,31 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
         {/* Meta Information */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Calendar className="h-5 w-5 text-gray-700" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Fecha y hora</p>
-                <p className="text-base font-medium text-gray-900">
-                  {formatDate()} | {timeRange}
-                </p>
-              </div>
-            </div>
-
+            <InfoRow
+              icon={<Calendar className="h-5 w-5 text-gray-700" />}
+              label="Fecha y hora"
+              value={`${formatDate()} | ${timeRange}`}
+            />
             {location !== "Ubicación por confirmar" && (
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <MapPin className="h-5 w-5 text-gray-700" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Ubicación</p>
-                  <p className="text-base font-medium text-gray-900">{location}</p>
-                </div>
-              </div>
+              <InfoRow
+                icon={<MapPin className="h-5 w-5 text-gray-700" />}
+                label="Ubicación"
+                value={location}
+              />
             )}
-
             {talk.speaker_name && (
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <User className="h-5 w-5 text-gray-700" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Ponente</p>
-                  <p className="text-base font-medium text-gray-900">
-                    {talk.speaker_name}
-                  </p>
-                </div>
-              </div>
+              <InfoRow
+                icon={<User className="h-5 w-5 text-gray-700" />}
+                label="Ponente"
+                value={talk.speaker_name}
+              />
             )}
-
             {talk.capacity && (
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-gray-100 rounded-lg">
-                  <Users className="h-5 w-5 text-gray-700" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Capacidad</p>
-                  <p className="text-base font-medium text-gray-900">
-                    {talk.capacity} asistentes
-                  </p>
-                </div>
-              </div>
+              <InfoRow
+                icon={<Users className="h-5 w-5 text-gray-700" />}
+                label="Capacidad"
+                value={`${talk.capacity} asistentes`}
+              />
             )}
           </div>
         </div>

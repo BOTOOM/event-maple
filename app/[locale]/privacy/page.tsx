@@ -3,6 +3,7 @@ import { ArrowLeft, Shield, Lock, Eye, Server, Mail, UserCheck } from "lucide-re
 import { Link } from "@/lib/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -54,14 +55,10 @@ export default function PrivacyPage() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 space-y-8">
           {/* 1. Introducción */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Eye className="h-5 w-5 text-gray-700" />
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {t("sections.introduction.title")}
-              </h2>
-            </div>
+            <SectionHeader
+              icon={<Eye className="h-5 w-5 text-gray-700" />}
+              title={t("sections.introduction.title")}
+            />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.introduction.text1")}</p>
               <p>{t("sections.introduction.text2")}</p>
@@ -70,14 +67,10 @@ export default function PrivacyPage() {
 
           {/* 2. Información que Recopilamos */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Server className="h-5 w-5 text-gray-700" />
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {t("sections.collection.title")}
-              </h2>
-            </div>
+            <SectionHeader
+              icon={<Server className="h-5 w-5 text-gray-700" />}
+              title={t("sections.collection.title")}
+            />
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>{t("sections.collection.intro")}</p>
 
@@ -124,14 +117,10 @@ export default function PrivacyPage() {
 
           {/* 3. Cómo Usamos tu Información */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <UserCheck className="h-5 w-5 text-gray-700" />
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {t("sections.usage.title")}
-              </h2>
-            </div>
+            <SectionHeader
+              icon={<UserCheck className="h-5 w-5 text-gray-700" />}
+              title={t("sections.usage.title")}
+            />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.usage.intro")}</p>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
@@ -184,14 +173,10 @@ export default function PrivacyPage() {
 
           {/* 4. Almacenamiento y Seguridad */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Lock className="h-5 w-5 text-gray-700" />
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {t("sections.storage.title")}
-              </h2>
-            </div>
+            <SectionHeader
+              icon={<Lock className="h-5 w-5 text-gray-700" />}
+              title={t("sections.storage.title")}
+            />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.storage.intro")}</p>
               <div className="space-y-3 mt-4">
@@ -238,14 +223,10 @@ export default function PrivacyPage() {
 
           {/* 5. Compartir Información */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <Mail className="h-5 w-5 text-gray-700" />
-              </div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                {t("sections.sharing.title")}
-              </h2>
-            </div>
+            <SectionHeader
+              icon={<Mail className="h-5 w-5 text-gray-700" />}
+              title={t("sections.sharing.title")}
+            />
             <div className="space-y-3 text-gray-700 leading-relaxed">
               <p>{t("sections.sharing.intro")}</p>
               <ul className="list-disc pl-6 space-y-2">
