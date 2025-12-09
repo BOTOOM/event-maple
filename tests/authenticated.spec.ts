@@ -3,9 +3,7 @@ import {
   navigateTo,
   assertPageLoaded,
   assertNoUntranslatedKeys,
-  assertVisible,
   login,
-  enablePastEventsFilter,
 } from './utils/test-helpers';
 
 // Credentials from environment variables
@@ -117,7 +115,7 @@ test.describe('Authenticated User Features', () => {
       await navigateTo(page, '/en/events/1/my-agenda');
       
       // Should see time slots
-      const timeSlots = page.locator('text=/\\d{1,2}:\\d{2}\\s*(AM|PM)/i');
+      const timeSlots = page.locator(String.raw`/\\d{1,2}:\\d{2}\\s*(AM|PM)/i`);
       const count = await timeSlots.count();
       expect(count).toBeGreaterThan(0);
     });

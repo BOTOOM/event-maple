@@ -5,7 +5,6 @@ import {
   navigateToLocalized,
   assertNoUntranslatedKeys,
   assertPageLoaded,
-  assertH1Visible,
 } from './utils/test-helpers';
 
 test.describe('Event Agenda Page', () => {
@@ -19,7 +18,6 @@ test.describe('Event Agenda Page', () => {
       await assertPageLoaded(page);
       
       // Verify filter sidebar elements
-      const filterToggle = page.locator('#show-past-events, [id*="past"]');
       const searchInput = page.locator('input[type="text"], input[type="search"]');
       
       // At least search should be visible

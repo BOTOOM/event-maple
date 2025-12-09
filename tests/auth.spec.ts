@@ -4,8 +4,6 @@ import {
   assertPageLoaded,
   assertVisible,
   login,
-  fillLoginForm,
-  submitLoginForm,
   setupConsoleErrorCollection,
   assertNoCriticalErrors,
 } from './utils/test-helpers';

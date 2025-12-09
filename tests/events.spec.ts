@@ -2,16 +2,7 @@ import { test, expect } from '@playwright/test';
 import {
   LOCALES,
   TEST_EVENT_NAME,
-  navigateTo,
-  navigateToLocalized,
-  assertNoUntranslatedKeys,
-  assertPageLoaded,
   enablePastEventsFilter,
-  searchForEvent,
-  clickViewDetails,
-  getFavoriteButton,
-  getFullAgendaButton,
-  getMyAgendaButton,
   checkForUntranslatedKeys,
 } from './utils/test-helpers';
 

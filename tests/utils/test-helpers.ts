@@ -90,8 +90,8 @@ export async function checkForUntranslatedKeys(page: Page): Promise<string[]> {
   const matches = bodyText.match(untranslatedPattern) || [];
   
   // Filter out valid template patterns
-  const validPatterns = ['{year}', '{count}', '{email}'];
-  return matches.filter(match => !validPatterns.includes(match));
+  const validPatterns = new Set(['{year}', '{count}', '{email}']);
+  return matches.filter(match => !validPatterns.has(match));
 }
 
 /**
