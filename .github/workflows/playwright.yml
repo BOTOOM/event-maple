@@ -14,7 +14,6 @@ jobs:
     # Optimización 2: Usar contenedor oficial con navegadores preinstalados
     container:
       image: mcr.microsoft.com/playwright:v1.57.0-noble
-      options: --user 1001
 
     env:
       PW_USER: ${{ secrets.PW_USER }}
