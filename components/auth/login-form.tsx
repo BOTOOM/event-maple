@@ -19,6 +19,7 @@ function LoginFormContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createClient();
@@ -27,20 +28,24 @@ function LoginFormContent() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      if (error) {
+      if (authError) {
+        const errorMessage = authError.message === "Invalid login credentials"
+          ? tCommon("errors.invalidCredentials")
+          : authError.message;
+        
+        setError(errorMessage);
         toast({
           variant: "destructive",
           title: t("errorTitle"),
-          description: error.message === "Invalid login credentials"
-            ? tCommon("errors.invalidCredentials")
-            : error.message,
+          description: errorMessage,
         });
         return;
       }
@@ -150,6 +155,16 @@ function LoginFormContent() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        {error && (
+          <div 
+            data-testid="login-error"
+            className="p-3 rounded-md bg-destructive/10 border border-destructive/20 text-destructive text-sm"
+            role="alert"
+          >
+            {error}
+          </div>
+        )}
 
         <Button
           type="submit"
