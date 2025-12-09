@@ -1,14 +1,18 @@
 import { test, expect } from '@playwright/test';
+import {
+  navigateTo,
+  assertPageLoaded,
+  assertH1Visible,
+  setupConsoleErrorCollection,
+  assertNoCriticalErrors,
+} from './utils/test-helpers';
 
 test.describe('Public Pages Navigation', () => {
   test('should load landing page successfully', async ({ page }) => {
-    await page.goto('/');
+    await navigateTo(page, '/');
     
-    // Verify page loads without errors
     await expect(page).toHaveURL(/\/(en|es)?$/);
-    
-    // Check for main content
-    await expect(page.locator('body')).toBeVisible();
+    await assertPageLoaded(page);
     
     // Verify no error state
     const errorElement = page.locator('text=Something went wrong');
@@ -16,95 +20,44 @@ test.describe('Public Pages Navigation', () => {
   });
 
   test('should navigate to Terms and Conditions page', async ({ page }) => {
-    await page.goto('/en/terms');
-    
-    // Verify URL
+    await navigateTo(page, '/en/terms');
     await expect(page).toHaveURL(/\/en\/terms/);
-    
-    // Verify page content loaded - Terms uses LegalPageLayout with h1
-    await expect(page.locator('h1')).toBeVisible();
+    await assertH1Visible(page);
   });
 
   test('should navigate to Privacy Policy page', async ({ page }) => {
-    await page.goto('/en/privacy');
-    
-    // Verify URL
+    await navigateTo(page, '/en/privacy');
     await expect(page).toHaveURL(/\/en\/privacy/);
-    
-    // Verify page content loaded - Privacy uses LegalPageLayout with h1
-    await expect(page.locator('h1')).toBeVisible();
+    await assertH1Visible(page);
   });
 
   test('should navigate to Contact page', async ({ page }) => {
-    await page.goto('/en/contact');
-    
-    // Verify URL
+    await navigateTo(page, '/en/contact');
     await expect(page).toHaveURL(/\/en\/contact/);
-    
-    // Verify page content loaded - Contact has h1 header
-    await expect(page.locator('h1')).toBeVisible();
+    await assertH1Visible(page);
   });
 
   test('should navigate to About Us page', async ({ page }) => {
-    await page.goto('/en/about');
-    
-    // Verify URL
+    await navigateTo(page, '/en/about');
     await expect(page).toHaveURL(/\/en\/about/);
-    
-    // Verify page content loaded - About has h1 header
-    await expect(page.locator('h1')).toBeVisible();
+    await assertH1Visible(page);
   });
 
   test('should have no critical console errors on landing page', async ({ page }) => {
-    const consoleErrors: string[] = [];
+    const consoleErrors = setupConsoleErrorCollection(page);
     
-    page.on('console', (msg) => {
-      if (msg.type() === 'error') {
-        consoleErrors.push(msg.text());
-      }
-    });
-
-    await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
+    await navigateTo(page, '/');
     await page.waitForTimeout(1000); // Allow time for console errors to appear
     
-    // Filter out known non-critical errors (dev mode warnings, service worker, hydration, React warnings, network)
-    const criticalErrors = consoleErrors.filter((error) => {
-      const nonCriticalPatterns = [
-        'favicon',
-        '404',
-        'hydrat',
-        'ServiceWorker',
-        'sw.js',
-        'redirect',
-        // React development warnings
-        'cannot contain a nested',
-        'mounting a new',
-        'unmounted first',
-        'render more than one',
-        '%s',
-        'ancestor stack trace',
-        // Network errors (transient)
-        'ERR_NETWORK',
-        'net::ERR_',
-        'Failed to load resource',
-      ];
-      return !nonCriticalPatterns.some(pattern => 
-        error.toLowerCase().includes(pattern.toLowerCase())
-      );
-    });
-    
-    expect(criticalErrors).toHaveLength(0);
+    assertNoCriticalErrors(consoleErrors);
   });
 
   test('should navigate between pages using footer links', async ({ page }) => {
-    await page.goto('/en');
+    await navigateTo(page, '/en');
     
-    // Look for footer links
     const footer = page.locator('footer');
     
     if (await footer.isVisible()) {
-      // Try to find and click terms link
       const termsLink = footer.locator('a[href*="terms"]').first();
       if (await termsLink.isVisible()) {
         await termsLink.click();

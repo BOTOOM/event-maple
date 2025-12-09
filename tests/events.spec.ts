@@ -1,54 +1,19 @@
-import { test, expect, Page } from '@playwright/test';
-
-const LOCALES = ['en', 'es', 'pt', 'fr'] as const;
-const EVENT_NAME = 'DevOpsDays Bogotá 2025';
-
-/**
- * Check for untranslated keys in the page body
- */
-async function checkForUntranslatedKeys(page: Page): Promise<string[]> {
-  const bodyText = await page.locator('body').innerText();
-  const untranslatedPattern = /\{[A-Za-z]+\.[A-Za-z.]+\}/g;
-  const matches = bodyText.match(untranslatedPattern) || [];
-  
-  const validPatterns = ['{year}', '{count}', '{email}'];
-  return matches.filter(match => !validPatterns.includes(match));
-}
-
-/**
- * Enable past events filter in the sidebar
- */
-async function enablePastEventsFilter(page: Page): Promise<void> {
-  // The sidebar toggle has id="show-past-events"
-  const toggle = page.locator('#show-past-events');
-  
-  // Check if toggle is visible (sidebar might be open on desktop)
-  if (await toggle.isVisible()) {
-    const isChecked = await toggle.isChecked();
-    if (!isChecked) {
-      await toggle.click();
-      await page.waitForTimeout(500);
-    }
-    return;
-  }
-  
-  // On mobile, need to open the sidebar first
-  const filtersButton = page.locator('button:has-text("Filters"), button:has-text("Filtros")').first();
-  if (await filtersButton.isVisible()) {
-    await filtersButton.click();
-    await page.waitForTimeout(500);
-    
-    // Now click the toggle
-    const toggleAfterOpen = page.locator('#show-past-events');
-    if (await toggleAfterOpen.isVisible()) {
-      const isChecked = await toggleAfterOpen.isChecked();
-      if (!isChecked) {
-        await toggleAfterOpen.click();
-        await page.waitForTimeout(500);
-      }
-    }
-  }
-}
+import { test, expect } from '@playwright/test';
+import {
+  LOCALES,
+  TEST_EVENT_NAME,
+  navigateTo,
+  navigateToLocalized,
+  assertNoUntranslatedKeys,
+  assertPageLoaded,
+  enablePastEventsFilter,
+  searchForEvent,
+  clickViewDetails,
+  getFavoriteButton,
+  getFullAgendaButton,
+  getMyAgendaButton,
+  checkForUntranslatedKeys,
+} from './utils/test-helpers';
 
 test.describe('Events Page', () => {
   
@@ -64,11 +29,11 @@ test.describe('Events Page', () => {
       
       // Search for the event
       const searchInput = page.locator('input[type="text"], input[type="search"]').first();
-      await searchInput.fill(EVENT_NAME);
+      await searchInput.fill(TEST_EVENT_NAME);
       await page.waitForTimeout(1000);
       
       // Verify event appears in the list
-      const eventCard = page.locator(`text=${EVENT_NAME}`).first();
+      const eventCard = page.locator(`text=${TEST_EVENT_NAME}`).first();
       await expect(eventCard).toBeVisible({ timeout: 10000 });
     });
 
@@ -82,7 +47,7 @@ test.describe('Events Page', () => {
       
       // Search for the event
       const searchInput = page.locator('input[type="text"], input[type="search"]').first();
-      await searchInput.fill(EVENT_NAME);
+      await searchInput.fill(TEST_EVENT_NAME);
       await page.waitForTimeout(1000);
       
       // Find and click on "View details" button
