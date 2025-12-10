@@ -1,0 +1,60 @@
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    # Optimización 1: Restringir ejecución a pushes O PRs creados por el dueño del repo (tú)
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.user.login == github.repository_owner)
+    
+    # Optimización 2: Usar contenedor oficial con navegadores preinstalados
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+
+    env:
+      PW_USER: ${{ secrets.PW_USER }}
+      PW_PSS: ${{ secrets.PW_PSS }}
+      # Necesario para pnpm en contenedor
+      HOME: /root
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install pnpm
+      run: npm install -g pnpm
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        # Optimización 3: Cache de pnpm
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: npm install -g pnpm && pnpm install
+
+    # Paso ELIMINADO: "Install Playwright Browsers" ya no es necesario
+
+    - name: Run Playwright tests
+      env:
+        PW_USER: ${{ secrets.PW_USER }}
+        PW_PSS: ${{ secrets.PW_PSS }}
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      run: |
+        # Fix permissions warning (optional but good practice)
+        mkdir -p /root/.docker
+        chmod 700 /root/.docker
+        
+        # Run tests
+        pnpm test
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
