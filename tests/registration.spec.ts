@@ -4,7 +4,6 @@ import {
   navigateTo,
   navigateToLocalized,
   assertNoUntranslatedKeys,
-  assertPageLoaded,
   assertH1Visible,
   assertVisible,
 } from './utils/test-helpers';
