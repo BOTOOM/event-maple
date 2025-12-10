@@ -39,7 +39,18 @@ jobs:
     # Paso ELIMINADO: "Install Playwright Browsers" ya no es necesario
 
     - name: Run Playwright tests
-      run: pnpm test
+      env:
+        PW_USER: ${{ secrets.PW_USER }}
+        PW_PSS: ${{ secrets.PW_PSS }}
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      run: |
+        # Fix permissions warning (optional but good practice)
+        mkdir -p /root/.docker
+        chmod 700 /root/.docker
+        
+        # Run tests
+        pnpm test
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
