@@ -99,9 +99,11 @@ export async function checkForUntranslatedKeys(page: Page): Promise<string[]> {
  */
 export async function assertNoUntranslatedKeys(page: Page, context: string = ''): Promise<void> {
   const untranslatedKeys = await checkForUntranslatedKeys(page);
+  const contextMessage = context ? ` in ${context}` : '';
+  
   expect(
     untranslatedKeys,
-    `Found untranslated keys${context ? ` in ${context}` : ''}: ${untranslatedKeys.join(', ')}`
+    `Found untranslated keys${contextMessage}: ${untranslatedKeys.join(', ')}`
   ).toHaveLength(0);
 }
 
