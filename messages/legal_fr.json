@@ -1,293 +1,305 @@
 {
-  "Privacy": {
-    "metadata": {
-      "title": "Politique de Confidentialité - EventMaple",
-      "description": "Politique de confidentialité et de protection des données d'EventMaple"
-    },
-    "back": "Retour à l'inscription",
-    "title": "Politique de Confidentialité",
-    "lastUpdate": "Dernière mise à jour",
-    "alert": "Votre vie privée est importante pour nous. Cette politique décrit comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez EventMaple.",
-    "sections": {
-      "introduction": {
-        "title": "1. Introduction",
-        "text1": "EventMaple est un projet personnel développé dans le but de faciliter la gestion d'événements et d'agendas. Cette Politique de Confidentialité explique quelles informations personnelles nous collectons, comment nous les utilisons, comment nous les protégeons et quels sont vos droits à leur égard.",
-        "text2": "En utilisant notre service, vous acceptez les pratiques décrites dans cette politique. Si vous n'êtes pas d'accord avec ces pratiques, veuillez ne pas utiliser EventMaple."
-      },
-      "collection": {
-        "title": "2. Informations que Nous Collectons",
-        "intro": "Nous collectons uniquement les informations nécessaires pour fournir et améliorer notre service. Ces informations incluent :",
-        "account": {
-          "title": "2.1. Informations de Compte",
-          "items": [
-            "<strong>Nom complet :</strong> Pour personnaliser votre expérience et vous afficher en tant qu'utilisateur enregistré",
-            "<strong>Adresse e-mail :</strong> Pour créer votre compte, l'authentification, les communications importantes et la récupération de mot de passe",
-            "<strong>Mot de passe chiffré :</strong> Stocké en toute sécurité à l'aide de hachage pour protéger votre compte"
-          ]
-        },
-        "usage": {
-          "title": "2.2. Données d'Utilisation du Service",
-          "items": [
-            "<strong>Événements enregistrés :</strong> Liste des événements auxquels vous vous êtes inscrit ou pour lesquels vous avez manifesté de l'intérêt",
-            "<strong>Conférences marquées :</strong> Sessions, ateliers ou conférences spécifiques que vous avez marqués comme favoris ou d'intérêt",
-            "<strong>Préférences d'agenda :</strong> Votre configuration personnelle d'affichage et d'organisation des événements",
-            "<strong>Dates d'activité :</strong> Enregistrement de quand vous vous inscrivez à des événements ou modifiez votre agenda"
-          ]
-        },
-        "technical": {
-          "title": "2.3. Informations Techniques De Base",
-          "items": [
-            "<strong>Données de session :</strong> Informations nécessaires pour maintenir votre session active en toute sécurité",
-            "<strong>Type de navigateur et appareil :</strong> Pour optimiser l'expérience utilisateur"
-          ],
-          "note": "<strong>Note :</strong> Nous n'utilisons pas de cookies de suivi ni d'outils d'analyse tiers."
-        }
-      },
-      "usage": {
-        "title": "3. Comment Nous Utilisons Vos Informations",
-        "intro": "Nous utilisons les informations collectées exclusivement aux fins suivantes :",
-        "operation": {
-          "title": "Fonctionnement du Service",
-          "items": [
-            "Créer et gérer votre compte",
-            "Authentifier votre accès",
-            "Traiter vos inscriptions aux événements",
-            "Enregistrer vos préférences"
-          ]
-        },
-        "communications": {
-          "title": "Communications",
-          "items": [
-            "Confirmations d'inscription",
-            "Récupération de mot de passe",
-            "Notifications d'événements",
-            "Mises à jour importantes"
-          ]
-        },
-        "improvement": {
-          "title": "Amélioration du Service",
-          "items": [
-            "Comprendre les modèles d'utilisation",
-            "Optimiser les fonctionnalités",
-            "Corriger les problèmes techniques",
-            "Développer de nouvelles fonctionnalités"
-          ]
-        },
-        "security": {
-          "title": "Sécurité",
-          "items": [
-            "Prévenir l'utilisation non autorisée",
-            "Détecter les activités suspectes",
-            "Protéger votre compte",
-            "Respecter les obligations légales"
-          ]
-        },
-        "commitment": "<strong>Engagement :</strong> Nous ne vendons, ne louons ni ne partageons JAMAIS vos informations personnelles avec des tiers à des fins commerciales ou marketing."
-      },
-      "storage": {
-        "title": "4. Stockage et Sécurité des Données",
-        "intro": "La sécurité de vos informations est une priorité pour nous. Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données :",
-        "encryption": {
-          "title": "Chiffrement",
-          "text": "Tous les mots de passe sont stockés à l'aide d'algorithmes de hachage sécurisés. Les connexions à notre plateforme utilisent HTTPS."
-        },
-        "infrastructure": {
-          "title": "Infrastructure Sécurisée",
-          "text": "Nous utilisons des services d'hébergement fiables (Supabase) qui respectent les normes de sécurité de l'industrie."
-        },
-        "access": {
-          "title": "Accès Restreint",
-          "text": "L'accès aux données est limité et protégé. Seul l'administrateur du projet a accès pour la maintenance et le support technique."
-        },
-        "minimization": {
-          "title": "Minimisation des Données",
-          "text": "Nous collectons et stockons uniquement les informations strictement nécessaires au fonctionnement du service."
-        },
-        "important": "<strong>Important :</strong> Aucune méthode de transmission sur Internet n'est sécurisée à 100 %. Bien que nous nous efforcions de protéger vos données, nous ne pouvons garantir leur sécurité absolue."
-      },
-      "sharing": {
-        "title": "5. Partage et Divulgation d'Informations",
-        "intro": "EventMaple ne partage pas vos informations personnelles avec des tiers, sauf dans les circonstances limitées suivantes :",
-        "items": [
-          "<strong>Fournisseurs de services :</strong> Nous utilisons Supabase comme fournisseur de backend et d'authentification. Ces fournisseurs ont accès à vos informations uniquement pour effectuer des tâches en notre nom et sont tenus de ne pas les divulguer ni les utiliser à d'autres fins.",
-          "<strong>Exigences légales :</strong> Si la loi l'exige ou en réponse à des demandes valides des autorités publiques.",
-          "<strong>Protection des droits :</strong> Pour protéger et défendre nos droits ou notre propriété, enquêter sur d'éventuelles violations ou protéger la sécurité des utilisateurs."
-        ],
-        "guarantee": "<strong>Garantie :</strong> Nous ne vendons JAMAIS vos informations personnelles. Nous n'utilisons JAMAIS vos données pour de la publicité ciblée. Nous ne partageons JAMAIS vos informations avec des tiers à des fins marketing."
-      },
-      "retention": {
-        "title": "6. Conservation des Données",
-        "intro": "Nous conservons vos informations personnelles uniquement le temps nécessaire pour remplir les objectifs décrits dans cette politique, à moins que la loi n'exige ou n'autorise une période de conservation plus longue.",
-        "items": [
-          "<strong>Données de compte actif :</strong> Conservées tant que votre compte est actif et que vous utilisez le service",
-          "<strong>Données après suppression de compte :</strong> Supprimées définitivement dans les 30 jours suivant la demande de suppression",
-          "<strong>Sauvegardes :</strong> Peuvent être conservées temporairement dans des systèmes de sauvegarde, mais seront supprimées lors du prochain cycle de nettoyage"
-        ]
-      },
-      "rights": {
-        "title": "7. Vos Droits de Confidentialité",
-        "intro": "Vous avez les droits suivants concernant vos informations personnelles :",
-        "access": { "title": "✓ Droit d'Accès", "desc": "Demander une copie des données personnelles que nous détenons sur vous" },
-        "rectification": { "title": "✓ Droit de Rectification", "desc": "Corriger des informations inexactes ou incomplètes" },
-        "deletion": { "title": "✓ Droit à l'Effacement", "desc": "Demander la suppression de vos données personnelles" },
-        "portability": { "title": "✓ Droit à la Portabilité", "desc": "Recevoir vos données dans un format structuré et lisible" },
-        "contact": "Pour exercer l'un de ces droits, veuillez nous contacter via les moyens indiqués à la fin de cette politique."
-      },
-      "cookies": {
-        "title": "8. Cookies et Technologies Similaires",
-        "intro": "EventMaple utilise des cookies essentiels uniquement pour le fonctionnement de base du service :",
-        "items": [
-          "<strong>Cookies de session :</strong> Nécessaires pour maintenir votre session active et garantir que vous restez authentifié pendant votre navigation",
-          "<strong>Cookies d'authentification :</strong> Pour vérifier votre identité en toute sécurité"
-        ],
-        "notUsed": "<strong>Nous n'utilisons pas :</strong> De cookies de suivi, de cookies publicitaires, d'outils d'analyse tiers (comme Google Analytics) ou de pixels de suivi."
-      },
-      "minors": {
-        "title": "9. Confidentialité des Mineurs",
-        "text1": "EventMaple ne s'adresse pas aux enfants de moins de 16 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 16 ans.",
-        "text2": "Si vous êtes parent ou tuteur et découvrez que votre enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement afin que nous puissions les supprimer de nos systèmes."
-      },
-      "changes": {
-        "title": "10. Modifications de cette Politique de Confidentialité",
-        "text1": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date de \"dernière mise à jour\".",
-        "text2": "Nous vous recommandons de consulter régulièrement cette Politique pour rester informé de la manière dont nous protégeons vos informations. Les modifications entrent en vigueur lorsqu'elles sont publiées sur cette page."
-      },
-      "international": {
-        "title": "11. Transferts Internationaux",
-        "text1": "Vos informations peuvent être transférées et conservées sur des serveurs situés en dehors de votre pays de résidence. Ces serveurs peuvent se trouver dans des pays dont les lois sur la protection des données diffèrent de celles de votre juridiction.",
-        "text2": "En utilisant EventMaple, vous consentez au transfert de vos informations vers ces serveurs. Nous nous assurons que nos fournisseurs de services respectent des normes de protection des données adéquates."
-      },
-      "contact": {
-        "title": "12. Contactez-nous",
-        "intro": "Si vous avez des questions, des préoccupations ou des demandes concernant cette Politique de Confidentialité ou le traitement de vos données personnelles, n'hésitez pas à nous contacter :",
-        "infoTitle": "Informations de Contact",
-        "project": "<strong>Projet :</strong> EventMaple",
-        "email": "<strong>E-mail :</strong>",
-        "response": "Nous répondrons à votre demande dès que possible, généralement dans un délai de 7 jours ouvrables."
-      }
-    },
-    "commitment": {
-      "title": "Notre Engagement envers Votre Confidentialité",
-      "text": "Chez EventMaple, nous comprenons que votre confiance est fondamentale. Nous nous engageons à être transparents sur la manière dont nous traitons vos données, à protéger vos informations avec les meilleures pratiques de sécurité disponibles et à respecter vos droits de confidentialité à tout moment. Votre vie privée n'est pas négociable."
-    },
-    "footer": {
-      "back": "Retour à l'Inscription",
-      "question": "Des questions ?",
-      "terms": "Voir les Conditions Générales"
-    }
-  },
-  "Terms": {
-    "metadata": {
-      "title": "Conditions Générales - EventMaple",
-      "description": "Conditions générales d'utilisation d'EventMaple"
-    },
-    "back": "Retour à l'inscription",
-    "title": "Conditions Générales",
-    "lastUpdate": "Dernière mise à jour",
-    "sections": {
-      "acceptance": {
-        "title": "1. Acceptation des Conditions",
-        "text1": "En accédant et en utilisant EventMaple (ci-après, \"la Plateforme\" ou \"le Service\"), vous acceptez de respecter et d'être lié par ces Conditions Générales. Si vous n'êtes pas d'accord avec une partie de ces conditions, veuillez ne pas utiliser nos services.",
-        "text2": "EventMaple est un projet personnel non commercial qui fournit gratuitement des outils de gestion d'événements et d'agendas."
-      },
-      "description": {
-        "title": "2. Description du Service",
-        "intro": "EventMaple est une plateforme numérique qui permet aux utilisateurs de :",
-        "items": [
-          "Créer et gérer leur profil utilisateur",
-          "Explorer et visualiser les événements disponibles",
-          "S'inscrire aux événements d'intérêt",
-          "Marquer et gérer des conférences ou sessions spécifiques au sein des événements",
-          "Créer et personnaliser leur agenda personnel d'événements"
-        ],
-        "text": "Le service est fourni \"tel quel\" et peut être soumis à des modifications, améliorations ou interruptions sans préavis."
-      },
-      "account": {
-        "title": "3. Inscription et Compte Utilisateur",
-        "intro": "Pour utiliser certaines fonctionnalités de la Plateforme, vous devez créer un compte en fournissant des informations exactes et complètes. Vous vous engagez à :",
-        "items": [
-          "Fournir des informations véridiques, actuelles et complètes lors du processus d'inscription",
-          "Maintenir et mettre à jour vos informations d'inscription pour qu'elles restent véridiques, actuelles et complètes",
-          "Maintenir la confidentialité de votre mot de passe et être responsable de toutes les activités qui se produisent sous votre compte",
-          "Nous informer immédiatement de toute utilisation non autorisée de votre compte"
-        ],
-        "text": "Nous nous réservons le droit de suspendre ou de résilier votre compte si les informations fournies sont incorrectes, inexactes ou incomplètes."
-      },
-      "data": {
-        "title": "4. Collecte, Utilisation des Données et Communications",
-        "intro": "En utilisant EventMaple, vous acceptez que nous collections et traitions les données personnelles suivantes :",
-        "items": [
-          "<strong>Informations de compte :</strong> Nom complet et adresse e-mail",
-          "<strong>Données d'événement :</strong> Informations sur les événements auxquels vous vous inscrivez",
-          "<strong>Préférences d'agenda :</strong> Conférences et sessions que vous marquez comme favorites ou d'intérêt"
-        ],
-        "usageIntro": "Ces données sont utilisées exclusivement pour :",
-        "usageItems": [
-          "Fournir et améliorer nos services",
-          "Gérer votre compte et vos préférences",
-          "Envoyer des notifications liées aux événements et aux mises à jour du service",
-          "Personnaliser votre expérience sur la Plateforme"
-        ],
-        "communications": "<strong>Consentement aux Communications :</strong> L'utilisateur accepte expressément de recevoir des e-mails à l'adresse fournie informant des nouvelles mises à jour de la plateforme, des événements disponibles, des enquêtes de satisfaction ou des actualités pertinentes du service. Vous pouvez vous désinscrire de ces communications à tout moment.",
-        "privacyLink": "Pour plus d'informations sur la manière dont nous traitons vos données, consultez notre <link>Politique de Confidentialité</link>."
-      },
-      "conduct": {
-        "title": "5. Conduite de l'Utilisateur",
-        "intro": "Vous acceptez d'utiliser la Plateforme uniquement à des fins légales et conformément à ces Conditions. Il est interdit de :",
-        "items": [
-          "Utiliser le Service d'une manière qui pourrait endommager, désactiver, surcharger ou nuire à la Plateforme",
-          "Tenter d'obtenir un accès non autorisé à toute partie de la Plateforme",
-          "Utiliser le Service pour transmettre du contenu illégal, offensant ou inapproprié",
-          "Interférer avec l'utilisation et la jouissance de la Plateforme par d'autres utilisateurs",
-          "Utiliser des robots, scrapers ou autres outils automatisés sans autorisation",
-          "Copier, reproduire ou distribuer du contenu de la Plateforme sans autorisation"
-        ]
-      },
-      "ip": {
-        "title": "6. Propriété Intellectuelle",
-        "text1": "Tout le contenu de la Plateforme, y compris, mais sans s'y limiter, le texte, les graphiques, les logos, les icônes, les images, les clips audio, les téléchargements numériques et les compilations de données, est la propriété d'EventMaple ou de ses fournisseurs de contenu et est protégé par les lois internationales sur le droit d'auteur.",
-        "text2": "Les informations sur des événements spécifiques peuvent être la propriété des organisateurs respectifs et sont affichées à titre informatif."
-      },
-      "liability": {
-        "title": "7. Limitation de Responsabilité",
-        "intro": "EventMaple est fourni en tant que projet personnel sans garantie d'aucune sorte. Dans toute la mesure permise par la loi applicable :",
-        "items": [
-          "Nous ne garantissons pas que le Service sera ininterrompu, opportun, sécurisé ou exempt d'erreurs",
-          "Nous ne sommes pas responsables de l'exactitude ou de la mise à jour des informations sur les événements fournies par des tiers",
-          "Nous ne serons pas responsables de tout dommage direct, indirect, accessoire, spécial ou consécutif découlant de l'utilisation ou de l'incapacité d'utiliser le Service",
-          "Nous ne garantissons pas que les événements listés auront lieu comme prévu"
-        ],
-        "text": "L'utilisateur est responsable de vérifier directement auprès des organisateurs d'événements toute information critique avant de prendre des décisions basées sur les informations affichées sur la Plateforme."
-      },
-      "modifications": {
-        "title": "8. Modifications du Service",
-        "text1": "Nous nous réservons le droit de modifier, suspendre ou interrompre le Service (ou toute partie de celui-ci) à tout moment, avec ou sans préavis. Nous ne serons pas responsables envers vous ou des tiers pour toute modification, suspension ou interruption du Service.",
-        "text2": "En tant que projet personnel, EventMaple peut connaître des périodes d'inactivité ou des changements importants dans ses fonctionnalités sans préavis."
-      },
-      "termination": {
-        "title": "9. Résiliation",
-        "text1": "Nous pouvons résilier ou suspendre votre accès à la Plateforme immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris, sans limitation, si vous enfreignez ces Conditions.",
-        "text2": "Vous pouvez fermer votre compte à tout moment en nous contactant ou en supprimant votre profil depuis les paramètres de votre compte. Lors de la résiliation, votre droit d'utiliser le Service cessera immédiatement."
-      },
-      "law": {
-        "title": "10. Droit Applicable et Juridiction",
-        "text1": "Ces Conditions seront régies et interprétées conformément aux lois applicables, sans tenir compte de ses dispositions relatives aux conflits de lois.",
-        "text2": "Tout litige lié à ces Conditions ou à l'utilisation de la Plateforme sera résolu par une négociation de bonne foi entre les parties."
-      },
-      "changes": {
-        "title": "11. Modifications des Conditions",
-        "text1": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Lorsque nous apportons des modifications, nous mettrons à jour la date de \"dernière mise à jour\" en haut de cette page.",
-        "text2": "Votre utilisation continue de la Plateforme après tout changement constitue votre acceptation des nouvelles Conditions. Nous vous recommandons de consulter régulièrement ces Conditions pour rester informé de toute mise à jour."
-      },
-      "contact": {
-        "title": "12. Informations de Contact",
-        "intro": "Si vous avez des questions, des commentaires ou des préoccupations concernant ces Conditions Générales, vous pouvez nous contacter via :",
-        "email": "E-mail :"
-      }
-    },
-    "footer": {
-      "text": "Merci d'utiliser EventMaple. Nous espérons que notre plateforme vous aidera à gérer et à profiter de vos événements plus efficacement.",
-      "back": "Retour à l'Inscription"
-    }
-  }
+	"Privacy": {
+		"metadata": {
+			"title": "Politique de Confidentialité - EventMaple",
+			"description": "Politique de confidentialité et de protection des données d'EventMaple"
+		},
+		"back": "Retour à l'inscription",
+		"title": "Politique de Confidentialité",
+		"lastUpdate": "Dernière mise à jour",
+		"alert": "Votre vie privée est importante pour nous. Cette politique décrit comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez EventMaple.",
+		"sections": {
+			"introduction": {
+				"title": "1. Introduction",
+				"text1": "EventMaple est un projet personnel développé dans le but de faciliter la gestion d'événements et d'agendas. Cette Politique de Confidentialité explique quelles informations personnelles nous collectons, comment nous les utilisons, comment nous les protégeons et quels sont vos droits à leur égard.",
+				"text2": "En utilisant notre service, vous acceptez les pratiques décrites dans cette politique. Si vous n'êtes pas d'accord avec ces pratiques, veuillez ne pas utiliser EventMaple."
+			},
+			"collection": {
+				"title": "2. Informations que Nous Collectons",
+				"intro": "Nous collectons uniquement les informations nécessaires pour fournir et améliorer notre service. Ces informations incluent :",
+				"account": {
+					"title": "2.1. Informations de Compte",
+					"items": [
+						"<strong>Nom complet :</strong> Pour personnaliser votre expérience et vous afficher en tant qu'utilisateur enregistré",
+						"<strong>Adresse e-mail :</strong> Pour créer votre compte, l'authentification, les communications importantes et la récupération de mot de passe",
+						"<strong>Mot de passe chiffré :</strong> Stocké en toute sécurité à l'aide de hachage pour protéger votre compte"
+					]
+				},
+				"usage": {
+					"title": "2.2. Données d'Utilisation du Service",
+					"items": [
+						"<strong>Événements enregistrés :</strong> Liste des événements auxquels vous vous êtes inscrit ou pour lesquels vous avez manifesté de l'intérêt",
+						"<strong>Conférences marquées :</strong> Sessions, ateliers ou conférences spécifiques que vous avez marqués comme favoris ou d'intérêt",
+						"<strong>Préférences d'agenda :</strong> Votre configuration personnelle d'affichage et d'organisation des événements",
+						"<strong>Dates d'activité :</strong> Enregistrement de quand vous vous inscrivez à des événements ou modifiez votre agenda"
+					]
+				},
+				"technical": {
+					"title": "2.3. Informations Techniques De Base",
+					"items": [
+						"<strong>Données de session :</strong> Informations nécessaires pour maintenir votre session active en toute sécurité",
+						"<strong>Type de navigateur et appareil :</strong> Pour optimiser l'expérience utilisateur"
+					],
+					"note": "<strong>Note :</strong> Nous n'utilisons pas de cookies de suivi ni d'outils d'analyse tiers."
+				}
+			},
+			"usage": {
+				"title": "3. Comment Nous Utilisons Vos Informations",
+				"intro": "Nous utilisons les informations collectées exclusivement aux fins suivantes :",
+				"operation": {
+					"title": "Fonctionnement du Service",
+					"items": [
+						"Créer et gérer votre compte",
+						"Authentifier votre accès",
+						"Traiter vos inscriptions aux événements",
+						"Enregistrer vos préférences"
+					]
+				},
+				"communications": {
+					"title": "Communications",
+					"items": [
+						"Confirmations d'inscription",
+						"Récupération de mot de passe",
+						"Notifications d'événements",
+						"Mises à jour importantes"
+					]
+				},
+				"improvement": {
+					"title": "Amélioration du Service",
+					"items": [
+						"Comprendre les modèles d'utilisation",
+						"Optimiser les fonctionnalités",
+						"Corriger les problèmes techniques",
+						"Développer de nouvelles fonctionnalités"
+					]
+				},
+				"security": {
+					"title": "Sécurité",
+					"items": [
+						"Prévenir l'utilisation non autorisée",
+						"Détecter les activités suspectes",
+						"Protéger votre compte",
+						"Respecter les obligations légales"
+					]
+				},
+				"commitment": "<strong>Engagement :</strong> Nous ne vendons, ne louons ni ne partageons JAMAIS vos informations personnelles avec des tiers à des fins commerciales ou marketing."
+			},
+			"storage": {
+				"title": "4. Stockage et Sécurité des Données",
+				"intro": "La sécurité de vos informations est une priorité pour nous. Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données :",
+				"encryption": {
+					"title": "Chiffrement",
+					"text": "Tous les mots de passe sont stockés à l'aide d'algorithmes de hachage sécurisés. Les connexions à notre plateforme utilisent HTTPS."
+				},
+				"infrastructure": {
+					"title": "Infrastructure Sécurisée",
+					"text": "Nous utilisons des services d'hébergement fiables (Supabase) qui respectent les normes de sécurité de l'industrie."
+				},
+				"access": {
+					"title": "Accès Restreint",
+					"text": "L'accès aux données est limité et protégé. Seul l'administrateur du projet a accès pour la maintenance et le support technique."
+				},
+				"minimization": {
+					"title": "Minimisation des Données",
+					"text": "Nous collectons et stockons uniquement les informations strictement nécessaires au fonctionnement du service."
+				},
+				"important": "<strong>Important :</strong> Aucune méthode de transmission sur Internet n'est sécurisée à 100 %. Bien que nous nous efforcions de protéger vos données, nous ne pouvons garantir leur sécurité absolue."
+			},
+			"sharing": {
+				"title": "5. Partage et Divulgation d'Informations",
+				"intro": "EventMaple ne partage pas vos informations personnelles avec des tiers, sauf dans les circonstances limitées suivantes :",
+				"items": [
+					"<strong>Fournisseurs de services :</strong> Nous utilisons Supabase comme fournisseur de backend et d'authentification. Ces fournisseurs ont accès à vos informations uniquement pour effectuer des tâches en notre nom et sont tenus de ne pas les divulguer ni les utiliser à d'autres fins.",
+					"<strong>Exigences légales :</strong> Si la loi l'exige ou en réponse à des demandes valides des autorités publiques.",
+					"<strong>Protection des droits :</strong> Pour protéger et défendre nos droits ou notre propriété, enquêter sur d'éventuelles violations ou protéger la sécurité des utilisateurs."
+				],
+				"guarantee": "<strong>Garantie :</strong> Nous ne vendons JAMAIS vos informations personnelles. Nous n'utilisons JAMAIS vos données pour de la publicité ciblée. Nous ne partageons JAMAIS vos informations avec des tiers à des fins marketing."
+			},
+			"retention": {
+				"title": "6. Conservation des Données",
+				"intro": "Nous conservons vos informations personnelles uniquement le temps nécessaire pour remplir les objectifs décrits dans cette politique, à moins que la loi n'exige ou n'autorise une période de conservation plus longue.",
+				"items": [
+					"<strong>Données de compte actif :</strong> Conservées tant que votre compte est actif et que vous utilisez le service",
+					"<strong>Données après suppression de compte :</strong> Supprimées définitivement dans les 30 jours suivant la demande de suppression",
+					"<strong>Sauvegardes :</strong> Peuvent être conservées temporairement dans des systèmes de sauvegarde, mais seront supprimées lors du prochain cycle de nettoyage"
+				]
+			},
+			"rights": {
+				"title": "7. Vos Droits de Confidentialité",
+				"intro": "Vous avez les droits suivants concernant vos informations personnelles :",
+				"access": {
+					"title": "✓ Droit d'Accès",
+					"desc": "Demander une copie des données personnelles que nous détenons sur vous"
+				},
+				"rectification": {
+					"title": "✓ Droit de Rectification",
+					"desc": "Corriger des informations inexactes ou incomplètes"
+				},
+				"deletion": {
+					"title": "✓ Droit à l'Effacement",
+					"desc": "Demander la suppression de vos données personnelles"
+				},
+				"portability": {
+					"title": "✓ Droit à la Portabilité",
+					"desc": "Recevoir vos données dans un format structuré et lisible"
+				},
+				"contact": "Pour exercer l'un de ces droits, veuillez nous contacter via les moyens indiqués à la fin de cette politique."
+			},
+			"cookies": {
+				"title": "8. Cookies et Technologies Similaires",
+				"intro": "EventMaple utilise des cookies essentiels uniquement pour le fonctionnement de base du service :",
+				"items": [
+					"<strong>Cookies de session :</strong> Nécessaires pour maintenir votre session active et garantir que vous restez authentifié pendant votre navigation",
+					"<strong>Cookies d'authentification :</strong> Pour vérifier votre identité en toute sécurité"
+				],
+				"notUsed": "<strong>Nous n'utilisons pas :</strong> De cookies de suivi, de cookies publicitaires, d'outils d'analyse tiers (comme Google Analytics) ou de pixels de suivi."
+			},
+			"minors": {
+				"title": "9. Confidentialité des Mineurs",
+				"text1": "EventMaple ne s'adresse pas aux enfants de moins de 16 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 16 ans.",
+				"text2": "Si vous êtes parent ou tuteur et découvrez que votre enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement afin que nous puissions les supprimer de nos systèmes."
+			},
+			"changes": {
+				"title": "10. Modifications de cette Politique de Confidentialité",
+				"text1": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page et en mettant à jour la date de \"dernière mise à jour\".",
+				"text2": "Nous vous recommandons de consulter régulièrement cette Politique pour rester informé de la manière dont nous protégeons vos informations. Les modifications entrent en vigueur lorsqu'elles sont publiées sur cette page."
+			},
+			"international": {
+				"title": "11. Transferts Internationaux",
+				"text1": "Vos informations peuvent être transférées et conservées sur des serveurs situés en dehors de votre pays de résidence. Ces serveurs peuvent se trouver dans des pays dont les lois sur la protection des données diffèrent de celles de votre juridiction.",
+				"text2": "En utilisant EventMaple, vous consentez au transfert de vos informations vers ces serveurs. Nous nous assurons que nos fournisseurs de services respectent des normes de protection des données adéquates."
+			},
+			"contact": {
+				"title": "12. Contactez-nous",
+				"intro": "Si vous avez des questions, des préoccupations ou des demandes concernant cette Politique de Confidentialité ou le traitement de vos données personnelles, n'hésitez pas à nous contacter :",
+				"infoTitle": "Informations de Contact",
+				"project": "<strong>Projet :</strong> EventMaple",
+				"email": "<strong>E-mail :</strong>",
+				"response": "Nous répondrons à votre demande dès que possible, généralement dans un délai de 7 jours ouvrables."
+			}
+		},
+		"commitment": {
+			"title": "Notre Engagement envers Votre Confidentialité",
+			"text": "Chez EventMaple, nous comprenons que votre confiance est fondamentale. Nous nous engageons à être transparents sur la manière dont nous traitons vos données, à protéger vos informations avec les meilleures pratiques de sécurité disponibles et à respecter vos droits de confidentialité à tout moment. Votre vie privée n'est pas négociable."
+		},
+		"footer": {
+			"back": "Retour à l'Inscription",
+			"question": "Des questions ?",
+			"terms": "Voir les Conditions Générales"
+		}
+	},
+	"Terms": {
+		"metadata": {
+			"title": "Conditions Générales - EventMaple",
+			"description": "Conditions générales d'utilisation d'EventMaple"
+		},
+		"back": "Retour à l'inscription",
+		"title": "Conditions Générales",
+		"lastUpdate": "Dernière mise à jour",
+		"sections": {
+			"acceptance": {
+				"title": "1. Acceptation des Conditions",
+				"text1": "En accédant et en utilisant EventMaple (ci-après, \"la Plateforme\" ou \"le Service\"), vous acceptez de respecter et d'être lié par ces Conditions Générales. Si vous n'êtes pas d'accord avec une partie de ces conditions, veuillez ne pas utiliser nos services.",
+				"text2": "EventMaple est un projet personnel non commercial qui fournit gratuitement des outils de gestion d'événements et d'agendas."
+			},
+			"description": {
+				"title": "2. Description du Service",
+				"intro": "EventMaple est une plateforme numérique qui permet aux utilisateurs de :",
+				"items": [
+					"Créer et gérer leur profil utilisateur",
+					"Explorer et visualiser les événements disponibles",
+					"S'inscrire aux événements d'intérêt",
+					"Marquer et gérer des conférences ou sessions spécifiques au sein des événements",
+					"Créer et personnaliser leur agenda personnel d'événements"
+				],
+				"text": "Le service est fourni \"tel quel\" et peut être soumis à des modifications, améliorations ou interruptions sans préavis."
+			},
+			"account": {
+				"title": "3. Inscription et Compte Utilisateur",
+				"intro": "Pour utiliser certaines fonctionnalités de la Plateforme, vous devez créer un compte en fournissant des informations exactes et complètes. Vous vous engagez à :",
+				"items": [
+					"Fournir des informations véridiques, actuelles et complètes lors du processus d'inscription",
+					"Maintenir et mettre à jour vos informations d'inscription pour qu'elles restent véridiques, actuelles et complètes",
+					"Maintenir la confidentialité de votre mot de passe et être responsable de toutes les activités qui se produisent sous votre compte",
+					"Nous informer immédiatement de toute utilisation non autorisée de votre compte"
+				],
+				"text": "Nous nous réservons le droit de suspendre ou de résilier votre compte si les informations fournies sont incorrectes, inexactes ou incomplètes."
+			},
+			"data": {
+				"title": "4. Collecte, Utilisation des Données et Communications",
+				"intro": "En utilisant EventMaple, vous acceptez que nous collections et traitions les données personnelles suivantes :",
+				"items": [
+					"<strong>Informations de compte :</strong> Nom complet et adresse e-mail",
+					"<strong>Données d'événement :</strong> Informations sur les événements auxquels vous vous inscrivez",
+					"<strong>Préférences d'agenda :</strong> Conférences et sessions que vous marquez comme favorites ou d'intérêt"
+				],
+				"usageIntro": "Ces données sont utilisées exclusivement pour :",
+				"usageItems": [
+					"Fournir et améliorer nos services",
+					"Gérer votre compte et vos préférences",
+					"Envoyer des notifications liées aux événements et aux mises à jour du service",
+					"Personnaliser votre expérience sur la Plateforme"
+				],
+				"communications": "<strong>Consentement aux Communications :</strong> L'utilisateur accepte expressément de recevoir des e-mails à l'adresse fournie informant des nouvelles mises à jour de la plateforme, des événements disponibles, des enquêtes de satisfaction ou des actualités pertinentes du service. Vous pouvez vous désinscrire de ces communications à tout moment.",
+				"privacyLink": "Pour plus d'informations sur la manière dont nous traitons vos données, consultez notre <link>Politique de Confidentialité</link>."
+			},
+			"conduct": {
+				"title": "5. Conduite de l'Utilisateur",
+				"intro": "Vous acceptez d'utiliser la Plateforme uniquement à des fins légales et conformément à ces Conditions. Il est interdit de :",
+				"items": [
+					"Utiliser le Service d'une manière qui pourrait endommager, désactiver, surcharger ou nuire à la Plateforme",
+					"Tenter d'obtenir un accès non autorisé à toute partie de la Plateforme",
+					"Utiliser le Service pour transmettre du contenu illégal, offensant ou inapproprié",
+					"Interférer avec l'utilisation et la jouissance de la Plateforme par d'autres utilisateurs",
+					"Utiliser des robots, scrapers ou autres outils automatisés sans autorisation",
+					"Copier, reproduire ou distribuer du contenu de la Plateforme sans autorisation"
+				]
+			},
+			"ip": {
+				"title": "6. Propriété Intellectuelle",
+				"text1": "Tout le contenu de la Plateforme, y compris, mais sans s'y limiter, le texte, les graphiques, les logos, les icônes, les images, les clips audio, les téléchargements numériques et les compilations de données, est la propriété d'EventMaple ou de ses fournisseurs de contenu et est protégé par les lois internationales sur le droit d'auteur.",
+				"text2": "Les informations sur des événements spécifiques peuvent être la propriété des organisateurs respectifs et sont affichées à titre informatif."
+			},
+			"liability": {
+				"title": "7. Limitation de Responsabilité",
+				"intro": "EventMaple est fourni en tant que projet personnel sans garantie d'aucune sorte. Dans toute la mesure permise par la loi applicable :",
+				"items": [
+					"Nous ne garantissons pas que le Service sera ininterrompu, opportun, sécurisé ou exempt d'erreurs",
+					"Nous ne sommes pas responsables de l'exactitude ou de la mise à jour des informations sur les événements fournies par des tiers",
+					"Nous ne serons pas responsables de tout dommage direct, indirect, accessoire, spécial ou consécutif découlant de l'utilisation ou de l'incapacité d'utiliser le Service",
+					"Nous ne garantissons pas que les événements listés auront lieu comme prévu"
+				],
+				"text": "L'utilisateur est responsable de vérifier directement auprès des organisateurs d'événements toute information critique avant de prendre des décisions basées sur les informations affichées sur la Plateforme."
+			},
+			"modifications": {
+				"title": "8. Modifications du Service",
+				"text1": "Nous nous réservons le droit de modifier, suspendre ou interrompre le Service (ou toute partie de celui-ci) à tout moment, avec ou sans préavis. Nous ne serons pas responsables envers vous ou des tiers pour toute modification, suspension ou interruption du Service.",
+				"text2": "En tant que projet personnel, EventMaple peut connaître des périodes d'inactivité ou des changements importants dans ses fonctionnalités sans préavis."
+			},
+			"termination": {
+				"title": "9. Résiliation",
+				"text1": "Nous pouvons résilier ou suspendre votre accès à la Plateforme immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris, sans limitation, si vous enfreignez ces Conditions.",
+				"text2": "Vous pouvez fermer votre compte à tout moment en nous contactant ou en supprimant votre profil depuis les paramètres de votre compte. Lors de la résiliation, votre droit d'utiliser le Service cessera immédiatement."
+			},
+			"law": {
+				"title": "10. Droit Applicable et Juridiction",
+				"text1": "Ces Conditions seront régies et interprétées conformément aux lois applicables, sans tenir compte de ses dispositions relatives aux conflits de lois.",
+				"text2": "Tout litige lié à ces Conditions ou à l'utilisation de la Plateforme sera résolu par une négociation de bonne foi entre les parties."
+			},
+			"changes": {
+				"title": "11. Modifications des Conditions",
+				"text1": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Lorsque nous apportons des modifications, nous mettrons à jour la date de \"dernière mise à jour\" en haut de cette page.",
+				"text2": "Votre utilisation continue de la Plateforme après tout changement constitue votre acceptation des nouvelles Conditions. Nous vous recommandons de consulter régulièrement ces Conditions pour rester informé de toute mise à jour."
+			},
+			"contact": {
+				"title": "12. Informations de Contact",
+				"intro": "Si vous avez des questions, des commentaires ou des préoccupations concernant ces Conditions Générales, vous pouvez nous contacter via :",
+				"email": "E-mail :"
+			}
+		},
+		"footer": {
+			"text": "Merci d'utiliser EventMaple. Nous espérons que notre plateforme vous aidera à gérer et à profiter de vos événements plus efficacement.",
+			"back": "Retour à l'Inscription"
+		}
+	}
 }

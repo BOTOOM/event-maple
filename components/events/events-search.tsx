@@ -1,66 +1,66 @@
 "use client";
 
 import { Search, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface EventsSearchProps {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
+	value: string;
+	onChange: (value: string) => void;
+	placeholder?: string;
 }
 
 export function EventsSearch({
-  value,
-  onChange,
-  placeholder = "Search events...",
+	value,
+	onChange,
+	placeholder = "Search events...",
 }: EventsSearchProps) {
-  const [localValue, setLocalValue] = useState(value);
+	const [localValue, setLocalValue] = useState(value);
 
-  useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
+	useEffect(() => {
+		setLocalValue(value);
+	}, [value]);
 
-  const handleClear = () => {
-    setLocalValue("");
-    onChange("");
-  };
+	const handleClear = () => {
+		setLocalValue("");
+		onChange("");
+	};
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setLocalValue(newValue);
-    onChange(newValue);
-  };
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		setLocalValue(newValue);
+		onChange(newValue);
+	};
 
-  return (
-    <div className="relative w-full">
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-        <input
-          type="text"
-          value={localValue}
-          onChange={handleChange}
-          placeholder={placeholder}
-          className="
+	return (
+		<div className="relative w-full">
+			<div className="relative">
+				<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+				<input
+					type="text"
+					value={localValue}
+					onChange={handleChange}
+					placeholder={placeholder}
+					className="
             w-full pl-10 pr-10 py-3 
             border border-gray-300 rounded-lg
             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
             bg-white text-gray-900 placeholder-gray-400
             transition-all
           "
-        />
-        {localValue && (
-          <button
-            onClick={handleClear}
-            className="
+				/>
+				{localValue && (
+					<button
+						onClick={handleClear}
+						className="
               absolute right-3 top-1/2 -translate-y-1/2
               p-1 rounded-full hover:bg-gray-100 transition-colors
             "
-            aria-label="Clear search"
-          >
-            <X className="h-4 w-4 text-gray-500" />
-          </button>
-        )}
-      </div>
-    </div>
-  );
+						aria-label="Clear search"
+					>
+						<X className="h-4 w-4 text-gray-500" />
+					</button>
+				)}
+			</div>
+		</div>
+	);
 }

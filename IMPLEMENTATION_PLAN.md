@@ -40,35 +40,35 @@ RLS exists for the main tables.
 # Pre-Phase (applies to both Branch A and Branch B)
 
 ## P0) Project hygiene / baseline
-- [ ] Create/confirm a clean git state on the target branch.
-- [ ] Ensure PNPM is the package manager used for all installs and scripts.
-- [ ] Run baseline verification on the current main branch (before changes):
-  - [ ] `pnpm run build`
-  - [ ] `pnpm exec playwright test`
+- [x] Create/confirm a clean git state on the target branch.
+- [x] Ensure PNPM is the package manager used for all installs and scripts.
+- [x] Run baseline verification on the current main branch (before changes):
+  - [x] `pnpm run build`
+  - [x] `pnpm exec playwright test`
 
 ## P1) i18n baseline checks
-- [ ] Confirm the routing structure is under `/app/[locale]/...`.
-- [ ] Confirm locales exist: `en`, `es`, `pt`, `fr`.
-- [ ] Confirm there is a missing-key validation step (or add it in tests).
+- [x] Confirm the routing structure is under `/app/[locale]/...`.
+- [x] Confirm locales exist: `en`, `es`, `pt`, `fr`.
+- [x] Confirm there is a missing-key validation step (or add it in tests).
 
 ## P2) PWA/SEO baseline checks
-- [ ] Confirm PWA manifest/service worker still works after each change.
-- [ ] Confirm SSR is preserved for public pages.
-- [ ] Confirm pages use `generateMetadata` and include canonical + hreflang where applicable.
+- [x] Confirm PWA manifest/service worker still works after each change.
+- [x] Confirm SSR is preserved for public pages.
+- [x] Confirm pages use `generateMetadata` and include canonical + hreflang where applicable.
 
 ---
 
 # Phase 1 (global): Replace ESLint with Biome
 
 ## B0) Tooling migration
-- [ ] Add Biome to the project and configure it for TypeScript + React.
-- [ ] Replace `lint`/format scripts to use Biome.
-- [ ] Remove ESLint dependencies/configuration once Biome is active.
-- [ ] Ensure IDE/editor integration is updated (optional but recommended).
+- [x] Add Biome to the project and configure it for TypeScript + React.
+- [x] Replace `lint`/format scripts to use Biome.
+- [x] Remove ESLint dependencies/configuration once Biome is active.
+- [x] Ensure IDE/editor integration is updated (optional but recommended).
 
 ## B1) Verification
-- [ ] `pnpm run build`
-- [ ] `pnpm exec playwright test`
+- [x] `pnpm run build`
+- [x] `pnpm exec playwright test`
 
 ---
 
