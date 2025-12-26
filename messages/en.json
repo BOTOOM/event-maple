@@ -293,6 +293,7 @@
 			"home": "Home",
 			"nav": {
 				"events": "Events",
+				"myEvents": "My Events",
 				"myAgenda": "My Agenda",
 				"fullAgenda": "Full Agenda"
 			}
@@ -330,7 +331,9 @@
 			"empty": {
 				"title": "No events available",
 				"description": "There are no events scheduled at the moment.",
-				"action": "Create your first event"
+				"action": "Sign in to create events",
+				"createEvent": "Create Event",
+				"viewMyEvents": "View My Events"
 			}
 		},
 		"Card": {
@@ -445,6 +448,117 @@
 			"retry": "Try again",
 			"home": "Back to Home",
 			"support": "If the problem persists, contact support."
+		}
+	},
+	"MyEvents": {
+		"pageTitle": "My Events",
+		"pageDescription": "Manage all your created events from one place",
+		"title": "My Created Events",
+		"subtitle": "Manage, edit and monitor all your events from one place.",
+		"searchPlaceholder": "Search by event name...",
+		"createEvent": "Create New Event",
+		"create": "Create",
+		"loadMore": "Load more events",
+		"filters": {
+			"all": "All",
+			"upcoming": "Upcoming",
+			"past": "Past",
+			"draft": "Drafts"
+		},
+		"pagination": {
+			"previous": "Previous",
+			"next": "Next",
+			"page": "Page {current} of {total}"
+		},
+		"noEvents": {
+			"title": "No events yet",
+			"description": "You haven't created any events yet. Start by creating your first event!"
+		},
+		"createFirstEvent": "Create your first event",
+		"Card": {
+			"status": {
+				"published": "Published",
+				"draft": "Draft",
+				"past": "Past"
+			},
+			"viewDetails": "View Details",
+			"continueEditing": "Continue Editing",
+			"viewReport": "View Report",
+			"edit": "Edit",
+			"delete": "Delete",
+			"deleting": "Deleting...",
+			"deleteConfirm": "Are you sure you want to delete this event? This action cannot be undone.",
+			"deleteSuccess": "Event deleted successfully",
+			"deleteError": "Error deleting event"
+		},
+		"Create": {
+			"pageTitle": "Create Event",
+			"pageDescription": "Create a new event and share it with the world",
+			"title": "Create New Event",
+			"subtitle": "Complete the details and preview how your event will look in real time.",
+			"breadcrumb": {
+				"myEvents": "My Events",
+				"create": "Create Event"
+			}
+		},
+		"Edit": {
+			"pageTitle": "Edit Event",
+			"pageDescription": "Edit your event details",
+			"title": "Edit Event",
+			"subtitle": "Update the details and preview your changes in real time.",
+			"breadcrumb": {
+				"myEvents": "My Events",
+				"edit": "Edit Event"
+			}
+		},
+		"Form": {
+			"sections": {
+				"general": "General Details",
+				"multimedia": "Multimedia",
+				"dateLocation": "Date and Location",
+				"description": "Description"
+			},
+			"fields": {
+				"name": "Event Name",
+				"category": "Category",
+				"imageUrl": "Cover Image URL",
+				"startDate": "Event Start",
+				"endDate": "Event End",
+				"country": "Country",
+				"timezone": "Timezone (IANA)",
+				"location": "Location"
+			},
+			"placeholders": {
+				"name": "e.g. Tech Innovation Summit 2024",
+				"imageUrl": "https://images.unsplash.com/photo-...",
+				"selectCountry": "Select a country",
+				"location": "e.g. Madrid, Spain",
+				"description": "Describe your event in detail..."
+			},
+			"recommended": "Recommended",
+			"saveDraft": "Save as Draft",
+			"unpublish": "Unpublish Event",
+			"publish": "Publish Event",
+			"saveSuccess": "Event saved as draft",
+			"publishSuccess": "Event published successfully",
+			"updateSuccess": "Event updated successfully",
+			"error": "Error",
+			"unexpectedError": "An unexpected error occurred. Please try again.",
+			"preview": {
+				"title": "LIVE PREVIEW",
+				"desktop": "Desktop",
+				"hint": "This is an approximate preview of how attendees will see your event in the listing page."
+			}
+		},
+		"Preview": {
+			"title": "LIVE PREVIEW",
+			"desktop": "Desktop",
+			"noDate": "No date set",
+			"noImage": "No image",
+			"untitled": "Untitled Event",
+			"eventImage": "Event image",
+			"register": "Register Now",
+			"hint": "This is an approximate preview of how attendees will see your event in the listing page."
 		}
 	}
 }

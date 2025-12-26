@@ -59,6 +59,9 @@ export function EventsHeader() {
 						<LanguageSwitcher />
 						{user ? (
 							<>
+								<Link href="/my-events">
+									<Button variant="ghost">{t("nav.myEvents")}</Button>
+								</Link>
 								<span className="text-sm text-gray-600">{user.email}</span>
 								<Button variant="outline" onClick={signOut}>
 									{t("userMenu.signOut")}
@@ -89,6 +92,15 @@ export function EventsHeader() {
 						>
 							{t("nav.events")}
 						</Link>
+						{user && (
+							<Link
+								href="/my-events"
+								className="block py-2 text-gray-700 hover:text-primary"
+								onClick={() => setShowMobileMenu(false)}
+							>
+								{t("nav.myEvents")}
+							</Link>
+						)}
 						<Link
 							href="/my-agenda"
 							className="block py-2 text-gray-700 hover:text-primary"

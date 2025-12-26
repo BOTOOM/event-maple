@@ -1,9 +1,14 @@
-import { CalendarX } from "lucide-react";
+"use client";
+
+import { CalendarX, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/lib/i18n/navigation";
+import { useAuth } from "@/lib/hooks/use-auth";
 
 export function EmptyEvents() {
 	const t = useTranslations("Events.List.empty");
+	const { user } = useAuth();
 
 	return (
 		<div className="flex flex-col items-center justify-center py-16 px-4 text-center">
@@ -12,7 +17,26 @@ export function EmptyEvents() {
 			</div>
 			<h2 className="text-2xl font-bold text-gray-900 mb-2">{t("title")}</h2>
 			<p className="text-gray-600 mb-8 max-w-md">{t("description")}</p>
-			<Button size="lg">{t("action")}</Button>
+			
+			{user ? (
+				<div className="flex flex-col sm:flex-row gap-3">
+					<Link href="/my-events/create">
+						<Button size="lg">
+							<Plus className="h-5 w-5 mr-2" />
+							{t("createEvent")}
+						</Button>
+					</Link>
+					<Link href="/my-events">
+						<Button size="lg" variant="outline">
+							{t("viewMyEvents")}
+						</Button>
+					</Link>
+				</div>
+			) : (
+				<Link href="/login">
+					<Button size="lg">{t("action")}</Button>
+				</Link>
+			)}
 		</div>
 	);
 }

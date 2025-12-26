@@ -293,6 +293,7 @@
 			"home": "Accueil",
 			"nav": {
 				"events": "Événements",
+				"myEvents": "Mes Événements",
 				"myAgenda": "Mon Agenda",
 				"fullAgenda": "Agenda Complet"
 			}
@@ -330,7 +331,9 @@
 			"empty": {
 				"title": "Aucun événement disponible",
 				"description": "Il n'y a aucun événement programmé pour le moment.",
-				"action": "Créez votre premier événement"
+				"action": "Connectez-vous pour créer des événements",
+				"createEvent": "Créer un Événement",
+				"viewMyEvents": "Voir Mes Événements"
 			}
 		},
 		"Card": {
@@ -445,6 +448,117 @@
 			"retry": "Réessayer",
 			"home": "Retour à l'accueil",
 			"support": "Si le problème persiste, contactez le support."
+		}
+	},
+	"MyEvents": {
+		"pageTitle": "Mes Événements",
+		"pageDescription": "Gérez tous vos événements créés depuis un seul endroit",
+		"title": "Mes Événements Créés",
+		"subtitle": "Gérez, modifiez et surveillez tous vos événements depuis un seul endroit.",
+		"searchPlaceholder": "Rechercher par nom d'événement...",
+		"createEvent": "Créer un Nouvel Événement",
+		"create": "Créer",
+		"loadMore": "Charger plus d'événements",
+		"filters": {
+			"all": "Tous",
+			"upcoming": "À venir",
+			"past": "Passés",
+			"draft": "Brouillons"
+		},
+		"pagination": {
+			"previous": "Précédent",
+			"next": "Suivant",
+			"page": "Page {current} sur {total}"
+		},
+		"noEvents": {
+			"title": "Pas encore d'événements",
+			"description": "Vous n'avez pas encore créé d'événement. Commencez par créer votre premier événement !"
+		},
+		"createFirstEvent": "Créez votre premier événement",
+		"Card": {
+			"status": {
+				"published": "Publié",
+				"draft": "Brouillon",
+				"past": "Passé"
+			},
+			"viewDetails": "Voir les Détails",
+			"continueEditing": "Continuer l'Édition",
+			"viewReport": "Voir le Rapport",
+			"edit": "Modifier",
+			"delete": "Supprimer",
+			"deleting": "Suppression...",
+			"deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet événement ? Cette action est irréversible.",
+			"deleteSuccess": "Événement supprimé avec succès",
+			"deleteError": "Erreur lors de la suppression de l'événement"
+		},
+		"Create": {
+			"pageTitle": "Créer un Événement",
+			"pageDescription": "Créez un nouvel événement et partagez-le avec le monde",
+			"title": "Créer un Nouvel Événement",
+			"subtitle": "Complétez les détails et prévisualisez votre événement en temps réel.",
+			"breadcrumb": {
+				"myEvents": "Mes Événements",
+				"create": "Créer un Événement"
+			}
+		},
+		"Edit": {
+			"pageTitle": "Modifier l'Événement",
+			"pageDescription": "Modifiez les détails de votre événement",
+			"title": "Modifier l'Événement",
+			"subtitle": "Mettez à jour les détails et prévisualisez vos modifications en temps réel.",
+			"breadcrumb": {
+				"myEvents": "Mes Événements",
+				"edit": "Modifier l'Événement"
+			}
+		},
+		"Form": {
+			"sections": {
+				"general": "Détails Généraux",
+				"multimedia": "Multimédia",
+				"dateLocation": "Date et Lieu",
+				"description": "Description"
+			},
+			"fields": {
+				"name": "Nom de l'Événement",
+				"category": "Catégorie",
+				"imageUrl": "URL de l'Image de Couverture",
+				"startDate": "Début de l'Événement",
+				"endDate": "Fin de l'Événement",
+				"country": "Pays",
+				"timezone": "Fuseau Horaire (IANA)",
+				"location": "Lieu"
+			},
+			"placeholders": {
+				"name": "Ex. Sommet de l'Innovation Technologique 2024",
+				"imageUrl": "https://images.unsplash.com/photo-...",
+				"selectCountry": "Sélectionnez un pays",
+				"location": "Ex. Paris, France",
+				"description": "Décrivez votre événement en détail..."
+			},
+			"recommended": "Recommandé",
+			"saveDraft": "Enregistrer comme Brouillon",
+			"unpublish": "Dépublier l'Événement",
+			"publish": "Publier l'Événement",
+			"saveSuccess": "Événement enregistré comme brouillon",
+			"publishSuccess": "Événement publié avec succès",
+			"updateSuccess": "Événement mis à jour avec succès",
+			"error": "Erreur",
+			"unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+			"preview": {
+				"title": "APERÇU EN DIRECT",
+				"desktop": "Bureau",
+				"hint": "Ceci est un aperçu approximatif de la façon dont les participants verront votre événement sur la page de liste."
+			}
+		},
+		"Preview": {
+			"title": "APERÇU EN DIRECT",
+			"desktop": "Bureau",
+			"noDate": "Pas de date",
+			"noImage": "Pas d'image",
+			"untitled": "Événement sans titre",
+			"eventImage": "Image de l'événement",
+			"register": "S'inscrire Maintenant",
+			"hint": "Ceci est un aperçu approximatif de la façon dont les participants verront votre événement sur la page de liste."
 		}
 	}
 }

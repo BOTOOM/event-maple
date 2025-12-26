@@ -293,6 +293,7 @@
 			"home": "Inicio",
 			"nav": {
 				"events": "Eventos",
+				"myEvents": "Mis Eventos",
 				"myAgenda": "Mi Agenda",
 				"fullAgenda": "Agenda Completa"
 			}
@@ -330,7 +331,9 @@
 			"empty": {
 				"title": "No hay eventos disponibles",
 				"description": "No hay eventos programados en este momento.",
-				"action": "Crear tu primer evento"
+				"action": "Inicia sesión para crear eventos",
+				"createEvent": "Crear Evento",
+				"viewMyEvents": "Ver Mis Eventos"
 			}
 		},
 		"Card": {
@@ -445,6 +448,117 @@
 			"retry": "Intentar de nuevo",
 			"home": "Volver al Inicio",
 			"support": "Si el problema persiste, contacta a soporte."
+		}
+	},
+	"MyEvents": {
+		"pageTitle": "Mis Eventos",
+		"pageDescription": "Gestiona todos tus eventos creados desde un solo lugar",
+		"title": "Mis Eventos Creados",
+		"subtitle": "Gestiona, edita y monitorea todos tus eventos desde un solo lugar.",
+		"searchPlaceholder": "Buscar por nombre de evento...",
+		"createEvent": "Crear Nuevo Evento",
+		"create": "Crear",
+		"loadMore": "Cargar más eventos",
+		"filters": {
+			"all": "Todos",
+			"upcoming": "Próximos",
+			"past": "Pasados",
+			"draft": "Borradores"
+		},
+		"pagination": {
+			"previous": "Anterior",
+			"next": "Siguiente",
+			"page": "Página {current} de {total}"
+		},
+		"noEvents": {
+			"title": "Aún no tienes eventos",
+			"description": "No has creado ningún evento todavía. ¡Comienza creando tu primer evento!"
+		},
+		"createFirstEvent": "Crea tu primer evento",
+		"Card": {
+			"status": {
+				"published": "Publicado",
+				"draft": "Borrador",
+				"past": "Pasado"
+			},
+			"viewDetails": "Ver Detalles",
+			"continueEditing": "Continuar Editando",
+			"viewReport": "Ver Reporte",
+			"edit": "Editar",
+			"delete": "Eliminar",
+			"deleting": "Eliminando...",
+			"deleteConfirm": "¿Estás seguro de que deseas eliminar este evento? Esta acción no se puede deshacer.",
+			"deleteSuccess": "Evento eliminado exitosamente",
+			"deleteError": "Error al eliminar el evento"
+		},
+		"Create": {
+			"pageTitle": "Crear Evento",
+			"pageDescription": "Crea un nuevo evento y compártelo con el mundo",
+			"title": "Crear Nuevo Evento",
+			"subtitle": "Completa los detalles y previsualiza cómo se verá tu evento en tiempo real.",
+			"breadcrumb": {
+				"myEvents": "Mis Eventos",
+				"create": "Crear Evento"
+			}
+		},
+		"Edit": {
+			"pageTitle": "Editar Evento",
+			"pageDescription": "Edita los detalles de tu evento",
+			"title": "Editar Evento",
+			"subtitle": "Actualiza los detalles y previsualiza tus cambios en tiempo real.",
+			"breadcrumb": {
+				"myEvents": "Mis Eventos",
+				"edit": "Editar Evento"
+			}
+		},
+		"Form": {
+			"sections": {
+				"general": "Detalles Generales",
+				"multimedia": "Multimedia",
+				"dateLocation": "Fecha y Ubicación",
+				"description": "Descripción"
+			},
+			"fields": {
+				"name": "Nombre del Evento",
+				"category": "Categoría",
+				"imageUrl": "URL de Imagen de Portada",
+				"startDate": "Inicio del Evento",
+				"endDate": "Fin del Evento",
+				"country": "País",
+				"timezone": "Zona Horaria (IANA)",
+				"location": "Ubicación"
+			},
+			"placeholders": {
+				"name": "Ej. Cumbre de Innovación Tecnológica 2024",
+				"imageUrl": "https://images.unsplash.com/photo-...",
+				"selectCountry": "Selecciona un país",
+				"location": "Ej. Madrid, España",
+				"description": "Describe tu evento en detalle..."
+			},
+			"recommended": "Recomendado",
+			"saveDraft": "Guardar como Borrador",
+			"unpublish": "Despublicar Evento",
+			"publish": "Publicar Evento",
+			"saveSuccess": "Evento guardado como borrador",
+			"publishSuccess": "Evento publicado exitosamente",
+			"updateSuccess": "Evento actualizado exitosamente",
+			"error": "Error",
+			"unexpectedError": "Ocurrió un error inesperado. Por favor, intenta de nuevo.",
+			"preview": {
+				"title": "VISTA PREVIA EN VIVO",
+				"desktop": "Escritorio",
+				"hint": "Esta es una vista previa aproximada de cómo los asistentes verán tu evento en la página de listado."
+			}
+		},
+		"Preview": {
+			"title": "VISTA PREVIA EN VIVO",
+			"desktop": "Escritorio",
+			"noDate": "Sin fecha",
+			"noImage": "Sin imagen",
+			"untitled": "Evento sin título",
+			"eventImage": "Imagen del evento",
+			"register": "Registrarse Ahora",
+			"hint": "Esta es una vista previa aproximada de cómo los asistentes verán tu evento en la página de listado."
 		}
 	}
 }
