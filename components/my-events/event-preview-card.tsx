@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Calendar, MapPin, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 interface EventPreviewCardProps {
 	readonly name: string;
@@ -108,24 +108,18 @@ export function EventPreviewCard({
 				</div>
 
 				{/* Title */}
-				<h3 className="text-xl font-bold text-gray-900 line-clamp-2">
-					{name || t("untitled")}
-				</h3>
+				<h3 className="text-xl font-bold text-gray-900 line-clamp-2">{name || t("untitled")}</h3>
 
 				{/* Location */}
 				{(location || timezone) && (
 					<div className="flex items-center gap-2 text-sm text-gray-600">
 						<MapPin className="h-4 w-4 flex-shrink-0" />
-						<span className="line-clamp-1">
-							{location || getTimezoneDisplay()}
-						</span>
+						<span className="line-clamp-1">{location || getTimezoneDisplay()}</span>
 					</div>
 				)}
 
 				{/* Description */}
-				{description && (
-					<p className="text-sm text-gray-600 line-clamp-2">{description}</p>
-				)}
+				{description && <p className="text-sm text-gray-600 line-clamp-2">{description}</p>}
 
 				{/* Actions */}
 				<div className="flex items-center gap-2 pt-2">

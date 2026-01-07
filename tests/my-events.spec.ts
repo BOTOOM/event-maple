@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const locales = ["en", "es", "pt", "fr"];
 
@@ -63,7 +63,9 @@ test.describe("My Events Page", () => {
 			await page.goto("/en/my-events");
 
 			// Check for search input
-			const searchInput = page.locator('input[type="text"][placeholder*="earch"], input[type="text"][placeholder*="uscar"]');
+			const searchInput = page.locator(
+				'input[type="text"][placeholder*="earch"], input[type="text"][placeholder*="uscar"]',
+			);
 			await expect(searchInput.first()).toBeVisible();
 		});
 	});
@@ -147,11 +149,13 @@ test.describe("Create Event Page", () => {
 			await page.waitForLoadState("networkidle");
 
 			// Check for form fields - use more flexible selectors
-			const nameInput = page.locator('input#name');
+			const nameInput = page.locator("input#name");
 			await expect(nameInput).toBeVisible({ timeout: 10000 });
 
 			// Check for category buttons (they are rendered as buttons)
-			const categoryButtons = page.locator('button[type="button"]').filter({ hasText: /Technology|Software|Business|Education/i });
+			const categoryButtons = page
+				.locator('button[type="button"]')
+				.filter({ hasText: /Technology|Software|Business|Education/i });
 			await expect(categoryButtons.first()).toBeVisible({ timeout: 10000 });
 
 			// Check for date inputs
@@ -173,14 +177,41 @@ test.describe("Create Event Page", () => {
 			await expect(previewCard).toBeVisible({ timeout: 10000 });
 		});
 
+		test("should have country autocomplete field", async ({ page }) => {
+			await page.goto("/en/my-events/create");
+			await page.waitForLoadState("networkidle");
+
+			// Look for the country autocomplete button (it's a combobox-style button)
+			const countryButton = page.locator(
+				'button:has-text("Select a country"), button:has-text("Seleccionar país")',
+			);
+			await expect(countryButton.first()).toBeVisible({ timeout: 10000 });
+		});
+
+		test("should have timezone autocomplete field", async ({ page }) => {
+			await page.goto("/en/my-events/create");
+			await page.waitForLoadState("networkidle");
+
+			// Look for the timezone autocomplete button - check for any timezone-related button
+			// The button may show "Select timezone" or already have a selected value like "UTC"
+			const timezoneButton = page.locator(
+				'button:has-text("Select timezone"), button:has-text("Selecciona zona horaria"), button:has-text("UTC")',
+			);
+			await expect(timezoneButton.first()).toBeVisible({ timeout: 10000 });
+		});
+
 		test("should have save and publish buttons", async ({ page }) => {
 			await page.goto("/en/my-events/create");
 
 			// Check for action buttons
-			const saveButton = page.locator('button:has-text("Save"), button:has-text("Guardar"), button:has-text("Salvar"), button:has-text("Enregistrer")');
+			const saveButton = page.locator(
+				'button:has-text("Save"), button:has-text("Guardar"), button:has-text("Salvar"), button:has-text("Enregistrer")',
+			);
 			await expect(saveButton.first()).toBeVisible();
 
-			const publishButton = page.locator('button:has-text("Publish"), button:has-text("Publicar"), button:has-text("Publier")');
+			const publishButton = page.locator(
+				'button:has-text("Publish"), button:has-text("Publicar"), button:has-text("Publier")',
+			);
 			await expect(publishButton.first()).toBeVisible();
 		});
 
@@ -229,7 +260,7 @@ test.describe("Create Event Page", () => {
 				// Check that the form is rendered (not showing raw i18n keys in visible text)
 				const visibleText = await page.locator("h1, h2, label, button").allTextContents();
 				const combinedText = visibleText.join(" ");
-				
+
 				// Should not have untranslated keys in visible UI elements
 				expect(combinedText).not.toMatch(/^MyEvents\./);
 				expect(combinedText).not.toMatch(/^Form\./);

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Event } from "@/lib/types/event";
 
 interface EventsPageClientProps {
-	initialEvents: Event[];
+	readonly initialEvents: Event[];
 }
 
 export function EventsPageClient({ initialEvents }: EventsPageClientProps) {

@@ -21,6 +21,7 @@ function ToggleFilter({ id, label, checked, onChange, description }: ToggleFilte
 					{label}
 				</Label>
 				<button
+					type="button"
 					id={id}
 					role="switch"
 					aria-checked={checked}

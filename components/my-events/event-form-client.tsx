@@ -1,18 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { Save, Send, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Save, Send, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Autocomplete } from "@/components/ui/autocomplete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { EventCategoryWithTranslation, EventFormData, EventStatus } from "@/lib/types/event";
 import { createEvent, updateEvent } from "@/lib/actions/events";
-import { EventPreviewCard } from "./event-preview-card";
+import { COUNTRIES } from "@/lib/data/countries";
+import { formatTimezoneLabel, TIMEZONES } from "@/lib/data/timezones";
+import { EventCategoryWithTranslation, EventFormData, EventStatus } from "@/lib/types/event";
 import { cn } from "@/lib/utils";
+import { convertLocalToUTC, getBrowserTimezone } from "@/lib/utils/date";
+import { EventPreviewCard } from "./event-preview-card";
 
 interface EventFormClientProps {
 	readonly categories: EventCategoryWithTranslation[];
@@ -20,42 +24,6 @@ interface EventFormClientProps {
 	readonly mode: "create" | "edit";
 	readonly initialData?: Partial<EventFormData> & { id?: number };
 }
-
-const TIMEZONES = [
-	{ value: "America/New_York", label: "America/New York (EST)" },
-	{ value: "America/Chicago", label: "America/Chicago (CST)" },
-	{ value: "America/Denver", label: "America/Denver (MST)" },
-	{ value: "America/Los_Angeles", label: "America/Los Angeles (PST)" },
-	{ value: "America/Bogota", label: "America/Bogota (COT)" },
-	{ value: "America/Sao_Paulo", label: "America/São Paulo (BRT)" },
-	{ value: "America/Mexico_City", label: "America/Mexico City (CST)" },
-	{ value: "Europe/London", label: "Europe/London (GMT)" },
-	{ value: "Europe/Paris", label: "Europe/Paris (CET)" },
-	{ value: "Europe/Madrid", label: "Europe/Madrid (CET)" },
-	{ value: "Europe/Berlin", label: "Europe/Berlin (CET)" },
-	{ value: "Asia/Tokyo", label: "Asia/Tokyo (JST)" },
-	{ value: "Asia/Shanghai", label: "Asia/Shanghai (CST)" },
-	{ value: "Australia/Sydney", label: "Australia/Sydney (AEST)" },
-	{ value: "UTC", label: "UTC" },
-];
-
-const COUNTRIES = [
-	{ code: "US", name: "United States" },
-	{ code: "ES", name: "Spain" },
-	{ code: "MX", name: "Mexico" },
-	{ code: "CO", name: "Colombia" },
-	{ code: "AR", name: "Argentina" },
-	{ code: "BR", name: "Brazil" },
-	{ code: "FR", name: "France" },
-	{ code: "DE", name: "Germany" },
-	{ code: "GB", name: "United Kingdom" },
-	{ code: "IT", name: "Italy" },
-	{ code: "PT", name: "Portugal" },
-	{ code: "JP", name: "Japan" },
-	{ code: "CN", name: "China" },
-	{ code: "AU", name: "Australia" },
-	{ code: "CA", name: "Canada" },
-];
 
 export function EventFormClient({
 	categories,
@@ -68,18 +36,35 @@ export function EventFormClient({
 	const { toast } = useToast();
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [formData, setFormData] = useState<EventFormData>({
-		name: initialData?.name || "",
-		description: initialData?.description || "",
-		start_at: initialData?.start_at || "",
-		end_at: initialData?.end_at || "",
-		timezone: initialData?.timezone || "UTC",
-		country_code: initialData?.country_code || "",
-		location: initialData?.location || "",
-		image_url: initialData?.image_url || "",
-		category_id: initialData?.category_id || "",
-		status: initialData?.status || "draft",
+	const [formData, setFormData] = useState<EventFormData>(() => {
+		// For create mode, we'll set the browser timezone after mount
+		// For edit mode, use the event's stored timezone
+		const defaultTimezone = initialData?.timezone || "UTC";
+		return {
+			name: initialData?.name || "",
+			description: initialData?.description || "",
+			start_at: initialData?.start_at || "",
+			end_at: initialData?.end_at || "",
+			timezone: defaultTimezone,
+			country_code: initialData?.country_code || "",
+			location: initialData?.location || "",
+			image_url: initialData?.image_url || "",
+			category_id: initialData?.category_id || "",
+			status: initialData?.status || "draft",
+		};
 	});
+
+	// Auto-detect browser timezone for new events
+	useEffect(() => {
+		if (mode === "create" && !initialData?.timezone) {
+			const browserTz = getBrowserTimezone();
+			// Check if the browser timezone exists in our list
+			const tzExists = TIMEZONES.some((tz) => tz.value === browserTz);
+			if (tzExists) {
+				setFormData((prev) => ({ ...prev, timezone: browserTz }));
+			}
+		}
+	}, [mode, initialData?.timezone]);
 
 	const updateField = <K extends keyof EventFormData>(field: K, value: EventFormData[K]) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
@@ -88,7 +73,18 @@ export function EventFormClient({
 	const handleSubmit = async (status: EventStatus) => {
 		setIsSubmitting(true);
 
-		const dataToSubmit = { ...formData, status };
+		// Convert local datetime to UTC using the selected timezone
+		const startAtUTC = formData.start_at
+			? convertLocalToUTC(formData.start_at, formData.timezone)
+			: "";
+		const endAtUTC = formData.end_at ? convertLocalToUTC(formData.end_at, formData.timezone) : "";
+
+		const dataToSubmit = {
+			...formData,
+			start_at: startAtUTC,
+			end_at: endAtUTC,
+			status,
+		};
 
 		try {
 			if (mode === "create") {
@@ -132,6 +128,26 @@ export function EventFormClient({
 	};
 
 	const selectedCategory = categories.find((c) => c.id === formData.category_id);
+
+	const countryOptions = useMemo(
+		() =>
+			COUNTRIES.map((country) => ({
+				value: country.code,
+				label: country.name,
+				searchTerms: `${country.name} ${country.code}`,
+			})),
+		[],
+	);
+
+	const timezoneOptions = useMemo(
+		() =>
+			TIMEZONES.map((tz) => ({
+				value: tz.value,
+				label: formatTimezoneLabel(tz),
+				searchTerms: `${tz.label} ${tz.value} ${tz.offset}`,
+			})),
+		[],
+	);
 
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -203,7 +219,7 @@ export function EventFormClient({
 											"px-3 py-1.5 rounded-full text-sm font-medium border transition-colors",
 											formData.category_id === category.id
 												? "bg-blue-600 text-white border-blue-600"
-												: "bg-white text-gray-700 border-gray-300 hover:border-blue-400"
+												: "bg-white text-gray-700 border-gray-300 hover:border-blue-400",
 										)}
 									>
 										{category.name}
@@ -224,9 +240,7 @@ export function EventFormClient({
 					<div>
 						<Label htmlFor="image_url">
 							{t("fields.imageUrl")}
-							<span className="text-gray-400 text-sm ml-2">
-								({t("recommended")}: 1200x600)
-							</span>
+							<span className="text-gray-400 text-sm ml-2">({t("recommended")}: 1200x600)</span>
 						</Label>
 						<Input
 							id="image_url"
@@ -271,35 +285,30 @@ export function EventFormClient({
 
 						<div>
 							<Label htmlFor="country_code">{t("fields.country")}</Label>
-							<select
-								id="country_code"
-								value={formData.country_code}
-								onChange={(e) => updateField("country_code", e.target.value)}
-								className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-							>
-								<option value="">{t("placeholders.selectCountry")}</option>
-								{COUNTRIES.map((country) => (
-									<option key={country.code} value={country.code}>
-										{country.name}
-									</option>
-								))}
-							</select>
+							<div className="mt-1">
+								<Autocomplete
+									options={countryOptions}
+									value={formData.country_code}
+									onChange={(value) => updateField("country_code", value)}
+									placeholder={t("placeholders.selectCountry")}
+									searchPlaceholder={t("placeholders.searchCountry")}
+									emptyMessage={t("placeholders.noCountryFound")}
+								/>
+							</div>
 						</div>
 
 						<div>
 							<Label htmlFor="timezone">{t("fields.timezone")}</Label>
-							<select
-								id="timezone"
-								value={formData.timezone}
-								onChange={(e) => updateField("timezone", e.target.value)}
-								className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-							>
-								{TIMEZONES.map((tz) => (
-									<option key={tz.value} value={tz.value}>
-										{tz.label}
-									</option>
-								))}
-							</select>
+							<div className="mt-1">
+								<Autocomplete
+									options={timezoneOptions}
+									value={formData.timezone}
+									onChange={(value) => updateField("timezone", value || "UTC")}
+									placeholder={t("placeholders.selectTimezone")}
+									searchPlaceholder={t("placeholders.searchTimezone")}
+									emptyMessage={t("placeholders.noTimezoneFound")}
+								/>
+							</div>
 						</div>
 					</div>
 
@@ -340,12 +349,8 @@ export function EventFormClient({
 				<div className="sticky top-4">
 					<div className="flex items-center gap-2 mb-4">
 						<span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-						<span className="text-sm font-medium text-gray-700">
-							{t("preview.title")}
-						</span>
-						<span className="text-xs text-gray-400 ml-auto">
-							{t("preview.desktop")}
-						</span>
+						<span className="text-sm font-medium text-gray-700">{t("preview.title")}</span>
+						<span className="text-xs text-gray-400 ml-auto">{t("preview.desktop")}</span>
 					</div>
 
 					<EventPreviewCard

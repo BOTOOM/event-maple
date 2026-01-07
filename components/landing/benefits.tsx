@@ -6,11 +6,13 @@ export function Benefits() {
 
 	const benefits = [
 		{
+			id: "time",
 			icon: Clock,
 			title: t("items.time.title"),
 			description: t("items.time.description"),
 		},
 		{
+			id: "organized",
 			icon: Calendar,
 			title: t("items.organized.title"),
 			description: t("items.organized.description"),
@@ -26,11 +28,11 @@ export function Benefits() {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
-					{benefits.map((benefit, index) => {
+					{benefits.map((benefit) => {
 						const Icon = benefit.icon;
 						return (
 							<div
-								key={index}
+								key={benefit.id}
 								className="flex flex-col items-center text-center p-8 rounded-lg hover:shadow-lg transition-shadow"
 							>
 								<div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">

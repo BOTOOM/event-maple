@@ -6,6 +6,7 @@ export function Features() {
 
 	const features = [
 		{
+			id: "agenda",
 			title: t("items.agenda.title"),
 			description: t("items.agenda.description"),
 			badge: null,
@@ -13,6 +14,7 @@ export function Features() {
 			alt: t("items.agenda.alt"),
 		},
 		{
+			id: "notifications",
 			title: t("items.notifications.title"),
 			description: t("items.notifications.description"),
 			badge: t("badges.comingSoon"),
@@ -20,6 +22,7 @@ export function Features() {
 			alt: t("items.notifications.alt"),
 		},
 		{
+			id: "maps",
 			title: t("items.maps.title"),
 			description: t("items.maps.description"),
 			badge: t("badges.comingSoon"),
@@ -38,9 +41,9 @@ export function Features() {
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{features.map((feature, index) => (
+					{features.map((feature) => (
 						<div
-							key={index}
+							key={feature.id}
 							className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
 						>
 							{/* Image */}

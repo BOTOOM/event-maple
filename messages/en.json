@@ -1,4 +1,13 @@
 {
+	"Common": {
+		"share": {
+			"shareEvent": "Share event",
+			"linkCopied": "Link copied!",
+			"linkCopiedDescription": "The event link has been copied to your clipboard.",
+			"error": "Error sharing",
+			"errorDescription": "Could not share the event. Please try again."
+		}
+	},
 	"Navbar": {
 		"links": {
 			"events": "Explore Events",
@@ -484,6 +493,7 @@
 			"viewDetails": "View Details",
 			"continueEditing": "Continue Editing",
 			"viewReport": "View Report",
+			"comingSoon": "Coming Soon",
 			"edit": "Edit",
 			"delete": "Delete",
 			"deleting": "Deleting...",
@@ -532,6 +542,11 @@
 				"name": "e.g. Tech Innovation Summit 2024",
 				"imageUrl": "https://images.unsplash.com/photo-...",
 				"selectCountry": "Select a country",
+				"searchCountry": "Search country...",
+				"noCountryFound": "No country found.",
+				"selectTimezone": "Select timezone",
+				"searchTimezone": "Search timezone...",
+				"noTimezoneFound": "No timezone found.",
 				"location": "e.g. Madrid, Spain",
 				"description": "Describe your event in detail..."
 			},

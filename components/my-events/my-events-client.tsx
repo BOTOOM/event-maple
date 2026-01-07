@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { ChevronDown, Plus, Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Plus, Search, ChevronDown } from "lucide-react";
+import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/lib/i18n/navigation";
-import { EventWithDetails, EventFilterType } from "@/lib/types/event";
-import { MyEventCard } from "./my-event-card";
+import { EventFilterType, EventWithDetails } from "@/lib/types/event";
 import { cn } from "@/lib/utils";
+import { MyEventCard } from "./my-event-card";
 
 interface MyEventsClientProps {
 	readonly initialEvents: EventWithDetails[];
@@ -46,7 +46,7 @@ export function MyEventsClient({
 		const params = new URLSearchParams(searchParams.toString());
 
 		Object.entries(updates).forEach(([key, value]) => {
-			if (value === undefined || value === "" || value === "1" && key === "page") {
+			if (value === undefined || value === "" || (value === "1" && key === "page")) {
 				params.delete(key);
 			} else {
 				params.set(key, value);
@@ -105,7 +105,7 @@ export function MyEventsClient({
 									"px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
 									initialFilter === filter.key
 										? "bg-white text-blue-600 shadow-sm"
-										: "text-gray-600 hover:text-gray-900"
+										: "text-gray-600 hover:text-gray-900",
 								)}
 							>
 								{filter.label}
@@ -130,9 +130,9 @@ export function MyEventsClient({
 			{/* Events Grid */}
 			{isPending ? (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{Array.from({ length: 6 }).map((_, index) => (
+					{[1, 2, 3, 4, 5, 6].map((skeletonId) => (
 						<div
-							key={`skeleton-${index}`}
+							key={`skeleton-${skeletonId}`}
 							className="bg-gray-100 rounded-lg h-80 animate-pulse"
 						/>
 					))}

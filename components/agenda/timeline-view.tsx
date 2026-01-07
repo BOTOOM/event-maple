@@ -22,7 +22,7 @@ export function TimelineView({
 	startHour = 7,
 	endHour = 20,
 	pixelsPerHour = 140,
-}: TimelineViewProps) {
+}: Readonly<TimelineViewProps>) {
 	const timeSlots = generateTimeSlots(startHour, endHour);
 	const totalHeight = (endHour - startHour + 1) * pixelsPerHour;
 
@@ -47,9 +47,9 @@ export function TimelineView({
 			{/* Timeline grid */}
 			<div className="ml-20 relative" style={{ height: `${totalHeight}px` }}>
 				{/* Hour lines */}
-				{timeSlots.map((slot, index) => (
+				{timeSlots.map((slot) => (
 					<div
-						key={index}
+						key={slot.label}
 						className="absolute left-0 right-0 border-t border-gray-200"
 						style={{ top: `${(slot.hour - startHour) * pixelsPerHour}px` }}
 					/>

@@ -36,6 +36,7 @@ export default function ErrorPage({
 
 					<div className="space-y-3">
 						<button
+							type="button"
 							onClick={reset}
 							className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-primary/90 transition-colors shadow-sm"
 						>

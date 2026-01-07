@@ -43,6 +43,7 @@ export interface Event {
 	image_url?: string | null;
 	status: EventStatus;
 	category_id: string | null;
+	category_name?: string | null;
 	created_by: string | null;
 	created_at?: string;
 	updated_at?: string;

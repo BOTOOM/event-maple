@@ -30,7 +30,7 @@ export async function getCategories(locale: string): Promise<EventCategoryWithTr
 				name,
 				description
 			)
-		`
+		`,
 		)
 		.eq("is_active", true)
 		.eq("event_category_translations.locale", locale)
@@ -61,7 +61,7 @@ export async function getMyEvents(
 	page: number = 1,
 	filter: EventFilterType = "all",
 	search: string = "",
-	locale: string = "en"
+	locale: string = "en",
 ): Promise<PaginatedEvents> {
 	const supabase = await createClient();
 
@@ -100,7 +100,7 @@ export async function getMyEvents(
 				)
 			)
 		`,
-			{ count: "exact" }
+			{ count: "exact" },
 		)
 		.eq("created_by", user.id)
 		.eq("event_categories.event_category_translations.locale", locale);
@@ -120,7 +120,9 @@ export async function getMyEvents(
 	}
 
 	// Order and paginate
-	query = query.order("created_at", { ascending: false }).range(offset, offset + EVENTS_PER_PAGE - 1);
+	query = query
+		.order("created_at", { ascending: false })
+		.range(offset, offset + EVENTS_PER_PAGE - 1);
 
 	const { data, error, count } = await query;
 
@@ -145,8 +147,7 @@ export async function getMyEvents(
 					sort_order: event.event_categories.sort_order,
 					created_at: event.event_categories.created_at,
 					name: event.event_categories.event_category_translations?.[0]?.name || "",
-					description:
-						event.event_categories.event_category_translations?.[0]?.description || null,
+					description: event.event_categories.event_category_translations?.[0]?.description || null,
 				}
 			: null;
 
@@ -171,7 +172,7 @@ export async function getMyEvents(
 // Get a single event by ID
 export async function getEventById(
 	eventId: number,
-	locale: string = "en"
+	locale: string = "en",
 ): Promise<EventWithDetails | null> {
 	const supabase = await createClient();
 
@@ -196,7 +197,7 @@ export async function getEventById(
 					description
 				)
 			)
-		`
+		`,
 		)
 		.eq("id", eventId)
 		.eq("event_categories.event_category_translations.locale", locale)
@@ -216,8 +217,7 @@ export async function getEventById(
 				sort_order: data.event_categories.sort_order,
 				created_at: data.event_categories.created_at,
 				name: data.event_categories.event_category_translations?.[0]?.name || "",
-				description:
-					data.event_categories.event_category_translations?.[0]?.description || null,
+				description: data.event_categories.event_category_translations?.[0]?.description || null,
 			}
 		: null;
 
@@ -230,7 +230,7 @@ export async function getEventById(
 
 // Create a new event
 export async function createEvent(
-	formData: EventFormData
+	formData: EventFormData,
 ): Promise<{ success: boolean; eventId?: number; error?: string }> {
 	const supabase = await createClient();
 
@@ -275,7 +275,7 @@ export async function createEvent(
 // Update an existing event
 export async function updateEvent(
 	eventId: number,
-	formData: Partial<EventFormData>
+	formData: Partial<EventFormData>,
 ): Promise<{ success: boolean; error?: string }> {
 	const supabase = await createClient();
 
@@ -311,8 +311,7 @@ export async function updateEvent(
 		updateData.end_date = formData.end_at.split("T")[0];
 	}
 	if (formData.timezone !== undefined) updateData.timezone = formData.timezone;
-	if (formData.country_code !== undefined)
-		updateData.country_code = formData.country_code || null;
+	if (formData.country_code !== undefined) updateData.country_code = formData.country_code || null;
 	if (formData.location !== undefined) updateData.location = formData.location;
 	if (formData.image_url !== undefined) updateData.image_url = formData.image_url || null;
 	if (formData.category_id !== undefined) updateData.category_id = formData.category_id || null;
@@ -332,9 +331,7 @@ export async function updateEvent(
 }
 
 // Delete an event
-export async function deleteEvent(
-	eventId: number
-): Promise<{ success: boolean; error?: string }> {
+export async function deleteEvent(eventId: number): Promise<{ success: boolean; error?: string }> {
 	const supabase = await createClient();
 
 	const {
@@ -369,15 +366,13 @@ export async function deleteEvent(
 }
 
 // Publish an event (change status from draft to published)
-export async function publishEvent(
-	eventId: number
-): Promise<{ success: boolean; error?: string }> {
+export async function publishEvent(eventId: number): Promise<{ success: boolean; error?: string }> {
 	return updateEvent(eventId, { status: "published" });
 }
 
 // Unpublish an event (change status from published to draft)
 export async function unpublishEvent(
-	eventId: number
+	eventId: number,
 ): Promise<{ success: boolean; error?: string }> {
 	return updateEvent(eventId, { status: "draft" });
 }

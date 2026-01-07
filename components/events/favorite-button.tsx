@@ -20,7 +20,7 @@ export function FavoriteButton({
 	initialIsFavorite,
 	className,
 	variant = "icon",
-}: FavoriteButtonProps) {
+}: Readonly<FavoriteButtonProps>) {
 	const t = useTranslations("Events.Favorite");
 	const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
 	const [isLoading, setIsLoading] = useState(false);
@@ -93,6 +93,7 @@ export function FavoriteButton({
 	if (variant === "button") {
 		return (
 			<button
+				type="button"
 				onClick={toggleFavorite}
 				disabled={isLoading}
 				className={cn(
@@ -109,6 +110,7 @@ export function FavoriteButton({
 
 	return (
 		<button
+			type="button"
 			onClick={toggleFavorite}
 			disabled={isLoading}
 			className={cn(

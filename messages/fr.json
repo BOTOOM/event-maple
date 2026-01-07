@@ -1,4 +1,13 @@
 {
+	"Common": {
+		"share": {
+			"shareEvent": "Partager l'événement",
+			"linkCopied": "Lien copié !",
+			"linkCopiedDescription": "Le lien de l'événement a été copié dans le presse-papiers.",
+			"error": "Erreur de partage",
+			"errorDescription": "Impossible de partager l'événement. Veuillez réessayer."
+		}
+	},
 	"Navbar": {
 		"links": {
 			"events": "Explorer les événements",
@@ -484,6 +493,7 @@
 			"viewDetails": "Voir les Détails",
 			"continueEditing": "Continuer l'Édition",
 			"viewReport": "Voir le Rapport",
+			"comingSoon": "Bientôt Disponible",
 			"edit": "Modifier",
 			"delete": "Supprimer",
 			"deleting": "Suppression...",
@@ -532,6 +542,11 @@
 				"name": "Ex. Sommet de l'Innovation Technologique 2024",
 				"imageUrl": "https://images.unsplash.com/photo-...",
 				"selectCountry": "Sélectionnez un pays",
+				"searchCountry": "Rechercher un pays...",
+				"noCountryFound": "Aucun pays trouvé.",
+				"selectTimezone": "Sélectionnez le fuseau horaire",
+				"searchTimezone": "Rechercher un fuseau horaire...",
+				"noTimezoneFound": "Aucun fuseau horaire trouvé.",
 				"location": "Ex. Paris, France",
 				"description": "Décrivez votre événement en détail..."
 			},

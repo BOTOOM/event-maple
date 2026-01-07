@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { BarChart3, Calendar, Eye, MapPin, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useFormatter, useTranslations } from "next-intl";
-import { Calendar, MapPin, Eye, Pencil, MoreVertical, Trash2, BarChart3 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/lib/i18n/navigation";
-import { EventWithDetails, getEventTitle, getEventDisplayStatus } from "@/lib/types/event";
-import { deleteEvent } from "@/lib/actions/events";
 import { useToast } from "@/hooks/use-toast";
+import { deleteEvent } from "@/lib/actions/events";
+import { Link } from "@/lib/i18n/navigation";
+import { EventWithDetails, getEventDisplayStatus, getEventTitle } from "@/lib/types/event";
 import { cn } from "@/lib/utils";
+import { formatDateForDisplay } from "@/lib/utils/date";
 
 interface MyEventCardProps {
 	readonly event: EventWithDetails;
@@ -17,7 +18,7 @@ interface MyEventCardProps {
 
 export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 	const t = useTranslations("MyEvents.Card");
-	const format = useFormatter();
+	const locale = useLocale();
 	const { toast } = useToast();
 	const [showMenu, setShowMenu] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
@@ -25,16 +26,22 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 	const eventTitle = getEventTitle(event);
 	const displayStatus = getEventDisplayStatus(event);
 
-	const formattedDate = format.dateTime(new Date(event.start_at || event.start_date), {
+	// Format date in user's browser timezone
+	const formattedDate = formatDateForDisplay(event.start_at || event.start_date, locale, {
 		day: "numeric",
 		month: "short",
 		year: "numeric",
+		hour: undefined,
+		minute: undefined,
 	});
 
 	const formattedTime = event.start_at
-		? format.dateTime(new Date(event.start_at), {
+		? formatDateForDisplay(event.start_at, locale, {
 				hour: "2-digit",
 				minute: "2-digit",
+				month: undefined,
+				day: undefined,
+				year: undefined,
 			})
 		: null;
 
@@ -90,12 +97,10 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 
 		if (displayStatus === "past") {
 			return (
-				<Link href={`/my-events/${event.id}/stats`} className="flex-1">
-					<Button variant="outline" className="w-full gap-2">
-						<BarChart3 className="h-4 w-4" />
-						{t("viewReport")}
-					</Button>
-				</Link>
+				<Button variant="outline" className="w-full gap-2 cursor-not-allowed opacity-70" disabled>
+					<BarChart3 className="h-4 w-4" />
+					{t("viewReport")} - {t("comingSoon")}
+				</Button>
 			);
 		}
 
@@ -121,17 +126,10 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 			{/* Image */}
 			<div className="relative w-full h-48 bg-gradient-to-br from-purple-600 to-purple-800">
 				{event.image_url ? (
-					<Image
-						src={event.image_url}
-						alt={eventTitle}
-						fill
-						className="object-cover"
-					/>
+					<Image src={event.image_url} alt={eventTitle} fill className="object-cover" />
 				) : (
 					<div className="absolute inset-0 flex items-center justify-center">
-						<span className="text-white/30 text-sm text-center px-4">
-							{eventTitle}
-						</span>
+						<span className="text-white/30 text-sm text-center px-4">{eventTitle}</span>
 					</div>
 				)}
 
@@ -139,7 +137,7 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 				<div
 					className={cn(
 						"absolute top-3 left-3 px-2.5 py-1 rounded text-xs font-medium",
-						status.className
+						status.className,
 					)}
 				>
 					{status.label}
@@ -182,9 +180,7 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 
 			{/* Content */}
 			<div className="p-4 space-y-3">
-				<h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-					{eventTitle}
-				</h3>
+				<h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{eventTitle}</h3>
 
 				<div className="space-y-2">
 					<div className="flex items-center gap-2 text-sm text-gray-600">
@@ -204,9 +200,7 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 				</div>
 
 				{/* Actions */}
-				<div className="flex items-center gap-2 pt-2">
-					{renderActionButton()}
-				</div>
+				<div className="flex items-center gap-2 pt-2">{renderActionButton()}</div>
 			</div>
 
 			{/* Click outside to close menu */}

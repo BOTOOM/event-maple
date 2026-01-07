@@ -80,44 +80,60 @@ export default function TermsPage() {
 				<LegalList items={[0, 1, 2, 3, 4, 5].map((i) => t(`sections.conduct.items.${i}`))} />
 			</LegalSection>
 
-			{/* 6. Propiedad Intelectual */}
+			{/* 6. Contenido de Eventos e Imágenes */}
+			<LegalSection title={t("sections.eventContent.title")}>
+				<p>{t("sections.eventContent.intro")}</p>
+				<h4 className="font-semibold mt-4">{t("sections.eventContent.disclaimer.title")}</h4>
+				<LegalList
+					items={[0, 1, 2, 3].map((i) => t(`sections.eventContent.disclaimer.items.${i}`))}
+				/>
+				<h4 className="font-semibold mt-4">{t("sections.eventContent.prohibited.title")}</h4>
+				<p>{t("sections.eventContent.prohibited.intro")}</p>
+				<LegalList
+					items={[0, 1, 2, 3, 4, 5].map((i) => t(`sections.eventContent.prohibited.items.${i}`))}
+				/>
+				<h4 className="font-semibold mt-4">{t("sections.eventContent.enforcement.title")}</h4>
+				<p>{t("sections.eventContent.enforcement.text")}</p>
+			</LegalSection>
+
+			{/* 7. Propiedad Intelectual */}
 			<LegalSection title={t("sections.ip.title")}>
 				<p>{t("sections.ip.text1")}</p>
 				<p>{t("sections.ip.text2")}</p>
 			</LegalSection>
 
-			{/* 7. Limitación de Responsabilidad */}
+			{/* 8. Limitación de Responsabilidad */}
 			<LegalSection title={t("sections.liability.title")}>
 				<p>{t("sections.liability.intro")}</p>
 				<LegalList items={[0, 1, 2, 3].map((i) => t(`sections.liability.items.${i}`))} />
 				<p>{t("sections.liability.text")}</p>
 			</LegalSection>
 
-			{/* 8. Modificaciones del Servicio */}
+			{/* 9. Modificaciones del Servicio */}
 			<LegalSection title={t("sections.modifications.title")}>
 				<p>{t("sections.modifications.text1")}</p>
 				<p>{t("sections.modifications.text2")}</p>
 			</LegalSection>
 
-			{/* 9. Terminación */}
+			{/* 10. Terminación */}
 			<LegalSection title={t("sections.termination.title")}>
 				<p>{t("sections.termination.text1")}</p>
 				<p>{t("sections.termination.text2")}</p>
 			</LegalSection>
 
-			{/* 10. Ley Aplicable */}
+			{/* 11. Ley Aplicable */}
 			<LegalSection title={t("sections.law.title")}>
 				<p>{t("sections.law.text1")}</p>
 				<p>{t("sections.law.text2")}</p>
 			</LegalSection>
 
-			{/* 11. Cambios a los Términos */}
+			{/* 12. Cambios a los Términos */}
 			<LegalSection title={t("sections.changes.title")}>
 				<p>{t("sections.changes.text1")}</p>
 				<p>{t("sections.changes.text2")}</p>
 			</LegalSection>
 
-			{/* 12. Contacto */}
+			{/* 13. Contacto */}
 			<LegalSection title={t("sections.contact.title")}>
 				<p>{t("sections.contact.intro")}</p>
 				<LegalContactBox

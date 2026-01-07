@@ -3,8 +3,8 @@
 import { CalendarX, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/lib/i18n/navigation";
 import { useAuth } from "@/lib/hooks/use-auth";
+import { Link } from "@/lib/i18n/navigation";
 
 export function EmptyEvents() {
 	const t = useTranslations("Events.List.empty");
@@ -17,7 +17,7 @@ export function EmptyEvents() {
 			</div>
 			<h2 className="text-2xl font-bold text-gray-900 mb-2">{t("title")}</h2>
 			<p className="text-gray-600 mb-8 max-w-md">{t("description")}</p>
-			
+
 			{user ? (
 				<div className="flex flex-col sm:flex-row gap-3">
 					<Link href="/my-events/create">

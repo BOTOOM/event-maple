@@ -1,4 +1,13 @@
 {
+	"Common": {
+		"share": {
+			"shareEvent": "Compartir evento",
+			"linkCopied": "¡Enlace copiado!",
+			"linkCopiedDescription": "El enlace del evento ha sido copiado al portapapeles.",
+			"error": "Error al compartir",
+			"errorDescription": "No se pudo compartir el evento. Por favor, inténtalo de nuevo."
+		}
+	},
 	"Navbar": {
 		"links": {
 			"events": "Explorar Eventos",
@@ -484,6 +493,7 @@
 			"viewDetails": "Ver Detalles",
 			"continueEditing": "Continuar Editando",
 			"viewReport": "Ver Reporte",
+			"comingSoon": "Próximamente",
 			"edit": "Editar",
 			"delete": "Eliminar",
 			"deleting": "Eliminando...",
@@ -532,6 +542,11 @@
 				"name": "Ej. Cumbre de Innovación Tecnológica 2024",
 				"imageUrl": "https://images.unsplash.com/photo-...",
 				"selectCountry": "Selecciona un país",
+				"searchCountry": "Buscar país...",
+				"noCountryFound": "No se encontró el país.",
+				"selectTimezone": "Selecciona zona horaria",
+				"searchTimezone": "Buscar zona horaria...",
+				"noTimezoneFound": "No se encontró la zona horaria.",
 				"location": "Ej. Madrid, España",
 				"description": "Describe tu evento en detalle..."
 			},

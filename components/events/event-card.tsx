@@ -1,25 +1,43 @@
-import { ArrowRight, Calendar, MapPin } from "lucide-react";
+"use client";
+
+import { ArrowRight, Calendar, MapPin, Tag } from "lucide-react";
 import Image from "next/image";
-import { useFormatter, useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { ShareButton } from "@/components/ui/share-button";
 import { Link } from "@/lib/i18n/navigation";
 import { Event, getEventTitle } from "@/lib/types/event";
+import { formatDateForDisplay } from "@/lib/utils/date";
 
 interface EventCardProps {
-	event: Event;
+	readonly event: Event;
 }
 
-export function EventCard({ event }: EventCardProps) {
+export function EventCard({ event }: Readonly<EventCardProps>) {
 	const t = useTranslations("Events.Card");
-	const format = useFormatter();
+	const locale = useLocale();
 	const eventTitle = getEventTitle(event);
 
-	// Usar next-intl formatter
-	const formattedDate = format.dateTime(new Date(event.start_date), {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	});
+	// Check if event has full timestamp (start_at) or just date (start_date)
+	const hasFullTimestamp = event.start_at?.includes("T");
+
+	// Format date in user's browser timezone
+	// If we have full timestamp, show date and time; otherwise just date
+	const formattedDate = hasFullTimestamp
+		? formatDateForDisplay(event.start_at, locale, {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+				hour: "numeric",
+				minute: "2-digit",
+			})
+		: formatDateForDisplay(event.start_date, locale, {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+				hour: undefined,
+				minute: undefined,
+			});
 
 	return (
 		<div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
@@ -36,10 +54,30 @@ export function EventCard({ event }: EventCardProps) {
 						</span>
 					</div>
 				)}
+				{/* Share Button */}
+				<div className="absolute top-2 right-2">
+					<ShareButton
+						url={`/events/${event.id}`}
+						title={eventTitle}
+						description={event.description ?? undefined}
+						variant="outline"
+						className="bg-white/90 hover:bg-white"
+					/>
+				</div>
 			</div>
 
 			{/* Content */}
 			<div className="p-4 sm:p-5 space-y-3">
+				{/* Category Badge */}
+				{event.category_name && (
+					<div className="flex items-center gap-1.5">
+						<Tag className="h-3.5 w-3.5 text-blue-600" />
+						<span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+							{event.category_name}
+						</span>
+					</div>
+				)}
+
 				<h3 className="text-lg sm:text-xl font-semibold text-gray-900 line-clamp-2">
 					{eventTitle}
 				</h3>

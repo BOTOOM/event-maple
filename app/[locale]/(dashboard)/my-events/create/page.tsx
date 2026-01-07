@@ -1,9 +1,9 @@
-import { getLocale, getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { getCategories } from "@/lib/actions/events";
-import { EventFormClient } from "@/components/my-events/event-form-client";
+import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHeader } from "@/components/events/events-header";
+import { EventFormClient } from "@/components/my-events/event-form-client";
+import { getCategories } from "@/lib/actions/events";
 import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -18,8 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CreateEventPage() {
 	// Check authentication - redirect to login if not authenticated
 	const supabase = await createClient();
-	const { data: { user } } = await supabase.auth.getUser();
-	
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
 	if (!user) {
 		redirect("/login");
 	}

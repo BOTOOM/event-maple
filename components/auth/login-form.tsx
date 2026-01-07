@@ -59,7 +59,7 @@ function LoginFormContent() {
 
 			// Validate returnUrl to prevent open redirect vulnerability
 			const isValidReturnUrl =
-				returnUrl !== null && returnUrl.startsWith("/") && !returnUrl.startsWith("//");
+				!!returnUrl && returnUrl.startsWith("/") && !returnUrl.startsWith("//");
 			const destination: string = isValidReturnUrl ? returnUrl : "/events";
 
 			router.push(destination);

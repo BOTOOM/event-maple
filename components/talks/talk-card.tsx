@@ -2,7 +2,6 @@
 
 import { ChevronRight, Clock, MapPin, User } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { Button } from "@/components/ui/button";
@@ -69,48 +68,43 @@ function TalkTags({ tags }: { readonly tags?: string[] }) {
 export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 	const timeRange = formatTalkTime(talk.start_time, talk.end_time);
 	const location = formatTalkLocation(talk.room, talk.floor);
-	const router = useRouter();
 	const t = useTranslations("Events.TalkCard");
 	const locationPending = t("locationPending");
-
-	const handleCardClick = () => {
-		router.push(`/events/${eventId}/talks/${talk.id}`);
-	};
 
 	return (
 		<>
 			{/* MOBILE: Card completa clickeable */}
-			<div
-				onClick={handleCardClick}
-				className="bg-white rounded-lg border border-gray-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all cursor-pointer sm:hidden active:scale-[0.98]"
-			>
+			<div className="bg-white rounded-lg border border-gray-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all sm:hidden">
 				<div className="flex items-start gap-3">
-					{/* Icon */}
-					<div className="p-2 bg-blue-50 rounded-lg flex-shrink-0">
-						<Clock className="h-5 w-5 text-blue-600" />
-					</div>
+					<Link
+						href={`/events/${eventId}/talks/${talk.id}`}
+						className="flex items-start gap-3 flex-1 min-w-0"
+					>
+						{/* Icon */}
+						<div className="p-2 bg-blue-50 rounded-lg flex-shrink-0">
+							<Clock className="h-5 w-5 text-blue-600" />
+						</div>
 
-					{/* Content */}
-					<div className="flex-1 min-w-0">
-						<h3 className="text-base font-semibold text-gray-900">{talk.title}</h3>
+						{/* Content */}
+						<div className="flex-1 min-w-0">
+							<h3 className="text-base font-semibold text-gray-900">{talk.title}</h3>
 
-						{talk.short_description && (
-							<p className="text-sm text-gray-600 mt-1 line-clamp-2">{talk.short_description}</p>
-						)}
+							{talk.short_description && (
+								<p className="text-sm text-gray-600 mt-1 line-clamp-2">{talk.short_description}</p>
+							)}
 
-						<TalkMeta
-							timeRange={timeRange}
-							location={location}
-							speakerName={talk.speaker_name ?? undefined}
-							locationPending={locationPending}
-						/>
-						<TalkTags tags={talk.tags ?? undefined} />
-					</div>
+							<TalkMeta
+								timeRange={timeRange}
+								location={location}
+								speakerName={talk.speaker_name ?? undefined}
+								locationPending={locationPending}
+							/>
+							<TalkTags tags={talk.tags ?? undefined} />
+						</div>
+					</Link>
 
 					{/* Favorite Button - Previene propagación */}
-					<div onClick={(e) => e.stopPropagation()}>
-						<AddToAgendaButton talkId={talk.id} eventId={eventId} initialIsInAgenda={isInAgenda} />
-					</div>
+					<AddToAgendaButton talkId={talk.id} eventId={eventId} initialIsInAgenda={isInAgenda} />
 				</div>
 			</div>
 

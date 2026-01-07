@@ -2,7 +2,8 @@ import { ArrowLeft, Calendar, CalendarDays, MapPin, Users } from "lucide-react";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
+import { EventDateDisplay } from "@/components/events/event-date-display";
 import { FavoriteButton } from "@/components/events/favorite-button";
 import { Button } from "@/components/ui/button";
 import { InfoRow } from "@/components/ui/info-row";
@@ -66,7 +67,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 	const resolvedParams = await params;
 	const eventId = Number.parseInt(resolvedParams.eventId, 10);
 	const t = await getTranslations({ locale: resolvedParams.locale, namespace: "Events.Detail" });
-	const format = await getFormatter({ locale: resolvedParams.locale });
 
 	if (Number.isNaN(eventId)) {
 		notFound();
@@ -122,13 +122,6 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
 		isFavorite = !!favoriteData;
 	}
-
-	// Formatear fecha con next-intl
-	const formattedDate = format.dateTime(new Date(event.start_date), {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	});
 
 	const eventTitle = getEventTitle(event);
 
@@ -202,7 +195,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 							<InfoRow
 								icon={<Calendar className="h-5 w-5 text-gray-700" />}
 								label={t("date")}
-								value={formattedDate}
+								value={<EventDateDisplay startAt={event.start_at} startDate={event.start_date} />}
 							/>
 							{event.location && (
 								<InfoRow

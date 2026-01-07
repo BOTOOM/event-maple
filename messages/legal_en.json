@@ -255,13 +255,42 @@
 					"Copy, reproduce, or distribute content from the Platform without permission"
 				]
 			},
+			"eventContent": {
+				"title": "6. Event Content and Images",
+				"intro": "When creating events on the Platform, users are solely responsible for the content they publish, including but not limited to event descriptions, cover images, and any other associated media. By creating an event, you acknowledge and agree that:",
+				"disclaimer": {
+					"title": "6.1. Platform Disclaimer",
+					"items": [
+						"EventMaple does not assume any responsibility for the images used as event covers or any other visual content uploaded by users",
+						"The Platform does not verify, endorse, or guarantee the accuracy, legality, or appropriateness of user-uploaded content",
+						"Users are solely responsible for ensuring they have the necessary rights and permissions to use any images or content they upload",
+						"EventMaple shall not be held liable for any copyright infringement, intellectual property violations, or other legal issues arising from user-uploaded content"
+					]
+				},
+				"prohibited": {
+					"title": "6.2. Prohibited Content",
+					"intro": "The following types of content are strictly prohibited on the Platform:",
+					"items": [
+						"Sexual, pornographic, or sexually explicit content of any kind",
+						"Content that promotes violence, hatred, discrimination, or harm against any individual or group",
+						"Content that is defamatory, libelous, or infringes upon the rights of others",
+						"Content that promotes illegal activities or substances",
+						"Content that exploits, harms, or endangers minors in any way",
+						"Content that is misleading, fraudulent, or designed to deceive users"
+					]
+				},
+				"enforcement": {
+					"title": "6.3. Enforcement and Consequences",
+					"text": "EventMaple reserves the right, at its sole discretion, to remove any event or content that violates these terms without prior notice. Users who publish prohibited content may face immediate and permanent account suspension or termination. In cases of severe violations, EventMaple may report the user's information to relevant law enforcement authorities. By using this Platform, you acknowledge that these enforcement measures are necessary to maintain a safe and respectful community environment."
+				}
+			},
 			"ip": {
-				"title": "6. Intellectual Property",
+				"title": "7. Intellectual Property",
 				"text1": "All content on the Platform, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, and data compilations, is the property of EventMaple or its content suppliers and is protected by international copyright laws.",
 				"text2": "Information about specific events may be property of the respective organizers and is shown for informational purposes."
 			},
 			"liability": {
-				"title": "7. Limitation of Liability",
+				"title": "8. Limitation of Liability",
 				"intro": "EventMaple is provided as a personal project without warranties of any kind. To the maximum extent permitted by applicable law:",
 				"items": [
 					"We do not guarantee that the Service will be uninterrupted, timely, secure, or error-free",
@@ -272,27 +301,27 @@
 				"text": "The user is responsible for verifying directly with event organizers any critical information before making decisions based on the information shown on the Platform."
 			},
 			"modifications": {
-				"title": "8. Service Modifications",
+				"title": "9. Service Modifications",
 				"text1": "We reserve the right to modify, suspend, or discontinue the Service (or any part thereof) at any time, with or without prior notice. We shall not be liable to you or third parties for any modification, suspension, or interruption of the Service.",
 				"text2": "As a personal project, EventMaple may experience periods of downtime or significant changes in functionality without prior notice."
 			},
 			"termination": {
-				"title": "9. Termination",
+				"title": "10. Termination",
 				"text1": "We may terminate or suspend your access to the Platform immediately, without prior notice or liability, for any reason, including without limitation if you breach these Terms.",
 				"text2": "You may close your account at any time by contacting us or deleting your profile from your account settings. Upon termination, your right to use the Service will cease immediately."
 			},
 			"law": {
-				"title": "10. Governing Law and Jurisdiction",
+				"title": "11. Governing Law and Jurisdiction",
 				"text1": "These Terms shall be governed by and interpreted in accordance with applicable laws, without regard to its conflict of law provisions.",
 				"text2": "Any dispute related to these Terms or the use of the Platform shall be resolved through good faith negotiation between the parties."
 			},
 			"changes": {
-				"title": "11. Changes to Terms",
+				"title": "12. Changes to Terms",
 				"text1": "We reserve the right to modify these Terms at any time. When we make changes, we will update the \"last updated\" date at the top of this page.",
 				"text2": "Your continued use of the Platform after any change constitutes your acceptance of the new Terms. We recommend reviewing these Terms periodically to stay informed of any updates."
 			},
 			"contact": {
-				"title": "12. Contact Information",
+				"title": "13. Contact Information",
 				"intro": "If you have questions, comments, or concerns about these Terms and Conditions, you can contact us via:",
 				"email": "Email:"
 			}

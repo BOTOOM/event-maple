@@ -30,6 +30,7 @@ export function CopyEmailButton({
 
 	return (
 		<button
+			type="button"
 			onClick={handleCopy}
 			className={cn(
 				"px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium whitespace-nowrap",

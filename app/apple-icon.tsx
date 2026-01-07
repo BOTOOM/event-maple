@@ -14,6 +14,9 @@ export default async function AppleIcon() {
 	const logoSvg = await fetch(new URL("/logo.svg", "http://localhost:3000")).then((res) =>
 		res.text(),
 	);
+
+	const logoSvgBase64 = btoa(unescape(encodeURIComponent(logoSvg)));
+	const logoDataUri = `data:image/svg+xml;base64,${logoSvgBase64}`;
 	return new ImageResponse(
 		<div
 			style={{
@@ -26,11 +29,15 @@ export default async function AppleIcon() {
 				borderRadius: 40,
 			}}
 		>
-			<img
-				src={`data:image/svg+xml;base64,${Buffer.from(logoSvg).toString("base64")}`}
-				width="140"
-				height="140"
-				alt="Logo"
+			<div
+				style={{
+					width: 140,
+					height: 140,
+					backgroundImage: `url(${logoDataUri})`,
+					backgroundRepeat: "no-repeat",
+					backgroundPosition: "center",
+					backgroundSize: "contain",
+				}}
 			/>
 		</div>,
 		{

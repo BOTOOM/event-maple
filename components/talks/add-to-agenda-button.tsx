@@ -112,6 +112,7 @@ export function AddToAgendaButton({
 
 	return (
 		<button
+			type="button"
 			onClick={handleToggle}
 			disabled={isLoading}
 			className={cn(

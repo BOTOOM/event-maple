@@ -17,11 +17,13 @@ export async function updateSession(request: NextRequest, initialResponse?: Next
 					return request.cookies.getAll();
 				},
 				setAll(cookiesToSet) {
-					cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+					cookiesToSet.forEach(({ name, value }) => {
+						request.cookies.set(name, value);
+					});
 					// No recreamos la respuesta para no perder la configuración de next-intl
-					cookiesToSet.forEach(({ name, value, options }) =>
-						supabaseResponse.cookies.set(name, value, options),
-					);
+					cookiesToSet.forEach(({ name, value, options }) => {
+						supabaseResponse.cookies.set(name, value, options);
+					});
 				},
 			},
 		},

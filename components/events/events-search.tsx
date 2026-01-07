@@ -4,9 +4,9 @@ import { Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface EventsSearchProps {
-	value: string;
-	onChange: (value: string) => void;
-	placeholder?: string;
+	readonly value: string;
+	readonly onChange: (value: string) => void;
+	readonly placeholder?: string;
 }
 
 export function EventsSearch({
@@ -50,6 +50,7 @@ export function EventsSearch({
 				/>
 				{localValue && (
 					<button
+						type="button"
 						onClick={handleClear}
 						className="
               absolute right-3 top-1/2 -translate-y-1/2

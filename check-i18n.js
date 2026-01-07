@@ -25,17 +25,23 @@ const ptKeys = new Set(getKeys(pt));
 console.log("=== Missing in ES ===");
 Array.from(enKeys)
 	.filter((k) => !esKeys.has(k))
-	.forEach((k) => console.log(k));
+	.forEach((k) => {
+		console.log(k);
+	});
 
 console.log("\n=== Missing in FR ===");
 Array.from(enKeys)
 	.filter((k) => !frKeys.has(k))
-	.forEach((k) => console.log(k));
+	.forEach((k) => {
+		console.log(k);
+	});
 
 console.log("\n=== Missing in PT ===");
 Array.from(enKeys)
 	.filter((k) => !ptKeys.has(k))
-	.forEach((k) => console.log(k));
+	.forEach((k) => {
+		console.log(k);
+	});
 
 console.log("\n=== Summary ===");
 console.log("EN keys:", enKeys.size);

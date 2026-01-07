@@ -20,6 +20,7 @@ export function EventsHeader() {
 				<div className="flex items-center justify-between h-14 sm:h-16">
 					{/* Mobile: Hamburger */}
 					<button
+						type="button"
 						className="md:hidden p-2 -ml-2"
 						onClick={() => setShowMobileMenu(!showMobileMenu)}
 					>
@@ -49,7 +50,7 @@ export function EventsHeader() {
 					{/* Mobile: Search Icon */}
 					<div className="flex items-center gap-2 md:hidden">
 						<LanguageSwitcher />
-						<button className="p-2 -mr-2">
+						<button type="button" className="p-2 -mr-2">
 							<Search className="h-5 w-5 text-gray-700" />
 						</button>
 					</div>

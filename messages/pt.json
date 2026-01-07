@@ -1,4 +1,13 @@
 {
+	"Common": {
+		"share": {
+			"shareEvent": "Compartilhar evento",
+			"linkCopied": "Link copiado!",
+			"linkCopiedDescription": "O link do evento foi copiado para a área de transferência.",
+			"error": "Erro ao compartilhar",
+			"errorDescription": "Não foi possível compartilhar o evento. Por favor, tente novamente."
+		}
+	},
 	"Navbar": {
 		"links": {
 			"events": "Explorar Eventos",
@@ -484,6 +493,7 @@
 			"viewDetails": "Ver Detalhes",
 			"continueEditing": "Continuar Editando",
 			"viewReport": "Ver Relatório",
+			"comingSoon": "Em Breve",
 			"edit": "Editar",
 			"delete": "Excluir",
 			"deleting": "Excluindo...",
@@ -532,6 +542,11 @@
 				"name": "Ex. Cúpula de Inovação Tecnológica 2024",
 				"imageUrl": "https://images.unsplash.com/photo-...",
 				"selectCountry": "Selecione um país",
+				"searchCountry": "Pesquisar país...",
+				"noCountryFound": "País não encontrado.",
+				"selectTimezone": "Selecione o fuso horário",
+				"searchTimezone": "Pesquisar fuso horário...",
+				"noTimezoneFound": "Fuso horário não encontrado.",
 				"location": "Ex. São Paulo, Brasil",
 				"description": "Descreva seu evento em detalhes..."
 			},

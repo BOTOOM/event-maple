@@ -9,10 +9,10 @@ import { DateSelector } from "./date-selector";
 import { TimelineView } from "./timeline-view";
 
 interface MyAgendaClientProps {
-	talks: Array<Talk & { is_in_my_agenda: boolean }>;
-	eventId: number;
-	selectedDate: string;
-	availableDates: string[];
+	readonly talks: Array<Talk & { is_in_my_agenda: boolean }>;
+	readonly eventId: number;
+	readonly selectedDate: string;
+	readonly availableDates: string[];
 }
 
 interface RoomLegend {
@@ -26,7 +26,7 @@ export function MyAgendaClient({
 	eventId,
 	selectedDate,
 	availableDates,
-}: MyAgendaClientProps) {
+}: Readonly<MyAgendaClientProps>) {
 	const router = useRouter();
 	const [currentDate, setCurrentDate] = useState(selectedDate);
 	const [isMobile, setIsMobile] = useState(false);
@@ -50,7 +50,7 @@ export function MyAgendaClient({
 	};
 
 	// Detect conflicts
-	const talksWithConflicts = detectConflicts(talks) as TalkWithConflict[];
+	const talksWithConflicts: TalkWithConflict[] = detectConflicts(talks);
 
 	// Generate dynamic legend based on rooms in talks
 	const roomLegends: RoomLegend[] = [];
@@ -114,10 +114,10 @@ export function MyAgendaClient({
 				<div className="bg-white rounded-lg border border-gray-200 p-4">
 					<h4 className="text-sm font-semibold text-gray-900 mb-3">{t("legend.rooms")}</h4>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
-						{roomLegends.map((legend, index) => {
+						{roomLegends.map((legend) => {
 							// Extract background color from colorClasses
-							const bgColorMatch = legend.colorClasses.match(/bg-(\w+)-(\d+)/);
-							const borderColorMatch = legend.colorClasses.match(/border-(\w+)-(\d+)/);
+							const bgColorMatch = /bg-(\w+)-(\d+)/.exec(legend.colorClasses);
+							const borderColorMatch = /border-(\w+)-(\d+)/.exec(legend.colorClasses);
 
 							const bgColor = bgColorMatch
 								? `bg-${bgColorMatch[1]}-${bgColorMatch[2]}`
@@ -127,7 +127,7 @@ export function MyAgendaClient({
 								: "border-gray-300";
 
 							return (
-								<div key={index} className="flex items-center gap-2">
+								<div key={legend.room} className="flex items-center gap-2">
 									<div
 										className={`w-4 h-4 rounded ${bgColor} border-2 ${borderColor} flex-shrink-0`}
 									></div>

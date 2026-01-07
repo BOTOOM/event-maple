@@ -255,13 +255,42 @@
 					"Copiar, reproduzir ou distribuir conteúdo da Plataforma sem permissão"
 				]
 			},
+			"eventContent": {
+				"title": "6. Conteúdo de Eventos e Imagens",
+				"intro": "Ao criar eventos na Plataforma, os usuários são os únicos responsáveis pelo conteúdo que publicam, incluindo, mas não se limitando a descrições de eventos, imagens de capa e qualquer outra mídia associada. Ao criar um evento, você reconhece e concorda que:",
+				"disclaimer": {
+					"title": "6.1. Isenção de Responsabilidade da Plataforma",
+					"items": [
+						"O EventMaple não assume nenhuma responsabilidade pelas imagens usadas como capas de eventos ou qualquer outro conteúdo visual enviado pelos usuários",
+						"A Plataforma não verifica, endossa ou garante a precisão, legalidade ou adequação do conteúdo enviado pelos usuários",
+						"Os usuários são os únicos responsáveis por garantir que possuem os direitos e permissões necessários para usar qualquer imagem ou conteúdo que enviem",
+						"O EventMaple não será responsabilizado por qualquer violação de direitos autorais, violações de propriedade intelectual ou outros problemas legais decorrentes do conteúdo enviado pelos usuários"
+					]
+				},
+				"prohibited": {
+					"title": "6.2. Conteúdo Proibido",
+					"intro": "Os seguintes tipos de conteúdo são estritamente proibidos na Plataforma:",
+					"items": [
+						"Conteúdo sexual, pornográfico ou sexualmente explícito de qualquer tipo",
+						"Conteúdo que promova violência, ódio, discriminação ou danos contra qualquer indivíduo ou grupo",
+						"Conteúdo difamatório, calunioso ou que viole os direitos de terceiros",
+						"Conteúdo que promova atividades ou substâncias ilegais",
+						"Conteúdo que explore, prejudique ou coloque em risco menores de qualquer forma",
+						"Conteúdo enganoso, fraudulento ou projetado para enganar os usuários"
+					]
+				},
+				"enforcement": {
+					"title": "6.3. Aplicação e Consequências",
+					"text": "O EventMaple reserva-se o direito, a seu exclusivo critério, de remover qualquer evento ou conteúdo que viole estes termos sem aviso prévio. Usuários que publicarem conteúdo proibido podem enfrentar suspensão ou encerramento imediato e permanente de sua conta. Em casos de violações graves, o EventMaple pode reportar as informações do usuário às autoridades policiais competentes. Ao usar esta Plataforma, você reconhece que essas medidas de aplicação são necessárias para manter um ambiente comunitário seguro e respeitoso."
+				}
+			},
 			"ip": {
-				"title": "6. Propriedade Intelectual",
+				"title": "7. Propriedade Intelectual",
 				"text1": "Todo o conteúdo da Plataforma, incluindo, mas não se limitando a texto, gráficos, logotipos, ícones, imagens, clipes de áudio, downloads digitais e compilações de dados, é propriedade do EventMaple ou de seus fornecedores de conteúdo e está protegido pelas leis internacionais de direitos autorais.",
 				"text2": "As informações sobre eventos específicos podem ser propriedade dos respectivos organizadores e são mostradas para fins informativos."
 			},
 			"liability": {
-				"title": "7. Limitação de Responsabilidade",
+				"title": "8. Limitação de Responsabilidade",
 				"intro": "O EventMaple é fornecido como um projeto pessoal sem garantias de qualquer tipo. Na extensão máxima permitida pela lei aplicável:",
 				"items": [
 					"Não garantimos que o Serviço será ininterrupto, oportuno, seguro ou livre de erros",
@@ -272,27 +301,27 @@
 				"text": "O usuário é responsável por verificar diretamente com os organizadores de eventos qualquer informação crítica antes de tomar decisões com base nas informações mostradas na Plataforma."
 			},
 			"modifications": {
-				"title": "8. Modificações do Serviço",
+				"title": "9. Modificações do Serviço",
 				"text1": "Reservamo-nos o direito de modificar, suspender ou descontinuar o Serviço (ou qualquer parte dele) a qualquer momento, com ou sem aviso prévio. Não seremos responsáveis perante você ou terceiros por qualquer modificação, suspensão ou interrupção do Serviço.",
 				"text2": "Como um projeto pessoal, o EventMaple pode passar por períodos de inatividade ou mudanças significativas em sua funcionalidade sem aviso prévio."
 			},
 			"termination": {
-				"title": "9. Rescisão",
+				"title": "10. Rescisão",
 				"text1": "Podemos encerrar ou suspender seu acesso à Plataforma imediatamente, sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo, sem limitação, se você violar estes Termos.",
 				"text2": "Você pode encerrar sua conta a qualquer momento entrando em contato conosco ou excluindo seu perfil nas configurações da conta. Após a rescisão, seu direito de usar o Serviço cessará imediatamente."
 			},
 			"law": {
-				"title": "10. Lei Aplicável e Jurisdição",
+				"title": "11. Lei Aplicável e Jurisdição",
 				"text1": "Estes Termos serão regidos e interpretados de acordo com as leis aplicáveis, sem considerar suas disposições sobre conflitos de leis.",
 				"text2": "Qualquer disputa relacionada a estes Termos ou ao uso da Plataforma será resolvida por meio de negociação de boa fé entre as partes."
 			},
 			"changes": {
-				"title": "11. Alterações nos Termos",
+				"title": "12. Alterações nos Termos",
 				"text1": "Reservamo-nos o direito de modificar estes Termos a qualquer momento. Quando fizermos alterações, atualizaremos a data da \"última atualização\" no topo desta página.",
 				"text2": "Seu uso continuado da Plataforma após qualquer alteração constitui sua aceitação dos novos Termos. Recomendamos revisar estes Termos periodicamente para se manter informado sobre quaisquer atualizações."
 			},
 			"contact": {
-				"title": "12. Informações de Contato",
+				"title": "13. Informações de Contato",
 				"intro": "Se você tiver dúvidas, comentários ou preocupações sobre estes Termos e Condições, pode entrar em contato conosco através de:",
 				"email": "E-mail:"
 			}

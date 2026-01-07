@@ -255,13 +255,42 @@
 					"Copier, reproduire ou distribuer du contenu de la Plateforme sans autorisation"
 				]
 			},
+			"eventContent": {
+				"title": "6. Contenu des Événements et Images",
+				"intro": "Lors de la création d'événements sur la Plateforme, les utilisateurs sont seuls responsables du contenu qu'ils publient, y compris, mais sans s'y limiter, les descriptions d'événements, les images de couverture et tout autre média associé. En créant un événement, vous reconnaissez et acceptez que :",
+				"disclaimer": {
+					"title": "6.1. Clause de Non-Responsabilité de la Plateforme",
+					"items": [
+						"EventMaple n'assume aucune responsabilité pour les images utilisées comme couvertures d'événements ou tout autre contenu visuel téléchargé par les utilisateurs",
+						"La Plateforme ne vérifie pas, n'approuve pas et ne garantit pas l'exactitude, la légalité ou l'adéquation du contenu téléchargé par les utilisateurs",
+						"Les utilisateurs sont seuls responsables de s'assurer qu'ils disposent des droits et autorisations nécessaires pour utiliser les images ou le contenu qu'ils téléchargent",
+						"EventMaple ne sera pas tenu responsable de toute violation de droits d'auteur, de propriété intellectuelle ou d'autres problèmes juridiques découlant du contenu téléchargé par les utilisateurs"
+					]
+				},
+				"prohibited": {
+					"title": "6.2. Contenu Interdit",
+					"intro": "Les types de contenu suivants sont strictement interdits sur la Plateforme :",
+					"items": [
+						"Contenu sexuel, pornographique ou sexuellement explicite de toute nature",
+						"Contenu promouvant la violence, la haine, la discrimination ou le préjudice envers tout individu ou groupe",
+						"Contenu diffamatoire, calomnieux ou portant atteinte aux droits d'autrui",
+						"Contenu promouvant des activités ou substances illégales",
+						"Contenu exploitant, nuisant ou mettant en danger des mineurs de quelque manière que ce soit",
+						"Contenu trompeur, frauduleux ou conçu pour induire les utilisateurs en erreur"
+					]
+				},
+				"enforcement": {
+					"title": "6.3. Application et Conséquences",
+					"text": "EventMaple se réserve le droit, à sa seule discrétion, de supprimer tout événement ou contenu violant ces conditions sans préavis. Les utilisateurs publiant du contenu interdit peuvent faire face à une suspension ou résiliation immédiate et permanente de leur compte. Dans les cas de violations graves, EventMaple peut signaler les informations de l'utilisateur aux autorités compétentes. En utilisant cette Plateforme, vous reconnaissez que ces mesures d'application sont nécessaires pour maintenir un environnement communautaire sûr et respectueux."
+				}
+			},
 			"ip": {
-				"title": "6. Propriété Intellectuelle",
+				"title": "7. Propriété Intellectuelle",
 				"text1": "Tout le contenu de la Plateforme, y compris, mais sans s'y limiter, le texte, les graphiques, les logos, les icônes, les images, les clips audio, les téléchargements numériques et les compilations de données, est la propriété d'EventMaple ou de ses fournisseurs de contenu et est protégé par les lois internationales sur le droit d'auteur.",
 				"text2": "Les informations sur des événements spécifiques peuvent être la propriété des organisateurs respectifs et sont affichées à titre informatif."
 			},
 			"liability": {
-				"title": "7. Limitation de Responsabilité",
+				"title": "8. Limitation de Responsabilité",
 				"intro": "EventMaple est fourni en tant que projet personnel sans garantie d'aucune sorte. Dans toute la mesure permise par la loi applicable :",
 				"items": [
 					"Nous ne garantissons pas que le Service sera ininterrompu, opportun, sécurisé ou exempt d'erreurs",
@@ -272,27 +301,27 @@
 				"text": "L'utilisateur est responsable de vérifier directement auprès des organisateurs d'événements toute information critique avant de prendre des décisions basées sur les informations affichées sur la Plateforme."
 			},
 			"modifications": {
-				"title": "8. Modifications du Service",
+				"title": "9. Modifications du Service",
 				"text1": "Nous nous réservons le droit de modifier, suspendre ou interrompre le Service (ou toute partie de celui-ci) à tout moment, avec ou sans préavis. Nous ne serons pas responsables envers vous ou des tiers pour toute modification, suspension ou interruption du Service.",
 				"text2": "En tant que projet personnel, EventMaple peut connaître des périodes d'inactivité ou des changements importants dans ses fonctionnalités sans préavis."
 			},
 			"termination": {
-				"title": "9. Résiliation",
+				"title": "10. Résiliation",
 				"text1": "Nous pouvons résilier ou suspendre votre accès à la Plateforme immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris, sans limitation, si vous enfreignez ces Conditions.",
 				"text2": "Vous pouvez fermer votre compte à tout moment en nous contactant ou en supprimant votre profil depuis les paramètres de votre compte. Lors de la résiliation, votre droit d'utiliser le Service cessera immédiatement."
 			},
 			"law": {
-				"title": "10. Droit Applicable et Juridiction",
+				"title": "11. Loi Applicable et Juridiction",
 				"text1": "Ces Conditions seront régies et interprétées conformément aux lois applicables, sans tenir compte de ses dispositions relatives aux conflits de lois.",
 				"text2": "Tout litige lié à ces Conditions ou à l'utilisation de la Plateforme sera résolu par une négociation de bonne foi entre les parties."
 			},
 			"changes": {
-				"title": "11. Modifications des Conditions",
+				"title": "12. Modifications des Conditions",
 				"text1": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Lorsque nous apportons des modifications, nous mettrons à jour la date de \"dernière mise à jour\" en haut de cette page.",
 				"text2": "Votre utilisation continue de la Plateforme après tout changement constitue votre acceptation des nouvelles Conditions. Nous vous recommandons de consulter régulièrement ces Conditions pour rester informé de toute mise à jour."
 			},
 			"contact": {
-				"title": "12. Informations de Contact",
+				"title": "13. Informations de Contact",
 				"intro": "Si vous avez des questions, des commentaires ou des préoccupations concernant ces Conditions Générales, vous pouvez nous contacter via :",
 				"email": "E-mail :"
 			}

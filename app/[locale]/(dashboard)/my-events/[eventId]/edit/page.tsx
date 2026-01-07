@@ -1,10 +1,11 @@
-import { getLocale, getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getCategories, getEventById } from "@/lib/actions/events";
-import { EventFormClient } from "@/components/my-events/event-form-client";
+import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHeader } from "@/components/events/events-header";
+import { EventFormClient } from "@/components/my-events/event-form-client";
+import { getCategories, getEventById } from "@/lib/actions/events";
 import { createClient } from "@/lib/supabase/server";
+import { formatDateTimeForTimezone } from "@/lib/utils/date";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations("MyEvents.Edit");
@@ -24,8 +25,10 @@ interface EditEventPageProps {
 export default async function EditEventPage({ params }: EditEventPageProps) {
 	// Check authentication - redirect to login if not authenticated
 	const supabase = await createClient();
-	const { data: { user } } = await supabase.auth.getUser();
-	
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
 	if (!user) {
 		redirect("/login");
 	}
@@ -48,13 +51,17 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
 		notFound();
 	}
 
+	// Convert UTC datetime from Supabase to the event's timezone for editing
+	// This ensures the user sees the same time they originally entered
+	const eventTimezone = event.timezone || "UTC";
+
 	const initialData = {
 		id: event.id,
 		name: event.name,
 		description: event.description || "",
-		start_at: event.start_at || "",
-		end_at: event.end_at || "",
-		timezone: event.timezone,
+		start_at: formatDateTimeForTimezone(event.start_at, eventTimezone),
+		end_at: formatDateTimeForTimezone(event.end_at, eventTimezone),
+		timezone: eventTimezone,
 		country_code: event.country_code || "",
 		location: event.location || "",
 		image_url: event.image_url || "",
