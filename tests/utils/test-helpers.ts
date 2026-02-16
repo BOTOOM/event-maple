@@ -243,6 +243,38 @@ export async function login(page: Page, email: string, password: string): Promis
 }
 
 /**
+ * Login using credentials provided through Playwright env variables.
+ * Automatically skips the current test when credentials are not available.
+ */
+export async function loginWithEnvCredentials(
+	page: Page,
+	locale: string = "en",
+): Promise<boolean> {
+	const email = process.env.PW_USER;
+	const password = process.env.PW_PSS;
+
+	if (!email || !password) {
+		return false;
+	}
+
+	await page.goto(`/${locale}/login`);
+	await page.fill('input[type="email"]', email);
+	await page.fill('input[type="password"]', password);
+	await page.click('button[type="submit"]');
+	await page.waitForURL(/events|my-events/, { timeout: 10000 });
+
+	return true;
+}
+
+/**
+ * Open create event page and wait until main network activity is complete.
+ */
+export async function openCreateEventPage(page: Page, locale: string = "en"): Promise<void> {
+	await page.goto(`/${locale}/my-events/create`);
+	await page.waitForLoadState("networkidle");
+}
+
+/**
  * Fill registration form
  */
 export async function fillRegistrationForm(

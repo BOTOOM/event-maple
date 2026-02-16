@@ -11,6 +11,108 @@ import {
 } from "@/lib/types/event";
 
 const EVENTS_PER_PAGE = 9;
+const NOT_AUTHENTICATED_ERROR = "Not authenticated";
+
+const EVENT_WITH_CATEGORY_SELECT = `
+			*,
+			event_categories (
+				id,
+				slug,
+				is_system,
+				is_active,
+				sort_order,
+				created_at,
+				event_category_translations!inner (
+					name,
+					description
+				)
+			)
+		`;
+
+function buildEmptyPaginatedEvents(page: number): PaginatedEvents {
+	return {
+		events: [],
+		total: 0,
+		page,
+		limit: EVENTS_PER_PAGE,
+		totalPages: 0,
+	};
+}
+
+async function getAuthenticatedContext() {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
+	return { supabase, user };
+}
+
+async function userOwnsEvent(
+	supabase: Awaited<ReturnType<typeof createClient>>,
+	eventId: number,
+	userId: string,
+) {
+	const { data: existingEvent } = await supabase
+		.from("events")
+		.select("created_by")
+		.eq("id", eventId)
+		.single();
+
+	return !!existingEvent && existingEvent.created_by === userId;
+}
+
+function mapEventCategory(rawCategory: any) {
+	if (!rawCategory) {
+		return null;
+	}
+
+	return {
+		id: rawCategory.id,
+		slug: rawCategory.slug,
+		is_system: rawCategory.is_system,
+		is_active: rawCategory.is_active,
+		sort_order: rawCategory.sort_order,
+		created_at: rawCategory.created_at,
+		name: rawCategory.event_category_translations?.[0]?.name || "",
+		description: rawCategory.event_category_translations?.[0]?.description || null,
+	};
+}
+
+function mapEventWithDetails(
+	rawEvent: any,
+	userId?: string,
+	forceOwner: boolean = false,
+): EventWithDetails {
+	return {
+		...rawEvent,
+		category: mapEventCategory(rawEvent.event_categories),
+		is_owner: forceOwner || (!!userId && userId === rawEvent.created_by),
+	};
+}
+
+function buildEventWritePayload(formData: Partial<EventFormData>) {
+	const payload: Record<string, unknown> = {};
+
+	if (formData.name !== undefined) payload.name = formData.name;
+	if (formData.description !== undefined) payload.description = formData.description;
+	if (formData.start_at !== undefined) {
+		payload.start_at = formData.start_at;
+		payload.start_date = formData.start_at.split("T")[0];
+	}
+	if (formData.end_at !== undefined) {
+		payload.end_at = formData.end_at;
+		payload.end_date = formData.end_at.split("T")[0];
+	}
+	if (formData.timezone !== undefined) payload.timezone = formData.timezone;
+	if (formData.country_code !== undefined) payload.country_code = formData.country_code || null;
+	if (formData.location !== undefined) payload.location = formData.location;
+	if (formData.image_url !== undefined) payload.image_url = formData.image_url || null;
+	if (formData.category_id !== undefined) payload.category_id = formData.category_id || null;
+	if (formData.status !== undefined) payload.status = formData.status;
+
+	return payload;
+}
 
 // Get categories with translations for a specific locale
 export async function getCategories(locale: string): Promise<EventCategoryWithTranslation[]> {
@@ -63,20 +165,10 @@ export async function getMyEvents(
 	search: string = "",
 	locale: string = "en",
 ): Promise<PaginatedEvents> {
-	const supabase = await createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	const { supabase, user } = await getAuthenticatedContext();
 
 	if (!user) {
-		return {
-			events: [],
-			total: 0,
-			page,
-			limit: EVENTS_PER_PAGE,
-			totalPages: 0,
-		};
+		return buildEmptyPaginatedEvents(page);
 	}
 
 	const offset = (page - 1) * EVENTS_PER_PAGE;
@@ -84,24 +176,7 @@ export async function getMyEvents(
 
 	let query = supabase
 		.from("events")
-		.select(
-			`
-			*,
-			event_categories (
-				id,
-				slug,
-				is_system,
-				is_active,
-				sort_order,
-				created_at,
-				event_category_translations!inner (
-					name,
-					description
-				)
-			)
-		`,
-			{ count: "exact" },
-		)
+		.select(EVENT_WITH_CATEGORY_SELECT, { count: "exact" })
 		.eq("created_by", user.id)
 		.eq("event_categories.event_category_translations.locale", locale);
 
@@ -128,35 +203,10 @@ export async function getMyEvents(
 
 	if (error) {
 		console.error("Error fetching my events:", error);
-		return {
-			events: [],
-			total: 0,
-			page,
-			limit: EVENTS_PER_PAGE,
-			totalPages: 0,
-		};
+		return buildEmptyPaginatedEvents(page);
 	}
 
-	const events: EventWithDetails[] = (data || []).map((event) => {
-		const category = event.event_categories
-			? {
-					id: event.event_categories.id,
-					slug: event.event_categories.slug,
-					is_system: event.event_categories.is_system,
-					is_active: event.event_categories.is_active,
-					sort_order: event.event_categories.sort_order,
-					created_at: event.event_categories.created_at,
-					name: event.event_categories.event_category_translations?.[0]?.name || "",
-					description: event.event_categories.event_category_translations?.[0]?.description || null,
-				}
-			: null;
-
-		return {
-			...event,
-			category,
-			is_owner: true,
-		};
-	});
+	const events: EventWithDetails[] = (data || []).map((event) => mapEventWithDetails(event, user.id, true));
 
 	const total = count || 0;
 
@@ -174,31 +224,11 @@ export async function getEventById(
 	eventId: number,
 	locale: string = "en",
 ): Promise<EventWithDetails | null> {
-	const supabase = await createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	const { supabase, user } = await getAuthenticatedContext();
 
 	const { data, error } = await supabase
 		.from("events")
-		.select(
-			`
-			*,
-			event_categories (
-				id,
-				slug,
-				is_system,
-				is_active,
-				sort_order,
-				created_at,
-				event_category_translations!inner (
-					name,
-					description
-				)
-			)
-		`,
-		)
+		.select(EVENT_WITH_CATEGORY_SELECT)
 		.eq("id", eventId)
 		.eq("event_categories.event_category_translations.locale", locale)
 		.single();
@@ -208,55 +238,25 @@ export async function getEventById(
 		return null;
 	}
 
-	const category = data.event_categories
-		? {
-				id: data.event_categories.id,
-				slug: data.event_categories.slug,
-				is_system: data.event_categories.is_system,
-				is_active: data.event_categories.is_active,
-				sort_order: data.event_categories.sort_order,
-				created_at: data.event_categories.created_at,
-				name: data.event_categories.event_category_translations?.[0]?.name || "",
-				description: data.event_categories.event_category_translations?.[0]?.description || null,
-			}
-		: null;
-
-	return {
-		...data,
-		category,
-		is_owner: user?.id === data.created_by,
-	};
+	return mapEventWithDetails(data, user?.id);
 }
 
 // Create a new event
 export async function createEvent(
 	formData: EventFormData,
 ): Promise<{ success: boolean; eventId?: number; error?: string }> {
-	const supabase = await createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	const { supabase, user } = await getAuthenticatedContext();
 
 	if (!user) {
-		return { success: false, error: "Not authenticated" };
+		return { success: false, error: NOT_AUTHENTICATED_ERROR };
 	}
+
+	const eventData = buildEventWritePayload(formData);
 
 	const { data, error } = await supabase
 		.from("events")
 		.insert({
-			name: formData.name,
-			description: formData.description,
-			start_at: formData.start_at,
-			end_at: formData.end_at,
-			start_date: formData.start_at.split("T")[0],
-			end_date: formData.end_at.split("T")[0],
-			timezone: formData.timezone,
-			country_code: formData.country_code || null,
-			location: formData.location,
-			image_url: formData.image_url || null,
-			category_id: formData.category_id || null,
-			status: formData.status,
+			...eventData,
 			created_by: user.id,
 		})
 		.select("id")
@@ -277,45 +277,18 @@ export async function updateEvent(
 	eventId: number,
 	formData: Partial<EventFormData>,
 ): Promise<{ success: boolean; error?: string }> {
-	const supabase = await createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	const { supabase, user } = await getAuthenticatedContext();
 
 	if (!user) {
-		return { success: false, error: "Not authenticated" };
+		return { success: false, error: NOT_AUTHENTICATED_ERROR };
 	}
 
 	// First check if user owns this event
-	const { data: existingEvent } = await supabase
-		.from("events")
-		.select("created_by")
-		.eq("id", eventId)
-		.single();
-
-	if (!existingEvent || existingEvent.created_by !== user.id) {
+	if (!(await userOwnsEvent(supabase, eventId, user.id))) {
 		return { success: false, error: "Not authorized" };
 	}
 
-	const updateData: Record<string, unknown> = {};
-
-	if (formData.name !== undefined) updateData.name = formData.name;
-	if (formData.description !== undefined) updateData.description = formData.description;
-	if (formData.start_at !== undefined) {
-		updateData.start_at = formData.start_at;
-		updateData.start_date = formData.start_at.split("T")[0];
-	}
-	if (formData.end_at !== undefined) {
-		updateData.end_at = formData.end_at;
-		updateData.end_date = formData.end_at.split("T")[0];
-	}
-	if (formData.timezone !== undefined) updateData.timezone = formData.timezone;
-	if (formData.country_code !== undefined) updateData.country_code = formData.country_code || null;
-	if (formData.location !== undefined) updateData.location = formData.location;
-	if (formData.image_url !== undefined) updateData.image_url = formData.image_url || null;
-	if (formData.category_id !== undefined) updateData.category_id = formData.category_id || null;
-	if (formData.status !== undefined) updateData.status = formData.status;
+	const updateData = buildEventWritePayload(formData);
 
 	const { error } = await supabase.from("events").update(updateData).eq("id", eventId);
 
@@ -332,24 +305,14 @@ export async function updateEvent(
 
 // Delete an event
 export async function deleteEvent(eventId: number): Promise<{ success: boolean; error?: string }> {
-	const supabase = await createClient();
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
+	const { supabase, user } = await getAuthenticatedContext();
 
 	if (!user) {
-		return { success: false, error: "Not authenticated" };
+		return { success: false, error: NOT_AUTHENTICATED_ERROR };
 	}
 
 	// First check if user owns this event
-	const { data: existingEvent } = await supabase
-		.from("events")
-		.select("created_by")
-		.eq("id", eventId)
-		.single();
-
-	if (!existingEvent || existingEvent.created_by !== user.id) {
+	if (!(await userOwnsEvent(supabase, eventId, user.id))) {
 		return { success: false, error: "Not authorized" };
 	}
 

@@ -16,6 +16,7 @@ type CarouselProps = {
 	plugins?: CarouselPlugin;
 	orientation?: "horizontal" | "vertical";
 	setApi?: (api: CarouselApi) => void;
+	ariaLabel?: string;
 };
 
 type CarouselContextProps = {
@@ -42,7 +43,20 @@ function useCarousel() {
 const Carousel = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & CarouselProps
->(({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }, ref) => {
+>(
+	(
+		{
+			orientation = "horizontal",
+			opts,
+			setApi,
+			plugins,
+			className,
+			children,
+			ariaLabel = "carousel",
+			...props
+		},
+		ref,
+	) => {
 	const [carouselRef, api] = useEmblaCarousel(
 		{
 			...opts,
@@ -126,14 +140,15 @@ const Carousel = React.forwardRef<
 				onKeyDownCapture={handleKeyDown}
 				className={cn("relative", className)}
 				aria-roledescription="carousel"
-				aria-label="Image carousel"
+				aria-label={ariaLabel}
 				{...props}
 			>
 				{children}
 			</section>
 		</CarouselContext.Provider>
 	);
-});
+},
+);
 Carousel.displayName = "Carousel";
 
 const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

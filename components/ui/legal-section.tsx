@@ -15,6 +15,27 @@ export function LegalSection({ title, children, className = "" }: LegalSectionPr
 	);
 }
 
+interface LegalTwoParagraphSectionProps {
+	readonly title: string;
+	readonly firstParagraph: string;
+	readonly secondParagraph: string;
+	readonly className?: string;
+}
+
+export function LegalTwoParagraphSection({
+	title,
+	firstParagraph,
+	secondParagraph,
+	className,
+}: LegalTwoParagraphSectionProps) {
+	return (
+		<LegalSection title={title} className={className}>
+			<p>{firstParagraph}</p>
+			<p>{secondParagraph}</p>
+		</LegalSection>
+	);
+}
+
 interface LegalListProps {
 	readonly items: readonly string[];
 	readonly useHtml?: boolean;

@@ -8,6 +8,7 @@ import {
 	LegalFooterSection,
 	LegalList,
 	LegalSection,
+	LegalTwoParagraphSection,
 } from "@/components/ui/legal-section";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -32,10 +33,11 @@ export default function TermsPage() {
 			footer={{ backText: t("footer.back") }}
 		>
 			{/* 1. Aceptación de los Términos */}
-			<LegalSection title={t("sections.acceptance.title")}>
-				<p>{t("sections.acceptance.text1")}</p>
-				<p>{t("sections.acceptance.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.acceptance.title")}
+				firstParagraph={t("sections.acceptance.text1")}
+				secondParagraph={t("sections.acceptance.text2")}
+			/>
 
 			{/* 2. Descripción del Servicio */}
 			<LegalSection title={t("sections.description.title")}>
@@ -97,10 +99,11 @@ export default function TermsPage() {
 			</LegalSection>
 
 			{/* 7. Propiedad Intelectual */}
-			<LegalSection title={t("sections.ip.title")}>
-				<p>{t("sections.ip.text1")}</p>
-				<p>{t("sections.ip.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.ip.title")}
+				firstParagraph={t("sections.ip.text1")}
+				secondParagraph={t("sections.ip.text2")}
+			/>
 
 			{/* 8. Limitación de Responsabilidad */}
 			<LegalSection title={t("sections.liability.title")}>
@@ -110,28 +113,32 @@ export default function TermsPage() {
 			</LegalSection>
 
 			{/* 9. Modificaciones del Servicio */}
-			<LegalSection title={t("sections.modifications.title")}>
-				<p>{t("sections.modifications.text1")}</p>
-				<p>{t("sections.modifications.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.modifications.title")}
+				firstParagraph={t("sections.modifications.text1")}
+				secondParagraph={t("sections.modifications.text2")}
+			/>
 
 			{/* 10. Terminación */}
-			<LegalSection title={t("sections.termination.title")}>
-				<p>{t("sections.termination.text1")}</p>
-				<p>{t("sections.termination.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.termination.title")}
+				firstParagraph={t("sections.termination.text1")}
+				secondParagraph={t("sections.termination.text2")}
+			/>
 
 			{/* 11. Ley Aplicable */}
-			<LegalSection title={t("sections.law.title")}>
-				<p>{t("sections.law.text1")}</p>
-				<p>{t("sections.law.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.law.title")}
+				firstParagraph={t("sections.law.text1")}
+				secondParagraph={t("sections.law.text2")}
+			/>
 
 			{/* 12. Cambios a los Términos */}
-			<LegalSection title={t("sections.changes.title")}>
-				<p>{t("sections.changes.text1")}</p>
-				<p>{t("sections.changes.text2")}</p>
-			</LegalSection>
+			<LegalTwoParagraphSection
+				title={t("sections.changes.title")}
+				firstParagraph={t("sections.changes.text1")}
+				secondParagraph={t("sections.changes.text2")}
+			/>
 
 			{/* 13. Contacto */}
 			<LegalSection title={t("sections.contact.title")}>

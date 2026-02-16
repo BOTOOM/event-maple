@@ -1,4 +1,20 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+import { enablePastEventsFilter, loginWithEnvCredentials, openCreateEventPage } from "./utils/test-helpers";
+
+async function openFirstEditableEvent(page: Page) {
+	await page.goto("/en/my-events");
+	await page.waitForLoadState("networkidle");
+
+	const editButton = page.locator('a[href*="/edit"], button:has-text("Continue Editing")').first();
+	if (!(await editButton.isVisible({ timeout: 5000 }))) {
+		return false;
+	}
+
+	await editButton.click();
+	await page.waitForURL(/my-events\/\d+\/edit/);
+	await page.waitForLoadState("networkidle");
+	return true;
+}
 
 /**
  * Tests for timezone handling in event creation and editing
@@ -13,24 +29,13 @@ import { expect, test } from "@playwright/test";
 test.describe("Timezone Handling", () => {
 	test.describe("Event Creation - Timezone Auto-detection", () => {
 		test.beforeEach(async ({ page }) => {
-			const email = process.env.PW_USER;
-			const password = process.env.PW_PSS;
-
-			if (!email || !password) {
+			if (!(await loginWithEnvCredentials(page))) {
 				test.skip();
-				return;
 			}
-
-			await page.goto("/en/login");
-			await page.fill('input[type="email"]', email);
-			await page.fill('input[type="password"]', password);
-			await page.click('button[type="submit"]');
-			await page.waitForURL(/events|my-events/, { timeout: 10000 });
 		});
 
 		test("should auto-detect browser timezone when creating a new event", async ({ page }) => {
-			await page.goto("/en/my-events/create");
-			await page.waitForLoadState("networkidle");
+			await openCreateEventPage(page);
 
 			// The timezone selector should have a value (auto-detected from browser)
 			// Look for the timezone combobox button
@@ -51,35 +56,13 @@ test.describe("Timezone Handling", () => {
 
 	test.describe("Event Editing - Timezone Conversion", () => {
 		test.beforeEach(async ({ page }) => {
-			const email = process.env.PW_USER;
-			const password = process.env.PW_PSS;
-
-			if (!email || !password) {
+			if (!(await loginWithEnvCredentials(page))) {
 				test.skip();
-				return;
 			}
-
-			await page.goto("/en/login");
-			await page.fill('input[type="email"]', email);
-			await page.fill('input[type="password"]', password);
-			await page.click('button[type="submit"]');
-			await page.waitForURL(/events|my-events/, { timeout: 10000 });
 		});
 
 		test("should load event dates correctly when editing", async ({ page }) => {
-			// Navigate to my-events
-			await page.goto("/en/my-events");
-			await page.waitForLoadState("networkidle");
-
-			// Find and click on edit for the first event
-			const editButton = page
-				.locator('a[href*="/edit"], button:has-text("Continue Editing")')
-				.first();
-
-			if (await editButton.isVisible({ timeout: 5000 })) {
-				await editButton.click();
-				await page.waitForURL(/my-events\/\d+\/edit/);
-				await page.waitForLoadState("networkidle");
+			if (await openFirstEditableEvent(page)) {
 
 				// Check that the start date input has a value
 				const startDateInput = page.locator('input[type="datetime-local"]').first();
@@ -98,17 +81,7 @@ test.describe("Timezone Handling", () => {
 		});
 
 		test("should preserve timezone when editing and saving", async ({ page }) => {
-			await page.goto("/en/my-events");
-			await page.waitForLoadState("networkidle");
-
-			const editButton = page
-				.locator('a[href*="/edit"], button:has-text("Continue Editing")')
-				.first();
-
-			if (await editButton.isVisible({ timeout: 5000 })) {
-				await editButton.click();
-				await page.waitForURL(/my-events\/\d+\/edit/);
-				await page.waitForLoadState("networkidle");
+			if (await openFirstEditableEvent(page)) {
 
 				// Get the current timezone value
 				const timezoneButton = page.locator(
@@ -133,15 +106,9 @@ test.describe("Timezone Handling", () => {
 				await page.waitForURL(/my-events(?!.*edit)/, { timeout: 10000 });
 
 				// Go back to edit the same event
-				await page.goto("/en/my-events");
-				await page.waitForLoadState("networkidle");
-
-				const editButtonAgain = page
-					.locator('a[href*="/edit"], button:has-text("Continue Editing")')
-					.first();
-				await editButtonAgain.click();
-				await page.waitForURL(/my-events\/\d+\/edit/);
-				await page.waitForLoadState("networkidle");
+				if (!(await openFirstEditableEvent(page))) {
+					return;
+				}
 
 				// Verify the timezone is still the same
 				const newTimezoneButton = page.locator(
@@ -172,14 +139,7 @@ test.describe("Timezone Handling", () => {
 			await page.waitForLoadState("networkidle");
 
 			// Enable past events to see more events
-			const toggle = page.locator("#show-past-events");
-			if (await toggle.isVisible()) {
-				const isChecked = await toggle.isChecked();
-				if (!isChecked) {
-					await toggle.click();
-					await page.waitForTimeout(1000);
-				}
-			}
+			await enablePastEventsFilter(page);
 
 			// Wait for events to load
 			await page.waitForTimeout(1000);
@@ -205,19 +165,9 @@ test.describe("Timezone Handling", () => {
 		test("should display event dates in user's browser timezone on my-events page", async ({
 			page,
 		}) => {
-			const email = process.env.PW_USER;
-			const password = process.env.PW_PSS;
-
-			if (!email || !password) {
+			if (!(await loginWithEnvCredentials(page))) {
 				test.skip();
-				return;
 			}
-
-			await page.goto("/en/login");
-			await page.fill('input[type="email"]', email);
-			await page.fill('input[type="password"]', password);
-			await page.click('button[type="submit"]');
-			await page.waitForURL(/events|my-events/, { timeout: 10000 });
 
 			await page.goto("/en/my-events");
 			await page.waitForLoadState("networkidle");

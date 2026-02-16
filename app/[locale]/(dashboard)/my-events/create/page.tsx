@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHeader } from "@/components/events/events-header";
 import { EventFormClient } from "@/components/my-events/event-form-client";
+import { MyEventsFormPageHeader } from "@/components/my-events/my-events-form-page-header";
 import { getCategories } from "@/lib/actions/events";
 import { requireAuthenticatedUser } from "@/lib/supabase/server";
 
@@ -25,18 +26,12 @@ export default async function CreateEventPage() {
 		<div className="min-h-screen bg-gray-50">
 			<EventsHeader />
 			<div className="container mx-auto px-4 py-8">
-				{/* Breadcrumb */}
-				<nav className="text-sm text-gray-500 mb-4">
-					<span>{t("breadcrumb.myEvents")}</span>
-					<span className="mx-2">›</span>
-					<span className="text-gray-900">{t("breadcrumb.create")}</span>
-				</nav>
-
-				{/* Header */}
-				<div className="mb-8">
-					<h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
-					<p className="text-gray-600 mt-1">{t("subtitle")}</p>
-				</div>
+				<MyEventsFormPageHeader
+					myEventsLabel={t("breadcrumb.myEvents")}
+					breadcrumbAction={t("breadcrumb.create")}
+					title={t("title")}
+					subtitle={t("subtitle")}
+				/>
 
 				<EventFormClient categories={categories} locale={locale} mode="create" />
 			</div>

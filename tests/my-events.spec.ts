@@ -1,29 +1,7 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { loginWithEnvCredentials, openCreateEventPage } from "./utils/test-helpers";
 
 const locales = ["en", "es", "pt", "fr"];
-
-async function loginWithEnvCredentials(page: Page, locale: string = "en"): Promise<boolean> {
-	const email = process.env.PW_USER;
-	const password = process.env.PW_PSS;
-
-	if (!email || !password) {
-		test.skip();
-		return false;
-	}
-
-	await page.goto(`/${locale}/login`);
-	await page.fill('input[type="email"]', email);
-	await page.fill('input[type="password"]', password);
-	await page.click('button[type="submit"]');
-	await page.waitForURL(/events|my-events/, { timeout: 10000 });
-
-	return true;
-}
-
-async function openCreateEventPage(page: Page) {
-	await page.goto("/en/my-events/create");
-	await page.waitForLoadState("networkidle");
-}
 
 test.describe("My Events Page", () => {
 	test.describe("Authentication Required", () => {
@@ -39,7 +17,9 @@ test.describe("My Events Page", () => {
 
 	test.describe("Authenticated User", () => {
 		test.beforeEach(async ({ page }) => {
-			await loginWithEnvCredentials(page);
+			if (!(await loginWithEnvCredentials(page))) {
+				test.skip();
+			}
 		});
 
 		test("should load My Events page", async ({ page }) => {
@@ -114,7 +94,9 @@ test.describe("Create Event Page", () => {
 
 	test.describe("Authenticated User", () => {
 		test.beforeEach(async ({ page }) => {
-			await loginWithEnvCredentials(page);
+			if (!(await loginWithEnvCredentials(page))) {
+				test.skip();
+			}
 		});
 
 		test("should load Create Event page", async ({ page }) => {
