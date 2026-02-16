@@ -1,0 +1,60 @@
+import { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
+import { EventsHeader } from "@/components/events/events-header";
+import { MyEventsClient } from "@/components/my-events/my-events-client";
+import { getMyEvents } from "@/lib/actions/events";
+import { requireAuthenticatedUser } from "@/lib/supabase/server";
+
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations("MyEvents");
+
+	return {
+		title: t("pageTitle"),
+		description: t("pageDescription"),
+	};
+}
+
+interface MyEventsPageProps {
+	readonly searchParams: Promise<{
+		page?: string;
+		filter?: string;
+		search?: string;
+	}>;
+}
+
+export default async function MyEventsPage({ searchParams }: MyEventsPageProps) {
+	await requireAuthenticatedUser();
+
+	const params = await searchParams;
+	const locale = await getLocale();
+	const t = await getTranslations("MyEvents");
+
+	const page = Number.parseInt(params.page || "1", 10);
+	const filter = (params.filter as "all" | "upcoming" | "past" | "draft") || "all";
+	const search = params.search || "";
+
+	const { events, total, totalPages } = await getMyEvents(page, filter, search, locale);
+
+	return (
+		<div className="min-h-screen bg-gray-50">
+			<EventsHeader />
+			<div className="container mx-auto px-4 py-8">
+				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+					<div>
+						<h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
+						<p className="text-gray-600 mt-1">{t("subtitle")}</p>
+					</div>
+				</div>
+
+				<MyEventsClient
+					initialEvents={events}
+					initialTotal={total}
+					initialPage={page}
+					initialFilter={filter}
+					initialSearch={search}
+					totalPages={totalPages}
+				/>
+			</div>
+		</div>
+	);
+}
