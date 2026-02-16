@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 interface MyEventsPageProps {
-	searchParams: Promise<{
+	readonly searchParams: Promise<{
 		page?: string;
 		filter?: string;
 		search?: string;

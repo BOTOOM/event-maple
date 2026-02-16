@@ -55,7 +55,7 @@ export function EventPreviewCard({
 		if (!timezone || timezone === "UTC") return "";
 
 		const tzParts = timezone.split("/");
-		const city = tzParts[tzParts.length - 1].replace(/_/g, " ");
+		const city = tzParts.at(-1)?.replaceAll("_", " ") ?? "";
 
 		try {
 			const offset = new Intl.DateTimeFormat("en-US", {

@@ -70,52 +70,62 @@ export function EventFormClient({
 		setFormData((prev) => ({ ...prev, [field]: value }));
 	};
 
-	const handleSubmit = async (status: EventStatus) => {
-		setIsSubmitting(true);
-
-		// Convert local datetime to UTC using the selected timezone
+	const buildSubmissionData = (status: EventStatus): EventFormData => {
 		const startAtUTC = formData.start_at
 			? convertLocalToUTC(formData.start_at, formData.timezone)
 			: "";
 		const endAtUTC = formData.end_at ? convertLocalToUTC(formData.end_at, formData.timezone) : "";
 
-		const dataToSubmit = {
+		return {
 			...formData,
 			start_at: startAtUTC,
 			end_at: endAtUTC,
 			status,
 		};
+	};
+
+	const submitEvent = async (dataToSubmit: EventFormData) => {
+		if (mode === "create") {
+			return createEvent(dataToSubmit);
+		}
+
+		if (!initialData?.id) {
+			return {
+				success: false,
+				error: t("unexpectedError"),
+			};
+		}
+
+		return updateEvent(initialData.id, dataToSubmit);
+	};
+
+	const getSuccessTitle = (status: EventStatus) => {
+		if (status === "published") {
+			return t("publishSuccess");
+		}
+
+		return mode === "create" ? t("saveSuccess") : t("updateSuccess");
+	};
+
+	const handleSubmit = async (status: EventStatus) => {
+		setIsSubmitting(true);
+		const dataToSubmit = buildSubmissionData(status);
 
 		try {
-			if (mode === "create") {
-				const result = await createEvent(dataToSubmit);
-				if (result.success) {
-					toast({
-						title: status === "published" ? t("publishSuccess") : t("saveSuccess"),
-					});
-					router.push("/my-events");
-				} else {
-					toast({
-						title: t("error"),
-						description: result.error,
-						variant: "destructive",
-					});
-				}
-			} else if (initialData?.id) {
-				const result = await updateEvent(initialData.id, dataToSubmit);
-				if (result.success) {
-					toast({
-						title: status === "published" ? t("publishSuccess") : t("updateSuccess"),
-					});
-					router.push("/my-events");
-				} else {
-					toast({
-						title: t("error"),
-						description: result.error,
-						variant: "destructive",
-					});
-				}
+			const result = await submitEvent(dataToSubmit);
+			if (result.success) {
+				toast({
+					title: getSuccessTitle(status),
+				});
+				router.push("/my-events");
+				return;
 			}
+
+			toast({
+				title: t("error"),
+				description: result.error,
+				variant: "destructive",
+			});
 		} catch {
 			toast({
 				title: t("error"),

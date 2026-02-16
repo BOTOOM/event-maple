@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 interface EditEventPageProps {
-	params: Promise<{
+	readonly params: Promise<{
 		eventId: string;
 	}>;
 }
@@ -47,7 +47,7 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
 		getCategories(locale),
 	]);
 
-	if (!event || !event.is_owner) {
+	if (!event?.is_owner) {
 		notFound();
 	}
 

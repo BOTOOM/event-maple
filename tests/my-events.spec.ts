@@ -1,6 +1,29 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const locales = ["en", "es", "pt", "fr"];
+
+async function loginWithEnvCredentials(page: Page, locale: string = "en"): Promise<boolean> {
+	const email = process.env.PW_USER;
+	const password = process.env.PW_PSS;
+
+	if (!email || !password) {
+		test.skip();
+		return false;
+	}
+
+	await page.goto(`/${locale}/login`);
+	await page.fill('input[type="email"]', email);
+	await page.fill('input[type="password"]', password);
+	await page.click('button[type="submit"]');
+	await page.waitForURL(/events|my-events/, { timeout: 10000 });
+
+	return true;
+}
+
+async function openCreateEventPage(page: Page) {
+	await page.goto("/en/my-events/create");
+	await page.waitForLoadState("networkidle");
+}
 
 test.describe("My Events Page", () => {
 	test.describe("Authentication Required", () => {
@@ -16,22 +39,7 @@ test.describe("My Events Page", () => {
 
 	test.describe("Authenticated User", () => {
 		test.beforeEach(async ({ page }) => {
-			// Login before each test
-			const email = process.env.PW_USER;
-			const password = process.env.PW_PSS;
-
-			if (!email || !password) {
-				test.skip();
-				return;
-			}
-
-			await page.goto("/en/login");
-			await page.fill('input[type="email"]', email);
-			await page.fill('input[type="password"]', password);
-			await page.click('button[type="submit"]');
-
-			// Wait for navigation after login
-			await page.waitForURL(/events|my-events/, { timeout: 10000 });
+			await loginWithEnvCredentials(page);
 		});
 
 		test("should load My Events page", async ({ page }) => {
@@ -73,20 +81,9 @@ test.describe("My Events Page", () => {
 	test.describe("i18n - My Events Page", () => {
 		for (const locale of locales) {
 			test(`should load My Events page in ${locale}`, async ({ page }) => {
-				// Login first
-				const email = process.env.PW_USER;
-				const password = process.env.PW_PSS;
-
-				if (!email || !password) {
-					test.skip();
+				if (!(await loginWithEnvCredentials(page, locale))) {
 					return;
 				}
-
-				await page.goto(`/${locale}/login`);
-				await page.fill('input[type="email"]', email);
-				await page.fill('input[type="password"]', password);
-				await page.click('button[type="submit"]');
-				await page.waitForURL(/events|my-events/, { timeout: 10000 });
 
 				// Navigate to my-events
 				await page.goto(`/${locale}/my-events`);
@@ -117,22 +114,7 @@ test.describe("Create Event Page", () => {
 
 	test.describe("Authenticated User", () => {
 		test.beforeEach(async ({ page }) => {
-			// Login before each test
-			const email = process.env.PW_USER;
-			const password = process.env.PW_PSS;
-
-			if (!email || !password) {
-				test.skip();
-				return;
-			}
-
-			await page.goto("/en/login");
-			await page.fill('input[type="email"]', email);
-			await page.fill('input[type="password"]', password);
-			await page.click('button[type="submit"]');
-
-			// Wait for navigation after login
-			await page.waitForURL(/events|my-events/, { timeout: 10000 });
+			await loginWithEnvCredentials(page);
 		});
 
 		test("should load Create Event page", async ({ page }) => {
@@ -145,8 +127,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should have event form fields", async ({ page }) => {
-			await page.goto("/en/my-events/create");
-			await page.waitForLoadState("networkidle");
+			await openCreateEventPage(page);
 
 			// Check for form fields - use more flexible selectors
 			const nameInput = page.locator("input#name");
@@ -164,8 +145,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should have live preview section", async ({ page }) => {
-			await page.goto("/en/my-events/create");
-			await page.waitForLoadState("networkidle");
+			await openCreateEventPage(page);
 
 			// Check for preview section - look for the sticky preview container
 			// The preview has a red pulsing dot and preview text
@@ -178,8 +158,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should have country autocomplete field", async ({ page }) => {
-			await page.goto("/en/my-events/create");
-			await page.waitForLoadState("networkidle");
+			await openCreateEventPage(page);
 
 			// Look for the country autocomplete button (it's a combobox-style button)
 			const countryButton = page.locator(
@@ -189,8 +168,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should have timezone autocomplete field", async ({ page }) => {
-			await page.goto("/en/my-events/create");
-			await page.waitForLoadState("networkidle");
+			await openCreateEventPage(page);
 
 			// Look for the timezone autocomplete button - check for any timezone-related button
 			// The button may show "Select timezone" or already have a selected value like "UTC"
@@ -201,7 +179,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should have save and publish buttons", async ({ page }) => {
-			await page.goto("/en/my-events/create");
+			await openCreateEventPage(page);
 
 			// Check for action buttons
 			const saveButton = page.locator(
@@ -216,7 +194,7 @@ test.describe("Create Event Page", () => {
 		});
 
 		test("should update preview when typing event name", async ({ page }) => {
-			await page.goto("/en/my-events/create");
+			await openCreateEventPage(page);
 
 			const testEventName = "Test Event Name 2024";
 
@@ -233,20 +211,9 @@ test.describe("Create Event Page", () => {
 	test.describe("i18n - Create Event Page", () => {
 		for (const locale of locales) {
 			test(`should load Create Event page in ${locale}`, async ({ page }) => {
-				// Login first
-				const email = process.env.PW_USER;
-				const password = process.env.PW_PSS;
-
-				if (!email || !password) {
-					test.skip();
+				if (!(await loginWithEnvCredentials(page, locale))) {
 					return;
 				}
-
-				await page.goto(`/${locale}/login`);
-				await page.fill('input[type="email"]', email);
-				await page.fill('input[type="password"]', password);
-				await page.click('button[type="submit"]');
-				await page.waitForURL(/events|my-events/, { timeout: 10000 });
 
 				// Navigate to create page
 				await page.goto(`/${locale}/my-events/create`);

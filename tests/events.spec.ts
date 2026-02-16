@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
-	checkForUntranslatedKeys,
+	assertNoUntranslatedKeys,
 	enablePastEventsFilter,
 	LOCALES,
 	TEST_EVENT_NAME,
@@ -51,11 +51,7 @@ test.describe("Events Page", () => {
 			await expect(page.locator("body")).toBeVisible();
 
 			// Verify no untranslated keys
-			const untranslatedKeys = await checkForUntranslatedKeys(page);
-			expect(
-				untranslatedKeys,
-				`Found untranslated keys: ${untranslatedKeys.join(", ")}`,
-			).toHaveLength(0);
+			await assertNoUntranslatedKeys(page);
 		});
 
 		test("should display event content without errors", async ({ page }) => {
@@ -66,11 +62,7 @@ test.describe("Events Page", () => {
 			await expect(page.locator("body")).toBeVisible();
 
 			// Check for untranslated keys
-			const untranslatedKeys = await checkForUntranslatedKeys(page);
-			expect(
-				untranslatedKeys,
-				`Found untranslated keys: ${untranslatedKeys.join(", ")}`,
-			).toHaveLength(0);
+			await assertNoUntranslatedKeys(page);
 
 			// Verify no error state
 			const errorElement = page.locator("text=Something went wrong, text=Error");
@@ -93,11 +85,7 @@ test.describe("Events Page", () => {
 				await expect(page.locator("body")).toBeVisible();
 
 				// Check for untranslated keys
-				const untranslatedKeys = await checkForUntranslatedKeys(page);
-				expect(
-					untranslatedKeys,
-					`Found untranslated keys in ${locale}: ${untranslatedKeys.join(", ")}`,
-				).toHaveLength(0);
+				await assertNoUntranslatedKeys(page, locale);
 			});
 		}
 	});
@@ -180,7 +168,7 @@ test.describe("Event Detail Page - Date and Time Display", () => {
 		await page.waitForLoadState("networkidle");
 
 		// Find date display - events with full timestamp should show time
-		const dateDisplay = page.locator(".lg\\:col-span-2 span").first();
+		const dateDisplay = page.locator(String.raw`.lg\:col-span-2 span`).first();
 
 		if (await dateDisplay.isVisible({ timeout: 5000 })) {
 			const dateText = await dateDisplay.textContent();
@@ -330,11 +318,7 @@ test.describe("Event Agenda Navigation", () => {
 			await expect(page.locator("body")).toBeVisible();
 
 			// Check for untranslated keys
-			const untranslatedKeys = await checkForUntranslatedKeys(page);
-			expect(
-				untranslatedKeys,
-				`Found untranslated keys: ${untranslatedKeys.join(", ")}`,
-			).toHaveLength(0);
+			await assertNoUntranslatedKeys(page);
 		}
 	});
 
@@ -378,11 +362,7 @@ test.describe("Event Agenda Navigation", () => {
 			expect(page.url()).toContain("/events/1");
 
 			// Check for untranslated keys
-			const untranslatedKeys = await checkForUntranslatedKeys(page);
-			expect(
-				untranslatedKeys,
-				`Found untranslated keys: ${untranslatedKeys.join(", ")}`,
-			).toHaveLength(0);
+			await assertNoUntranslatedKeys(page);
 		}
 	});
 
@@ -395,11 +375,7 @@ test.describe("Event Agenda Navigation", () => {
 				await expect(page).toHaveURL(new RegExp(`/${locale}/events/1/agenda`));
 				await expect(page.locator("body")).toBeVisible();
 
-				const untranslatedKeys = await checkForUntranslatedKeys(page);
-				expect(
-					untranslatedKeys,
-					`Found untranslated keys in ${locale}: ${untranslatedKeys.join(", ")}`,
-				).toHaveLength(0);
+				await assertNoUntranslatedKeys(page, locale);
 			});
 
 			test(`should redirect to login or load my agenda page in ${locale}`, async ({ page }) => {
@@ -418,11 +394,7 @@ test.describe("Event Agenda Navigation", () => {
 				await expect(page.locator("body")).toBeVisible();
 
 				// Check for untranslated keys on whatever page we landed on
-				const untranslatedKeys = await checkForUntranslatedKeys(page);
-				expect(
-					untranslatedKeys,
-					`Found untranslated keys in ${locale}: ${untranslatedKeys.join(", ")}`,
-				).toHaveLength(0);
+				await assertNoUntranslatedKeys(page, locale);
 			});
 		}
 	});

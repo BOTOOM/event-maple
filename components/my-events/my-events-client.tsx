@@ -76,6 +76,59 @@ export function MyEventsClient({
 		updateSearchParams({ page: page.toString() });
 	};
 
+	const renderEventsContent = () => {
+		if (isPending) {
+			return (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{[1, 2, 3, 4, 5, 6].map((skeletonId) => (
+						<div
+							key={`skeleton-${skeletonId}`}
+							className="bg-gray-100 rounded-lg h-80 animate-pulse"
+						/>
+					))}
+				</div>
+			);
+		}
+
+		if (initialEvents.length === 0) {
+			return (
+				<div className="text-center py-16">
+					<div className="text-gray-400 mb-4">
+						<svg
+							className="mx-auto h-16 w-16"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={1.5}
+								d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+							/>
+						</svg>
+					</div>
+					<h3 className="text-lg font-medium text-gray-900 mb-2">{t("noEvents.title")}</h3>
+					<p className="text-gray-600 mb-6">{t("noEvents.description")}</p>
+					<Link href="/my-events/create">
+						<Button className="gap-2">
+							<Plus className="h-4 w-4" />
+							{t("createFirstEvent")}
+						</Button>
+					</Link>
+				</div>
+			);
+		}
+
+		return (
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{initialEvents.map((event) => (
+					<MyEventCard key={event.id} event={event} />
+				))}
+			</div>
+		);
+	};
+
 	return (
 		<div className="space-y-6">
 			{/* Search and Filters */}
@@ -128,48 +181,7 @@ export function MyEventsClient({
 			</div>
 
 			{/* Events Grid */}
-			{isPending ? (
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{[1, 2, 3, 4, 5, 6].map((skeletonId) => (
-						<div
-							key={`skeleton-${skeletonId}`}
-							className="bg-gray-100 rounded-lg h-80 animate-pulse"
-						/>
-					))}
-				</div>
-			) : initialEvents.length === 0 ? (
-				<div className="text-center py-16">
-					<div className="text-gray-400 mb-4">
-						<svg
-							className="mx-auto h-16 w-16"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={1.5}
-								d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-							/>
-						</svg>
-					</div>
-					<h3 className="text-lg font-medium text-gray-900 mb-2">{t("noEvents.title")}</h3>
-					<p className="text-gray-600 mb-6">{t("noEvents.description")}</p>
-					<Link href="/my-events/create">
-						<Button className="gap-2">
-							<Plus className="h-4 w-4" />
-							{t("createFirstEvent")}
-						</Button>
-					</Link>
-				</div>
-			) : (
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{initialEvents.map((event) => (
-						<MyEventCard key={event.id} event={event} />
-					))}
-				</div>
-			)}
+			{renderEventsContent()}
 
 			{/* Pagination */}
 			{totalPages > 1 && (
