@@ -112,6 +112,9 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale} className={inter.className} suppressHydrationWarning>
 			<body className="antialiased">
+				<a href="#main-content" className="skip-to-main">
+					Skip to main content
+				</a>
 				<NextIntlClientProvider messages={messages}>
 					<JsonLd />
 					<ServiceWorkerRegister />

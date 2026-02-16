@@ -115,7 +115,7 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 				onShowPastTalksChange={setShowPastTalks}
 			/>
 
-			<main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+			<main id="main-content" className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 				<div className="mb-6 space-y-4">
 					{/* Header with filter button */}
 					<div className="flex items-center justify-between gap-4">

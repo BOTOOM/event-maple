@@ -74,7 +74,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 	return (
 		<>
 			{/* MOBILE: Card completa clickeable */}
-			<div className="bg-card rounded-lg border border-border p-4 hover:border-primary/40 hover:shadow-sm transition-all sm:hidden">
+			<div className="bg-card rounded-lg border border-border p-4 hover:border-primary/40 hover:shadow-sm transition-all sm:hidden cursor-pointer">
 				<div className="flex items-start gap-3">
 					<Link
 						href={`/events/${eventId}/talks/${talk.id}`}
@@ -109,7 +109,7 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 			</div>
 
 			{/* DESKTOP: Título clickeable + Botón "Ver Más" */}
-			<div className="hidden sm:block bg-card rounded-lg border border-border p-5 hover:border-primary/40 hover:shadow-sm transition-all">
+			<div className="hidden sm:block bg-card rounded-lg border border-border p-5 hover:border-primary/40 hover:shadow-sm transition-all cursor-default">
 				<div className="flex items-start gap-3">
 					{/* Icon */}
 					<div className="p-2 bg-winter-100 rounded-lg flex-shrink-0">

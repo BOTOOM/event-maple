@@ -23,7 +23,7 @@ export default function ErrorPage({
 	return (
 		<div className="min-h-screen flex flex-col bg-surface">
 			<Navbar />
-			<main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+			<main id="main-content" className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
 				<div className="max-w-md w-full text-center bg-card p-8 rounded-2xl shadow-sm border border-border">
 					<div className="relative w-20 h-20 mx-auto mb-6 bg-red-50 rounded-full flex items-center justify-center">
 						<div className="relative w-10 h-10">
