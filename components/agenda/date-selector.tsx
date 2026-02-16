@@ -1,9 +1,12 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { enUS, es, fr, pt } from "date-fns/locale";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+
+const localeMap: Record<string, typeof es> = { es, en: enUS, fr, pt };
 
 interface DateSelectorProps {
 	selectedDate: string; // YYYY-MM-DD
@@ -12,6 +15,9 @@ interface DateSelectorProps {
 }
 
 export function DateSelector({ selectedDate, availableDates, onDateChange }: DateSelectorProps) {
+	const locale = useLocale();
+	const t = useTranslations("Events.DateSelector");
+	const dateFnsLocale = localeMap[locale] || es;
 	const currentIndex = availableDates.indexOf(selectedDate);
 	const canGoPrevious = currentIndex > 0;
 	const canGoNext = currentIndex < availableDates.length - 1;
@@ -31,8 +37,7 @@ export function DateSelector({ selectedDate, availableDates, onDateChange }: Dat
 	const formatDisplayDate = (dateStr: string) => {
 		try {
 			const date = parseISO(dateStr);
-			// "Martes, 24 de Octubre"
-			return format(date, "EEEE, d 'de' MMMM", { locale: es }).replace(/^./, (char) =>
+			return format(date, "EEEE, d MMMM", { locale: dateFnsLocale }).replace(/^./, (char) =>
 				char.toUpperCase(),
 			);
 		} catch {
@@ -47,14 +52,14 @@ export function DateSelector({ selectedDate, availableDates, onDateChange }: Dat
 				size="icon"
 				onClick={handlePrevious}
 				disabled={!canGoPrevious}
-				aria-label="Día anterior"
+				aria-label={t("previousDay")}
 			>
 				<ChevronLeft className="h-5 w-5" />
 			</Button>
 
 			<div className="flex items-center gap-2">
-				<CalendarIcon className="h-5 w-5 text-gray-600" />
-				<span className="text-lg font-semibold text-gray-900 min-w-[250px] text-center">
+				<CalendarIcon className="h-5 w-5 text-muted-foreground" />
+				<span className="text-lg font-semibold text-foreground min-w-[250px] text-center">
 					{formatDisplayDate(selectedDate)}
 				</span>
 			</div>
@@ -64,7 +69,7 @@ export function DateSelector({ selectedDate, availableDates, onDateChange }: Dat
 				size="icon"
 				onClick={handleNext}
 				disabled={!canGoNext}
-				aria-label="Día siguiente"
+				aria-label={t("nextDay")}
 			>
 				<ChevronRight className="h-5 w-5" />
 			</Button>

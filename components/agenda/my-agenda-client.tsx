@@ -94,8 +94,8 @@ export function MyAgendaClient({
 			)}
 
 			{/* Timeline */}
-			<div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
-				<h3 className="text-lg font-semibold text-gray-900 mb-4">{t("timeline.title")}</h3>
+			<div className="bg-card rounded-lg shadow-sm p-4 sm:p-6">
+				<h3 className="text-lg font-semibold text-foreground mb-4">{t("timeline.title")}</h3>
 				<div className="overflow-x-auto">
 					<div className="min-w-[600px]">
 						<TimelineView
@@ -111,8 +111,8 @@ export function MyAgendaClient({
 
 			{/* Dynamic Legend */}
 			{roomLegends.length > 0 && (
-				<div className="bg-white rounded-lg border border-gray-200 p-4">
-					<h4 className="text-sm font-semibold text-gray-900 mb-3">{t("legend.rooms")}</h4>
+				<div className="bg-card rounded-lg border border-border p-4">
+					<h4 className="text-sm font-semibold text-foreground mb-3">{t("legend.rooms")}</h4>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
 						{roomLegends.map((legend) => {
 							// Extract background color from colorClasses
@@ -131,7 +131,7 @@ export function MyAgendaClient({
 									<div
 										className={`w-4 h-4 rounded ${bgColor} border-2 ${borderColor} flex-shrink-0`}
 									></div>
-									<span className="text-gray-700 truncate">
+									<span className="text-foreground truncate">
 										{legend.room} {legend.count > 1 && `(${legend.count})`}
 									</span>
 								</div>

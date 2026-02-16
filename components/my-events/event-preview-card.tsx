@@ -72,9 +72,9 @@ export function EventPreviewCard({
 	};
 
 	return (
-		<div className="bg-white rounded-lg shadow-lg overflow-hidden border">
+		<div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gradient-to-br from-gray-600 to-gray-800">
+			<div className="relative w-full h-48 bg-gradient-to-br from-winter-700 to-winter-900">
 				{imageUrl ? (
 					<Image
 						src={imageUrl}
@@ -93,7 +93,7 @@ export function EventPreviewCard({
 
 				{/* Category Badge */}
 				{categoryName && (
-					<div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-gray-900/80 text-white text-xs font-medium">
+					<div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-winter-900/80 text-white text-xs font-medium">
 						{categoryName}
 					</div>
 				)}
@@ -102,24 +102,24 @@ export function EventPreviewCard({
 			{/* Content */}
 			<div className="p-4 space-y-3">
 				{/* Date */}
-				<div className="flex items-center gap-2 text-sm text-blue-600">
+				<div className="flex items-center gap-2 text-sm text-primary">
 					<Calendar className="h-4 w-4" />
 					<span>{formatDateRange()}</span>
 				</div>
 
 				{/* Title */}
-				<h3 className="text-xl font-bold text-gray-900 line-clamp-2">{name || t("untitled")}</h3>
+				<h3 className="text-xl font-bold text-foreground line-clamp-2">{name || t("untitled")}</h3>
 
 				{/* Location */}
 				{(location || timezone) && (
-					<div className="flex items-center gap-2 text-sm text-gray-600">
+					<div className="flex items-center gap-2 text-sm text-muted-foreground">
 						<MapPin className="h-4 w-4 flex-shrink-0" />
 						<span className="line-clamp-1">{location || getTimezoneDisplay()}</span>
 					</div>
 				)}
 
 				{/* Description */}
-				{description && <p className="text-sm text-gray-600 line-clamp-2">{description}</p>}
+				{description && <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>}
 
 				{/* Actions */}
 				<div className="flex items-center gap-2 pt-2">

@@ -119,7 +119,7 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 				<div className="mb-6 space-y-4">
 					{/* Header with filter button */}
 					<div className="flex items-center justify-between gap-4">
-						<h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+						<h2 className="text-xl sm:text-2xl font-bold text-foreground">
 							{showPastTalks ? t("header.allTalks") : t("header.futureTalks")}
 						</h2>
 						<Button
@@ -142,7 +142,7 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 
 					{/* Results count */}
 					{searchQuery && (
-						<p className="text-sm text-gray-600">
+						<p className="text-sm text-muted-foreground">
 							{t("results.count", { count: filteredTalks.length })}
 						</p>
 					)}
@@ -153,8 +153,8 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 					<div className="text-center py-12">
 						{searchQuery ? (
 							<div className="space-y-3">
-								<p className="text-lg font-medium text-gray-900">{t("results.notFound")}</p>
-								<p className="text-gray-600">{t("results.notFoundDesc")}</p>
+								<p className="text-lg font-medium text-foreground">{t("results.notFound")}</p>
+								<p className="text-muted-foreground">{t("results.notFoundDesc")}</p>
 							</div>
 						) : (
 							<EmptyTalks />
@@ -166,8 +166,8 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 							<div key={date}>
 								{/* Date Header */}
 								<div className="mb-4">
-									<h3 className="text-lg font-semibold text-gray-900">{formatDateHeader(date)}</h3>
-									<p className="text-sm text-gray-500">{getTimeRange(dateTalks)}</p>
+									<h3 className="text-lg font-semibold text-foreground">{formatDateHeader(date)}</h3>
+									<p className="text-sm text-muted-foreground">{getTimeRange(dateTalks)}</p>
 								</div>
 
 								{/* Talks for this date */}

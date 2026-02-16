@@ -148,7 +148,7 @@ export function RegisterForm() {
 			<div className="mb-6">
 				<Link
 					href="/"
-					className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+					className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
 				>
 					<ArrowLeft className="h-4 w-4" />
 					<span className="text-sm font-medium">{tCommon("backToHome")}</span>
@@ -163,11 +163,11 @@ export function RegisterForm() {
 			</div>
 
 			<div className="text-center mb-8">
-				<h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+				<h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
 					<span className="hidden md:inline">{t("title")}</span>
 					<span className="md:hidden">{t("titleMobile")}</span>
 				</h1>
-				<p className="text-gray-600">
+				<p className="text-muted-foreground">
 					<span className="hidden md:inline">{t("subtitle")}</span>
 					<span className="md:hidden">{t("subtitleMobile")}</span>
 				</p>
@@ -175,7 +175,7 @@ export function RegisterForm() {
 
 			<form onSubmit={handleRegister} className="space-y-5">
 				<div className="space-y-2">
-					<Label htmlFor="name" className="text-gray-900">
+					<Label htmlFor="name" className="text-foreground">
 						<span className="hidden md:inline">{t("name")}</span>
 						<span className="md:hidden">{t("nameMobile")}</span>
 					</Label>
@@ -192,7 +192,7 @@ export function RegisterForm() {
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="email" className="text-gray-900">
+					<Label htmlFor="email" className="text-foreground">
 						{tCommon("email")}
 					</Label>
 					<Input
@@ -208,7 +208,7 @@ export function RegisterForm() {
 				</div>
 
 				<div className="space-y-2">
-					<Label htmlFor="password" className="text-gray-900">
+					<Label htmlFor="password" className="text-foreground">
 						{tCommon("password")}
 					</Label>
 					<PasswordInput
@@ -224,7 +224,7 @@ export function RegisterForm() {
 
 				{/* Confirmar contraseña */}
 				<div className="space-y-2">
-					<Label htmlFor="confirmPassword" className="text-gray-900">
+					<Label htmlFor="confirmPassword" className="text-foreground">
 						{tCommon("confirmPassword")}
 					</Label>
 					<PasswordInput
@@ -249,7 +249,7 @@ export function RegisterForm() {
 						}
 						required
 					/>
-					<label htmlFor="terms" className="text-sm text-gray-600 leading-tight cursor-pointer">
+					<label htmlFor="terms" className="text-sm text-muted-foreground leading-tight cursor-pointer">
 						{t.rich("terms", {
 							terms: TermsLink,
 							privacy: PrivacyLink,
@@ -269,7 +269,7 @@ export function RegisterForm() {
 					)}
 				</Button>
 
-				<div className="text-center text-sm text-gray-600">
+				<div className="text-center text-sm text-muted-foreground">
 					{t("alreadyAccount")}{" "}
 					<Link href="/login" className="text-primary hover:underline font-medium">
 						<span className="hidden md:inline">{t("loginLink")}</span>

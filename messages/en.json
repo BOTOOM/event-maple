@@ -288,6 +288,44 @@
 				"resend": "Resend email",
 				"backToLogin": "Back to sign in"
 			}
+		},
+		"ResetPassword": {
+			"verifying": "Verifying link...",
+			"invalidLink": {
+				"title": "Invalid or Expired Link",
+				"description": "The recovery link is invalid or has expired. Please request a new recovery link.",
+				"requestNew": "Request New Link",
+				"backToLogin": "Back to sign in"
+			},
+			"success": {
+				"title": "Password Updated!",
+				"description": "Your password has been successfully reset. You will be redirected to sign in shortly.",
+				"goToLogin": "Go to Sign In"
+			},
+			"form": {
+				"title": "Reset your Password",
+				"subtitle": "Enter your new password to restore access to your account.",
+				"newPassword": "New Password",
+				"newPasswordPlaceholder": "Enter your new password",
+				"confirmPassword": "Confirm Password",
+				"confirmPasswordPlaceholder": "Confirm your new password",
+				"minChars": "Minimum 6 characters",
+				"submit": "Reset Password",
+				"submitting": "Resetting..."
+			},
+			"validation": {
+				"tooShort": "Password too short",
+				"tooShortDesc": "Password must be at least 6 characters.",
+				"mismatch": "Passwords do not match",
+				"mismatchDesc": "Please verify that both passwords are the same."
+			},
+			"toast": {
+				"successTitle": "Password reset!",
+				"successDesc": "Your password has been updated successfully.",
+				"errorTitle": "Error",
+				"errorDesc": "Could not reset the password.",
+				"unexpectedError": "An unexpected error occurred. Please try again."
+			}
 		}
 	},
 	"Events": {
@@ -413,6 +451,29 @@
 		"TalkCard": {
 			"viewMore": "View More",
 			"locationPending": "Location to be confirmed"
+		},
+		"TalkTimelineCard": {
+			"by": "By {speaker}",
+			"fixedEvent": "Fixed Event",
+			"conflict": "Conflict"
+		},
+		"EmptyTalks": {
+			"title": "No talks scheduled",
+			"description": "The agenda for this event is not yet available. Come back soon to see the scheduled talks and workshops."
+		},
+		"DateSelector": {
+			"previousDay": "Previous day",
+			"nextDay": "Next day"
+		},
+		"EventNotFound": {
+			"title": "Event not found",
+			"description": "The event you are looking for does not exist or has been removed.",
+			"backToEvents": "Back to Events"
+		},
+		"TalkNotFound": {
+			"title": "Talk not found",
+			"description": "The talk you are looking for does not exist or has been removed.",
+			"backToEvents": "Back to Events"
 		},
 		"TalkDetail": {
 			"backToAgenda": "Back to Agenda",

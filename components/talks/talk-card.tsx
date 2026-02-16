@@ -28,8 +28,8 @@ function TalkMeta({
 	readonly locationPending: string;
 }) {
 	return (
-		<div className={`flex flex-wrap items-center gap-3 mt-3 ${className} text-gray-500`}>
-			<span className="font-medium text-blue-600">{timeRange}</span>
+		<div className={`flex flex-wrap items-center gap-3 mt-3 ${className} text-muted-foreground`}>
+			<span className="font-medium text-primary">{timeRange}</span>
 			{location !== locationPending && (
 				<div className="flex items-center gap-1">
 					<MapPin className="h-3.5 w-3.5" />
@@ -53,13 +53,13 @@ function TalkTags({ tags }: { readonly tags?: string[] }) {
 			{tags.slice(0, 3).map((tag) => (
 				<span
 					key={tag}
-					className="inline-block px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full"
+					className="inline-block px-2 py-0.5 bg-secondary text-foreground text-xs rounded-full"
 				>
 					{tag}
 				</span>
 			))}
 			{tags.length > 3 && (
-				<span className="inline-block px-2 py-0.5 text-gray-500 text-xs">+{tags.length - 3}</span>
+				<span className="inline-block px-2 py-0.5 text-muted-foreground text-xs">+{tags.length - 3}</span>
 			)}
 		</div>
 	);
@@ -74,23 +74,23 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 	return (
 		<>
 			{/* MOBILE: Card completa clickeable */}
-			<div className="bg-white rounded-lg border border-gray-200 p-4 hover:border-blue-300 hover:shadow-sm transition-all sm:hidden">
+			<div className="bg-card rounded-lg border border-border p-4 hover:border-primary/40 hover:shadow-sm transition-all sm:hidden">
 				<div className="flex items-start gap-3">
 					<Link
 						href={`/events/${eventId}/talks/${talk.id}`}
 						className="flex items-start gap-3 flex-1 min-w-0"
 					>
 						{/* Icon */}
-						<div className="p-2 bg-blue-50 rounded-lg flex-shrink-0">
-							<Clock className="h-5 w-5 text-blue-600" />
+						<div className="p-2 bg-winter-100 rounded-lg flex-shrink-0">
+							<Clock className="h-5 w-5 text-primary" />
 						</div>
 
 						{/* Content */}
 						<div className="flex-1 min-w-0">
-							<h3 className="text-base font-semibold text-gray-900">{talk.title}</h3>
+							<h3 className="text-base font-semibold text-foreground">{talk.title}</h3>
 
 							{talk.short_description && (
-								<p className="text-sm text-gray-600 mt-1 line-clamp-2">{talk.short_description}</p>
+								<p className="text-sm text-muted-foreground mt-1 line-clamp-2">{talk.short_description}</p>
 							)}
 
 							<TalkMeta
@@ -109,11 +109,11 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 			</div>
 
 			{/* DESKTOP: Título clickeable + Botón "Ver Más" */}
-			<div className="hidden sm:block bg-white rounded-lg border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all">
+			<div className="hidden sm:block bg-card rounded-lg border border-border p-5 hover:border-primary/40 hover:shadow-sm transition-all">
 				<div className="flex items-start gap-3">
 					{/* Icon */}
-					<div className="p-2 bg-blue-50 rounded-lg flex-shrink-0">
-						<Clock className="h-5 w-5 text-blue-600" />
+					<div className="p-2 bg-winter-100 rounded-lg flex-shrink-0">
+						<Clock className="h-5 w-5 text-primary" />
 					</div>
 
 					{/* Content */}
@@ -122,13 +122,13 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 							href={`/events/${eventId}/talks/${talk.id}?from=agenda`}
 							className="group inline-block"
 						>
-							<h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+							<h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
 								{talk.title}
 							</h3>
 						</Link>
 
 						{talk.short_description && (
-							<p className="text-sm text-gray-600 mt-1 line-clamp-2">{talk.short_description}</p>
+							<p className="text-sm text-muted-foreground mt-1 line-clamp-2">{talk.short_description}</p>
 						)}
 
 						<TalkMeta

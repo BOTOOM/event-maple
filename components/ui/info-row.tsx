@@ -9,10 +9,10 @@ interface InfoRowProps {
 export function InfoRow({ icon, label, value }: InfoRowProps) {
 	return (
 		<div className="flex items-start gap-3">
-			<div className="p-2 bg-gray-100 rounded-lg">{icon}</div>
+			<div className="p-2 bg-secondary rounded-lg">{icon}</div>
 			<div>
-				<p className="text-sm text-gray-500">{label}</p>
-				<p className="text-base font-medium text-gray-900">{value}</p>
+				<p className="text-sm text-muted-foreground">{label}</p>
+				<p className="text-base font-medium text-foreground">{value}</p>
 			</div>
 		</div>
 	);

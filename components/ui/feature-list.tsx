@@ -10,7 +10,7 @@ function FeatureItem({ title, description }: FeatureItemProps) {
 				<div className="w-2 h-2 bg-green-600 rounded-full"></div>
 			</div>
 			<div>
-				<h4 className="font-semibold text-gray-900">{title}</h4>
+				<h4 className="font-semibold text-foreground">{title}</h4>
 				<p className="text-sm">{description}</p>
 			</div>
 		</div>

@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 			footer={{
 				backText: t("footer.back"),
 				extraContent: (
-					<p className="text-sm text-gray-600">
+					<p className="text-sm text-muted-foreground">
 						{t("footer.question")}{" "}
 						<Link href="/terms" className="text-primary hover:underline font-medium">
 							{t("footer.terms")}
@@ -45,10 +45,10 @@ export default function PrivacyPage() {
 			{/* 1. Introducción */}
 			<section>
 				<SectionHeader
-					icon={<Eye className="h-5 w-5 text-gray-700" />}
+					icon={<Eye className="h-5 w-5 text-foreground/80" />}
 					title={t("sections.introduction.title")}
 				/>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.introduction.text1")}</p>
 					<p>{t("sections.introduction.text2")}</p>
 				</div>
@@ -57,16 +57,16 @@ export default function PrivacyPage() {
 			{/* 2. Información que Recopilamos */}
 			<section>
 				<SectionHeader
-					icon={<Server className="h-5 w-5 text-gray-700" />}
+					icon={<Server className="h-5 w-5 text-foreground/80" />}
 					title={t("sections.collection.title")}
 				/>
-				<div className="space-y-4 text-gray-700 leading-relaxed">
+				<div className="space-y-4 text-foreground/80 leading-relaxed">
 					<p>{t("sections.collection.intro")}</p>
 
 					<div className="space-y-4">
 						{/* Información de Cuenta */}
 						<div className="border-l-4 border-primary pl-4">
-							<h3 className="font-semibold text-gray-900 mb-2">
+							<h3 className="font-semibold text-foreground mb-2">
 								{t("sections.collection.account.title")}
 							</h3>
 							<ul className="list-disc pl-6 space-y-2">
@@ -82,8 +82,8 @@ export default function PrivacyPage() {
 						</div>
 
 						{/* Datos de Uso */}
-						<div className="border-l-4 border-blue-500 pl-4">
-							<h3 className="font-semibold text-gray-900 mb-2">
+						<div className="border-l-4 border-primary pl-4">
+							<h3 className="font-semibold text-foreground mb-2">
 								{t("sections.collection.usage.title")}
 							</h3>
 							<ul className="list-disc pl-6 space-y-2">
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
 
 						{/* Datos Técnicos */}
 						<div className="border-l-4 border-green-500 pl-4">
-							<h3 className="font-semibold text-gray-900 mb-2">
+							<h3 className="font-semibold text-foreground mb-2">
 								{t("sections.collection.technical.title")}
 							</h3>
 							<ul className="list-disc pl-6 space-y-2">
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
 								))}
 							</ul>
 							<p
-								className="mt-2 text-sm text-gray-600"
+								className="mt-2 text-sm text-muted-foreground"
 								dangerouslySetInnerHTML={{ __html: t.raw("sections.collection.technical.note") }}
 							/>
 						</div>
@@ -125,10 +125,10 @@ export default function PrivacyPage() {
 			{/* 3. Cómo Usamos tu Información */}
 			<section>
 				<SectionHeader
-					icon={<UserCheck className="h-5 w-5 text-gray-700" />}
+					icon={<UserCheck className="h-5 w-5 text-foreground/80" />}
 					title={t("sections.usage.title")}
 				/>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.usage.intro")}</p>
 					<UsageGrid
 						items={[
@@ -163,10 +163,10 @@ export default function PrivacyPage() {
 			{/* 4. Almacenamiento y Seguridad */}
 			<section>
 				<SectionHeader
-					icon={<Lock className="h-5 w-5 text-gray-700" />}
+					icon={<Lock className="h-5 w-5 text-foreground/80" />}
 					title={t("sections.storage.title")}
 				/>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.storage.intro")}</p>
 					<FeatureList
 						items={[
@@ -190,7 +190,7 @@ export default function PrivacyPage() {
 						className="mt-4"
 					/>
 					<p
-						className="text-sm text-gray-600 mt-4"
+						className="text-sm text-muted-foreground mt-4"
 						dangerouslySetInnerHTML={{ __html: t.raw("sections.storage.important") }}
 					/>
 				</div>
@@ -199,10 +199,10 @@ export default function PrivacyPage() {
 			{/* 5. Compartir Información */}
 			<section>
 				<SectionHeader
-					icon={<Mail className="h-5 w-5 text-gray-700" />}
+					icon={<Mail className="h-5 w-5 text-foreground/80" />}
 					title={t("sections.sharing.title")}
 				/>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.sharing.intro")}</p>
 					<ul className="list-disc pl-6 space-y-2">
 						{[0, 1, 2].map((i) => (
@@ -223,10 +223,10 @@ export default function PrivacyPage() {
 
 			{/* 6. Retención de Datos */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
 					{t("sections.retention.title")}
 				</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.retention.intro")}</p>
 					<ul className="list-disc pl-6 space-y-2">
 						{[0, 1, 2].map((i) => (
@@ -241,8 +241,8 @@ export default function PrivacyPage() {
 
 			{/* 7. Tus Derechos */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t("sections.rights.title")}</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.rights.title")}</h2>
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.rights.intro")}</p>
 					<RightsGrid
 						items={[
@@ -271,8 +271,8 @@ export default function PrivacyPage() {
 
 			{/* 8. Cookies */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t("sections.cookies.title")}</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.cookies.title")}</h2>
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.cookies.intro")}</p>
 					<ul className="list-disc pl-6 space-y-2">
 						{[0, 1].map((i) => (
@@ -288,8 +288,8 @@ export default function PrivacyPage() {
 
 			{/* 9. Menores de Edad */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t("sections.minors.title")}</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.minors.title")}</h2>
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.minors.text1")}</p>
 					<p>{t("sections.minors.text2")}</p>
 				</div>
@@ -297,8 +297,8 @@ export default function PrivacyPage() {
 
 			{/* 10. Cambios a esta Política */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t("sections.changes.title")}</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.changes.title")}</h2>
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.changes.text1")}</p>
 					<p>{t("sections.changes.text2")}</p>
 				</div>
@@ -306,10 +306,10 @@ export default function PrivacyPage() {
 
 			{/* 11. Transferencias Internacionales */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
 					{t("sections.international.title")}
 				</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.international.text1")}</p>
 					<p>{t("sections.international.text2")}</p>
 				</div>
@@ -317,17 +317,17 @@ export default function PrivacyPage() {
 
 			{/* 12. Contacto */}
 			<section>
-				<h2 className="text-2xl font-semibold text-gray-900 mb-4">{t("sections.contact.title")}</h2>
-				<div className="space-y-3 text-gray-700 leading-relaxed">
+				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.contact.title")}</h2>
+				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.contact.intro")}</p>
-					<div className="bg-gradient-to-br from-primary/10 to-blue-50 border border-primary/20 rounded-lg p-6 mt-4">
-						<h3 className="font-semibold text-gray-900 mb-4">{t("sections.contact.infoTitle")}</h3>
+					<div className="bg-gradient-to-br from-primary/10 to-winter-100 border border-primary/20 rounded-lg p-6 mt-4">
+						<h3 className="font-semibold text-foreground mb-4">{t("sections.contact.infoTitle")}</h3>
 						<div className="space-y-2">
 							<p
-								className="text-gray-700"
+								className="text-foreground/80"
 								dangerouslySetInnerHTML={{ __html: t.raw("sections.contact.project") }}
 							/>
-							<p className="text-gray-700">
+							<p className="text-foreground/80">
 								<strong dangerouslySetInnerHTML={{ __html: t.raw("sections.contact.email") }} />{" "}
 								<a
 									href="mailto:edwardiaz.dev@gmail.com"
@@ -336,7 +336,7 @@ export default function PrivacyPage() {
 									edwardiaz.dev@gmail.com
 								</a>
 							</p>
-							<p className="text-sm text-gray-600 mt-4">{t("sections.contact.response")}</p>
+							<p className="text-sm text-muted-foreground mt-4">{t("sections.contact.response")}</p>
 						</div>
 					</div>
 				</div>
@@ -344,12 +344,12 @@ export default function PrivacyPage() {
 
 			{/* Compromiso Final */}
 			<LegalFooterSection>
-				<div className="bg-gradient-to-r from-primary/5 to-blue-50 border border-primary/20 rounded-lg p-6">
-					<h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+				<div className="bg-gradient-to-r from-primary/5 to-winter-100 border border-primary/20 rounded-lg p-6">
+					<h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
 						<Shield className="h-5 w-5 text-primary" />
 						{t("commitment.title")}
 					</h3>
-					<p className="text-gray-700 text-sm leading-relaxed">{t("commitment.text")}</p>
+					<p className="text-foreground/80 text-sm leading-relaxed">{t("commitment.text")}</p>
 				</div>
 			</LegalFooterSection>
 		</LegalPageLayout>

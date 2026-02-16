@@ -199,9 +199,9 @@ export function EventFormClient({
 				</div>
 
 				{/* General Details */}
-				<div className="bg-white rounded-lg border p-6 space-y-4">
+				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
 					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-blue-600">✏️</span>
+						<span className="text-primary">✏️</span>
 						{t("sections.general")}
 					</h2>
 
@@ -228,8 +228,8 @@ export function EventFormClient({
 										className={cn(
 											"px-3 py-1.5 rounded-full text-sm font-medium border transition-colors",
 											formData.category_id === category.id
-												? "bg-blue-600 text-white border-blue-600"
-												: "bg-white text-gray-700 border-gray-300 hover:border-blue-400",
+												? "bg-primary text-primary-foreground border-primary"
+												: "bg-card text-foreground border-border hover:border-primary/50",
 										)}
 									>
 										{category.name}
@@ -241,16 +241,16 @@ export function EventFormClient({
 				</div>
 
 				{/* Multimedia */}
-				<div className="bg-white rounded-lg border p-6 space-y-4">
+				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
 					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-blue-600">🖼️</span>
+						<span className="text-primary">🖼️</span>
 						{t("sections.multimedia")}
 					</h2>
 
 					<div>
 						<Label htmlFor="image_url">
 							{t("fields.imageUrl")}
-							<span className="text-gray-400 text-sm ml-2">({t("recommended")}: 1200x600)</span>
+							<span className="text-muted-foreground text-sm ml-2">({t("recommended")}: 1200x600)</span>
 						</Label>
 						<Input
 							id="image_url"
@@ -264,9 +264,9 @@ export function EventFormClient({
 				</div>
 
 				{/* Date and Location */}
-				<div className="bg-white rounded-lg border p-6 space-y-4">
+				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
 					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-blue-600">📍</span>
+						<span className="text-primary">📍</span>
 						{t("sections.dateLocation")}
 					</h2>
 
@@ -335,9 +335,9 @@ export function EventFormClient({
 				</div>
 
 				{/* Description */}
-				<div className="bg-white rounded-lg border p-6 space-y-4">
+				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
 					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-blue-600">📝</span>
+						<span className="text-primary">📝</span>
 						{t("sections.description")}
 					</h2>
 
@@ -359,8 +359,8 @@ export function EventFormClient({
 				<div className="sticky top-4">
 					<div className="flex items-center gap-2 mb-4">
 						<span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-						<span className="text-sm font-medium text-gray-700">{t("preview.title")}</span>
-						<span className="text-xs text-gray-400 ml-auto">{t("preview.desktop")}</span>
+						<span className="text-sm font-medium text-foreground">{t("preview.title")}</span>
+						<span className="text-xs text-muted-foreground ml-auto">{t("preview.desktop")}</span>
 					</div>
 
 					<EventPreviewCard
@@ -375,7 +375,7 @@ export function EventFormClient({
 						locale={locale}
 					/>
 
-					<p className="text-xs text-blue-600 mt-4 flex items-center gap-1">
+					<p className="text-xs text-primary mt-4 flex items-center gap-1">
 						<span>ℹ️</span>
 						{t("preview.hint")}
 					</p>

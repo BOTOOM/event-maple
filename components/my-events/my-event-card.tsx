@@ -48,15 +48,15 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 	const statusConfig = {
 		published: {
 			label: t("status.published"),
-			className: "bg-green-500 text-white",
+			className: "bg-emerald-600 text-white",
 		},
 		draft: {
 			label: t("status.draft"),
-			className: "bg-orange-500 text-white",
+			className: "bg-amber-500 text-white",
 		},
 		past: {
 			label: t("status.past"),
-			className: "bg-gray-500 text-white",
+			className: "bg-winter-500 text-white",
 		},
 	};
 
@@ -122,9 +122,9 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 	};
 
 	return (
-		<div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden relative group">
+		<div className="bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden relative group">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gradient-to-br from-purple-600 to-purple-800">
+			<div className="relative w-full h-48 bg-gradient-to-br from-winter-500 to-winter-900">
 				{event.image_url ? (
 					<Image src={event.image_url} alt={eventTitle} fill className="object-cover" />
 				) : (
@@ -148,17 +148,17 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 					<button
 						type="button"
 						onClick={() => setShowMenu(!showMenu)}
-						className="p-1.5 rounded-full bg-white/90 hover:bg-white transition-colors"
+						className="p-1.5 rounded-full bg-card/90 hover:bg-card transition-colors"
 					>
-						<MoreVertical className="h-4 w-4 text-gray-700" />
+						<MoreVertical className="h-4 w-4 text-foreground" />
 					</button>
 
 					{/* Dropdown Menu */}
 					{showMenu && (
-						<div className="absolute right-0 mt-1 w-40 bg-white rounded-lg shadow-lg border py-1 z-10">
+						<div className="absolute right-0 mt-1 w-40 bg-card rounded-lg shadow-lg border border-border py-1 z-10">
 							<Link
 								href={`/my-events/${event.id}/edit`}
-								className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+								className="flex items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-surface"
 								onClick={() => setShowMenu(false)}
 							>
 								<Pencil className="h-4 w-4" />
@@ -168,7 +168,7 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 								type="button"
 								onClick={handleDelete}
 								disabled={isDeleting}
-								className="flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 w-full"
+								className="flex items-center gap-2 px-3 py-2 text-sm text-destructive hover:bg-destructive/10 w-full"
 							>
 								<Trash2 className="h-4 w-4" />
 								{isDeleting ? t("deleting") : t("delete")}
@@ -180,10 +180,10 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 
 			{/* Content */}
 			<div className="p-4 space-y-3">
-				<h3 className="text-lg font-semibold text-gray-900 line-clamp-2">{eventTitle}</h3>
+				<h3 className="text-lg font-semibold text-foreground line-clamp-2">{eventTitle}</h3>
 
 				<div className="space-y-2">
-					<div className="flex items-center gap-2 text-sm text-gray-600">
+					<div className="flex items-center gap-2 text-sm text-muted-foreground">
 						<Calendar className="h-4 w-4 flex-shrink-0" />
 						<span>
 							{formattedDate}
@@ -192,7 +192,7 @@ export function MyEventCard({ event }: Readonly<MyEventCardProps>) {
 					</div>
 
 					{event.location && (
-						<div className="flex items-start gap-2 text-sm text-gray-600">
+						<div className="flex items-start gap-2 text-sm text-muted-foreground">
 							<MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
 							<span className="line-clamp-1">{event.location}</span>
 						</div>

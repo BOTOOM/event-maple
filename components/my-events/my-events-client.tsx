@@ -83,7 +83,7 @@ export function MyEventsClient({
 					{[1, 2, 3, 4, 5, 6].map((skeletonId) => (
 						<div
 							key={`skeleton-${skeletonId}`}
-							className="bg-gray-100 rounded-lg h-80 animate-pulse"
+							className="bg-secondary rounded-lg h-80 animate-pulse"
 						/>
 					))}
 				</div>
@@ -93,7 +93,7 @@ export function MyEventsClient({
 		if (initialEvents.length === 0) {
 			return (
 				<div className="text-center py-16">
-					<div className="text-gray-400 mb-4">
+					<div className="text-muted-foreground mb-4">
 						<svg
 							className="mx-auto h-16 w-16"
 							fill="none"
@@ -108,8 +108,8 @@ export function MyEventsClient({
 							/>
 						</svg>
 					</div>
-					<h3 className="text-lg font-medium text-gray-900 mb-2">{t("noEvents.title")}</h3>
-					<p className="text-gray-600 mb-6">{t("noEvents.description")}</p>
+					<h3 className="text-lg font-medium text-foreground mb-2">{t("noEvents.title")}</h3>
+					<p className="text-muted-foreground mb-6">{t("noEvents.description")}</p>
 					<Link href="/my-events/create">
 						<Button className="gap-2">
 							<Plus className="h-4 w-4" />
@@ -135,7 +135,7 @@ export function MyEventsClient({
 			<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
 				{/* Search */}
 				<form onSubmit={handleSearch} className="relative w-full sm:w-80">
-					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+					<Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
 					<Input
 						type="text"
 						placeholder={t("searchPlaceholder")}
@@ -148,7 +148,7 @@ export function MyEventsClient({
 				{/* Filters and Create Button */}
 				<div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
 					{/* Filter Tabs */}
-					<div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+					<div className="flex items-center gap-1 bg-secondary rounded-lg p-1">
 						{filters.map((filter) => (
 							<button
 								key={filter.key}
@@ -157,13 +157,13 @@ export function MyEventsClient({
 								className={cn(
 									"px-3 py-1.5 text-sm font-medium rounded-md transition-colors",
 									initialFilter === filter.key
-										? "bg-white text-blue-600 shadow-sm"
-										: "text-gray-600 hover:text-gray-900",
+										? "bg-card text-primary shadow-sm"
+										: "text-muted-foreground hover:text-foreground",
 								)}
 							>
 								{filter.label}
 								{filter.key === "all" && (
-									<span className="ml-1 text-xs text-gray-400">{initialTotal}</span>
+									<span className="ml-1 text-xs text-muted-foreground">{initialTotal}</span>
 								)}
 							</button>
 						))}
@@ -195,7 +195,7 @@ export function MyEventsClient({
 						{t("pagination.previous")}
 					</Button>
 
-					<span className="text-sm text-gray-600 px-4">
+					<span className="text-sm text-muted-foreground px-4">
 						{t("pagination.page", { current: initialPage, total: totalPages })}
 					</span>
 
@@ -217,7 +217,7 @@ export function MyEventsClient({
 						type="button"
 						onClick={() => handlePageChange(initialPage + 1)}
 						disabled={isPending}
-						className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+						className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
 					>
 						<span>{t("loadMore")}</span>
 						<ChevronDown className="h-4 w-4" />

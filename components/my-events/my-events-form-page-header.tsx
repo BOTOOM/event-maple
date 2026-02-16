@@ -13,15 +13,15 @@ export function MyEventsFormPageHeader({
 }: MyEventsFormPageHeaderProps) {
 	return (
 		<>
-			<nav className="text-sm text-gray-500 mb-4">
+			<nav className="text-sm text-muted-foreground mb-4">
 				<span>{myEventsLabel}</span>
 				<span className="mx-2">›</span>
-				<span className="text-gray-900">{breadcrumbAction}</span>
+				<span className="text-foreground">{breadcrumbAction}</span>
 			</nav>
 
 			<div className="mb-8">
-				<h1 className="text-3xl font-bold text-gray-900">{title}</h1>
-				<p className="text-gray-600 mt-1">{subtitle}</p>
+				<h1 className="text-3xl font-bold text-foreground">{title}</h1>
+				<p className="text-muted-foreground mt-1">{subtitle}</p>
 			</div>
 		</>
 	);

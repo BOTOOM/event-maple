@@ -152,7 +152,7 @@ export default function TermsPage() {
 
 			{/* Agradecimiento */}
 			<LegalFooterSection>
-				<p className="text-gray-600 text-sm">{t("footer.text")}</p>
+				<p className="text-muted-foreground text-sm">{t("footer.text")}</p>
 			</LegalFooterSection>
 		</LegalPageLayout>
 	);

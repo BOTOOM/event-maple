@@ -8,9 +8,9 @@ interface InfoCardProps {
 
 export function InfoCard({ title, description, className = "" }: InfoCardProps) {
 	return (
-		<div className={`p-4 bg-gray-50 rounded-lg border border-gray-200 ${className}`}>
-			<h4 className="font-semibold text-gray-900 mb-2">{title}</h4>
-			<p className="text-sm text-gray-600">{description}</p>
+		<div className={`p-4 bg-surface rounded-lg border border-border ${className}`}>
+			<h4 className="font-semibold text-foreground mb-2">{title}</h4>
+			<p className="text-sm text-muted-foreground">{description}</p>
 		</div>
 	);
 }

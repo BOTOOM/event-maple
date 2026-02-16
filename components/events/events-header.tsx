@@ -15,7 +15,7 @@ export function EventsHeader() {
 	const t = useTranslations("Events.Header");
 
 	return (
-		<header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+		<header className="sticky top-0 z-40 bg-card border-b border-border">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-14 sm:h-16">
 					{/* Mobile: Hamburger */}
@@ -24,7 +24,7 @@ export function EventsHeader() {
 						className="md:hidden p-2 -ml-2"
 						onClick={() => setShowMobileMenu(!showMobileMenu)}
 					>
-						<Menu className="h-6 w-6 text-gray-700" />
+						<Menu className="h-6 w-6 text-foreground" />
 					</button>
 
 					{/* Logo / Title */}
@@ -36,7 +36,7 @@ export function EventsHeader() {
 							height={32}
 							className="w-8 h-8 md:w-10 md:h-10"
 						/>
-						<span className="font-bold text-lg sm:text-xl text-gray-900">
+						<span className="font-bold text-lg sm:text-xl text-foreground">
 							<span className="hidden md:inline">{t("title")}</span>
 							<span className="md:hidden">{t("titleMobile")}</span>
 						</span>
@@ -51,7 +51,7 @@ export function EventsHeader() {
 					<div className="flex items-center gap-2 md:hidden">
 						<LanguageSwitcher />
 						<button type="button" className="p-2 -mr-2">
-							<Search className="h-5 w-5 text-gray-700" />
+							<Search className="h-5 w-5 text-foreground" />
 						</button>
 					</div>
 
@@ -63,7 +63,7 @@ export function EventsHeader() {
 								<Link href="/my-events">
 									<Button variant="ghost">{t("nav.myEvents")}</Button>
 								</Link>
-								<span className="text-sm text-gray-600">{user.email}</span>
+								<span className="text-sm text-muted-foreground">{user.email}</span>
 								<Button variant="outline" onClick={signOut}>
 									{t("userMenu.signOut")}
 								</Button>
@@ -84,11 +84,11 @@ export function EventsHeader() {
 
 			{/* Mobile Menu Dropdown */}
 			{showMobileMenu && (
-				<div className="md:hidden border-t border-gray-200 bg-white">
+				<div className="md:hidden border-t border-border bg-card">
 					<div className="px-4 py-3 space-y-2">
 						<Link
 							href="/events"
-							className="block py-2 text-gray-700 hover:text-primary"
+							className="block py-2 text-foreground hover:text-primary"
 							onClick={() => setShowMobileMenu(false)}
 						>
 							{t("nav.events")}
@@ -96,7 +96,7 @@ export function EventsHeader() {
 						{user && (
 							<Link
 								href="/my-events"
-								className="block py-2 text-gray-700 hover:text-primary"
+								className="block py-2 text-foreground hover:text-primary"
 								onClick={() => setShowMobileMenu(false)}
 							>
 								{t("nav.myEvents")}
@@ -104,15 +104,15 @@ export function EventsHeader() {
 						)}
 						<Link
 							href="/my-agenda"
-							className="block py-2 text-gray-700 hover:text-primary"
+							className="block py-2 text-foreground hover:text-primary"
 							onClick={() => setShowMobileMenu(false)}
 						>
 							{t("nav.myAgenda")}
 						</Link>
-						<div className="pt-2 border-t border-gray-200">
+						<div className="pt-2 border-t border-border">
 							{user ? (
 								<>
-									<p className="text-xs text-gray-500 mb-2">{user.email}</p>
+									<p className="text-xs text-muted-foreground mb-2">{user.email}</p>
 									<Button
 										variant="ghost"
 										size="sm"
@@ -126,7 +126,7 @@ export function EventsHeader() {
 								<>
 									<Link
 										href="/"
-										className="block py-2 text-gray-700 hover:text-primary"
+										className="block py-2 text-foreground hover:text-primary"
 										onClick={() => setShowMobileMenu(false)}
 									>
 										{t("home")}

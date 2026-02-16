@@ -36,13 +36,13 @@ export default async function MyEventsPage({ searchParams }: MyEventsPageProps) 
 	const { events, total, totalPages } = await getMyEvents(page, filter, search, locale);
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			<EventsHeader />
 			<div className="container mx-auto px-4 py-8">
 				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 					<div>
-						<h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
-						<p className="text-gray-600 mt-1">{t("subtitle")}</p>
+						<h1 className="text-3xl font-bold text-foreground">{t("title")}</h1>
+						<p className="text-muted-foreground mt-1">{t("subtitle")}</p>
 					</div>
 				</div>
 

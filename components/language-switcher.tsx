@@ -36,14 +36,14 @@ export function LanguageSwitcher() {
 				variant="ghost"
 				size="icon"
 				onClick={() => setIsOpen(!isOpen)}
-				className="text-gray-600 hover:text-gray-900"
+				className="text-muted-foreground hover:text-foreground"
 			>
 				<Globe className="h-5 w-5" />
 				<span className="sr-only">Switch Language</span>
 			</Button>
 
 			{isOpen && (
-				<div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 z-50">
+				<div className="absolute right-0 mt-2 w-48 bg-card rounded-md shadow-lg ring-1 ring-border py-1 z-50">
 					{languages.map((lang) => (
 						<button
 							type="button"
@@ -51,8 +51,8 @@ export function LanguageSwitcher() {
 							onClick={() => handleLanguageChange(lang.code)}
 							className={`block w-full text-left px-4 py-2 text-sm ${
 								locale === lang.code
-									? "bg-gray-100 text-gray-900 font-medium"
-									: "text-gray-700 hover:bg-gray-50"
+									? "bg-secondary text-foreground font-medium"
+									: "text-muted-foreground hover:bg-surface"
 							}`}
 						>
 							<span className="mr-2">{lang.flag}</span>

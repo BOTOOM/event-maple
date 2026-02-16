@@ -27,13 +27,13 @@ export function TimelineView({
 	const totalHeight = (endHour - startHour + 1) * pixelsPerHour;
 
 	return (
-		<div className="relative border border-gray-200 rounded-lg bg-white overflow-hidden">
+		<div className="relative border border-border rounded-lg bg-card overflow-hidden">
 			{/* Time labels (left side) */}
-			<div className="absolute left-0 top-0 w-20 h-full border-r border-gray-200 bg-gray-50">
+			<div className="absolute left-0 top-0 w-20 h-full border-r border-border bg-surface">
 				{timeSlots.map((slot) => (
 					<div
 						key={slot.label}
-						className="absolute left-0 w-full px-2 text-sm font-medium text-gray-600"
+						className="absolute left-0 w-full px-2 text-sm font-medium text-muted-foreground"
 						style={{
 							top: `${(slot.hour - startHour) * pixelsPerHour}px`,
 							height: `${pixelsPerHour}px`,
@@ -50,7 +50,7 @@ export function TimelineView({
 				{timeSlots.map((slot) => (
 					<div
 						key={slot.label}
-						className="absolute left-0 right-0 border-t border-gray-200"
+						className="absolute left-0 right-0 border-t border-border"
 						style={{ top: `${(slot.hour - startHour) * pixelsPerHour}px` }}
 					/>
 				))}

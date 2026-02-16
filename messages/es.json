@@ -288,6 +288,44 @@
 				"resend": "Volver a enviar correo",
 				"backToLogin": "Volver a iniciar sesión"
 			}
+		},
+		"ResetPassword": {
+			"verifying": "Verificando enlace...",
+			"invalidLink": {
+				"title": "Enlace Inválido o Expirado",
+				"description": "El enlace de recuperación no es válido o ha expirado. Por favor, solicita un nuevo enlace de recuperación.",
+				"requestNew": "Solicitar Nuevo Enlace",
+				"backToLogin": "Volver a iniciar sesión"
+			},
+			"success": {
+				"title": "¡Contraseña Actualizada!",
+				"description": "Tu contraseña ha sido restablecida correctamente. Serás redirigido al inicio de sesión en unos momentos.",
+				"goToLogin": "Ir a Iniciar Sesión"
+			},
+			"form": {
+				"title": "Recupera tu Contraseña",
+				"subtitle": "Ingresa tu nueva contraseña para restablecer el acceso a tu cuenta.",
+				"newPassword": "Nueva Contraseña",
+				"newPasswordPlaceholder": "Introduce tu nueva contraseña",
+				"confirmPassword": "Confirmar Contraseña",
+				"confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+				"minChars": "Mínimo 6 caracteres",
+				"submit": "Restablecer Contraseña",
+				"submitting": "Restableciendo..."
+			},
+			"validation": {
+				"tooShort": "Contraseña muy corta",
+				"tooShortDesc": "La contraseña debe tener al menos 6 caracteres.",
+				"mismatch": "Las contraseñas no coinciden",
+				"mismatchDesc": "Por favor verifica que ambas contraseñas sean iguales."
+			},
+			"toast": {
+				"successTitle": "¡Contraseña restablecida!",
+				"successDesc": "Tu contraseña ha sido actualizada correctamente.",
+				"errorTitle": "Error",
+				"errorDesc": "No se pudo restablecer la contraseña.",
+				"unexpectedError": "Ocurrió un error inesperado. Intenta nuevamente."
+			}
 		}
 	},
 	"Events": {
@@ -413,6 +451,29 @@
 		"TalkCard": {
 			"viewMore": "Ver Más",
 			"locationPending": "Ubicación por confirmar"
+		},
+		"TalkTimelineCard": {
+			"by": "Por {speaker}",
+			"fixedEvent": "Evento Fijo",
+			"conflict": "Conflicto"
+		},
+		"EmptyTalks": {
+			"title": "No hay charlas programadas",
+			"description": "La agenda de este evento aún no está disponible. Vuelve pronto para ver las charlas y talleres programados."
+		},
+		"DateSelector": {
+			"previousDay": "Día anterior",
+			"nextDay": "Día siguiente"
+		},
+		"EventNotFound": {
+			"title": "Evento no encontrado",
+			"description": "El evento que buscas no existe o ha sido eliminado.",
+			"backToEvents": "Volver a Eventos"
+		},
+		"TalkNotFound": {
+			"title": "Charla no encontrada",
+			"description": "La charla que buscas no existe o ha sido eliminada.",
+			"backToEvents": "Volver a Eventos"
 		},
 		"TalkDetail": {
 			"backToAgenda": "Volver a Agenda",
