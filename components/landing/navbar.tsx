@@ -23,8 +23,7 @@ export function Navbar() {
 							className="w-8 h-8 sm:w-10 sm:h-10"
 						/>
 						<span className="font-bold text-lg sm:text-xl text-foreground">
-							<span className="hidden sm:inline">EventMaple</span>
-							<span className="sm:hidden">EventApp</span>
+							EventMaple
 						</span>
 					</Link>
 
