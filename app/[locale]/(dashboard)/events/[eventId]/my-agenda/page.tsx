@@ -1,11 +1,11 @@
 import { AlertCircle, Calendar } from "lucide-react";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { AgendaHeader } from "@/components/agenda/agenda-header";
 import { MyAgendaClient } from "@/components/agenda/my-agenda-client";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/i18n/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuthenticatedUser } from "@/lib/supabase/server";
 import { Talk } from "@/lib/types/talk";
 
 interface MyAgendaPageProps {
@@ -19,14 +19,7 @@ interface MyAgendaPageProps {
 }
 
 export default async function MyAgendaPage({ params, searchParams }: MyAgendaPageProps) {
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	if (!user) {
-		redirect("/login");
-	}
+	const { supabase, user } = await requireAuthenticatedUser();
 
 	const resolvedParams = await params;
 	const resolvedSearchParams = await searchParams;

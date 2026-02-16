@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHeader } from "@/components/events/events-header";
 import { EventFormClient } from "@/components/my-events/event-form-client";
 import { getCategories, getEventById } from "@/lib/actions/events";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuthenticatedUser } from "@/lib/supabase/server";
 import { formatDateTimeForTimezone } from "@/lib/utils/date";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,15 +23,7 @@ interface EditEventPageProps {
 }
 
 export default async function EditEventPage({ params }: EditEventPageProps) {
-	// Check authentication - redirect to login if not authenticated
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	if (!user) {
-		redirect("/login");
-	}
+	await requireAuthenticatedUser();
 
 	const { eventId } = await params;
 	const locale = await getLocale();

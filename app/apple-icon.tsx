@@ -16,7 +16,7 @@ export default async function AppleIcon() {
 	);
 
 	const encodedLogo = new TextEncoder().encode(logoSvg);
-	const binaryLogo = Array.from(encodedLogo, (charCode) => String.fromCharCode(charCode)).join("");
+	const binaryLogo = Array.from(encodedLogo, (charCode) => String.fromCodePoint(charCode)).join("");
 	const logoSvgBase64 = btoa(binaryLogo);
 	const logoDataUri = `data:image/svg+xml;base64,${logoSvgBase64}`;
 	return new ImageResponse(

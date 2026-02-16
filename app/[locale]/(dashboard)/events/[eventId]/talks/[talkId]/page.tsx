@@ -2,12 +2,12 @@ import { format, parseISO } from "date-fns";
 import { enUS, es, fr, ptBR } from "date-fns/locale";
 import { Award, Calendar, MapPin, User, Users } from "lucide-react";
 import Image from "next/image";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { AddToAgendaButton } from "@/components/talks/add-to-agenda-button";
 import { InfoRow } from "@/components/ui/info-row";
 import { PageHeader } from "@/components/ui/page-header";
-import { createClient } from "@/lib/supabase/server";
+import { requireAuthenticatedUser } from "@/lib/supabase/server";
 import { formatTalkLocation, formatTalkTime } from "@/lib/types/talk";
 
 interface TalkDetailPageProps {
@@ -22,14 +22,7 @@ interface TalkDetailPageProps {
 }
 
 export default async function TalkDetailPage({ params, searchParams }: TalkDetailPageProps) {
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-
-	if (!user) {
-		redirect("/login");
-	}
+	const { supabase, user } = await requireAuthenticatedUser();
 
 	const resolvedParams = await params;
 	const resolvedSearchParams = await searchParams;

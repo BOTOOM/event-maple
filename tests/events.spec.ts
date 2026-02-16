@@ -1,25 +1,40 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import {
 	assertNoUntranslatedKeys,
+	clickViewDetails,
 	enablePastEventsFilter,
 	LOCALES,
+	searchForEvent,
 	TEST_EVENT_NAME,
 } from "./utils/test-helpers";
+
+async function openEventsPageWithPastFilter(
+	page: Page,
+	loadState: "domcontentloaded" | "networkidle" = "domcontentloaded",
+	waitMs: number = 500,
+) {
+	await page.goto("/en/events");
+	await page.waitForLoadState(loadState);
+	await enablePastEventsFilter(page);
+	await page.waitForTimeout(waitMs);
+}
+
+async function openEventDetailPage(
+	page: Page,
+	locale: string = "en",
+	loadState: "domcontentloaded" | "networkidle" = "domcontentloaded",
+) {
+	await page.goto(`/${locale}/events/1`);
+	await page.waitForLoadState(loadState);
+}
 
 test.describe("Events Page", () => {
 	test.describe("Event Search and Navigation", () => {
 		test("should search for event and find it in past events", async ({ page }) => {
-			await page.goto("/en/events");
-			await page.waitForLoadState("domcontentloaded");
-
-			// Enable past events filter
-			await enablePastEventsFilter(page);
-			await page.waitForTimeout(500);
+			await openEventsPageWithPastFilter(page);
 
 			// Search for the event
-			const searchInput = page.locator('input[type="text"], input[type="search"]').first();
-			await searchInput.fill(TEST_EVENT_NAME);
-			await page.waitForTimeout(1000);
+			await searchForEvent(page, TEST_EVENT_NAME);
 
 			// Verify event appears in the list
 			const eventCard = page.locator(`text=${TEST_EVENT_NAME}`).first();
@@ -27,24 +42,11 @@ test.describe("Events Page", () => {
 		});
 
 		test("should access event detail page from event card", async ({ page }) => {
-			await page.goto("/en/events");
-			await page.waitForLoadState("domcontentloaded");
-
-			// Enable past events filter
-			await enablePastEventsFilter(page);
-			await page.waitForTimeout(500);
+			await openEventsPageWithPastFilter(page);
 
 			// Search for the event
-			const searchInput = page.locator('input[type="text"], input[type="search"]').first();
-			await searchInput.fill(TEST_EVENT_NAME);
-			await page.waitForTimeout(1000);
-
-			// Find and click on "View details" button
-			const viewDetailsButton = page
-				.locator('a:has-text("View details"), a:has-text("Ver detalles")')
-				.first();
-			await expect(viewDetailsButton).toBeVisible({ timeout: 10000 });
-			await viewDetailsButton.click();
+			await searchForEvent(page, TEST_EVENT_NAME);
+			await clickViewDetails(page);
 
 			// Verify we're on the event detail page
 			await page.waitForURL(/\/events\/\d+/);
@@ -55,8 +57,7 @@ test.describe("Events Page", () => {
 		});
 
 		test("should display event content without errors", async ({ page }) => {
-			await page.goto("/en/events/1");
-			await page.waitForLoadState("domcontentloaded");
+			await openEventDetailPage(page);
 
 			// Verify page has content
 			await expect(page.locator("body")).toBeVisible();
@@ -75,8 +76,7 @@ test.describe("Events Page", () => {
 	test.describe("Event Detail i18n", () => {
 		for (const locale of LOCALES) {
 			test(`should load event detail page correctly in ${locale}`, async ({ page }) => {
-				await page.goto(`/${locale}/events/1`);
-				await page.waitForLoadState("domcontentloaded");
+				await openEventDetailPage(page, locale);
 
 				// Verify URL
 				await expect(page).toHaveURL(new RegExp(`/${locale}/events/1`));
@@ -93,12 +93,7 @@ test.describe("Events Page", () => {
 
 test.describe("Events Page - Published Events Only", () => {
 	test("should only show published events (no draft events)", async ({ page }) => {
-		await page.goto("/en/events");
-		await page.waitForLoadState("networkidle");
-
-		// Enable past events filter to see all events
-		await enablePastEventsFilter(page);
-		await page.waitForTimeout(1000);
+		await openEventsPageWithPastFilter(page, "networkidle", 1000);
 
 		// Get all event cards
 		const eventCards = page.locator(".bg-white.rounded-lg.shadow-sm");
@@ -118,12 +113,7 @@ test.describe("Events Page - Published Events Only", () => {
 	});
 
 	test("should display event date with time when timestamp is available", async ({ page }) => {
-		await page.goto("/en/events");
-		await page.waitForLoadState("networkidle");
-
-		// Enable past events filter
-		await enablePastEventsFilter(page);
-		await page.waitForTimeout(1000);
+		await openEventsPageWithPastFilter(page, "networkidle", 1000);
 
 		// Look for date elements in event cards
 		const dateElements = page.locator(".text-gray-600 span").first();
@@ -143,8 +133,7 @@ test.describe("Events Page - Published Events Only", () => {
 
 test.describe("Event Detail Page - Date and Time Display", () => {
 	test("should display date with time on event detail page", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("networkidle");
+		await openEventDetailPage(page, "en", "networkidle");
 
 		// Find the date info row
 		const dateRow = page.locator('text="Date"').locator("..").locator("span").last();
@@ -164,8 +153,7 @@ test.describe("Event Detail Page - Date and Time Display", () => {
 	test("should show time in user browser timezone when event has full timestamp", async ({
 		page,
 	}) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("networkidle");
+		await openEventDetailPage(page, "en", "networkidle");
 
 		// Find date display - events with full timestamp should show time
 		const dateDisplay = page.locator(String.raw`.lg\:col-span-2 span`).first();
@@ -185,12 +173,7 @@ test.describe("Event Detail Page - Date and Time Display", () => {
 
 test.describe("Event Card Features", () => {
 	test("should display share button on event cards", async ({ page }) => {
-		await page.goto("/en/events");
-		await page.waitForLoadState("domcontentloaded");
-
-		// Enable past events filter to ensure we have events
-		await enablePastEventsFilter(page);
-		await page.waitForTimeout(500);
+		await openEventsPageWithPastFilter(page);
 
 		// Find share button on event cards
 		const shareButton = page
@@ -202,12 +185,7 @@ test.describe("Event Card Features", () => {
 	});
 
 	test("should display category badge on event cards when category exists", async ({ page }) => {
-		await page.goto("/en/events");
-		await page.waitForLoadState("domcontentloaded");
-
-		// Enable past events filter
-		await enablePastEventsFilter(page);
-		await page.waitForTimeout(500);
+		await openEventsPageWithPastFilter(page);
 
 		// Look for category badges (they have a Tag icon and blue styling)
 		const categoryBadge = page.locator(".text-blue-600.bg-blue-50").first();
@@ -221,8 +199,7 @@ test.describe("Event Card Features", () => {
 
 test.describe("Event Favorites", () => {
 	test("should display favorite button on event detail page", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Find the favorite button - it can be icon variant or button variant
 		// Button variant has text like "Add to favorites" or "In favorites"
@@ -244,8 +221,7 @@ test.describe("Event Favorites", () => {
 	});
 
 	test("should redirect to login when clicking favorite without auth", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Find the favorite button
 		const favoriteButton = page
@@ -277,8 +253,7 @@ test.describe("Event Favorites", () => {
 	});
 
 	test("should show heart icon with correct styling", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Find heart icon inside a button
 		const heartIcon = page.locator('button svg.lucide-heart, button svg[class*="heart"]').first();
@@ -297,8 +272,7 @@ test.describe("Event Favorites", () => {
 
 test.describe("Event Agenda Navigation", () => {
 	test("should navigate to full agenda from event detail", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Find "View Full Agenda" or "Ver Agenda Completa" button
 		const fullAgendaButton = page
@@ -323,8 +297,7 @@ test.describe("Event Agenda Navigation", () => {
 	});
 
 	test("should show my agenda button in event detail", async ({ page }) => {
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Find "My Personal Agenda" or "My Agenda" button/link
 		const myAgendaButton = page
@@ -347,8 +320,7 @@ test.describe("Event Agenda Navigation", () => {
 
 	test("should maintain event context when navigating to full agenda", async ({ page }) => {
 		// Start at event detail
-		await page.goto("/en/events/1");
-		await page.waitForLoadState("domcontentloaded");
+		await openEventDetailPage(page);
 
 		// Navigate to full agenda
 		const fullAgendaButton = page
