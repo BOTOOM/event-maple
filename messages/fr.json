@@ -288,6 +288,44 @@
 				"resend": "Renvoyer l'email",
 				"backToLogin": "Retour à la connexion"
 			}
+		},
+		"ResetPassword": {
+			"verifying": "Vérification du lien...",
+			"invalidLink": {
+				"title": "Lien Invalide ou Expiré",
+				"description": "Le lien de récupération est invalide ou a expiré. Veuillez demander un nouveau lien de récupération.",
+				"requestNew": "Demander un Nouveau Lien",
+				"backToLogin": "Retour à la connexion"
+			},
+			"success": {
+				"title": "Mot de Passe Mis à Jour !",
+				"description": "Votre mot de passe a été réinitialisé avec succès. Vous serez redirigé vers la connexion dans quelques instants.",
+				"goToLogin": "Aller à la Connexion"
+			},
+			"form": {
+				"title": "Réinitialisez votre Mot de Passe",
+				"subtitle": "Entrez votre nouveau mot de passe pour restaurer l'accès à votre compte.",
+				"newPassword": "Nouveau Mot de Passe",
+				"newPasswordPlaceholder": "Entrez votre nouveau mot de passe",
+				"confirmPassword": "Confirmer le Mot de Passe",
+				"confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+				"minChars": "Minimum 6 caractères",
+				"submit": "Réinitialiser le Mot de Passe",
+				"submitting": "Réinitialisation..."
+			},
+			"validation": {
+				"tooShort": "Mot de passe trop court",
+				"tooShortDesc": "Le mot de passe doit comporter au moins 6 caractères.",
+				"mismatch": "Les mots de passe ne correspondent pas",
+				"mismatchDesc": "Veuillez vérifier que les deux mots de passe sont identiques."
+			},
+			"toast": {
+				"successTitle": "Mot de passe réinitialisé !",
+				"successDesc": "Votre mot de passe a été mis à jour avec succès.",
+				"errorTitle": "Erreur",
+				"errorDesc": "Impossible de réinitialiser le mot de passe.",
+				"unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer."
+			}
 		}
 	},
 	"Events": {
@@ -413,6 +451,29 @@
 		"TalkCard": {
 			"viewMore": "Voir Plus",
 			"locationPending": "Lieu à confirmer"
+		},
+		"TalkTimelineCard": {
+			"by": "Par {speaker}",
+			"fixedEvent": "Événement Fixe",
+			"conflict": "Conflit"
+		},
+		"EmptyTalks": {
+			"title": "Aucune conférence programmée",
+			"description": "L'agenda de cet événement n'est pas encore disponible. Revenez bientôt pour voir les conférences et ateliers programmés."
+		},
+		"DateSelector": {
+			"previousDay": "Jour précédent",
+			"nextDay": "Jour suivant"
+		},
+		"EventNotFound": {
+			"title": "Événement non trouvé",
+			"description": "L'événement que vous recherchez n'existe pas ou a été supprimé.",
+			"backToEvents": "Retour aux Événements"
+		},
+		"TalkNotFound": {
+			"title": "Conférence non trouvée",
+			"description": "La conférence que vous recherchez n'existe pas ou a été supprimée.",
+			"backToEvents": "Retour aux Événements"
 		},
 		"TalkDetail": {
 			"backToAgenda": "Retour à l'Agenda",

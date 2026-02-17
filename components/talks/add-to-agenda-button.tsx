@@ -102,7 +102,7 @@ export function AddToAgendaButton({
 				onClick={handleToggle}
 				disabled={isLoading}
 				variant={isInAgenda ? "default" : "outline"}
-				className={cn("w-full sm:w-auto", isInAgenda && "bg-blue-600 hover:bg-blue-700", className)}
+				className={cn("w-full sm:w-auto", isInAgenda && "bg-primary hover:bg-primary/90", className)}
 			>
 				<Heart className={cn("h-4 w-4 mr-2", isInAgenda && "fill-white")} />
 				{isInAgenda ? t("inAgenda") : t("add")}
@@ -116,7 +116,7 @@ export function AddToAgendaButton({
 			onClick={handleToggle}
 			disabled={isLoading}
 			className={cn(
-				"p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0",
+				"p-2 rounded-full hover:bg-secondary transition-colors flex-shrink-0",
 				className,
 			)}
 			aria-label={isInAgenda ? t("removeAriaLabel") : t("addAriaLabel")}
@@ -124,7 +124,7 @@ export function AddToAgendaButton({
 			<Heart
 				className={cn(
 					"h-5 w-5 transition-colors",
-					isInAgenda ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-500",
+					isInAgenda ? "fill-red-500 text-red-500" : "text-muted-foreground hover:text-red-500",
 				)}
 			/>
 		</button>

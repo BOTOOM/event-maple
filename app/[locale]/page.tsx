@@ -6,7 +6,7 @@ import { Navbar } from "@/components/landing/navbar";
 
 export default function HomePage() {
 	return (
-		<main className="min-h-screen">
+		<main id="main-content" className="min-h-screen">
 			<Navbar />
 			<Hero />
 			<Benefits />

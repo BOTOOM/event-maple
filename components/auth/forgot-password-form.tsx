@@ -67,21 +67,21 @@ export function ForgotPasswordForm() {
 				{/* Success State */}
 				<div className="text-center space-y-6">
 					<div className="flex justify-center">
-						<div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-							<CheckCircle className="h-10 w-10 text-green-600" />
+						<div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center">
+							<CheckCircle className="h-10 w-10 text-emerald-600" />
 						</div>
 					</div>
 
 					<div>
-						<h1 className="text-3xl font-bold text-gray-900 mb-2">{t("success.title")}</h1>
-						<p className="text-gray-600">{t("success.message")}</p>
+						<h1 className="text-3xl font-bold text-foreground mb-2">{t("success.title")}</h1>
+						<p className="text-muted-foreground">{t("success.message")}</p>
 						<p className="text-primary font-medium mt-2">{email}</p>
 					</div>
 
-					<div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-left">
+					<div className="bg-winter-100 border border-border rounded-lg p-4 text-left">
 						<div className="flex gap-3">
-							<Mail className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-							<div className="text-sm text-gray-700">
+							<Mail className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+							<div className="text-sm text-foreground">
 								<p className="font-medium mb-1">{t("success.checkInbox")}</p>
 								<p>{t("success.validity")}</p>
 							</div>
@@ -116,7 +116,7 @@ export function ForgotPasswordForm() {
 			<div className="mb-6">
 				<Link
 					href="/login"
-					className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+					className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
 				>
 					<ArrowLeft className="h-4 w-4" />
 					<span className="text-sm font-medium">{t("backToLogin")}</span>
@@ -131,13 +131,13 @@ export function ForgotPasswordForm() {
 			</div>
 
 			<div className="text-center mb-8">
-				<h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{t("title")}</h1>
-				<p className="text-gray-600">{t("subtitle")}</p>
+				<h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{t("title")}</h1>
+				<p className="text-muted-foreground">{t("subtitle")}</p>
 			</div>
 
 			<form onSubmit={handleSubmit} className="space-y-6">
 				<div className="space-y-2">
-					<Label htmlFor="email" className="text-gray-900">
+					<Label htmlFor="email" className="text-foreground">
 						{tCommon("email")}
 					</Label>
 					<Input

@@ -4,58 +4,85 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Marine Blue / Muted Skyline palette
+     * From image reference:
+     *   --winter-900: #004a6e  → 199 100% 22%  (deep marine)
+     *   --winter-700: #016191  → 199 100% 28%  (Marine Blue)
+     *   --winter-500: #0197ca  → 196 100% 40%  (bright cyan)
+     *   --winter-300: #78a7bc  → 199 32% 60%   (Pale Denim)
+     *   --winter-100: #d4dfe5  → 199 20% 86%   (light wash)
+     */
+    --winter-900: 199 100% 22%;
+    --winter-700: 199 100% 28%;
+    --winter-500: 196 100% 40%;
+    --winter-300: 199 32% 60%;
+    --winter-100: 199 20% 86%;
+
+    --background: 200 20% 97%;
+    --foreground: 199 50% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 199 50% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 217 91% 60%;
+    --popover-foreground: 199 50% 15%;
+    --primary: 199 100% 28%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --secondary: 199 20% 90%;
+    --secondary-foreground: 199 50% 15%;
+    --muted: 199 15% 90%;
+    --muted-foreground: 199 20% 46%;
+    --accent: 196 60% 92%;
+    --accent-foreground: 199 100% 22%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 199 18% 85%;
+    --input: 199 18% 85%;
+    --ring: 199 100% 28%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 199 100% 28%;
+    --chart-2: 196 100% 40%;
+    --chart-3: 199 32% 60%;
+    --chart-4: 173 40% 42%;
+    --chart-5: 43 74% 66%;
+
+    /* Semantic surface tokens */
+    --surface: 200 18% 95%;
+    --surface-foreground: 199 50% 15%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --winter-900: 199 20% 86%;
+    --winter-700: 199 32% 60%;
+    --winter-500: 196 100% 40%;
+    --winter-300: 199 100% 28%;
+    --winter-100: 199 100% 22%;
+
+    --background: 200 40% 7%;
+    --foreground: 199 15% 90%;
+    --card: 200 35% 11%;
+    --card-foreground: 199 15% 90%;
+    --popover: 200 35% 11%;
+    --popover-foreground: 199 15% 90%;
+    --primary: 196 100% 40%;
+    --primary-foreground: 200 40% 7%;
+    --secondary: 200 30% 16%;
+    --secondary-foreground: 199 15% 90%;
+    --muted: 200 25% 18%;
+    --muted-foreground: 199 20% 62%;
+    --accent: 200 30% 16%;
+    --accent-foreground: 199 15% 90%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 200 25% 18%;
+    --input: 200 25% 18%;
+    --ring: 196 100% 40%;
+    --chart-1: 196 100% 40%;
+    --chart-2: 199 32% 60%;
+    --chart-3: 199 100% 28%;
+    --chart-4: 160 60% 45%;
+    --chart-5: 30 80% 55%;
+
+    --surface: 200 35% 13%;
+    --surface-foreground: 199 15% 90%;
   }
 }
 
@@ -63,8 +90,31 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip to main content - accessibility */
+.skip-to-main {
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring;
 }

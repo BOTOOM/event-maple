@@ -95,12 +95,12 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 	const locationPending = locationPendingMap[locale] || locationPendingMap.en;
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			<PageHeader backHref={backLink} backText={backText} mobileTitle={t("mobileTitle")} />
 
 			<main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-4xl">
 				{/* Title */}
-				<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+				<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
 					{talk.title}
 				</h1>
 
@@ -109,13 +109,13 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 					{talk.tags?.map((tag: string) => (
 						<span
 							key={tag}
-							className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full"
+							className="inline-block px-3 py-1 bg-winter-100 text-primary text-sm font-medium rounded-full"
 						>
 							{tag}
 						</span>
 					))}
 					{talk.level && (
-						<span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 text-sm font-medium rounded-full">
+						<span className="inline-flex items-center gap-1 px-3 py-1 bg-winter-300/50 text-winter-900 text-sm font-medium rounded-full">
 							<Award className="h-3.5 w-3.5" />
 							{talk.level}
 						</span>
@@ -123,30 +123,30 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 				</div>
 
 				{/* Meta Information */}
-				<div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+				<div className="bg-card rounded-lg shadow-sm p-6 mb-6">
 					<div className="space-y-4">
 						<InfoRow
-							icon={<Calendar className="h-5 w-5 text-gray-700" />}
+							icon={<Calendar className="h-5 w-5 text-muted-foreground" />}
 							label={t("dateTime")}
 							value={`${formatDate()} | ${timeRange}`}
 						/>
 						{location !== locationPending && (
 							<InfoRow
-								icon={<MapPin className="h-5 w-5 text-gray-700" />}
+								icon={<MapPin className="h-5 w-5 text-muted-foreground" />}
 								label={t("location")}
 								value={location}
 							/>
 						)}
 						{talk.speaker_name && (
 							<InfoRow
-								icon={<User className="h-5 w-5 text-gray-700" />}
+								icon={<User className="h-5 w-5 text-muted-foreground" />}
 								label={t("speaker")}
 								value={talk.speaker_name}
 							/>
 						)}
 						{talk.capacity && (
 							<InfoRow
-								icon={<Users className="h-5 w-5 text-gray-700" />}
+								icon={<Users className="h-5 w-5 text-muted-foreground" />}
 								label={t("capacity")}
 								value={t("capacityValue", { count: talk.capacity })}
 							/>
@@ -156,8 +156,8 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 
 				{/* Speaker Info */}
 				{talk.speaker_name && (talk.speaker_bio || talk.speaker_photo) && (
-					<div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-						<h2 className="text-xl font-semibold text-gray-900 mb-4">{t("aboutSpeaker")}</h2>
+					<div className="bg-card rounded-lg shadow-sm p-6 mb-6">
+						<h2 className="text-xl font-semibold text-foreground mb-4">{t("aboutSpeaker")}</h2>
 						<div className="flex items-start gap-4">
 							{talk.speaker_photo && (
 								<div className="relative w-16 h-16 flex-shrink-0">
@@ -170,9 +170,9 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 								</div>
 							)}
 							<div>
-								<p className="font-semibold text-gray-900 mb-1">{talk.speaker_name}</p>
+								<p className="font-semibold text-foreground mb-1">{talk.speaker_name}</p>
 								{talk.speaker_bio && (
-									<p className="text-gray-700 leading-relaxed">{talk.speaker_bio}</p>
+									<p className="text-foreground/80 leading-relaxed">{talk.speaker_bio}</p>
 								)}
 							</div>
 						</div>
@@ -180,17 +180,17 @@ export default async function TalkDetailPage({ params, searchParams }: TalkDetai
 				)}
 
 				{/* Description */}
-				<div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-					<h2 className="text-xl font-semibold text-gray-900 mb-4">{t("description")}</h2>
+				<div className="bg-card rounded-lg shadow-sm p-6 mb-6">
+					<h2 className="text-xl font-semibold text-foreground mb-4">{t("description")}</h2>
 					<div className="prose prose-gray max-w-none">
-						<p className="text-gray-700 leading-relaxed whitespace-pre-line">
+						<p className="text-foreground/80 leading-relaxed whitespace-pre-line">
 							{talk.detailed_description || talk.short_description || t("noDescription")}
 						</p>
 					</div>
 				</div>
 
 				{/* CTA - Add to Agenda */}
-				<div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 -mx-4 sm:mx-0 sm:rounded-lg sm:border sm:static">
+				<div className="sticky bottom-0 bg-card border-t border-border p-4 -mx-4 sm:mx-0 sm:rounded-lg sm:border sm:static">
 					<AddToAgendaButton
 						talkId={talkId}
 						eventId={eventId}

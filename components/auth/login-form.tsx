@@ -100,7 +100,7 @@ function LoginFormContent() {
 			<div className="mb-6">
 				<Link
 					href="/"
-					className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+					className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
 				>
 					<ArrowLeft className="h-4 w-4" />
 					<span className="text-sm font-medium">{tCommon("backToHome")}</span>
@@ -115,13 +115,13 @@ function LoginFormContent() {
 			</div>
 
 			<div className="text-center mb-8">
-				<h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">{t("title")}</h1>
-				<p className="text-gray-600">{t("subtitle")}</p>
+				<h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{t("title")}</h1>
+				<p className="text-muted-foreground">{t("subtitle")}</p>
 			</div>
 
 			<form onSubmit={handleLogin} className="space-y-6">
 				<div className="space-y-2">
-					<Label htmlFor="email" className="text-gray-900">
+					<Label htmlFor="email" className="text-foreground">
 						{tCommon("email")}
 					</Label>
 					<Input
@@ -137,7 +137,7 @@ function LoginFormContent() {
 
 				<div className="space-y-2">
 					<div className="flex items-center justify-between">
-						<Label htmlFor="password" className="text-gray-900">
+						<Label htmlFor="password" className="text-foreground">
 							{tCommon("password")}
 						</Label>
 						<Link href="/forgot-password" className="text-sm text-primary hover:underline">
@@ -168,7 +168,7 @@ function LoginFormContent() {
 					{isLoading ? t("submitting") : t("submit")}
 				</Button>
 
-				<div className="text-center text-sm text-gray-600">
+				<div className="text-center text-sm text-muted-foreground">
 					{t("noAccount")}{" "}
 					<Link href="/register" className="text-primary hover:underline font-medium">
 						{t("registerLink")}

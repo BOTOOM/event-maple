@@ -61,7 +61,7 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
 	const eventTitle = event.title || event.name;
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			{/* Header */}
 			<AgendaHeader eventId={eventId} eventTitle={eventTitle} />
 

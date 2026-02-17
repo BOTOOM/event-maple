@@ -288,6 +288,44 @@
 				"resend": "Reenviar email",
 				"backToLogin": "Voltar ao login"
 			}
+		},
+		"ResetPassword": {
+			"verifying": "Verificando link...",
+			"invalidLink": {
+				"title": "Link Inválido ou Expirado",
+				"description": "O link de recuperação é inválido ou expirou. Por favor, solicite um novo link de recuperação.",
+				"requestNew": "Solicitar Novo Link",
+				"backToLogin": "Voltar ao login"
+			},
+			"success": {
+				"title": "Senha Atualizada!",
+				"description": "Sua senha foi redefinida com sucesso. Você será redirecionado para o login em instantes.",
+				"goToLogin": "Ir para o Login"
+			},
+			"form": {
+				"title": "Redefina sua Senha",
+				"subtitle": "Digite sua nova senha para restaurar o acesso à sua conta.",
+				"newPassword": "Nova Senha",
+				"newPasswordPlaceholder": "Digite sua nova senha",
+				"confirmPassword": "Confirmar Senha",
+				"confirmPasswordPlaceholder": "Confirme sua nova senha",
+				"minChars": "Mínimo 6 caracteres",
+				"submit": "Redefinir Senha",
+				"submitting": "Redefinindo..."
+			},
+			"validation": {
+				"tooShort": "Senha muito curta",
+				"tooShortDesc": "A senha deve ter pelo menos 6 caracteres.",
+				"mismatch": "As senhas não coincidem",
+				"mismatchDesc": "Por favor, verifique se ambas as senhas são iguais."
+			},
+			"toast": {
+				"successTitle": "Senha redefinida!",
+				"successDesc": "Sua senha foi atualizada com sucesso.",
+				"errorTitle": "Erro",
+				"errorDesc": "Não foi possível redefinir a senha.",
+				"unexpectedError": "Ocorreu um erro inesperado. Tente novamente."
+			}
 		}
 	},
 	"Events": {
@@ -413,6 +451,29 @@
 		"TalkCard": {
 			"viewMore": "Ver Mais",
 			"locationPending": "Local a confirmar"
+		},
+		"TalkTimelineCard": {
+			"by": "Por {speaker}",
+			"fixedEvent": "Evento Fixo",
+			"conflict": "Conflito"
+		},
+		"EmptyTalks": {
+			"title": "Nenhuma palestra programada",
+			"description": "A agenda deste evento ainda não está disponível. Volte em breve para ver as palestras e workshops programados."
+		},
+		"DateSelector": {
+			"previousDay": "Dia anterior",
+			"nextDay": "Próximo dia"
+		},
+		"EventNotFound": {
+			"title": "Evento não encontrado",
+			"description": "O evento que você procura não existe ou foi removido.",
+			"backToEvents": "Voltar aos Eventos"
+		},
+		"TalkNotFound": {
+			"title": "Palestra não encontrada",
+			"description": "A palestra que você procura não existe ou foi removida.",
+			"backToEvents": "Voltar aos Eventos"
 		},
 		"TalkDetail": {
 			"backToAgenda": "Voltar para Agenda",

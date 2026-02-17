@@ -40,9 +40,9 @@ export function EventCard({ event }: Readonly<EventCardProps>) {
 			});
 
 	return (
-		<div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+		<div className="bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-ring">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gradient-to-br from-teal-500 to-teal-700">
+			<div className="relative w-full h-48 bg-gradient-to-br from-winter-700 to-winter-900">
 				{event.image_url ? (
 					<Image src={event.image_url} alt={eventTitle} fill className="object-cover" />
 				) : (
@@ -71,25 +71,25 @@ export function EventCard({ event }: Readonly<EventCardProps>) {
 				{/* Category Badge */}
 				{event.category_name && (
 					<div className="flex items-center gap-1.5">
-						<Tag className="h-3.5 w-3.5 text-blue-600" />
-						<span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+						<Tag className="h-3.5 w-3.5 text-primary" />
+						<span className="text-xs font-medium text-primary bg-winter-100 px-2 py-0.5 rounded-full">
 							{event.category_name}
 						</span>
 					</div>
 				)}
 
-				<h3 className="text-lg sm:text-xl font-semibold text-gray-900 line-clamp-2">
+				<h3 className="text-lg sm:text-xl font-semibold text-foreground line-clamp-2">
 					{eventTitle}
 				</h3>
 
 				<div className="space-y-2">
-					<div className="flex items-center gap-2 text-sm text-gray-600">
+					<div className="flex items-center gap-2 text-sm text-muted-foreground">
 						<Calendar className="h-4 w-4 flex-shrink-0" />
 						<span>{formattedDate}</span>
 					</div>
 
 					{event.location && (
-						<div className="flex items-start gap-2 text-sm text-gray-600">
+						<div className="flex items-start gap-2 text-sm text-muted-foreground">
 							<MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
 							<span className="line-clamp-2">{event.location}</span>
 						</div>

@@ -97,7 +97,7 @@ export function FavoriteButton({
 				onClick={toggleFavorite}
 				disabled={isLoading}
 				className={cn(
-					"flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors",
+					"flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors",
 					isLoading && "opacity-50 cursor-not-allowed",
 					className,
 				)}
@@ -114,14 +114,14 @@ export function FavoriteButton({
 			onClick={toggleFavorite}
 			disabled={isLoading}
 			className={cn(
-				"p-2 rounded-full hover:bg-gray-100 transition-colors",
+				"p-2 rounded-full hover:bg-secondary transition-colors",
 				isLoading && "opacity-50 cursor-not-allowed",
 				className,
 			)}
 			aria-label={isFavorite ? t("remove") : t("add")}
 		>
 			<Heart
-				className={cn("h-6 w-6", isFavorite ? "fill-red-500 text-red-500" : "text-gray-700")}
+				className={cn("h-6 w-6", isFavorite ? "fill-red-500 text-red-500" : "text-muted-foreground")}
 			/>
 		</button>
 	);

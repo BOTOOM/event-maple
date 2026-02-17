@@ -208,7 +208,7 @@ export async function searchForEvent(page: Page, eventName: string): Promise<voi
  */
 export async function clickViewDetails(page: Page): Promise<void> {
 	const viewDetailsButton = page
-		.locator('a:has-text("View details"), a:has-text("Ver detalles")')
+		.locator('a:has-text("View details"), a:has-text("Ver detalles"), a:has-text("Voir les détails"), a:has-text("Ver detalhes")')
 		.first();
 	await expect(viewDetailsButton).toBeVisible({ timeout: 10000 });
 	await viewDetailsButton.click();

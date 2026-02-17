@@ -117,10 +117,10 @@ test.describe("Authenticated User Features", () => {
 		test("should display day schedule timeline", async ({ page }) => {
 			await navigateTo(page, "/en/events/1/my-agenda");
 
-			// Should see time slots
-			const timeSlots = page.locator(`text=/\\d{1,2}:\\d{2}\\s*(AM|PM)/i`);
-			const count = await timeSlots.count();
-			expect(count).toBeGreaterThan(0);
+			// Should see timeline section and at least one timeline card
+			await expect(page.getByRole("heading", { name: /day schedule/i })).toBeVisible();
+			const timelineCards = page.locator("main a:has(h3)");
+			await expect(timelineCards.first()).toBeVisible();
 		});
 
 		test("should display rooms section", async ({ page }) => {

@@ -126,7 +126,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 	const eventTitle = getEventTitle(event);
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			{/* Structured Data for SEO */}
 			<script
 				type="application/ld+json"
@@ -134,20 +134,20 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 			/>
 
 			{/* Mobile Header */}
-			<div className="md:hidden sticky top-0 z-40 bg-white border-b border-gray-200">
+			<div className="md:hidden sticky top-0 z-40 bg-card border-b border-border">
 				<div className="flex items-center justify-between px-4 h-14">
 					<Link href="/events">
 						<Button variant="ghost" size="icon">
 							<ArrowLeft className="h-5 w-5" />
 						</Button>
 					</Link>
-					<span className="font-semibold text-gray-900">{t("titleMobile")}</span>
+					<span className="font-semibold text-foreground">{t("titleMobile")}</span>
 					<FavoriteButton eventId={eventId} initialIsFavorite={isFavorite} />
 				</div>
 			</div>
 
 			{/* Desktop Header */}
-			<div className="hidden md:block sticky top-0 z-40 bg-white border-b border-gray-200">
+			<div className="hidden md:block sticky top-0 z-40 bg-card border-b border-border">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex items-center justify-between h-16">
 						<Link href="/events">
@@ -162,7 +162,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
 			<main className="container mx-auto px-0 md:px-4 lg:px-8 pb-8">
 				{/* Hero Image */}
-				<div className="relative w-full h-64 sm:h-80 md:h-96 md:rounded-lg md:mt-6 overflow-hidden bg-gradient-to-br from-blue-600 to-purple-600">
+				<div className="relative w-full h-64 sm:h-80 md:h-96 md:rounded-lg md:mt-6 overflow-hidden bg-gradient-to-br from-winter-700 to-winter-900">
 					{event.image_url ? (
 						<Image src={event.image_url} alt={eventTitle} fill className="object-cover" priority />
 					) : (
@@ -183,8 +183,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 				</div>
 
 				{/* Content */}
-				<div className="bg-white md:rounded-lg md:shadow-sm mt-0 md:mt-6 p-6 sm:p-8">
-					<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+				<div className="bg-card md:rounded-lg md:shadow-sm mt-0 md:mt-6 p-6 sm:p-8">
+					<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
 						{eventTitle}
 					</h1>
 
@@ -193,20 +193,20 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 						{/* Left Column: Event Meta */}
 						<div className="lg:col-span-2 space-y-4">
 							<InfoRow
-								icon={<Calendar className="h-5 w-5 text-gray-700" />}
+								icon={<Calendar className="h-5 w-5 text-muted-foreground" />}
 								label={t("date")}
 								value={<EventDateDisplay startAt={event.start_at} startDate={event.start_date} />}
 							/>
 							{event.location && (
 								<InfoRow
-									icon={<MapPin className="h-5 w-5 text-gray-700" />}
+									icon={<MapPin className="h-5 w-5 text-muted-foreground" />}
 									label={t("location")}
 									value={event.location}
 								/>
 							)}
 							{event.organizer && (
 								<InfoRow
-									icon={<Users className="h-5 w-5 text-gray-700" />}
+									icon={<Users className="h-5 w-5 text-muted-foreground" />}
 									label={t("organizer")}
 									value={event.organizer}
 								/>
@@ -215,8 +215,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
 						{/* Right Column: Actions Panel */}
 						<div className="lg:col-span-1">
-							<div className="bg-gray-50 rounded-lg p-5 space-y-4 border border-gray-200">
-								<h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide">
+							<div className="bg-surface rounded-lg p-5 space-y-4 border border-border">
+								<h3 className="font-semibold text-foreground text-sm uppercase tracking-wide">
 									{t("actions.title")}
 								</h3>
 
@@ -237,7 +237,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 								</div>
 
 								{/* Desktop: Add to Favorites */}
-								<div className="pt-3 border-t border-gray-300">
+								<div className="pt-3 border-t border-border">
 									<FavoriteButton
 										eventId={eventId}
 										initialIsFavorite={isFavorite}
@@ -250,10 +250,10 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
 					{/* Description */}
 					{event.description && (
-						<div className="border-t border-gray-200 pt-8">
-							<h2 className="text-xl font-semibold text-gray-900 mb-4">{t("about")}</h2>
+						<div className="border-t border-border pt-8">
+							<h2 className="text-xl font-semibold text-foreground mb-4">{t("about")}</h2>
 							<div className="prose prose-gray max-w-none">
-								<p className="text-gray-700 leading-relaxed whitespace-pre-line">
+								<p className="text-foreground/80 leading-relaxed whitespace-pre-line">
 									{event.description}
 								</p>
 							</div>

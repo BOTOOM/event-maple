@@ -7,29 +7,29 @@ export function Footer() {
 	const t = useTranslations("Landing.Footer");
 
 	return (
-		<footer className="bg-gray-900 text-gray-300">
+		<footer className="bg-winter-900 text-winter-300">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 					{/* Brand */}
 					<div className="col-span-1">
-						<Link href="/" className="flex items-center gap-2 text-white mb-4">
+						<Link href="/" className="flex items-center gap-2 text-winter-100 mb-4">
 							<Calendar className="h-6 w-6" />
 							<span className="font-bold text-xl">EventMaple</span>
 						</Link>
-						<p className="text-sm text-gray-400">{t("brand.tagline")}</p>
+						<p className="text-sm text-winter-500">{t("brand.tagline")}</p>
 					</div>
 
 					{/* Links */}
 					<div>
-						<h3 className="font-semibold text-white mb-4">{t("columns.product")}</h3>
+						<h3 className="font-semibold text-winter-100 mb-4">{t("columns.product")}</h3>
 						<ul className="space-y-2">
 							<li>
-								<Link href="#benefits" className="text-sm hover:text-white transition-colors">
+								<Link href="#benefits" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.benefits")}
 								</Link>
 							</li>
 							<li>
-								<Link href="#features" className="text-sm hover:text-white transition-colors">
+								<Link href="#features" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.features")}
 								</Link>
 							</li>
@@ -42,15 +42,15 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h3 className="font-semibold text-white mb-4">{t("columns.project")}</h3>
+						<h3 className="font-semibold text-winter-100 mb-4">{t("columns.project")}</h3>
 						<ul className="space-y-2">
 							<li>
-								<Link href="/about" className="text-sm hover:text-white transition-colors">
+								<Link href="/about" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.about")}
 								</Link>
 							</li>
 							<li>
-								<Link href="/contact" className="text-sm hover:text-white transition-colors">
+								<Link href="/contact" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.contact")}
 								</Link>
 							</li>
@@ -58,15 +58,15 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h3 className="font-semibold text-white mb-4">{t("columns.legal")}</h3>
+						<h3 className="font-semibold text-winter-100 mb-4">{t("columns.legal")}</h3>
 						<ul className="space-y-2">
 							<li>
-								<Link href="/terms" className="text-sm hover:text-white transition-colors">
+								<Link href="/terms" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.terms")}
 								</Link>
 							</li>
 							<li>
-								<Link href="/privacy" className="text-sm hover:text-white transition-colors">
+								<Link href="/privacy" className="text-sm hover:text-winter-100 transition-colors">
 									{t("links.privacy")}
 								</Link>
 							</li>
@@ -74,8 +74,8 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="border-t border-gray-800 mt-12 pt-8 text-center">
-					<p className="text-sm text-gray-400">
+				<div className="border-t border-winter-700 mt-12 pt-8 text-center">
+					<p className="text-sm text-winter-500">
 						{t("copyright", { year: currentYear })}{" "}
 						<a
 							href="https://edwardiaz.dev"

@@ -88,19 +88,19 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 	const hasNoTalks = talksWithStatus.length === 0;
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			{/* Header */}
 			<AgendaHeader eventId={eventId} eventTitle={eventTitle} />
 
 			<main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl">
 				{/* Empty State */}
 				{hasNoTalks ? (
-					<div className="text-center py-12 px-4 bg-white rounded-lg border border-gray-200">
-						<div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-							<Calendar className="h-8 w-8 text-blue-600" />
+					<div className="text-center py-12 px-4 bg-card rounded-lg border border-border">
+						<div className="w-16 h-16 bg-winter-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<Calendar className="h-8 w-8 text-primary" />
 						</div>
-						<h3 className="text-lg font-semibold text-gray-900 mb-2">{t("empty.title")}</h3>
-						<p className="text-gray-600 max-w-md mx-auto mb-6">{t("empty.description")}</p>
+						<h3 className="text-lg font-semibold text-foreground mb-2">{t("empty.title")}</h3>
+						<p className="text-muted-foreground max-w-md mx-auto mb-6">{t("empty.description")}</p>
 						<Link href={`/events/${eventId}/agenda`}>
 							<Button>
 								<Calendar className="h-4 w-4 mr-2" />
@@ -112,11 +112,11 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 					<>
 						{/* Info Box - Conflicts Warning */}
 						{talksWithStatus.length > 1 && (
-							<div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-								<AlertCircle className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
+							<div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 flex items-start gap-3">
+								<AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
 								<div>
-									<p className="text-sm font-medium text-orange-900 mb-1">{t("conflicts.title")}</p>
-									<p className="text-sm text-orange-700">{t("conflicts.description")}</p>
+									<p className="text-sm font-medium text-amber-900 mb-1">{t("conflicts.title")}</p>
+									<p className="text-sm text-amber-700">{t("conflicts.description")}</p>
 								</div>
 							</div>
 						)}

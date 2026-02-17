@@ -1,5 +1,6 @@
 import { AlertCircle, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { formatTimeDisplay, getTalkColor, TalkWithConflict } from "@/lib/utils/timeline";
 
@@ -16,6 +17,7 @@ export function TalkTimelineCard({
 	isInAgenda,
 	hasConflict,
 }: TalkTimelineCardProps) {
+	const t = useTranslations("Events.TalkTimelineCard");
 	const colorClasses = getTalkColor(talk);
 
 	return (
@@ -44,7 +46,7 @@ export function TalkTimelineCard({
 			{/* Details */}
 			{!talk.is_fixed && (
 				<div className="space-y-1.5 text-sm">
-					{talk.speaker_name && <p className="opacity-80 line-clamp-1">Por {talk.speaker_name}</p>}
+					{talk.speaker_name && <p className="opacity-80 line-clamp-1">{t("by", { speaker: talk.speaker_name })}</p>}
 					{talk.room && (
 						<div className="flex items-center gap-1.5 opacity-70">
 							<MapPin className="h-4 w-4 flex-shrink-0" />
@@ -55,13 +57,13 @@ export function TalkTimelineCard({
 			)}
 
 			{/* Fixed event indicator */}
-			{talk.is_fixed && <p className="text-sm opacity-70 mt-2">Evento Fijo</p>}
+			{talk.is_fixed && <p className="text-sm opacity-70 mt-2">{t("fixedEvent")}</p>}
 
 			{/* Conflict warning */}
 			{hasConflict && (
 				<p className="text-sm font-medium text-orange-700 mt-2 flex items-center gap-1">
 					<AlertCircle className="h-4 w-4" />
-					Conflicto
+					{t("conflict")}
 				</p>
 			)}
 		</Link>

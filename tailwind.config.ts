@@ -43,6 +43,17 @@ const config: Config = {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
+				surface: {
+					DEFAULT: "hsl(var(--surface))",
+					foreground: "hsl(var(--surface-foreground))",
+				},
+				winter: {
+					100: "hsl(var(--winter-100))",
+					300: "hsl(var(--winter-300))",
+					500: "hsl(var(--winter-500))",
+					700: "hsl(var(--winter-700))",
+					900: "hsl(var(--winter-900))",
+				},
 				chart: {
 					"1": "hsl(var(--chart-1))",
 					"2": "hsl(var(--chart-2))",

@@ -5,8 +5,8 @@ interface UsageGridItemProps {
 
 function UsageGridItem({ title, items }: UsageGridItemProps) {
 	return (
-		<div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-			<h4 className="font-semibold text-gray-900 mb-2">{title}</h4>
+		<div className="bg-surface border border-border rounded-lg p-4">
+			<h4 className="font-semibold text-foreground mb-2">{title}</h4>
 			<ul className="text-sm space-y-1">
 				{items.map((item) => (
 					<li key={item}>• {item}</li>
@@ -48,8 +48,8 @@ interface RightsGridItemProps {
 
 function RightsGridItem({ title, description }: RightsGridItemProps) {
 	return (
-		<div className="border border-gray-200 rounded-lg p-4">
-			<h4 className="font-semibold text-gray-900 mb-2">{title}</h4>
+		<div className="border border-border rounded-lg p-4">
+			<h4 className="font-semibold text-foreground mb-2">{title}</h4>
 			<p className="text-sm">{description}</p>
 		</div>
 	);

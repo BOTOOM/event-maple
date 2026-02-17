@@ -6,9 +6,9 @@ export function Hero() {
 	const t = useTranslations("Landing.Hero");
 
 	return (
-		<section className="relative pt-20 pb-12 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-gray-50 to-white">
+		<section className="relative pt-20 pb-12 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-b from-surface to-background">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 sm:from-gray-900 sm:via-gray-800 sm:to-gray-900 shadow-2xl">
+				<div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-winter-700 via-winter-900 to-winter-700 shadow-2xl">
 					{/* Background Image Overlay - Solo en desktop */}
 					<div
 						className="absolute inset-0 opacity-0 sm:opacity-40"
@@ -36,7 +36,7 @@ export function Hero() {
 							<Link href="/register">
 								<Button
 									size="lg"
-									className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100 sm:bg-primary sm:text-white sm:hover:bg-primary/90"
+									className="w-full sm:w-auto bg-white text-winter-900 hover:bg-winter-100 sm:bg-white sm:text-winter-900 sm:hover:bg-winter-100"
 								>
 									<span className="hidden sm:inline">{t("cta")}</span>
 									<span className="sm:hidden">{t("ctaMobile")}</span>

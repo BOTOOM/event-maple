@@ -29,13 +29,13 @@ export function LegalPageLayout({
 	footer,
 }: LegalPageLayoutProps) {
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="min-h-screen bg-surface">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl">
 				{/* Back Button */}
 				<div className="mb-6">
 					<Link
 						href={backHref}
-						className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+						className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
 					>
 						<ArrowLeft className="h-4 w-4" />
 						<span className="text-sm font-medium">{backText}</span>
@@ -43,27 +43,27 @@ export function LegalPageLayout({
 				</div>
 
 				{/* Header */}
-				<div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-6">
+				<div className="bg-card rounded-lg shadow-sm border border-border p-8 mb-6">
 					<div className="flex items-center gap-3 mb-4">
 						{HeaderIcon && (
 							<div className="p-3 bg-primary/10 rounded-lg">
 								<HeaderIcon className="h-8 w-8 text-primary" />
 							</div>
 						)}
-						<h1 className="text-4xl font-bold text-gray-900">{title}</h1>
+						<h1 className="text-4xl font-bold text-foreground">{title}</h1>
 					</div>
-					<p className="text-gray-600">
+					<p className="text-muted-foreground">
 						{lastUpdateText}: {lastUpdateDate}
 					</p>
 					{headerAlert && (
-						<div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-							<p className="text-sm text-blue-900">{headerAlert}</p>
+						<div className="mt-4 p-4 bg-winter-100 border border-border rounded-lg">
+							<p className="text-sm text-foreground">{headerAlert}</p>
 						</div>
 					)}
 				</div>
 
 				{/* Content */}
-				<div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 space-y-8">
+				<div className="bg-card rounded-lg shadow-sm border border-border p-8 space-y-8">
 					{children}
 				</div>
 

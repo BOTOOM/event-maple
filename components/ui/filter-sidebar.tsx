@@ -16,8 +16,8 @@ interface ToggleFilterProps {
 function ToggleFilter({ id, label, checked, onChange, description }: ToggleFilterProps) {
 	return (
 		<>
-			<div className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors">
-				<Label htmlFor={id} className="text-sm font-medium text-gray-700 cursor-pointer">
+			<div className="flex items-center justify-between py-3 px-4 bg-surface rounded-lg border border-border hover:bg-secondary transition-colors">
+				<Label htmlFor={id} className="text-sm font-medium text-foreground cursor-pointer">
 					{label}
 				</Label>
 				<button
@@ -29,7 +29,7 @@ function ToggleFilter({ id, label, checked, onChange, description }: ToggleFilte
 					className={`
             relative inline-flex h-6 w-11 items-center rounded-full
             transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-            ${checked ? "bg-primary" : "bg-gray-300"}
+            ${checked ? "bg-primary" : "bg-winter-300"}
           `}
 				>
 					<span
@@ -40,7 +40,7 @@ function ToggleFilter({ id, label, checked, onChange, description }: ToggleFilte
 					/>
 				</button>
 			</div>
-			{description && <p className="text-xs text-gray-500 leading-relaxed">{description}</p>}
+			{description && <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>}
 		</>
 	);
 }
@@ -54,7 +54,7 @@ interface FilterSectionProps {
 function FilterSection({ icon: Icon, title, children }: FilterSectionProps) {
 	return (
 		<div className="space-y-4">
-			<div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+			<div className="flex items-center gap-2 text-sm font-medium text-foreground">
 				<Icon className="h-4 w-4" />
 				<span>{title}</span>
 			</div>
@@ -96,7 +96,7 @@ export function FilterSidebar({
 			<aside
 				className={`
           fixed lg:sticky ${stickyTop} left-0 h-screen lg:h-auto
-          w-80 lg:w-64 bg-white border-r border-gray-200
+          w-80 lg:w-64 bg-card border-r border-border
           transform transition-transform duration-300 ease-in-out
           z-50 lg:z-0 overflow-y-auto
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
@@ -107,7 +107,7 @@ export function FilterSidebar({
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<Filter className="h-5 w-5 text-primary" />
-							<h2 className="font-semibold text-gray-900">{title}</h2>
+							<h2 className="font-semibold text-foreground">{title}</h2>
 						</div>
 						<Button variant="ghost" size="sm" onClick={onClose} className="lg:hidden">
 							<X className="h-5 w-5" />
@@ -117,10 +117,10 @@ export function FilterSidebar({
 					{children}
 
 					{/* Divider */}
-					<div className="border-t border-gray-200" />
+					<div className="border-t border-border" />
 
 					{/* Footer */}
-					{footer && <div className="text-xs text-gray-400 italic">{footer}</div>}
+					{footer && <div className="text-xs text-muted-foreground italic">{footer}</div>}
 				</div>
 			</aside>
 		</>

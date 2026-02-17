@@ -74,7 +74,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
 				<div className="mb-6 space-y-4">
 					{/* Header with filter button */}
 					<div className="flex items-center justify-between gap-4">
-						<h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+						<h1 className="text-2xl sm:text-3xl font-bold text-foreground">
 							{showPastEvents ? t("titleAll") : t("titleUpcoming")}
 						</h1>
 						<Button
@@ -97,7 +97,7 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
 
 					{/* Results count */}
 					{searchQuery && (
-						<p className="text-sm text-gray-600">
+						<p className="text-sm text-muted-foreground">
 							{t("results.count", { count: filteredEvents.length })}
 						</p>
 					)}
@@ -108,8 +108,8 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
 					<div className="text-center py-12">
 						{searchQuery ? (
 							<div className="space-y-3">
-								<p className="text-lg font-medium text-gray-900">{t("results.notFound")}</p>
-								<p className="text-gray-600">{t("results.notFoundDesc")}</p>
+								<p className="text-lg font-medium text-foreground">{t("results.notFound")}</p>
+								<p className="text-muted-foreground">{t("results.notFoundDesc")}</p>
 							</div>
 						) : (
 							<EmptyEvents />
