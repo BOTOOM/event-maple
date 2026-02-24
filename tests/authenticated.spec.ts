@@ -1,14 +1,54 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import {
 	assertNoUntranslatedKeys,
 	assertPageLoaded,
-	login,
+	loginWithEnvCredentials,
 	navigateTo,
 } from "./utils/test-helpers";
 
 // Credentials from environment variables
 const TEST_USER = process.env.PW_USER || "";
 const TEST_PASS = process.env.PW_PSS || "";
+const AGENDA_ADD_BUTTON_TEXT =
+	/Add to my agenda|Añadir a mi agenda|Adicionar à minha agenda|Ajouter à mon agenda/i;
+const AGENDA_IN_BUTTON_TEXT = /In my agenda|En mi agenda|Na minha agenda|Dans mon agenda/i;
+
+async function ensureTalkAgendaState(page: Page, expectedState: "in" | "out") {
+	const addButton = page.locator("button").filter({ hasText: AGENDA_ADD_BUTTON_TEXT }).first();
+	const inAgendaButton = page.locator("button").filter({ hasText: AGENDA_IN_BUTTON_TEXT }).first();
+
+	if (expectedState === "in") {
+		if (await inAgendaButton.isVisible()) {
+			return;
+		}
+
+		await expect(addButton).toBeVisible();
+		await addButton.click();
+
+		try {
+			await expect(inAgendaButton).toBeVisible({ timeout: 6000 });
+		} catch {
+			await page.reload();
+			await expect(inAgendaButton).toBeVisible({ timeout: 10000 });
+		}
+
+		return;
+	}
+
+	if (await addButton.isVisible()) {
+		return;
+	}
+
+	await expect(inAgendaButton).toBeVisible();
+	await inAgendaButton.click();
+
+	try {
+		await expect(addButton).toBeVisible({ timeout: 6000 });
+	} catch {
+		await page.reload();
+		await expect(addButton).toBeVisible({ timeout: 10000 });
+	}
+}
 
 test.describe("Authenticated User Features", () => {
 	// Skip all tests if credentials are not provided
@@ -17,29 +57,48 @@ test.describe("Authenticated User Features", () => {
 
 		// Clear cookies and login
 		await page.context().clearCookies();
-		await navigateTo(page, "/en/login");
-		await login(page, TEST_USER, TEST_PASS);
-		await page.waitForURL(/\/events/, { timeout: 15000 });
+		if (!(await loginWithEnvCredentials(page, "en"))) {
+			test.skip();
+		}
 	});
 
 	test.describe("User Session", () => {
 		test("should display user email in header when logged in", async ({ page }) => {
-			// User email should be visible in header
-			const userEmail = page.locator(`text=${TEST_USER}`);
-			await expect(userEmail).toBeVisible();
+			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
+			await expect(userMenuTrigger).toBeVisible();
+
+			await userMenuTrigger.click();
+			await expect(page.locator('[data-testid="header-user-menu-email"]')).toContainText(
+				`(${TEST_USER})`,
+			);
+		});
+
+		test("should navigate to profile page from user menu", async ({ page }) => {
+			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
+			await userMenuTrigger.click();
+
+			const profileLink = page.locator('[data-testid="header-user-menu-profile"]');
+			await expect(profileLink).toBeVisible();
+			await Promise.all([
+				page.waitForURL(/\/profile(?:\?|$)/, { timeout: 15000 }),
+				profileLink.click(),
+			]);
+			await assertPageLoaded(page);
 		});
 
 		test("should display sign out button when logged in", async ({ page }) => {
-			const signOutButton = page.locator(
-				'button:has-text("Sign Out"), button:has-text("Cerrar sesión")',
-			);
+			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
+			await userMenuTrigger.click();
+
+			const signOutButton = page.locator('[data-testid="header-user-menu-signout"]');
 			await expect(signOutButton).toBeVisible();
 		});
 
 		test("should sign out successfully", async ({ page }) => {
-			const signOutButton = page.locator(
-				'button:has-text("Sign Out"), button:has-text("Cerrar sesión")',
-			);
+			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
+			await userMenuTrigger.click();
+
+			const signOutButton = page.locator('[data-testid="header-user-menu-signout"]');
 			await signOutButton.click();
 
 			// Wait for redirect or page update
@@ -204,43 +263,15 @@ test.describe("Authenticated User Features", () => {
 		test("should add talk to my agenda", async ({ page }) => {
 			await navigateTo(page, "/en/events/1/talks/18");
 
-			// Find "Add to my agenda" button
-			const addButton = page.locator(
-				'button:has-text("Add to my agenda"), button:has-text("Añadir a mi agenda")',
-			);
-
-			if (await addButton.isVisible()) {
-				await addButton.click();
-				await page.waitForTimeout(1000);
-
-				// Button should change to "In my agenda"
-				const inAgendaButton = page.locator(
-					'button:has-text("In my agenda"), button:has-text("En mi agenda")',
-				);
-				await expect(inAgendaButton.first()).toBeVisible();
-			}
+			await ensureTalkAgendaState(page, "out");
+			await ensureTalkAgendaState(page, "in");
 		});
 
 		test("should remove talk from my agenda", async ({ page }) => {
 			await navigateTo(page, "/en/events/1/talks/18");
 
-			// First add if not already
-			const addButton = page.locator('button:has-text("Add to my agenda")').first();
-			if (await addButton.isVisible()) {
-				await addButton.click();
-				await page.waitForTimeout(1000);
-			}
-
-			// Now remove
-			const inAgendaButton = page.locator('button:has-text("In my agenda")').first();
-			if (await inAgendaButton.isVisible()) {
-				await inAgendaButton.click();
-				await page.waitForTimeout(1000);
-
-				// Button should change back
-				const addButtonAfter = page.locator('button:has-text("Add to my agenda")');
-				await expect(addButtonAfter.first()).toBeVisible();
-			}
+			await ensureTalkAgendaState(page, "in");
+			await ensureTalkAgendaState(page, "out");
 		});
 
 		test("should have back navigation to agenda", async ({ page }) => {

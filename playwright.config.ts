@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+process.env.PLAYWRIGHT_BROWSERS_PATH ??= "0";
+
 /**
  * Playwright configuration for Event Planner
  * @see https://playwright.dev/docs/test-configuration

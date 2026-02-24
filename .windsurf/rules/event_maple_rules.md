@@ -177,4 +177,8 @@ All changes must pass:
 - `pnpm run build`
 - `pnpm exec playwright test`
 
+<skills_to_use>
+always use the skills vercel-react-best-practices, ui-ux-pro-max, playwright-skill
+</skills_to_use>
+
 </generation_rules>
