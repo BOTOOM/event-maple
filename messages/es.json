@@ -335,12 +335,16 @@
 			"backToEvent": "Volver al Evento",
 			"userMenu": {
 				"signIn": "Iniciar Sesión",
-				"signOut": "Cerrar Sesión"
+				"signOut": "Cerrar Sesión",
+				"guestName": "Usuario",
+				"openProfileMenu": "Abrir menú de perfil",
+				"avatarAlt": "Avatar de {name}"
 			},
 			"home": "Inicio",
 			"nav": {
 				"events": "Eventos",
 				"myEvents": "Mis Eventos",
+				"profile": "Perfil",
 				"myAgenda": "Mi Agenda",
 				"fullAgenda": "Agenda Completa"
 			}
@@ -635,6 +639,50 @@
 			"eventImage": "Imagen del evento",
 			"register": "Registrarse Ahora",
 			"hint": "Esta es una vista previa aproximada de cómo los asistentes verán tu evento en la página de listado."
+		}
+	},
+	"Profile": {
+		"Metadata": {
+			"title": "Configuración de perfil",
+			"description": "Gestiona tus preferencias personales, idioma y zona horaria."
+		},
+		"pageTitle": "Configuración de perfil",
+		"pageDescription": "Actualiza tu información y preferencias personales.",
+		"Form": {
+			"title": "Tu perfil",
+			"subtitle": "Estas preferencias se usarán en toda tu experiencia de EventMaple.",
+			"fields": {
+				"email": "Correo electrónico",
+				"displayName": "Nombre visible",
+				"avatarUrl": "URL del avatar",
+				"locale": "Idioma preferido",
+				"timezone": "Zona horaria preferida"
+			},
+			"placeholders": {
+				"displayName": "¿Cómo te llamamos?",
+				"avatarUrl": "https://example.com/avatar.jpg",
+				"selectTimezone": "Selecciona zona horaria",
+				"searchTimezone": "Buscar zona horaria...",
+				"noTimezoneFound": "No se encontró la zona horaria."
+			},
+			"locales": {
+				"en": "Inglés",
+				"es": "Español",
+				"pt": "Portugués",
+				"fr": "Francés"
+			},
+			"actions": {
+				"save": "Guardar cambios",
+				"saving": "Guardando..."
+			},
+			"messages": {
+				"successTitle": "Perfil actualizado",
+				"successDescription": "Tus preferencias de perfil se guardaron correctamente.",
+				"errorTitle": "Error",
+				"error": "No pudimos actualizar tu perfil. Inténtalo de nuevo.",
+				"profileUnavailable": "Tu perfil aún no está disponible. Vuelve a intentarlo en un momento.",
+				"invalidAvatar": "La URL del avatar debe ser válida y usar http o https."
+			}
 		}
 	}
 }

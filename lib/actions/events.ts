@@ -13,6 +13,25 @@ import {
 const EVENTS_PER_PAGE = 9;
 const NOT_AUTHENTICATED_ERROR = "Not authenticated";
 
+interface RawCategoryTranslation {
+	name: string;
+	description: string | null;
+}
+
+interface RawEventCategory {
+	id: string;
+	slug: string;
+	is_system: boolean;
+	is_active: boolean;
+	sort_order: number;
+	created_at: string;
+	event_category_translations?: RawCategoryTranslation[] | null;
+}
+
+type RawEventWithRelations = Omit<EventWithDetails, "category" | "is_owner"> & {
+	event_categories?: RawEventCategory | null;
+};
+
 const EVENT_WITH_CATEGORY_SELECT = `
 			*,
 			event_categories (
@@ -62,7 +81,9 @@ async function userOwnsEvent(
 	return !!existingEvent && existingEvent.created_by === userId;
 }
 
-function mapEventCategory(rawCategory: any) {
+function mapEventCategory(
+	rawCategory: RawEventCategory | null | undefined,
+): EventCategoryWithTranslation | null {
 	if (!rawCategory) {
 		return null;
 	}
@@ -80,7 +101,7 @@ function mapEventCategory(rawCategory: any) {
 }
 
 function mapEventWithDetails(
-	rawEvent: any,
+	rawEvent: RawEventWithRelations,
 	userId?: string,
 	forceOwner: boolean = false,
 ): EventWithDetails {

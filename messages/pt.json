@@ -335,12 +335,16 @@
 			"backToEvent": "Voltar ao Evento",
 			"userMenu": {
 				"signIn": "Entrar",
-				"signOut": "Sair"
+				"signOut": "Sair",
+				"guestName": "Usuário",
+				"openProfileMenu": "Abrir menu de perfil",
+				"avatarAlt": "Avatar de {name}"
 			},
 			"home": "Início",
 			"nav": {
 				"events": "Eventos",
 				"myEvents": "Meus Eventos",
+				"profile": "Perfil",
 				"myAgenda": "Minha Agenda",
 				"fullAgenda": "Agenda Completa"
 			}
@@ -635,6 +639,50 @@
 			"eventImage": "Imagem do evento",
 			"register": "Registrar Agora",
 			"hint": "Esta é uma prévia aproximada de como os participantes verão seu evento na página de listagem."
+		}
+	},
+	"Profile": {
+		"Metadata": {
+			"title": "Configurações de perfil",
+			"description": "Gerencie suas preferências pessoais, idioma e fuso horário."
+		},
+		"pageTitle": "Configurações de perfil",
+		"pageDescription": "Atualize suas informações e preferências pessoais.",
+		"Form": {
+			"title": "Seu perfil",
+			"subtitle": "Estas preferências serão usadas em toda a sua experiência no EventMaple.",
+			"fields": {
+				"email": "Email",
+				"displayName": "Nome de exibição",
+				"avatarUrl": "URL do avatar",
+				"locale": "Idioma preferido",
+				"timezone": "Fuso horário preferido"
+			},
+			"placeholders": {
+				"displayName": "Como devemos te chamar?",
+				"avatarUrl": "https://example.com/avatar.jpg",
+				"selectTimezone": "Selecione o fuso horário",
+				"searchTimezone": "Pesquisar fuso horário...",
+				"noTimezoneFound": "Fuso horário não encontrado."
+			},
+			"locales": {
+				"en": "Inglês",
+				"es": "Espanhol",
+				"pt": "Português",
+				"fr": "Francês"
+			},
+			"actions": {
+				"save": "Salvar alterações",
+				"saving": "Salvando..."
+			},
+			"messages": {
+				"successTitle": "Perfil atualizado",
+				"successDescription": "Suas preferências de perfil foram salvas com sucesso.",
+				"errorTitle": "Erro",
+				"error": "Não foi possível atualizar seu perfil. Tente novamente.",
+				"profileUnavailable": "Seu perfil ainda não está disponível. Tente novamente em instantes.",
+				"invalidAvatar": "A URL do avatar deve ser válida e usar http ou https."
+			}
 		}
 	}
 }

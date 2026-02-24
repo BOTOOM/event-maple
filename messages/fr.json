@@ -335,12 +335,16 @@
 			"backToEvent": "Retour à l'Événement",
 			"userMenu": {
 				"signIn": "Se connecter",
-				"signOut": "Se déconnecter"
+				"signOut": "Se déconnecter",
+				"guestName": "Utilisateur",
+				"openProfileMenu": "Ouvrir le menu du profil",
+				"avatarAlt": "Avatar de {name}"
 			},
 			"home": "Accueil",
 			"nav": {
 				"events": "Événements",
 				"myEvents": "Mes Événements",
+				"profile": "Profil",
 				"myAgenda": "Mon Agenda",
 				"fullAgenda": "Agenda Complet"
 			}
@@ -635,6 +639,50 @@
 			"eventImage": "Image de l'événement",
 			"register": "S'inscrire Maintenant",
 			"hint": "Ceci est un aperçu approximatif de la façon dont les participants verront votre événement sur la page de liste."
+		}
+	},
+	"Profile": {
+		"Metadata": {
+			"title": "Paramètres du profil",
+			"description": "Gérez vos préférences personnelles, langue et fuseau horaire."
+		},
+		"pageTitle": "Paramètres du profil",
+		"pageDescription": "Mettez à jour vos informations et préférences personnelles.",
+		"Form": {
+			"title": "Votre profil",
+			"subtitle": "Ces préférences seront utilisées dans toute votre expérience EventMaple.",
+			"fields": {
+				"email": "Email",
+				"displayName": "Nom affiché",
+				"avatarUrl": "URL de l'avatar",
+				"locale": "Langue préférée",
+				"timezone": "Fuseau horaire préféré"
+			},
+			"placeholders": {
+				"displayName": "Comment devons-nous vous appeler ?",
+				"avatarUrl": "https://example.com/avatar.jpg",
+				"selectTimezone": "Sélectionnez le fuseau horaire",
+				"searchTimezone": "Rechercher un fuseau horaire...",
+				"noTimezoneFound": "Aucun fuseau horaire trouvé."
+			},
+			"locales": {
+				"en": "Anglais",
+				"es": "Espagnol",
+				"pt": "Portugais",
+				"fr": "Français"
+			},
+			"actions": {
+				"save": "Enregistrer les modifications",
+				"saving": "Enregistrement..."
+			},
+			"messages": {
+				"successTitle": "Profil mis à jour",
+				"successDescription": "Vos préférences de profil ont été enregistrées avec succès.",
+				"errorTitle": "Erreur",
+				"error": "Impossible de mettre à jour votre profil. Veuillez réessayer.",
+				"profileUnavailable": "Votre profil n'est pas encore disponible. Veuillez réessayer dans un instant.",
+				"invalidAvatar": "L'URL de l'avatar doit être valide et utiliser http ou https."
+			}
 		}
 	}
 }

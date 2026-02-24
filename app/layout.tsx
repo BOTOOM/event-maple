@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { ReactNode } from "react";
 import "./globals.css";
 
-// El layout raíz es necesario, pero el contenido principal vive en [locale]/layout.tsx
+export const metadata: Metadata = {
+	metadataBase: new URL("https://event-maple.edwardiaz.dev"),
+};
+
+// The root layout is required, but main localized metadata/content lives in [locale]/layout.tsx.
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
 	return (
 		<html lang="en">
