@@ -335,12 +335,16 @@
 			"backToEvent": "Back to Event",
 			"userMenu": {
 				"signIn": "Sign In",
-				"signOut": "Sign Out"
+				"signOut": "Sign Out",
+				"guestName": "User",
+				"openProfileMenu": "Open profile menu",
+				"avatarAlt": "{name} avatar"
 			},
 			"home": "Home",
 			"nav": {
 				"events": "Events",
 				"myEvents": "My Events",
+				"profile": "Profile",
 				"myAgenda": "My Agenda",
 				"fullAgenda": "Full Agenda"
 			}
@@ -635,6 +639,50 @@
 			"eventImage": "Event image",
 			"register": "Register Now",
 			"hint": "This is an approximate preview of how attendees will see your event in the listing page."
+		}
+	},
+	"Profile": {
+		"Metadata": {
+			"title": "Profile settings",
+			"description": "Manage your personal preferences, locale, and timezone."
+		},
+		"pageTitle": "Profile settings",
+		"pageDescription": "Update your personal information and preferences.",
+		"Form": {
+			"title": "Your profile",
+			"subtitle": "These preferences will be used across your EventMaple experience.",
+			"fields": {
+				"email": "Email",
+				"displayName": "Display name",
+				"avatarUrl": "Avatar URL",
+				"locale": "Preferred locale",
+				"timezone": "Preferred timezone"
+			},
+			"placeholders": {
+				"displayName": "How should we call you?",
+				"avatarUrl": "https://example.com/avatar.jpg",
+				"selectTimezone": "Select timezone",
+				"searchTimezone": "Search timezone...",
+				"noTimezoneFound": "No timezone found."
+			},
+			"locales": {
+				"en": "English",
+				"es": "Spanish",
+				"pt": "Portuguese",
+				"fr": "French"
+			},
+			"actions": {
+				"save": "Save changes",
+				"saving": "Saving..."
+			},
+			"messages": {
+				"successTitle": "Profile updated",
+				"successDescription": "Your profile preferences were saved successfully.",
+				"errorTitle": "Error",
+				"error": "We could not update your profile. Please try again.",
+				"profileUnavailable": "Your profile is not available yet. Please try again in a moment.",
+				"invalidAvatar": "Avatar URL must be a valid http or https URL."
+			}
 		}
 	}
 }

@@ -257,13 +257,25 @@ export async function loginWithEnvCredentials(
 		return false;
 	}
 
-	await page.goto(`/${locale}/login`);
-	await page.fill('input[type="email"]', email);
-	await page.fill('input[type="password"]', password);
-	await page.click('button[type="submit"]');
-	await page.waitForURL(/events|my-events/, { timeout: 10000 });
+	for (let attempt = 0; attempt < 3; attempt++) {
+		await page.goto(`/${locale}/login`);
+		await page.fill('input[type="email"]', email);
+		await page.fill('input[type="password"]', password);
+		await page.click('button[type="submit"]');
 
-	return true;
+		try {
+			await page.waitForURL(/events|my-events/, { timeout: 12000 });
+			return true;
+		} catch {
+			if (attempt === 2) {
+				return false;
+			}
+
+			await page.waitForTimeout(800 * (attempt + 1));
+		}
+	}
+
+	return false;
 }
 
 /**
