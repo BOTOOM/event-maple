@@ -586,6 +586,90 @@
 				"edit": "Edit Event"
 			}
 		},
+		"Talks": {
+			"title": "Event Talks",
+			"subtitle": "Create and manage talks for your event agenda.",
+			"add": "Add talk",
+			"edit": "Edit talk",
+			"delete": "Delete talk",
+			"deleteConfirm": "Are you sure you want to delete this talk? This action cannot be undone.",
+			"empty": "No talks yet",
+			"emptyDesc": "You have not added talks for this event yet.",
+			"fields": {
+				"title": "Title",
+				"date": "Date",
+				"startTime": "Start time",
+				"endTime": "End time",
+				"room": "Room",
+				"floor": "Floor",
+				"speakerName": "Speaker name",
+				"speakerBio": "Speaker bio",
+				"speakerPhoto": "Speaker photo URL",
+				"shortDescription": "Short description",
+				"detailedDescription": "Detailed description",
+				"tags": "Tags",
+				"level": "Level",
+				"capacity": "Capacity",
+				"isFixed": "Fixed talk"
+			},
+			"placeholders": {
+				"room": "e.g. Main Hall",
+				"floor": "e.g. Ground Floor",
+				"speakerName": "e.g. Jane Doe",
+				"speakerBio": "Short speaker bio",
+				"speakerPhoto": "https://example.com/speaker.jpg",
+				"shortDescription": "Brief summary of the talk",
+				"detailedDescription": "Describe the talk in detail",
+				"tags": "ai, frontend, product",
+				"level": "e.g. beginner",
+				"capacity": "e.g. 120"
+			},
+			"actions": {
+				"cancel": "Cancel",
+				"save": "Save talk",
+				"saving": "Saving...",
+				"deleting": "Deleting..."
+			},
+			"messages": {
+				"successTitle": "Talk saved",
+				"createSuccess": "Talk created successfully.",
+				"updateSuccess": "Talk updated successfully.",
+				"errorTitle": "Error",
+				"unexpectedError": "An unexpected error occurred. Please try again."
+			},
+			"validation": {
+				"titleRequired": "Title is required",
+				"dateRequired": "Date is required",
+				"timeRequired": "Start and end times are required",
+				"timeOrder": "End time must be after start time"
+			},
+			"import": {
+				"title": "Import Talks",
+				"description": "Upload a CSV or JSON file to bulk import talks into your event agenda.",
+				"button": "Import",
+				"downloadCSV": "CSV Template",
+				"downloadJSON": "JSON Template",
+				"dropzone": "Click to select a CSV or JSON file",
+				"changeFile": "Change file",
+				"errorsFound": "{count} validation error(s) found. Please fix and re-upload.",
+				"preview": "{count} talk(s) ready to import",
+				"confirm": "Import {count} talk(s)",
+				"importing": "Importing...",
+				"success": "{count} talk(s) imported successfully",
+				"successUpsert": "{created} created, {updated} updated",
+				"error": "Error importing talks",
+				"parseError": "Could not parse the file. Check the format.",
+				"duplicatesFound": "{count} duplicate(s) detected — matching existing talks by title, date and start time.",
+				"duplicate": "Duplicate",
+				"new": "New",
+				"actionSkip": "Skip",
+				"actionOverwrite": "Overwrite",
+				"actionSkipped": "Skipped",
+				"skipAll": "Skip all duplicates",
+				"overwriteAll": "Overwrite all duplicates",
+				"status": "Status"
+			}
+		},
 		"Form": {
 			"sections": {
 				"general": "General Details",
@@ -682,6 +766,38 @@
 				"error": "We could not update your profile. Please try again.",
 				"profileUnavailable": "Your profile is not available yet. Please try again in a moment.",
 				"invalidAvatar": "Avatar URL must be a valid http or https URL."
+			},
+			"validation": {
+				"titleRequired": "Title is required",
+				"dateRequired": "Date is required",
+				"timeRequired": "Start and end times are required",
+				"timeOrder": "End time must be after start time"
+			},
+			"import": {
+				"title": "Import Talks",
+				"description": "Upload a CSV or JSON file to bulk import talks into your event agenda.",
+				"button": "Import",
+				"downloadCSV": "CSV Template",
+				"downloadJSON": "JSON Template",
+				"dropzone": "Click to select a CSV or JSON file",
+				"changeFile": "Change file",
+				"errorsFound": "{count} validation error(s) found. Please fix and re-upload.",
+				"preview": "{count} talk(s) ready to import",
+				"confirm": "Import {count} talk(s)",
+				"importing": "Importing...",
+				"success": "{count} talk(s) imported successfully",
+				"successUpsert": "{created} created, {updated} updated",
+				"error": "Error importing talks",
+				"parseError": "Could not parse the file. Check the format.",
+				"duplicatesFound": "{count} duplicate(s) detected — matching existing talks by title, date and start time.",
+				"duplicate": "Duplicate",
+				"new": "New",
+				"actionSkip": "Skip",
+				"actionOverwrite": "Overwrite",
+				"actionSkipped": "Skipped",
+				"skipAll": "Skip all duplicates",
+				"overwriteAll": "Overwrite all duplicates",
+				"status": "Status"
 			}
 		}
 	}

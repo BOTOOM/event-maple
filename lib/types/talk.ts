@@ -18,6 +18,25 @@ export interface Talk {
 	capacity: number | null;
 }
 
+export interface TalkFormData {
+	event_id: number;
+	title: string;
+	short_description: string;
+	detailed_description: string;
+	date: string;
+	start_time: string;
+	end_time: string;
+	room: string;
+	floor: string;
+	speaker_name: string;
+	speaker_bio: string;
+	speaker_photo: string;
+	tags: string[];
+	is_fixed: boolean;
+	level: string;
+	capacity: number;
+}
+
 export interface TalkWithAgendaStatus extends Talk {
 	is_in_my_agenda: boolean;
 }

@@ -586,6 +586,90 @@
 				"edit": "Editar Evento"
 			}
 		},
+		"Talks": {
+			"title": "Charlas del evento",
+			"subtitle": "Crea y gestiona charlas para la agenda de tu evento.",
+			"add": "Agregar charla",
+			"edit": "Editar charla",
+			"delete": "Eliminar charla",
+			"deleteConfirm": "¿Seguro que deseas eliminar esta charla? Esta acción no se puede deshacer.",
+			"empty": "Aún no hay charlas",
+			"emptyDesc": "Todavía no has agregado charlas para este evento.",
+			"fields": {
+				"title": "Título",
+				"date": "Fecha",
+				"startTime": "Hora de inicio",
+				"endTime": "Hora de fin",
+				"room": "Sala",
+				"floor": "Piso",
+				"speakerName": "Nombre del ponente",
+				"speakerBio": "Biografía del ponente",
+				"speakerPhoto": "URL de foto del ponente",
+				"shortDescription": "Descripción corta",
+				"detailedDescription": "Descripción detallada",
+				"tags": "Etiquetas",
+				"level": "Nivel",
+				"capacity": "Capacidad",
+				"isFixed": "Charla fija"
+			},
+			"placeholders": {
+				"room": "Ej. Sala Principal",
+				"floor": "Ej. Planta Baja",
+				"speakerName": "Ej. Jane Doe",
+				"speakerBio": "Breve biografía del ponente",
+				"speakerPhoto": "https://example.com/speaker.jpg",
+				"shortDescription": "Resumen breve de la charla",
+				"detailedDescription": "Describe la charla en detalle",
+				"tags": "ai, frontend, producto",
+				"level": "Ej. principiante",
+				"capacity": "Ej. 120"
+			},
+			"actions": {
+				"cancel": "Cancelar",
+				"save": "Guardar charla",
+				"saving": "Guardando...",
+				"deleting": "Eliminando..."
+			},
+			"messages": {
+				"successTitle": "Charla guardada",
+				"createSuccess": "Charla creada correctamente.",
+				"updateSuccess": "Charla actualizada correctamente.",
+				"errorTitle": "Error",
+				"unexpectedError": "Ocurrió un error inesperado. Inténtalo de nuevo."
+			},
+			"validation": {
+				"titleRequired": "El título es obligatorio",
+				"dateRequired": "La fecha es obligatoria",
+				"timeRequired": "Las horas de inicio y fin son obligatorias",
+				"timeOrder": "La hora de fin debe ser posterior a la de inicio"
+			},
+			"import": {
+				"title": "Importar Charlas",
+				"description": "Sube un archivo CSV o JSON para importar charlas masivamente a la agenda de tu evento.",
+				"button": "Importar",
+				"downloadCSV": "Plantilla CSV",
+				"downloadJSON": "Plantilla JSON",
+				"dropzone": "Haz clic para seleccionar un archivo CSV o JSON",
+				"changeFile": "Cambiar archivo",
+				"errorsFound": "Se encontraron {count} error(es) de validación. Corrige y vuelve a subir.",
+				"preview": "{count} charla(s) lista(s) para importar",
+				"confirm": "Importar {count} charla(s)",
+				"importing": "Importando...",
+				"success": "{count} charla(s) importada(s) exitosamente",
+				"successUpsert": "{created} creada(s), {updated} actualizada(s)",
+				"error": "Error al importar charlas",
+				"parseError": "No se pudo procesar el archivo. Verifica el formato.",
+				"duplicatesFound": "{count} duplicado(s) detectado(s) — coinciden con charlas existentes por título, fecha y hora de inicio.",
+				"duplicate": "Duplicado",
+				"new": "Nueva",
+				"actionSkip": "Omitir",
+				"actionOverwrite": "Sobrescribir",
+				"actionSkipped": "Omitida",
+				"skipAll": "Omitir todos los duplicados",
+				"overwriteAll": "Sobrescribir todos los duplicados",
+				"status": "Estado"
+			}
+		},
 		"Form": {
 			"sections": {
 				"general": "Detalles Generales",
@@ -682,6 +766,38 @@
 				"error": "No pudimos actualizar tu perfil. Inténtalo de nuevo.",
 				"profileUnavailable": "Tu perfil aún no está disponible. Vuelve a intentarlo en un momento.",
 				"invalidAvatar": "La URL del avatar debe ser válida y usar http o https."
+			},
+			"validation": {
+				"titleRequired": "El título es obligatorio",
+				"dateRequired": "La fecha es obligatoria",
+				"timeRequired": "Las horas de inicio y fin son obligatorias",
+				"timeOrder": "La hora de fin debe ser posterior a la de inicio"
+			},
+			"import": {
+				"title": "Importar Charlas",
+				"description": "Sube un archivo CSV o JSON para importar charlas masivamente a la agenda de tu evento.",
+				"button": "Importar",
+				"downloadCSV": "Plantilla CSV",
+				"downloadJSON": "Plantilla JSON",
+				"dropzone": "Haz clic para seleccionar un archivo CSV o JSON",
+				"changeFile": "Cambiar archivo",
+				"errorsFound": "Se encontraron {count} error(es) de validación. Corrige y vuelve a subir.",
+				"preview": "{count} charla(s) lista(s) para importar",
+				"confirm": "Importar {count} charla(s)",
+				"importing": "Importando...",
+				"success": "{count} charla(s) importada(s) exitosamente",
+				"successUpsert": "{created} creada(s), {updated} actualizada(s)",
+				"error": "Error al importar charlas",
+				"parseError": "No se pudo procesar el archivo. Verifica el formato.",
+				"duplicatesFound": "{count} duplicado(s) detectado(s) — coinciden con charlas existentes por título, fecha y hora de inicio.",
+				"duplicate": "Duplicado",
+				"new": "Nueva",
+				"actionSkip": "Omitir",
+				"actionOverwrite": "Sobrescribir",
+				"actionSkipped": "Omitida",
+				"skipAll": "Omitir todos los duplicados",
+				"overwriteAll": "Sobrescribir todos los duplicados",
+				"status": "Estado"
 			}
 		}
 	}
