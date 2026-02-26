@@ -84,11 +84,16 @@ export function TalksManager({ eventId, talks, locale, talkSuggestions }: TalksM
 					<p className="text-muted-foreground">{t("subtitle")}</p>
 				</div>
 				<div className="flex items-center gap-2">
-					<Button variant="outline" onClick={() => setIsImportOpen(true)} className="gap-2">
+					<Button
+						variant="outline"
+						onClick={() => setIsImportOpen(true)}
+						className="gap-2"
+						data-testid="talks-import-button"
+					>
 						<FileUp className="h-4 w-4" />
 						{t("import.button")}
 					</Button>
-					<Button onClick={handleAddTalk} className="gap-2">
+					<Button onClick={handleAddTalk} className="gap-2" data-testid="talks-add-button">
 						<Plus className="h-4 w-4" />
 						{t("add")}
 					</Button>
@@ -102,7 +107,12 @@ export function TalksManager({ eventId, talks, locale, talkSuggestions }: TalksM
 					</div>
 					<h3 className="mt-4 text-lg font-semibold">{t("empty")}</h3>
 					<p className="mt-2 text-sm text-muted-foreground max-w-sm">{t("emptyDesc")}</p>
-					<Button onClick={handleAddTalk} variant="outline" className="mt-4 gap-2">
+					<Button
+						onClick={handleAddTalk}
+						variant="outline"
+						className="mt-4 gap-2"
+						data-testid="talks-add-empty-button"
+					>
 						<Plus className="h-4 w-4" />
 						{t("add")}
 					</Button>
