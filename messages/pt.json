@@ -586,6 +586,90 @@
 				"edit": "Editar Evento"
 			}
 		},
+		"Talks": {
+			"title": "Palestras do evento",
+			"subtitle": "Crie e gerencie palestras para a agenda do seu evento.",
+			"add": "Adicionar palestra",
+			"edit": "Editar palestra",
+			"delete": "Excluir palestra",
+			"deleteConfirm": "Tem certeza de que deseja excluir esta palestra? Esta ação não pode ser desfeita.",
+			"empty": "Ainda não há palestras",
+			"emptyDesc": "Você ainda não adicionou palestras para este evento.",
+			"fields": {
+				"title": "Título",
+				"date": "Data",
+				"startTime": "Hora de início",
+				"endTime": "Hora de término",
+				"room": "Sala",
+				"floor": "Andar",
+				"speakerName": "Nome do palestrante",
+				"speakerBio": "Bio do palestrante",
+				"speakerPhoto": "URL da foto do palestrante",
+				"shortDescription": "Descrição curta",
+				"detailedDescription": "Descrição detalhada",
+				"tags": "Tags",
+				"level": "Nível",
+				"capacity": "Capacidade",
+				"isFixed": "Palestra fixa"
+			},
+			"placeholders": {
+				"room": "Ex. Auditório Principal",
+				"floor": "Ex. Térreo",
+				"speakerName": "Ex. Jane Doe",
+				"speakerBio": "Breve bio do palestrante",
+				"speakerPhoto": "https://example.com/speaker.jpg",
+				"shortDescription": "Resumo breve da palestra",
+				"detailedDescription": "Descreva a palestra em detalhes",
+				"tags": "ai, frontend, produto",
+				"level": "Ex. iniciante",
+				"capacity": "Ex. 120"
+			},
+			"actions": {
+				"cancel": "Cancelar",
+				"save": "Salvar palestra",
+				"saving": "Salvando...",
+				"deleting": "Excluindo..."
+			},
+			"messages": {
+				"successTitle": "Palestra salva",
+				"createSuccess": "Palestra criada com sucesso.",
+				"updateSuccess": "Palestra atualizada com sucesso.",
+				"errorTitle": "Erro",
+				"unexpectedError": "Ocorreu um erro inesperado. Tente novamente."
+			},
+			"validation": {
+				"titleRequired": "O título é obrigatório",
+				"dateRequired": "A data é obrigatória",
+				"timeRequired": "Os horários de início e fim são obrigatórios",
+				"timeOrder": "O horário de término deve ser após o horário de início"
+			},
+			"import": {
+				"title": "Importar Palestras",
+				"description": "Faça upload de um arquivo CSV ou JSON para importar palestras em massa para a agenda do seu evento.",
+				"button": "Importar",
+				"downloadCSV": "Modelo CSV",
+				"downloadJSON": "Modelo JSON",
+				"dropzone": "Clique para selecionar um arquivo CSV ou JSON",
+				"changeFile": "Trocar arquivo",
+				"errorsFound": "{count} erro(s) de validação encontrado(s). Corrija e envie novamente.",
+				"preview": "{count} palestra(s) pronta(s) para importar",
+				"confirm": "Importar {count} palestra(s)",
+				"importing": "Importando...",
+				"success": "{count} palestra(s) importada(s) com sucesso",
+				"successUpsert": "{created} criada(s), {updated} atualizada(s)",
+				"error": "Erro ao importar palestras",
+				"parseError": "Não foi possível processar o arquivo. Verifique o formato.",
+				"duplicatesFound": "{count} duplicata(s) detectada(s) — coincidem com palestras existentes por título, data e horário de início.",
+				"duplicate": "Duplicata",
+				"new": "Nova",
+				"actionSkip": "Ignorar",
+				"actionOverwrite": "Sobrescrever",
+				"actionSkipped": "Ignorada",
+				"skipAll": "Ignorar todas as duplicatas",
+				"overwriteAll": "Sobrescrever todas as duplicatas",
+				"status": "Status"
+			}
+		},
 		"Form": {
 			"sections": {
 				"general": "Detalhes Gerais",
@@ -682,6 +766,38 @@
 				"error": "Não foi possível atualizar seu perfil. Tente novamente.",
 				"profileUnavailable": "Seu perfil ainda não está disponível. Tente novamente em instantes.",
 				"invalidAvatar": "A URL do avatar deve ser válida e usar http ou https."
+			},
+			"validation": {
+				"titleRequired": "O título é obrigatório",
+				"dateRequired": "A data é obrigatória",
+				"timeRequired": "Os horários de início e fim são obrigatórios",
+				"timeOrder": "O horário de término deve ser após o horário de início"
+			},
+			"import": {
+				"title": "Importar Palestras",
+				"description": "Faça upload de um arquivo CSV ou JSON para importar palestras em massa para a agenda do seu evento.",
+				"button": "Importar",
+				"downloadCSV": "Modelo CSV",
+				"downloadJSON": "Modelo JSON",
+				"dropzone": "Clique para selecionar um arquivo CSV ou JSON",
+				"changeFile": "Trocar arquivo",
+				"errorsFound": "{count} erro(s) de validação encontrado(s). Corrija e envie novamente.",
+				"preview": "{count} palestra(s) pronta(s) para importar",
+				"confirm": "Importar {count} palestra(s)",
+				"importing": "Importando...",
+				"success": "{count} palestra(s) importada(s) com sucesso",
+				"successUpsert": "{created} criada(s), {updated} atualizada(s)",
+				"error": "Erro ao importar palestras",
+				"parseError": "Não foi possível processar o arquivo. Verifique o formato.",
+				"duplicatesFound": "{count} duplicata(s) detectada(s) — coincidem com palestras existentes por título, data e horário de início.",
+				"duplicate": "Duplicata",
+				"new": "Nova",
+				"actionSkip": "Ignorar",
+				"actionOverwrite": "Sobrescrever",
+				"actionSkipped": "Ignorada",
+				"skipAll": "Ignorar todas as duplicatas",
+				"overwriteAll": "Sobrescrever todas as duplicatas",
+				"status": "Status"
 			}
 		}
 	}

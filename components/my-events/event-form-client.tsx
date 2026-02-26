@@ -11,18 +11,23 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { createEvent, updateEvent } from "@/lib/actions/events";
+import type { TalkFieldSuggestions } from "@/lib/actions/talks";
 import { COUNTRIES } from "@/lib/data/countries";
 import { formatTimezoneLabel, TIMEZONES } from "@/lib/data/timezones";
+import type { Talk } from "@/lib/types/talk";
 import { EventCategoryWithTranslation, EventFormData, EventStatus } from "@/lib/types/event";
 import { cn } from "@/lib/utils";
 import { convertLocalToUTC, getBrowserTimezone } from "@/lib/utils/date";
 import { EventPreviewCard } from "./event-preview-card";
+import { TalksManager } from "../talks/talks-manager";
 
 interface EventFormClientProps {
 	readonly categories: EventCategoryWithTranslation[];
 	readonly locale: string;
 	readonly mode: "create" | "edit";
 	readonly initialData?: Partial<EventFormData> & { id?: number };
+	readonly talks?: Talk[];
+	readonly talkSuggestions?: TalkFieldSuggestions;
 }
 
 export function EventFormClient({
@@ -30,6 +35,8 @@ export function EventFormClient({
 	locale,
 	mode,
 	initialData,
+	talks = [],
+	talkSuggestions,
 }: Readonly<EventFormClientProps>) {
 	const t = useTranslations("MyEvents.Form");
 	const router = useRouter();
@@ -160,9 +167,10 @@ export function EventFormClient({
 	);
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-			{/* Form Section */}
-			<div className="lg:col-span-2 space-y-6">
+		<div className="space-y-8">
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				{/* Form Section */}
+				<div className="lg:col-span-2 space-y-6">
 				{/* Action Buttons */}
 				<div className="flex flex-wrap gap-3 justify-end">
 					<Button
@@ -352,35 +360,47 @@ export function EventFormClient({
 						/>
 					</div>
 				</div>
-			</div>
+				</div>
 
-			{/* Preview Section */}
-			<div className="lg:col-span-1">
-				<div className="sticky top-4">
-					<div className="flex items-center gap-2 mb-4">
-						<span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-						<span className="text-sm font-medium text-foreground">{t("preview.title")}</span>
-						<span className="text-xs text-muted-foreground ml-auto">{t("preview.desktop")}</span>
+				{/* Preview Section */}
+				<div className="lg:col-span-1">
+					<div className="sticky top-4">
+						<div className="flex items-center gap-2 mb-4">
+							<span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+							<span className="text-sm font-medium text-foreground">{t("preview.title")}</span>
+							<span className="text-xs text-muted-foreground ml-auto">{t("preview.desktop")}</span>
+						</div>
+
+						<EventPreviewCard
+							name={formData.name}
+							description={formData.description}
+							startAt={formData.start_at}
+							endAt={formData.end_at}
+							timezone={formData.timezone}
+							location={formData.location}
+							imageUrl={formData.image_url}
+							categoryName={selectedCategory?.name}
+							locale={locale}
+						/>
+
+						<p className="text-xs text-primary mt-4 flex items-center gap-1">
+							<span>ℹ️</span>
+							{t("preview.hint")}
+						</p>
 					</div>
-
-					<EventPreviewCard
-						name={formData.name}
-						description={formData.description}
-						startAt={formData.start_at}
-						endAt={formData.end_at}
-						timezone={formData.timezone}
-						location={formData.location}
-						imageUrl={formData.image_url}
-						categoryName={selectedCategory?.name}
-						locale={locale}
-					/>
-
-					<p className="text-xs text-primary mt-4 flex items-center gap-1">
-						<span>ℹ️</span>
-						{t("preview.hint")}
-					</p>
 				</div>
 			</div>
+
+			{mode === "edit" && initialData?.id && (
+				<div className="bg-card rounded-lg border border-border p-6">
+					<TalksManager
+						eventId={initialData.id}
+						talks={talks}
+						locale={locale}
+						talkSuggestions={talkSuggestions}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

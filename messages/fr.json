@@ -586,6 +586,90 @@
 				"edit": "Modifier l'Événement"
 			}
 		},
+		"Talks": {
+			"title": "Conférences de l'événement",
+			"subtitle": "Créez et gérez les conférences de l'agenda de votre événement.",
+			"add": "Ajouter une conférence",
+			"edit": "Modifier la conférence",
+			"delete": "Supprimer la conférence",
+			"deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette conférence ? Cette action est irréversible.",
+			"empty": "Aucune conférence pour le moment",
+			"emptyDesc": "Vous n'avez pas encore ajouté de conférences pour cet événement.",
+			"fields": {
+				"title": "Titre",
+				"date": "Date",
+				"startTime": "Heure de début",
+				"endTime": "Heure de fin",
+				"room": "Salle",
+				"floor": "Étage",
+				"speakerName": "Nom de l'intervenant",
+				"speakerBio": "Biographie de l'intervenant",
+				"speakerPhoto": "URL de la photo de l'intervenant",
+				"shortDescription": "Description courte",
+				"detailedDescription": "Description détaillée",
+				"tags": "Tags",
+				"level": "Niveau",
+				"capacity": "Capacité",
+				"isFixed": "Conférence fixe"
+			},
+			"placeholders": {
+				"room": "Ex. Salle Principale",
+				"floor": "Ex. Rez-de-chaussée",
+				"speakerName": "Ex. Jane Doe",
+				"speakerBio": "Courte biographie de l'intervenant",
+				"speakerPhoto": "https://example.com/speaker.jpg",
+				"shortDescription": "Bref résumé de la conférence",
+				"detailedDescription": "Décrivez la conférence en détail",
+				"tags": "ai, frontend, produit",
+				"level": "Ex. débutant",
+				"capacity": "Ex. 120"
+			},
+			"actions": {
+				"cancel": "Annuler",
+				"save": "Enregistrer la conférence",
+				"saving": "Enregistrement...",
+				"deleting": "Suppression..."
+			},
+			"messages": {
+				"successTitle": "Conférence enregistrée",
+				"createSuccess": "Conférence créée avec succès.",
+				"updateSuccess": "Conférence mise à jour avec succès.",
+				"errorTitle": "Erreur",
+				"unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer."
+			},
+			"validation": {
+				"titleRequired": "Le titre est obligatoire",
+				"dateRequired": "La date est obligatoire",
+				"timeRequired": "Les heures de début et de fin sont obligatoires",
+				"timeOrder": "L'heure de fin doit être postérieure à l'heure de début"
+			},
+			"import": {
+				"title": "Importer des Conférences",
+				"description": "Téléchargez un fichier CSV ou JSON pour importer des conférences en masse dans l'agenda de votre événement.",
+				"button": "Importer",
+				"downloadCSV": "Modèle CSV",
+				"downloadJSON": "Modèle JSON",
+				"dropzone": "Cliquez pour sélectionner un fichier CSV ou JSON",
+				"changeFile": "Changer de fichier",
+				"errorsFound": "{count} erreur(s) de validation trouvée(s). Corrigez et renvoyez.",
+				"preview": "{count} conférence(s) prête(s) à importer",
+				"confirm": "Importer {count} conférence(s)",
+				"importing": "Importation...",
+				"success": "{count} conférence(s) importée(s) avec succès",
+				"successUpsert": "{created} créée(s), {updated} mise(s) à jour",
+				"error": "Erreur lors de l'importation des conférences",
+				"parseError": "Impossible de traiter le fichier. Vérifiez le format.",
+				"duplicatesFound": "{count} doublon(s) détecté(s) — correspondent à des conférences existantes par titre, date et heure de début.",
+				"duplicate": "Doublon",
+				"new": "Nouvelle",
+				"actionSkip": "Ignorer",
+				"actionOverwrite": "Écraser",
+				"actionSkipped": "Ignorée",
+				"skipAll": "Ignorer tous les doublons",
+				"overwriteAll": "Écraser tous les doublons",
+				"status": "Statut"
+			}
+		},
 		"Form": {
 			"sections": {
 				"general": "Détails Généraux",
@@ -682,6 +766,38 @@
 				"error": "Impossible de mettre à jour votre profil. Veuillez réessayer.",
 				"profileUnavailable": "Votre profil n'est pas encore disponible. Veuillez réessayer dans un instant.",
 				"invalidAvatar": "L'URL de l'avatar doit être valide et utiliser http ou https."
+			},
+			"validation": {
+				"titleRequired": "Le titre est obligatoire",
+				"dateRequired": "La date est obligatoire",
+				"timeRequired": "Les heures de début et de fin sont obligatoires",
+				"timeOrder": "L'heure de fin doit être postérieure à l'heure de début"
+			},
+			"import": {
+				"title": "Importer des Conférences",
+				"description": "Téléchargez un fichier CSV ou JSON pour importer des conférences en masse dans l'agenda de votre événement.",
+				"button": "Importer",
+				"downloadCSV": "Modèle CSV",
+				"downloadJSON": "Modèle JSON",
+				"dropzone": "Cliquez pour sélectionner un fichier CSV ou JSON",
+				"changeFile": "Changer de fichier",
+				"errorsFound": "{count} erreur(s) de validation trouvée(s). Corrigez et renvoyez.",
+				"preview": "{count} conférence(s) prête(s) à importer",
+				"confirm": "Importer {count} conférence(s)",
+				"importing": "Importation...",
+				"success": "{count} conférence(s) importée(s) avec succès",
+				"successUpsert": "{created} créée(s), {updated} mise(s) à jour",
+				"error": "Erreur lors de l'importation des conférences",
+				"parseError": "Impossible de traiter le fichier. Vérifiez le format.",
+				"duplicatesFound": "{count} doublon(s) détecté(s) — correspondent à des conférences existantes par titre, date et heure de début.",
+				"duplicate": "Doublon",
+				"new": "Nouvelle",
+				"actionSkip": "Ignorer",
+				"actionOverwrite": "Écraser",
+				"actionSkipped": "Ignorée",
+				"skipAll": "Ignorer tous les doublons",
+				"overwriteAll": "Écraser tous les doublons",
+				"status": "Statut"
 			}
 		}
 	}

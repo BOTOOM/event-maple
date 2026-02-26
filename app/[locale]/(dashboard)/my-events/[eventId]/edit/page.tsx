@@ -5,6 +5,7 @@ import { EventsHeader } from "@/components/events/events-header";
 import { EventFormClient } from "@/components/my-events/event-form-client";
 import { MyEventsFormPageHeader } from "@/components/my-events/my-events-form-page-header";
 import { getCategories, getEventById } from "@/lib/actions/events";
+import { getTalkFieldSuggestions, getTalksByEventId } from "@/lib/actions/talks";
 import { requireAuthenticatedUser } from "@/lib/supabase/server";
 import { formatDateTimeForTimezone } from "@/lib/utils/date";
 
@@ -44,6 +45,11 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
 		notFound();
 	}
 
+	const [talks, talkSuggestions] = await Promise.all([
+		getTalksByEventId(eventIdNum),
+		getTalkFieldSuggestions(eventIdNum),
+	]);
+
 	// Convert UTC datetime from Supabase to the event's timezone for editing
 	// This ensures the user sees the same time they originally entered
 	const eventTimezone = event.timezone || "UTC";
@@ -78,6 +84,8 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
 					locale={locale}
 					mode="edit"
 					initialData={initialData}
+					talks={talks}
+					talkSuggestions={talkSuggestions}
 				/>
 			</div>
 		</div>
