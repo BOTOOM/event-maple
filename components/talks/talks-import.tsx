@@ -542,39 +542,58 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 											const isDuplicate = !!duplicateInfo[idx];
 											const action = duplicateActions[idx] ?? "skip";
 											const isSkipped = isDuplicate && action === "skip";
+											const rowClassName = (() => {
+												if (isSkipped) {
+													return "bg-muted/20 opacity-50";
+												}
+
+												if (isDuplicate && action === "overwrite") {
+													return "bg-amber-50/50 dark:bg-amber-950/10";
+												}
+
+												return "hover:bg-muted/30";
+											})();
+
+											const statusBadge = (() => {
+												if (!isDuplicate) {
+													return (
+														<Badge
+															variant="secondary"
+															className="text-[10px] gap-1 px-1.5 py-0 bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200 border-emerald-300"
+														>
+															<Check className="h-2.5 w-2.5" />
+															{t("import.new")}
+														</Badge>
+													);
+												}
+
+												if (isSkipped) {
+													return (
+														<Badge variant="outline" className="text-[10px] gap-1 px-1.5 py-0">
+															<SkipForward className="h-2.5 w-2.5" />
+															{t("import.actionSkipped")}
+														</Badge>
+													);
+												}
+
+												return (
+													<Badge
+														variant="secondary"
+														className="text-[10px] gap-1 px-1.5 py-0 bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200 border-amber-300"
+													>
+														<Copy className="h-2.5 w-2.5" />
+														{t("import.actionOverwrite")}
+													</Badge>
+												);
+											})();
 
 											return (
 												<tr
 													key={`${talk.title}-${talk.date}-${talk.start_time}-${idx}`}
-													className={
-														isSkipped
-															? "bg-muted/20 opacity-50"
-															: isDuplicate && action === "overwrite"
-																? "bg-amber-50/50 dark:bg-amber-950/10"
-																: "hover:bg-muted/30"
-													}
+													className={rowClassName}
 												>
 													<td className="px-3 py-2 text-muted-foreground">{idx + 1}</td>
-													<td className="px-3 py-2">
-														{isDuplicate ? (
-															isSkipped ? (
-																<Badge variant="outline" className="text-[10px] gap-1 px-1.5 py-0">
-																	<SkipForward className="h-2.5 w-2.5" />
-																	{t("import.actionSkipped")}
-																</Badge>
-															) : (
-																<Badge variant="secondary" className="text-[10px] gap-1 px-1.5 py-0 bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200 border-amber-300">
-																	<Copy className="h-2.5 w-2.5" />
-																	{t("import.actionOverwrite")}
-																</Badge>
-															)
-														) : (
-															<Badge variant="secondary" className="text-[10px] gap-1 px-1.5 py-0 bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200 border-emerald-300">
-																<Check className="h-2.5 w-2.5" />
-																{t("import.new")}
-															</Badge>
-														)}
-													</td>
+													<td className="px-3 py-2">{statusBadge}</td>
 													<td className="px-3 py-2 font-medium truncate max-w-[140px]">{talk.title}</td>
 													<td className="px-3 py-2">{talk.date}</td>
 													<td className="px-3 py-2">{talk.start_time}</td>

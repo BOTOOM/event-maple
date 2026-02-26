@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { randomUUID } from "node:crypto";
 import { loginWithEnvCredentials } from "./utils/test-helpers";
 
 function formatDateForInput(date: Date): string {
@@ -9,7 +10,7 @@ function formatDateForInput(date: Date): string {
 }
 
 function uniqueSuffix(): string {
-	return `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+	return randomUUID();
 }
 
 async function getAddTalkButton(page: Page): Promise<Locator | null> {
