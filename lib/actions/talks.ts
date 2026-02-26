@@ -6,6 +6,49 @@ import { Talk, TalkFormData } from "@/lib/types/talk";
 
 const NOT_AUTHENTICATED_ERROR = "Not authenticated";
 
+type TalkPayloadInput = Omit<TalkFormData, "event_id">;
+
+function toTalkInsertPayload(eventId: number, talk: TalkPayloadInput) {
+	return {
+		event_id: eventId,
+		title: talk.title,
+		short_description: talk.short_description || null,
+		detailed_description: talk.detailed_description || null,
+		date: talk.date,
+		start_time: talk.start_time,
+		end_time: talk.end_time,
+		room: talk.room || null,
+		floor: talk.floor || null,
+		speaker_name: talk.speaker_name || null,
+		speaker_bio: talk.speaker_bio || null,
+		speaker_photo: talk.speaker_photo || null,
+		tags: talk.tags || [],
+		is_fixed: talk.is_fixed || false,
+		level: talk.level || null,
+		capacity: talk.capacity || null,
+	};
+}
+
+function toTalkUpdatePayload(talk: TalkPayloadInput) {
+	return {
+		title: talk.title,
+		short_description: talk.short_description || null,
+		detailed_description: talk.detailed_description || null,
+		date: talk.date,
+		start_time: talk.start_time,
+		end_time: talk.end_time,
+		room: talk.room || null,
+		floor: talk.floor || null,
+		speaker_name: talk.speaker_name || null,
+		speaker_bio: talk.speaker_bio || null,
+		speaker_photo: talk.speaker_photo || null,
+		tags: talk.tags || [],
+		is_fixed: talk.is_fixed || false,
+		level: talk.level || null,
+		capacity: talk.capacity || null,
+	};
+}
+
 // Get all talks for a specific event
 export async function getTalksByEventId(eventId: number): Promise<Talk[]> {
 	const supabase = await createClient();
@@ -59,24 +102,7 @@ export async function createTalk(
 	// Verify event ownership handled by RLS, but we can double check if needed.
 	// RLS policy: "Event creators can insert talks" using EXISTS query.
 
-	const payload = {
-		event_id: formData.event_id,
-		title: formData.title,
-		short_description: formData.short_description || null,
-		detailed_description: formData.detailed_description || null,
-		date: formData.date,
-		start_time: formData.start_time,
-		end_time: formData.end_time,
-		room: formData.room || null,
-		floor: formData.floor || null,
-		speaker_name: formData.speaker_name || null,
-		speaker_bio: formData.speaker_bio || null,
-		speaker_photo: formData.speaker_photo || null,
-		tags: formData.tags || [],
-		is_fixed: formData.is_fixed || false,
-		level: formData.level || null,
-		capacity: formData.capacity || null,
-	};
+	const payload = toTalkInsertPayload(formData.event_id, formData);
 
 	const { data, error } = await supabase
 		.from("talks")
@@ -161,24 +187,7 @@ export async function batchCreateTalks(
 		return { success: false, error: "No talks to import" };
 	}
 
-	const payloads = talksData.map((t) => ({
-		event_id: eventId,
-		title: t.title,
-		short_description: t.short_description || null,
-		detailed_description: t.detailed_description || null,
-		date: t.date,
-		start_time: t.start_time,
-		end_time: t.end_time,
-		room: t.room || null,
-		floor: t.floor || null,
-		speaker_name: t.speaker_name || null,
-		speaker_bio: t.speaker_bio || null,
-		speaker_photo: t.speaker_photo || null,
-		tags: t.tags || [],
-		is_fixed: t.is_fixed || false,
-		level: t.level || null,
-		capacity: t.capacity || null,
-	}));
+	const payloads = talksData.map((talk) => toTalkInsertPayload(eventId, talk));
 
 	const { data, error } = await supabase
 		.from("talks")
@@ -215,24 +224,7 @@ export async function batchUpsertTalks(
 
 	// Insert new talks
 	if (newTalks.length > 0) {
-		const payloads = newTalks.map((t) => ({
-			event_id: eventId,
-			title: t.title,
-			short_description: t.short_description || null,
-			detailed_description: t.detailed_description || null,
-			date: t.date,
-			start_time: t.start_time,
-			end_time: t.end_time,
-			room: t.room || null,
-			floor: t.floor || null,
-			speaker_name: t.speaker_name || null,
-			speaker_bio: t.speaker_bio || null,
-			speaker_photo: t.speaker_photo || null,
-			tags: t.tags || [],
-			is_fixed: t.is_fixed || false,
-			level: t.level || null,
-			capacity: t.capacity || null,
-		}));
+		const payloads = newTalks.map((talk) => toTalkInsertPayload(eventId, talk));
 
 		const { data, error } = await supabase.from("talks").insert(payloads).select("id");
 		if (error) {
@@ -246,23 +238,7 @@ export async function batchUpsertTalks(
 	for (const item of overwriteTalks) {
 		const { error } = await supabase
 			.from("talks")
-			.update({
-				title: item.data.title,
-				short_description: item.data.short_description || null,
-				detailed_description: item.data.detailed_description || null,
-				date: item.data.date,
-				start_time: item.data.start_time,
-				end_time: item.data.end_time,
-				room: item.data.room || null,
-				floor: item.data.floor || null,
-				speaker_name: item.data.speaker_name || null,
-				speaker_bio: item.data.speaker_bio || null,
-				speaker_photo: item.data.speaker_photo || null,
-				tags: item.data.tags || [],
-				is_fixed: item.data.is_fixed || false,
-				level: item.data.level || null,
-				capacity: item.data.capacity || null,
-			})
+			.update(toTalkUpdatePayload(item.data))
 			.eq("id", item.id)
 			.eq("event_id", eventId);
 

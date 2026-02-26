@@ -12,9 +12,9 @@ import { Button } from "@/components/ui/button";
 import { Talk } from "@/lib/types/talk";
 
 interface AgendaPageClientProps {
-	talks: Talk[];
-	eventId: number;
-	agendaTalkIds: Set<number>;
+	readonly talks: Talk[];
+	readonly eventId: number;
+	readonly agendaTalkIds: Set<number>;
 }
 
 export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageClientProps) {
@@ -99,10 +99,14 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 	// Get time range for a group of talks
 	const getTimeRange = (talks: Talk[]) => {
 		if (talks.length === 0) return "";
-		const startTimes = talks.map((t) => t.start_time).sort();
-		const endTimes = talks.map((t) => t.end_time).sort();
+		const startTimes = talks
+			.map((t) => t.start_time)
+			.sort((first, second) => first.localeCompare(second));
+		const endTimes = talks
+			.map((t) => t.end_time)
+			.sort((first, second) => first.localeCompare(second));
 		const formatTime = (time: string) => time.substring(0, 5);
-		return `${formatTime(startTimes[0])} - ${formatTime(endTimes[endTimes.length - 1])}`;
+		return `${formatTime(startTimes[0])} - ${formatTime(endTimes.at(-1) || endTimes[0])}`;
 	};
 
 	return (
