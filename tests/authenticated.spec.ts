@@ -182,6 +182,22 @@ test.describe("Authenticated User Features", () => {
 			await expect(timelineCards.first()).toBeVisible();
 		});
 
+		test("should keep timeline talks readable with minimum visual height", async ({ page }) => {
+			await navigateTo(page, "/en/events/1/my-agenda");
+
+			const timelineCards = page.locator("main a:has(h3)");
+			const cardCount = await timelineCards.count();
+
+			if (cardCount > 0) {
+				const firstCard = timelineCards.first();
+				await expect(firstCard).toBeVisible();
+				const cardHeight = await firstCard.evaluate((element) =>
+					Math.round(element.getBoundingClientRect().height),
+				);
+				expect(cardHeight).toBeGreaterThanOrEqual(50);
+			}
+		});
+
 		test("should display rooms section", async ({ page }) => {
 			await navigateTo(page, "/en/events/1/my-agenda");
 

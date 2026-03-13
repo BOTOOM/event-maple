@@ -53,13 +53,7 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 		console.error("Error fetching talks:", talksError);
 	}
 
-	// Get unique dates
-	const uniqueDates = Array.from(new Set(allTalks?.map((talk) => talk.date) || [])).sort((a, b) =>
-		a.localeCompare(b),
-	);
-
-	// Determine selected date (from query param or first available)
-	const selectedDate = resolvedSearchParams.date || uniqueDates[0] || event.start_date;
+	const selectedDate = resolvedSearchParams.date;
 
 	// Fetch user's personal agenda
 	const { data: agendaItems } = await supabase
@@ -70,13 +64,12 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 
 	const agendaTalkIds = new Set(agendaItems?.map((item) => item.talk_id) || []);
 
-	// Filter talks for selected date
-	const talksForDate = (allTalks || []).filter((talk) => talk.date === selectedDate);
-
 	// Include:
 	// 1. User's saved talks
 	// 2. Fixed events (is_fixed = true)
-	const myAgendaTalks = talksForDate.filter((talk) => agendaTalkIds.has(talk.id) || talk.is_fixed);
+	const myAgendaTalks = (allTalks || []).filter(
+		(talk) => agendaTalkIds.has(talk.id) || talk.is_fixed,
+	);
 
 	// Add is_in_my_agenda flag
 	const talksWithStatus: Array<Talk & { is_in_my_agenda: boolean }> = myAgendaTalks.map((talk) => ({
@@ -125,8 +118,8 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 						<MyAgendaClient
 							talks={talksWithStatus}
 							eventId={eventId}
-							selectedDate={selectedDate}
-							availableDates={uniqueDates}
+							eventTimezone={event.timezone || "UTC"}
+							initialDate={selectedDate}
 						/>
 					</>
 				)}
