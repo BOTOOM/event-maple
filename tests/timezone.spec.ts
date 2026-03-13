@@ -1,5 +1,9 @@
-import { expect, test, type Page } from "@playwright/test";
-import { enablePastEventsFilter, loginWithEnvCredentials, openCreateEventPage } from "./utils/test-helpers";
+import { expect, type Page, test } from "@playwright/test";
+import {
+	enablePastEventsFilter,
+	loginWithEnvCredentials,
+	openCreateEventPage,
+} from "./utils/test-helpers";
 
 async function openFirstEditableEvent(page: Page) {
 	await page.goto("/en/my-events");
@@ -63,7 +67,6 @@ test.describe("Timezone Handling", () => {
 
 		test("should load event dates correctly when editing", async ({ page }) => {
 			if (await openFirstEditableEvent(page)) {
-
 				// Check that the start date input has a value
 				const startDateInput = page.locator('input[type="datetime-local"]').first();
 				await expect(startDateInput).toBeVisible({ timeout: 10000 });
@@ -82,7 +85,6 @@ test.describe("Timezone Handling", () => {
 
 		test("should preserve timezone when editing and saving", async ({ page }) => {
 			if (await openFirstEditableEvent(page)) {
-
 				// Get the current timezone value
 				const timezoneButton = page.locator(
 					'button:has-text("UTC"), button:has-text("America"), button:has-text("Europe")',

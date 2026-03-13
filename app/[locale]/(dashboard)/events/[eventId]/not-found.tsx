@@ -12,9 +12,7 @@ export default function EventNotFound() {
 					<CalendarX className="h-12 w-12 text-red-600" />
 				</div>
 				<h1 className="text-3xl font-bold text-foreground mb-2">{t("title")}</h1>
-				<p className="text-muted-foreground mb-8 max-w-md">
-					{t("description")}
-				</p>
+				<p className="text-muted-foreground mb-8 max-w-md">{t("description")}</p>
 				<Link href="/events">
 					<Button size="lg">{t("backToEvents")}</Button>
 				</Link>

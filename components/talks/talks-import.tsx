@@ -1,6 +1,15 @@
 "use client";
 
-import { AlertTriangle, Check, Copy, Download, FileUp, Loader2, SkipForward, X } from "lucide-react";
+import {
+	AlertTriangle,
+	Check,
+	Copy,
+	Download,
+	FileUp,
+	Loader2,
+	SkipForward,
+	X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useRef, useState } from "react";
@@ -275,7 +284,9 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 	const processFile = useCallback(
 		async (file: File) => {
 			const validExtensions = [".csv", ".json"];
-			const hasValidExtension = validExtensions.some((ext) => file.name.toLowerCase().endsWith(ext));
+			const hasValidExtension = validExtensions.some((ext) =>
+				file.name.toLowerCase().endsWith(ext),
+			);
 			if (!hasValidExtension) {
 				toast({ title: t("import.parseError"), variant: "destructive" });
 				return;
@@ -286,9 +297,7 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 			const text = await file.text();
 
 			try {
-				const parsed = file.name.toLowerCase().endsWith(".json")
-					? parseJSON(text)
-					: parseCSV(text);
+				const parsed = file.name.toLowerCase().endsWith(".json") ? parseJSON(text) : parseCSV(text);
 
 				const validationErrors = validateTalks(parsed);
 				setParsedTalks(parsed);
@@ -448,9 +457,7 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 						>
 							<div className="flex flex-col items-center gap-2">
 								<FileUp className="h-8 w-8 text-muted-foreground" />
-								<p className="text-sm text-muted-foreground">
-									{t("import.dropzone")}
-								</p>
+								<p className="text-sm text-muted-foreground">{t("import.dropzone")}</p>
 								<p className="text-xs text-muted-foreground">CSV, JSON</p>
 							</div>
 							<input
@@ -532,9 +539,7 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 											<th className="px-3 py-2 text-left font-medium">{t("fields.date")}</th>
 											<th className="px-3 py-2 text-left font-medium">{t("fields.startTime")}</th>
 											<th className="px-3 py-2 text-left font-medium">{t("fields.room")}</th>
-											{hasDuplicates && (
-												<th className="px-3 py-2 text-right font-medium" />
-											)}
+											{hasDuplicates && <th className="px-3 py-2 text-right font-medium" />}
 										</tr>
 									</thead>
 									<tbody className="divide-y">
@@ -594,7 +599,9 @@ export function TalksImport({ eventId, existingTalks, open, onOpenChange }: Talk
 												>
 													<td className="px-3 py-2 text-muted-foreground">{idx + 1}</td>
 													<td className="px-3 py-2">{statusBadge}</td>
-													<td className="px-3 py-2 font-medium truncate max-w-[140px]">{talk.title}</td>
+													<td className="px-3 py-2 font-medium truncate max-w-[140px]">
+														{talk.title}
+													</td>
 													<td className="px-3 py-2">{talk.date}</td>
 													<td className="px-3 py-2">{talk.start_time}</td>
 													<td className="px-3 py-2 truncate max-w-[80px]">{talk.room || "—"}</td>

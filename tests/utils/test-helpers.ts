@@ -208,7 +208,9 @@ export async function searchForEvent(page: Page, eventName: string): Promise<voi
  */
 export async function clickViewDetails(page: Page): Promise<void> {
 	const viewDetailsButton = page
-		.locator('a:has-text("View details"), a:has-text("Ver detalles"), a:has-text("Voir les détails"), a:has-text("Ver detalhes")')
+		.locator(
+			'a:has-text("View details"), a:has-text("Ver detalles"), a:has-text("Voir les détails"), a:has-text("Ver detalhes")',
+		)
 		.first();
 	await expect(viewDetailsButton).toBeVisible({ timeout: 10000 });
 	await viewDetailsButton.click();
@@ -246,10 +248,7 @@ export async function login(page: Page, email: string, password: string): Promis
  * Login using credentials provided through Playwright env variables.
  * Automatically skips the current test when credentials are not available.
  */
-export async function loginWithEnvCredentials(
-	page: Page,
-	locale: string = "en",
-): Promise<boolean> {
+export async function loginWithEnvCredentials(page: Page, locale: string = "en"): Promise<boolean> {
 	const email = process.env.PW_USER;
 	const password = process.env.PW_PSS;
 

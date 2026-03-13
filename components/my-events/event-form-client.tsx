@@ -14,12 +14,12 @@ import { createEvent, updateEvent } from "@/lib/actions/events";
 import type { TalkFieldSuggestions } from "@/lib/actions/talks";
 import { COUNTRIES } from "@/lib/data/countries";
 import { formatTimezoneLabel, TIMEZONES } from "@/lib/data/timezones";
-import type { Talk } from "@/lib/types/talk";
 import { EventCategoryWithTranslation, EventFormData, EventStatus } from "@/lib/types/event";
+import type { Talk } from "@/lib/types/talk";
 import { cn } from "@/lib/utils";
 import { convertLocalToUTC, getBrowserTimezone } from "@/lib/utils/date";
-import { EventPreviewCard } from "./event-preview-card";
 import { TalksManager } from "../talks/talks-manager";
+import { EventPreviewCard } from "./event-preview-card";
 
 interface EventFormClientProps {
 	readonly categories: EventCategoryWithTranslation[];
@@ -171,195 +171,197 @@ export function EventFormClient({
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 				{/* Form Section */}
 				<div className="lg:col-span-2 space-y-6">
-				{/* Action Buttons */}
-				<div className="flex flex-wrap gap-3 justify-end">
-					<Button
-						type="button"
-						variant="outline"
-						onClick={() => handleSubmit("draft")}
-						disabled={isSubmitting}
-						className="gap-2"
-					>
-						<Save className="h-4 w-4" />
-						{t("saveDraft")}
-					</Button>
-					{formData.status === "published" && (
+					{/* Action Buttons */}
+					<div className="flex flex-wrap gap-3 justify-end">
 						<Button
 							type="button"
-							variant="destructive"
+							variant="outline"
 							onClick={() => handleSubmit("draft")}
 							disabled={isSubmitting}
 							className="gap-2"
 						>
-							<X className="h-4 w-4" />
-							{t("unpublish")}
+							<Save className="h-4 w-4" />
+							{t("saveDraft")}
 						</Button>
-					)}
-					<Button
-						type="button"
-						onClick={() => handleSubmit("published")}
-						disabled={isSubmitting}
-						className="gap-2"
-					>
-						<Send className="h-4 w-4" />
-						{t("publish")}
-					</Button>
-				</div>
-
-				{/* General Details */}
-				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
-					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-primary">✏️</span>
-						{t("sections.general")}
-					</h2>
-
-					<div className="space-y-4">
-						<div>
-							<Label htmlFor="name">{t("fields.name")}</Label>
-							<Input
-								id="name"
-								value={formData.name}
-								onChange={(e) => updateField("name", e.target.value)}
-								placeholder={t("placeholders.name")}
-								className="mt-1"
-							/>
-						</div>
-
-						<div>
-							<Label>{t("fields.category")}</Label>
-							<div className="flex flex-wrap gap-2 mt-2">
-								{categories.map((category) => (
-									<button
-										key={category.id}
-										type="button"
-										onClick={() => updateField("category_id", category.id)}
-										className={cn(
-											"px-3 py-1.5 rounded-full text-sm font-medium border transition-colors",
-											formData.category_id === category.id
-												? "bg-primary text-primary-foreground border-primary"
-												: "bg-card text-foreground border-border hover:border-primary/50",
-										)}
-									>
-										{category.name}
-									</button>
-								))}
-							</div>
-						</div>
+						{formData.status === "published" && (
+							<Button
+								type="button"
+								variant="destructive"
+								onClick={() => handleSubmit("draft")}
+								disabled={isSubmitting}
+								className="gap-2"
+							>
+								<X className="h-4 w-4" />
+								{t("unpublish")}
+							</Button>
+						)}
+						<Button
+							type="button"
+							onClick={() => handleSubmit("published")}
+							disabled={isSubmitting}
+							className="gap-2"
+						>
+							<Send className="h-4 w-4" />
+							{t("publish")}
+						</Button>
 					</div>
-				</div>
 
-				{/* Multimedia */}
-				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
-					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-primary">🖼️</span>
-						{t("sections.multimedia")}
-					</h2>
+					{/* General Details */}
+					<div className="bg-card rounded-lg border border-border p-6 space-y-4">
+						<h2 className="text-lg font-semibold flex items-center gap-2">
+							<span className="text-primary">✏️</span>
+							{t("sections.general")}
+						</h2>
 
-					<div>
-						<Label htmlFor="image_url">
-							{t("fields.imageUrl")}
-							<span className="text-muted-foreground text-sm ml-2">({t("recommended")}: 1200x600)</span>
-						</Label>
-						<Input
-							id="image_url"
-							type="url"
-							value={formData.image_url}
-							onChange={(e) => updateField("image_url", e.target.value)}
-							placeholder={t("placeholders.imageUrl")}
-							className="mt-1"
-						/>
-					</div>
-				</div>
-
-				{/* Date and Location */}
-				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
-					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-primary">📍</span>
-						{t("sections.dateLocation")}
-					</h2>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<div>
-							<Label htmlFor="start_at">{t("fields.startDate")}</Label>
-							<Input
-								id="start_at"
-								type="datetime-local"
-								value={formData.start_at}
-								onChange={(e) => updateField("start_at", e.target.value)}
-								className="mt-1"
-							/>
-						</div>
-
-						<div>
-							<Label htmlFor="end_at">{t("fields.endDate")}</Label>
-							<Input
-								id="end_at"
-								type="datetime-local"
-								value={formData.end_at}
-								onChange={(e) => updateField("end_at", e.target.value)}
-								className="mt-1"
-							/>
-						</div>
-
-						<div>
-							<Label htmlFor="country_code">{t("fields.country")}</Label>
-							<div className="mt-1">
-								<Autocomplete
-									options={countryOptions}
-									value={formData.country_code}
-									onChange={(value) => updateField("country_code", value)}
-									placeholder={t("placeholders.selectCountry")}
-									searchPlaceholder={t("placeholders.searchCountry")}
-									emptyMessage={t("placeholders.noCountryFound")}
+						<div className="space-y-4">
+							<div>
+								<Label htmlFor="name">{t("fields.name")}</Label>
+								<Input
+									id="name"
+									value={formData.name}
+									onChange={(e) => updateField("name", e.target.value)}
+									placeholder={t("placeholders.name")}
+									className="mt-1"
 								/>
 							</div>
-						</div>
 
-						<div>
-							<Label htmlFor="timezone">{t("fields.timezone")}</Label>
-							<div className="mt-1">
-								<Autocomplete
-									options={timezoneOptions}
-									value={formData.timezone}
-									onChange={(value) => updateField("timezone", value || "UTC")}
-									placeholder={t("placeholders.selectTimezone")}
-									searchPlaceholder={t("placeholders.searchTimezone")}
-									emptyMessage={t("placeholders.noTimezoneFound")}
-								/>
+							<div>
+								<Label>{t("fields.category")}</Label>
+								<div className="flex flex-wrap gap-2 mt-2">
+									{categories.map((category) => (
+										<button
+											key={category.id}
+											type="button"
+											onClick={() => updateField("category_id", category.id)}
+											className={cn(
+												"px-3 py-1.5 rounded-full text-sm font-medium border transition-colors",
+												formData.category_id === category.id
+													? "bg-primary text-primary-foreground border-primary"
+													: "bg-card text-foreground border-border hover:border-primary/50",
+											)}
+										>
+											{category.name}
+										</button>
+									))}
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<div>
-						<Label htmlFor="location">{t("fields.location")}</Label>
-						<Input
-							id="location"
-							value={formData.location}
-							onChange={(e) => updateField("location", e.target.value)}
-							placeholder={t("placeholders.location")}
-							className="mt-1"
-						/>
-					</div>
-				</div>
+					{/* Multimedia */}
+					<div className="bg-card rounded-lg border border-border p-6 space-y-4">
+						<h2 className="text-lg font-semibold flex items-center gap-2">
+							<span className="text-primary">🖼️</span>
+							{t("sections.multimedia")}
+						</h2>
 
-				{/* Description */}
-				<div className="bg-card rounded-lg border border-border p-6 space-y-4">
-					<h2 className="text-lg font-semibold flex items-center gap-2">
-						<span className="text-primary">📝</span>
-						{t("sections.description")}
-					</h2>
-
-					<div>
-						<Textarea
-							id="description"
-							value={formData.description}
-							onChange={(e) => updateField("description", e.target.value)}
-							placeholder={t("placeholders.description")}
-							rows={6}
-							className="mt-1"
-						/>
+						<div>
+							<Label htmlFor="image_url">
+								{t("fields.imageUrl")}
+								<span className="text-muted-foreground text-sm ml-2">
+									({t("recommended")}: 1200x600)
+								</span>
+							</Label>
+							<Input
+								id="image_url"
+								type="url"
+								value={formData.image_url}
+								onChange={(e) => updateField("image_url", e.target.value)}
+								placeholder={t("placeholders.imageUrl")}
+								className="mt-1"
+							/>
+						</div>
 					</div>
-				</div>
+
+					{/* Date and Location */}
+					<div className="bg-card rounded-lg border border-border p-6 space-y-4">
+						<h2 className="text-lg font-semibold flex items-center gap-2">
+							<span className="text-primary">📍</span>
+							{t("sections.dateLocation")}
+						</h2>
+
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+							<div>
+								<Label htmlFor="start_at">{t("fields.startDate")}</Label>
+								<Input
+									id="start_at"
+									type="datetime-local"
+									value={formData.start_at}
+									onChange={(e) => updateField("start_at", e.target.value)}
+									className="mt-1"
+								/>
+							</div>
+
+							<div>
+								<Label htmlFor="end_at">{t("fields.endDate")}</Label>
+								<Input
+									id="end_at"
+									type="datetime-local"
+									value={formData.end_at}
+									onChange={(e) => updateField("end_at", e.target.value)}
+									className="mt-1"
+								/>
+							</div>
+
+							<div>
+								<Label htmlFor="country_code">{t("fields.country")}</Label>
+								<div className="mt-1">
+									<Autocomplete
+										options={countryOptions}
+										value={formData.country_code}
+										onChange={(value) => updateField("country_code", value)}
+										placeholder={t("placeholders.selectCountry")}
+										searchPlaceholder={t("placeholders.searchCountry")}
+										emptyMessage={t("placeholders.noCountryFound")}
+									/>
+								</div>
+							</div>
+
+							<div>
+								<Label htmlFor="timezone">{t("fields.timezone")}</Label>
+								<div className="mt-1">
+									<Autocomplete
+										options={timezoneOptions}
+										value={formData.timezone}
+										onChange={(value) => updateField("timezone", value || "UTC")}
+										placeholder={t("placeholders.selectTimezone")}
+										searchPlaceholder={t("placeholders.searchTimezone")}
+										emptyMessage={t("placeholders.noTimezoneFound")}
+									/>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<Label htmlFor="location">{t("fields.location")}</Label>
+							<Input
+								id="location"
+								value={formData.location}
+								onChange={(e) => updateField("location", e.target.value)}
+								placeholder={t("placeholders.location")}
+								className="mt-1"
+							/>
+						</div>
+					</div>
+
+					{/* Description */}
+					<div className="bg-card rounded-lg border border-border p-6 space-y-4">
+						<h2 className="text-lg font-semibold flex items-center gap-2">
+							<span className="text-primary">📝</span>
+							{t("sections.description")}
+						</h2>
+
+						<div>
+							<Textarea
+								id="description"
+								value={formData.description}
+								onChange={(e) => updateField("description", e.target.value)}
+								placeholder={t("placeholders.description")}
+								rows={6}
+								className="mt-1"
+							/>
+						</div>
+					</div>
 				</div>
 
 				{/* Preview Section */}
