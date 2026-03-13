@@ -18,6 +18,6 @@ export const config = {
 	matcher: [
 		// Matcher optimizado para excluir archivos estáticos, rutas de API, manifest, sitemap, robots y generador de iconos
 		// eslint-disable-next-line no-useless-escape
-		"/((?!api|_next/static|_next/image|_vercel|favicon.ico|manifest.webmanifest|sitemap.xml|robots.txt|icon|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+		"/((?!api|_next/static|_next/image|_vercel|favicon.ico|manifest.webmanifest|sitemap.xml|robots.txt|icon|sw.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
 	],
 };
