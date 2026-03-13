@@ -40,6 +40,7 @@ export interface Event {
 	country_code: string | null;
 	location: string | null;
 	organizer?: string | null;
+	created_by_eventmaple_team?: boolean;
 	image_url?: string | null;
 	status: EventStatus;
 	category_id: string | null;

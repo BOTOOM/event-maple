@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import {
 	assertNoUntranslatedKeys,
 	clickViewDetails,
@@ -167,6 +167,19 @@ test.describe("Event Detail Page - Date and Time Display", () => {
 				// Date should be formatted, not raw ISO
 				expect(dateText).not.toMatch(/^\d{4}-\d{2}-\d{2}T/);
 			}
+		}
+	});
+
+	test("should show a creator value in event detail", async ({ page }) => {
+		await openEventDetailPage(page, "en", "networkidle");
+
+		const organizerLabel = page.locator("p", { hasText: "Organized by" }).first();
+
+		if (await organizerLabel.isVisible({ timeout: 5000 })) {
+			const organizerValue = organizerLabel.locator("xpath=following-sibling::p").first();
+			await expect(organizerValue).toBeVisible();
+			const creatorText = (await organizerValue.textContent())?.trim() || "";
+			expect(creatorText.length).toBeGreaterThan(0);
 		}
 	});
 });
