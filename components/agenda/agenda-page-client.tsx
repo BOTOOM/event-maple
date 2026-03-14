@@ -10,14 +10,26 @@ import { TalksFilterSidebar } from "@/components/talks/talks-filter-sidebar";
 import { TalksSearch } from "@/components/talks/talks-search";
 import { Button } from "@/components/ui/button";
 import { Talk } from "@/lib/types/talk";
+import { convertTalkScheduleToBrowser } from "@/lib/utils/date";
 
 interface AgendaPageClientProps {
 	readonly talks: Talk[];
 	readonly eventId: number;
 	readonly agendaTalkIds: Set<number>;
+	readonly eventTimezone: string;
 }
 
-export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageClientProps) {
+type LocalizedTalk = Talk & {
+	browserStartUtcIso: string;
+	browserEndUtcIso: string;
+};
+
+export function AgendaPageClient({
+	talks,
+	eventId,
+	agendaTalkIds,
+	eventTimezone,
+}: AgendaPageClientProps) {
 	const t = useTranslations("Events.FullAgenda");
 	const format = useFormatter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,22 +39,37 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 	// Get current date and time for comparison
 	const now = useMemo(() => new Date(), []);
 
+	const localizedTalks = useMemo<LocalizedTalk[]>(
+		() =>
+			talks
+				.map((talk) => {
+					const localizedSchedule = convertTalkScheduleToBrowser(
+						talk.date,
+						talk.start_time,
+						talk.end_time,
+						eventTimezone || "UTC",
+					);
+
+					return {
+						...talk,
+						date: localizedSchedule.date,
+						start_time: localizedSchedule.startTime,
+						end_time: localizedSchedule.endTime,
+						browserStartUtcIso: localizedSchedule.startUtcIso,
+						browserEndUtcIso: localizedSchedule.endUtcIso,
+					};
+				})
+				.sort((first, second) => first.browserStartUtcIso.localeCompare(second.browserStartUtcIso)),
+		[talks, eventTimezone],
+	);
+
 	// Filter and search talks
 	const filteredTalks = useMemo(() => {
-		let filtered = talks;
+		let filtered = localizedTalks;
 
 		// Filter by date/time
 		if (!showPastTalks) {
-			filtered = filtered.filter((talk) => {
-				try {
-					const talkDate = parseISO(talk.date);
-					const [hours, minutes] = talk.end_time.split(":").map(Number);
-					talkDate.setHours(hours, minutes, 0, 0);
-					return talkDate >= now;
-				} catch {
-					return true; // Include talks with invalid dates
-				}
-			});
+			filtered = filtered.filter((talk) => new Date(talk.browserEndUtcIso) >= now);
 		}
 
 		// Filter by search query
@@ -68,11 +95,11 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 		}
 
 		return filtered;
-	}, [talks, showPastTalks, searchQuery, now]);
+	}, [localizedTalks, showPastTalks, searchQuery, now]);
 
 	// Group talks by date
 	const talksByDate = useMemo(() => {
-		const grouped = new Map<string, Talk[]>();
+		const grouped = new Map<string, LocalizedTalk[]>();
 		filteredTalks.forEach((talk) => {
 			const dateKey = talk.date;
 			if (!grouped.has(dateKey)) {
@@ -80,6 +107,11 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 			}
 			grouped.get(dateKey)!.push(talk);
 		});
+
+		for (const talksForDate of grouped.values()) {
+			talksForDate.sort((first, second) => first.start_time.localeCompare(second.start_time));
+		}
+
 		return grouped;
 	}, [filteredTalks]);
 
@@ -97,12 +129,12 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 	};
 
 	// Get time range for a group of talks
-	const getTimeRange = (talks: Talk[]) => {
-		if (talks.length === 0) return "";
-		const startTimes = talks
+	const getTimeRange = (talksForDate: Talk[]) => {
+		if (talksForDate.length === 0) return "";
+		const startTimes = talksForDate
 			.map((t) => t.start_time)
 			.sort((first, second) => first.localeCompare(second));
-		const endTimes = talks
+		const endTimes = talksForDate
 			.map((t) => t.end_time)
 			.sort((first, second) => first.localeCompare(second));
 		const formatTime = (time: string) => time.substring(0, 5);
@@ -119,7 +151,10 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 				onShowPastTalksChange={setShowPastTalks}
 			/>
 
-			<main id="main-content" className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+			<main
+				id="main-content"
+				className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+			>
 				<div className="mb-6 space-y-4">
 					{/* Header with filter button */}
 					<div className="flex items-center justify-between gap-4">
@@ -170,7 +205,9 @@ export function AgendaPageClient({ talks, eventId, agendaTalkIds }: AgendaPageCl
 							<div key={date}>
 								{/* Date Header */}
 								<div className="mb-4">
-									<h3 className="text-lg font-semibold text-foreground">{formatDateHeader(date)}</h3>
+									<h3 className="text-lg font-semibold text-foreground">
+										{formatDateHeader(date)}
+									</h3>
 									<p className="text-sm text-muted-foreground">{getTimeRange(dateTalks)}</p>
 								</div>
 

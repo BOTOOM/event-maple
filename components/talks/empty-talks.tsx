@@ -9,9 +9,7 @@ export function EmptyTalks() {
 				<Calendar className="h-8 w-8 text-muted-foreground" />
 			</div>
 			<h3 className="text-lg font-semibold text-foreground mb-2">{t("title")}</h3>
-			<p className="text-muted-foreground max-w-md mx-auto">
-				{t("description")}
-			</p>
+			<p className="text-muted-foreground max-w-md mx-auto">{t("description")}</p>
 		</div>
 	);
 }

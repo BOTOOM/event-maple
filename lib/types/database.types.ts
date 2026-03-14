@@ -34,6 +34,7 @@ export interface Database {
 					date: string;
 					location: string;
 					organizer: string;
+					created_by_eventmaple_team: boolean;
 					image_url: string | null;
 					created_at: string;
 				};
@@ -44,6 +45,7 @@ export interface Database {
 					date: string;
 					location: string;
 					organizer: string;
+					created_by_eventmaple_team?: boolean;
 					image_url?: string | null;
 					created_at?: string;
 				};
@@ -54,6 +56,7 @@ export interface Database {
 					date?: string;
 					location?: string;
 					organizer?: string;
+					created_by_eventmaple_team?: boolean;
 					image_url?: string | null;
 					created_at?: string;
 				};

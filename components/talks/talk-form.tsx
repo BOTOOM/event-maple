@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { createTalk, updateTalk, type TalkFieldSuggestions } from "@/lib/actions/talks";
+import { createTalk, type TalkFieldSuggestions, updateTalk } from "@/lib/actions/talks";
 import type { Talk, TalkFormData } from "@/lib/types/talk";
 
 interface TalkFormProps {
@@ -37,7 +37,13 @@ function normalizeTags(value: string): string[] {
 		.filter(Boolean);
 }
 
-export function TalkForm({ eventId, talk, suggestions, onSuccess, onCancel }: Readonly<TalkFormProps>) {
+export function TalkForm({
+	eventId,
+	talk,
+	suggestions,
+	onSuccess,
+	onCancel,
+}: Readonly<TalkFormProps>) {
 	const t = useTranslations("MyEvents.Talks");
 	const { toast } = useToast();
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,9 +99,7 @@ export function TalkForm({ eventId, talk, suggestions, onSuccess, onCancel }: Re
 		};
 
 		try {
-			const result = talk
-				? await updateTalk(talk.id, payload)
-				: await createTalk(payload);
+			const result = talk ? await updateTalk(talk.id, payload) : await createTalk(payload);
 
 			if (!result.success) {
 				toast({

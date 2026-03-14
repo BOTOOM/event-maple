@@ -57,97 +57,97 @@ const Carousel = React.forwardRef<
 		},
 		ref,
 	) => {
-	const [carouselRef, api] = useEmblaCarousel(
-		{
-			...opts,
-			axis: orientation === "horizontal" ? "x" : "y",
-		},
-		plugins,
-	);
-	const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-	const [canScrollNext, setCanScrollNext] = React.useState(false);
+		const [carouselRef, api] = useEmblaCarousel(
+			{
+				...opts,
+				axis: orientation === "horizontal" ? "x" : "y",
+			},
+			plugins,
+		);
+		const [canScrollPrev, setCanScrollPrev] = React.useState(false);
+		const [canScrollNext, setCanScrollNext] = React.useState(false);
 
-	const onSelect = React.useCallback((api: CarouselApi) => {
-		if (!api) {
-			return;
-		}
-
-		setCanScrollPrev(api.canScrollPrev());
-		setCanScrollNext(api.canScrollNext());
-	}, []);
-
-	const scrollPrev = React.useCallback(() => {
-		api?.scrollPrev();
-	}, [api]);
-
-	const scrollNext = React.useCallback(() => {
-		api?.scrollNext();
-	}, [api]);
-
-	const handleKeyDown = React.useCallback(
-		(event: React.KeyboardEvent<HTMLDivElement>) => {
-			if (event.key === "ArrowLeft") {
-				event.preventDefault();
-				scrollPrev();
-			} else if (event.key === "ArrowRight") {
-				event.preventDefault();
-				scrollNext();
+		const onSelect = React.useCallback((api: CarouselApi) => {
+			if (!api) {
+				return;
 			}
-		},
-		[scrollPrev, scrollNext],
-	);
 
-	React.useEffect(() => {
-		if (!api || !setApi) {
-			return;
-		}
+			setCanScrollPrev(api.canScrollPrev());
+			setCanScrollNext(api.canScrollNext());
+		}, []);
 
-		setApi(api);
-	}, [api, setApi]);
+		const scrollPrev = React.useCallback(() => {
+			api?.scrollPrev();
+		}, [api]);
 
-	React.useEffect(() => {
-		if (!api) {
-			return;
-		}
+		const scrollNext = React.useCallback(() => {
+			api?.scrollNext();
+		}, [api]);
 
-		onSelect(api);
-		api.on("reInit", onSelect);
-		api.on("select", onSelect);
+		const handleKeyDown = React.useCallback(
+			(event: React.KeyboardEvent<HTMLDivElement>) => {
+				if (event.key === "ArrowLeft") {
+					event.preventDefault();
+					scrollPrev();
+				} else if (event.key === "ArrowRight") {
+					event.preventDefault();
+					scrollNext();
+				}
+			},
+			[scrollPrev, scrollNext],
+		);
 
-		return () => {
-			api?.off("select", onSelect);
-		};
-	}, [api, onSelect]);
+		React.useEffect(() => {
+			if (!api || !setApi) {
+				return;
+			}
 
-	const contextValue = React.useMemo(
-		() => ({
-			carouselRef,
-			api: api,
-			opts,
-			orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
-			scrollPrev,
-			scrollNext,
-			canScrollPrev,
-			canScrollNext,
-		}),
-		[carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext],
-	);
+			setApi(api);
+		}, [api, setApi]);
 
-	return (
-		<CarouselContext.Provider value={contextValue}>
-			<section
-				ref={ref}
-				onKeyDownCapture={handleKeyDown}
-				className={cn("relative", className)}
-				aria-roledescription="carousel"
-				aria-label={ariaLabel}
-				{...props}
-			>
-				{children}
-			</section>
-		</CarouselContext.Provider>
-	);
-},
+		React.useEffect(() => {
+			if (!api) {
+				return;
+			}
+
+			onSelect(api);
+			api.on("reInit", onSelect);
+			api.on("select", onSelect);
+
+			return () => {
+				api?.off("select", onSelect);
+			};
+		}, [api, onSelect]);
+
+		const contextValue = React.useMemo(
+			() => ({
+				carouselRef,
+				api: api,
+				opts,
+				orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+				scrollPrev,
+				scrollNext,
+				canScrollPrev,
+				canScrollNext,
+			}),
+			[carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext],
+		);
+
+		return (
+			<CarouselContext.Provider value={contextValue}>
+				<section
+					ref={ref}
+					onKeyDownCapture={handleKeyDown}
+					className={cn("relative", className)}
+					aria-roledescription="carousel"
+					aria-label={ariaLabel}
+					{...props}
+				>
+					{children}
+				</section>
+			</CarouselContext.Provider>
+		);
+	},
 );
 Carousel.displayName = "Carousel";
 

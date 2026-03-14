@@ -22,9 +22,7 @@ export function Navbar() {
 							height={32}
 							className="w-8 h-8 sm:w-10 sm:h-10"
 						/>
-						<span className="font-bold text-lg sm:text-xl text-foreground">
-							EventMaple
-						</span>
+						<span className="font-bold text-lg sm:text-xl text-foreground">EventMaple</span>
 					</Link>
 
 					{/* Navigation Links - Hidden on mobile */}
@@ -35,10 +33,16 @@ export function Navbar() {
 						>
 							{t("links.events")}
 						</Link>
-						<Link href="#benefits" className="text-muted-foreground hover:text-foreground transition-colors">
+						<Link
+							href="#benefits"
+							className="text-muted-foreground hover:text-foreground transition-colors"
+						>
 							{t("links.benefits")}
 						</Link>
-						<Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+						<Link
+							href="#features"
+							className="text-muted-foreground hover:text-foreground transition-colors"
+						>
 							{t("links.features")}
 						</Link>
 						{/* <Link

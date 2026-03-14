@@ -66,7 +66,12 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
 			<AgendaHeader eventId={eventId} eventTitle={eventTitle} />
 
 			{/* Client-side component for filtering and searching */}
-			<AgendaPageClient talks={talks || []} eventId={eventId} agendaTalkIds={agendaTalkIds} />
+			<AgendaPageClient
+				talks={talks || []}
+				eventId={eventId}
+				agendaTalkIds={agendaTalkIds}
+				eventTimezone={event.timezone || "UTC"}
+			/>
 		</div>
 	);
 }

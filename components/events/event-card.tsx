@@ -42,7 +42,7 @@ export function EventCard({ event }: Readonly<EventCardProps>) {
 	return (
 		<div className="bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-ring">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gradient-to-br from-winter-700 to-winter-900">
+			<div className="relative w-full h-48 bg-[#f5f7fa]">
 				{event.image_url ? (
 					<Image src={event.image_url} alt={eventTitle} fill className="object-cover" />
 				) : (

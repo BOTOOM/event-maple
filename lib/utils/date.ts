@@ -125,6 +125,96 @@ export function convertLocalToUTC(localDateTime: string, timeZone: string): stri
 	}
 }
 
+function normalizeTimeValue(time: string): string {
+	const [rawHour = "00", rawMinute = "00"] = time.split(":");
+	return `${rawHour.padStart(2, "0")}:${rawMinute.padStart(2, "0")}`;
+}
+
+function getDateTimePartsInTimezone(date: Date, timeZone: string): Record<string, string> {
+	const formatter = new Intl.DateTimeFormat("en-CA", {
+		timeZone,
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
+		hour12: false,
+	});
+
+	const parts = formatter.formatToParts(date);
+	const map = new Map(parts.map((part) => [part.type, part.value]));
+	const hour = map.get("hour") === "24" ? "00" : map.get("hour");
+
+	return {
+		year: map.get("year") || "0000",
+		month: map.get("month") || "01",
+		day: map.get("day") || "01",
+		hour: hour || "00",
+		minute: map.get("minute") || "00",
+	};
+}
+
+export interface BrowserTalkSchedule {
+	date: string;
+	startTime: string;
+	endTime: string;
+	startUtcIso: string;
+	endUtcIso: string;
+}
+
+export function convertTalkScheduleToBrowser(
+	talkDate: string,
+	startTime: string,
+	endTime: string,
+	eventTimezone: string,
+	browserTimezone: string = getBrowserTimezone(),
+): BrowserTalkSchedule {
+	const normalizedStartTime = normalizeTimeValue(startTime);
+	const normalizedEndTime = normalizeTimeValue(endTime);
+
+	const fallbackStartUtc = new Date(`${talkDate}T${normalizedStartTime}:00Z`).toISOString();
+	const fallbackEndUtc = new Date(`${talkDate}T${normalizedEndTime}:00Z`).toISOString();
+
+	const startUtcIso =
+		convertLocalToUTC(`${talkDate}T${normalizedStartTime}`, eventTimezone) || fallbackStartUtc;
+	const endUtcIso =
+		convertLocalToUTC(`${talkDate}T${normalizedEndTime}`, eventTimezone) || fallbackEndUtc;
+
+	try {
+		const startDate = new Date(startUtcIso);
+		const endDate = new Date(endUtcIso);
+
+		if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+			return {
+				date: talkDate,
+				startTime: normalizedStartTime,
+				endTime: normalizedEndTime,
+				startUtcIso: fallbackStartUtc,
+				endUtcIso: fallbackEndUtc,
+			};
+		}
+
+		const startParts = getDateTimePartsInTimezone(startDate, browserTimezone);
+		const endParts = getDateTimePartsInTimezone(endDate, browserTimezone);
+
+		return {
+			date: `${startParts.year}-${startParts.month}-${startParts.day}`,
+			startTime: `${startParts.hour}:${startParts.minute}`,
+			endTime: `${endParts.hour}:${endParts.minute}`,
+			startUtcIso,
+			endUtcIso,
+		};
+	} catch {
+		return {
+			date: talkDate,
+			startTime: normalizedStartTime,
+			endTime: normalizedEndTime,
+			startUtcIso: fallbackStartUtc,
+			endUtcIso: fallbackEndUtc,
+		};
+	}
+}
+
 /**
  * Formats a UTC date string for display in the user's browser timezone
  * Used in event cards and listings

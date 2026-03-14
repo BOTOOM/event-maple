@@ -102,7 +102,11 @@ export function AddToAgendaButton({
 				onClick={handleToggle}
 				disabled={isLoading}
 				variant={isInAgenda ? "default" : "outline"}
-				className={cn("w-full sm:w-auto", isInAgenda && "bg-primary hover:bg-primary/90", className)}
+				className={cn(
+					"w-full sm:w-auto",
+					isInAgenda && "bg-primary hover:bg-primary/90",
+					className,
+				)}
 			>
 				<Heart className={cn("h-4 w-4 mr-2", isInAgenda && "fill-white")} />
 				{isInAgenda ? t("inAgenda") : t("add")}

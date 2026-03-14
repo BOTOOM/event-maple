@@ -398,6 +398,8 @@
 			"date": "Date",
 			"location": "Location",
 			"organizer": "Organized by",
+			"createdByEventMapleTeam": "Created by EventMaple Team",
+			"createdByUnknown": "EventMaple User",
 			"about": "About the event",
 			"actions": {
 				"title": "Quick Actions",

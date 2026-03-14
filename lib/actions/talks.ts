@@ -72,11 +72,7 @@ export async function getTalksByEventId(eventId: number): Promise<Talk[]> {
 export async function getTalkById(talkId: number): Promise<Talk | null> {
 	const supabase = await createClient();
 
-	const { data, error } = await supabase
-		.from("talks")
-		.select("*")
-		.eq("id", talkId)
-		.single();
+	const { data, error } = await supabase.from("talks").select("*").eq("id", talkId).single();
 
 	if (error) {
 		console.error("Error fetching talk:", error);
@@ -104,11 +100,7 @@ export async function createTalk(
 
 	const payload = toTalkInsertPayload(formData.event_id, formData);
 
-	const { data, error } = await supabase
-		.from("talks")
-		.insert(payload)
-		.select("id")
-		.single();
+	const { data, error } = await supabase.from("talks").insert(payload).select("id").single();
 
 	if (error) {
 		console.error("Error creating talk:", error);
@@ -135,8 +127,15 @@ export async function updateTalk(
 	}
 
 	const nullableFields = [
-		"short_description", "detailed_description", "room", "floor",
-		"speaker_name", "speaker_bio", "speaker_photo", "level", "capacity",
+		"short_description",
+		"detailed_description",
+		"room",
+		"floor",
+		"speaker_name",
+		"speaker_bio",
+		"speaker_photo",
+		"level",
+		"capacity",
 	] as const;
 
 	const directFields = ["title", "date", "start_time", "end_time", "is_fixed"] as const;
@@ -189,10 +188,7 @@ export async function batchCreateTalks(
 
 	const payloads = talksData.map((talk) => toTalkInsertPayload(eventId, talk));
 
-	const { data, error } = await supabase
-		.from("talks")
-		.insert(payloads)
-		.select("id");
+	const { data, error } = await supabase.from("talks").insert(payloads).select("id");
 
 	if (error) {
 		console.error("Error batch creating talks:", error);
@@ -273,7 +269,14 @@ function collectTags(tags: string[] | null, set: Set<string>) {
 	for (const tag of tags) addIfTruthy(set, tag);
 }
 
-function collectFieldValues(data: { room: string | null; floor: string | null; tags: string[] | null; level: string | null }[]) {
+function collectFieldValues(
+	data: {
+		room: string | null;
+		floor: string | null;
+		tags: string[] | null;
+		level: string | null;
+	}[],
+) {
 	const rooms = new Set<string>();
 	const floors = new Set<string>();
 	const tags = new Set<string>();

@@ -74,7 +74,7 @@ export function EventPreviewCard({
 	return (
 		<div className="bg-card rounded-lg shadow-lg overflow-hidden border border-border">
 			{/* Image */}
-			<div className="relative w-full h-48 bg-gradient-to-br from-winter-700 to-winter-900">
+			<div className="relative w-full h-48 bg-[#f5f7fa]">
 				{imageUrl ? (
 					<Image
 						src={imageUrl}
