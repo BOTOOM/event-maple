@@ -83,7 +83,7 @@ export function TimelineView({
 								style={{
 									top: `${top}px`,
 									minHeight: `${isCompact ? minTalkHeight : height}px`,
-									height: `${isCompact ? "auto" : `${height}px`}`,
+									height: isCompact ? "auto" : `${height}px`,
 									left: leftPercentage,
 									width: widthPercentage,
 									padding: "0 4px",
