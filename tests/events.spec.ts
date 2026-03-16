@@ -175,12 +175,11 @@ test.describe("Event Detail Page - Date and Time Display", () => {
 
 		const organizerLabel = page.locator("p", { hasText: "Organized by" }).first();
 
-		if (await organizerLabel.isVisible({ timeout: 5000 })) {
-			const organizerValue = organizerLabel.locator("xpath=following-sibling::p").first();
-			await expect(organizerValue).toBeVisible();
-			const creatorText = (await organizerValue.textContent())?.trim() || "";
-			expect(creatorText.length).toBeGreaterThan(0);
-		}
+		await expect(organizerLabel).toBeVisible({ timeout: 5000 });
+		const organizerValue = organizerLabel.locator("xpath=following-sibling::p").first();
+		await expect(organizerValue).toBeVisible();
+		const creatorText = (await organizerValue.textContent())?.trim() || "";
+		expect(creatorText.length).toBeGreaterThan(0);
 	});
 });
 

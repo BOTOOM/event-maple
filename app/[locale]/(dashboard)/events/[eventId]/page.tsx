@@ -221,13 +221,11 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 									value={event.location}
 								/>
 							)}
-							{creatorDisplayName && (
-								<InfoRow
-									icon={<Users className="h-5 w-5 text-muted-foreground" />}
-									label={t("organizer")}
-									value={creatorDisplayName}
-								/>
-							)}
+							<InfoRow
+								icon={<Users className="h-5 w-5 text-muted-foreground" />}
+								label={t("organizer")}
+								value={creatorDisplayName || event.organizer || (t("createdByUnknown") as string)}
+							/>
 						</div>
 
 						{/* Right Column: Actions Panel */}

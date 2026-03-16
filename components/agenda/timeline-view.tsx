@@ -62,7 +62,7 @@ export function TimelineView({
 					{talks.map((talk) => {
 						const top = calculateTopPosition(talk.start_time, startHour, pixelsPerHour);
 						const calculatedHeight = calculateHeight(talk.start_time, talk.end_time, pixelsPerHour);
-						const height = Math.max(calculatedHeight, minTalkHeight);
+						const height = calculatedHeight;
 						const isCompact = calculatedHeight < minTalkHeight;
 
 						// Calcular ancho y posición horizontal si hay conflictos
@@ -79,10 +79,11 @@ export function TimelineView({
 						return (
 							<div
 								key={talk.id}
-								className="absolute"
+								className="absolute group z-10 hover:z-20"
 								style={{
 									top: `${top}px`,
-									height: `${height}px`,
+									minHeight: `${isCompact ? minTalkHeight : height}px`,
+									height: `${isCompact ? "auto" : `${height}px`}`,
 									left: leftPercentage,
 									width: widthPercentage,
 									padding: "0 4px",

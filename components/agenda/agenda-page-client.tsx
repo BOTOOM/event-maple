@@ -9,8 +9,8 @@ import { TalkCard } from "@/components/talks/talk-card";
 import { TalksFilterSidebar } from "@/components/talks/talks-filter-sidebar";
 import { TalksSearch } from "@/components/talks/talks-search";
 import { Button } from "@/components/ui/button";
+import { useLocalizedTalks } from "@/lib/hooks/useLocalizedTalks";
 import { Talk } from "@/lib/types/talk";
-import { convertTalkScheduleToBrowser } from "@/lib/utils/date";
 
 interface AgendaPageClientProps {
 	readonly talks: Talk[];
@@ -39,29 +39,7 @@ export function AgendaPageClient({
 	// Get current date and time for comparison
 	const now = useMemo(() => new Date(), []);
 
-	const localizedTalks = useMemo<LocalizedTalk[]>(
-		() =>
-			talks
-				.map((talk) => {
-					const localizedSchedule = convertTalkScheduleToBrowser(
-						talk.date,
-						talk.start_time,
-						talk.end_time,
-						eventTimezone || "UTC",
-					);
-
-					return {
-						...talk,
-						date: localizedSchedule.date,
-						start_time: localizedSchedule.startTime,
-						end_time: localizedSchedule.endTime,
-						browserStartUtcIso: localizedSchedule.startUtcIso,
-						browserEndUtcIso: localizedSchedule.endUtcIso,
-					};
-				})
-				.sort((first, second) => first.browserStartUtcIso.localeCompare(second.browserStartUtcIso)),
-		[talks, eventTimezone],
-	);
+	const localizedTalks = useLocalizedTalks(talks, eventTimezone);
 
 	// Filter and search talks
 	const filteredTalks = useMemo(() => {

@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
+import { useLocalizedTalks } from "@/lib/hooks/useLocalizedTalks";
 import { Talk } from "@/lib/types/talk";
-import { convertTalkScheduleToBrowser } from "@/lib/utils/date";
 import { detectConflicts, getTalkColor, TalkWithConflict } from "@/lib/utils/timeline";
 import { DateSelector } from "./date-selector";
 import { TimelineView } from "./timeline-view";
@@ -32,25 +32,7 @@ export function MyAgendaClient({
 	const [isMobile, setIsMobile] = useState(false);
 	const t = useTranslations("Events.MyAgenda");
 
-	const localizedTalks = useMemo<Array<Talk & { is_in_my_agenda: boolean }>>(
-		() =>
-			talks.map((talk) => {
-				const localizedSchedule = convertTalkScheduleToBrowser(
-					talk.date,
-					talk.start_time,
-					talk.end_time,
-					eventTimezone || "UTC",
-				);
-
-				return {
-					...talk,
-					date: localizedSchedule.date,
-					start_time: localizedSchedule.startTime,
-					end_time: localizedSchedule.endTime,
-				};
-			}),
-		[talks, eventTimezone],
-	);
+	const localizedTalks = useLocalizedTalks(talks, eventTimezone);
 
 	const availableDates = useMemo(
 		() =>
@@ -110,7 +92,7 @@ export function MyAgendaClient({
 
 	// Count talks per room and get colors
 	talksForCurrentDate.forEach((talk) => {
-		const room = talk.room || "Sin sala";
+		const room = talk.room || t("legend.noRoom");
 		const colorClasses = getTalkColor(talk);
 
 		if (roomMap.has(room)) {
