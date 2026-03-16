@@ -14,6 +14,7 @@ interface TimelineViewProps {
 	startHour?: number;
 	endHour?: number;
 	pixelsPerHour?: number;
+	minTalkHeight?: number;
 }
 
 export function TimelineView({
@@ -22,6 +23,7 @@ export function TimelineView({
 	startHour = 7,
 	endHour = 20,
 	pixelsPerHour = 140,
+	minTalkHeight = 52,
 }: Readonly<TimelineViewProps>) {
 	const timeSlots = generateTimeSlots(startHour, endHour);
 	const totalHeight = (endHour - startHour + 1) * pixelsPerHour;
@@ -59,7 +61,9 @@ export function TimelineView({
 				<div className="absolute inset-0 px-2 py-1">
 					{talks.map((talk) => {
 						const top = calculateTopPosition(talk.start_time, startHour, pixelsPerHour);
-						const height = calculateHeight(talk.start_time, talk.end_time, pixelsPerHour);
+						const calculatedHeight = calculateHeight(talk.start_time, talk.end_time, pixelsPerHour);
+						const height = calculatedHeight;
+						const isCompact = calculatedHeight < minTalkHeight;
 
 						// Calcular ancho y posición horizontal si hay conflictos
 						const widthPercentage =
@@ -75,10 +79,11 @@ export function TimelineView({
 						return (
 							<div
 								key={talk.id}
-								className="absolute"
+								className="absolute group z-10 hover:z-20"
 								style={{
 									top: `${top}px`,
-									height: `${height}px`,
+									minHeight: `${isCompact ? minTalkHeight : height}px`,
+									height: isCompact ? "auto" : `${height}px`,
 									left: leftPercentage,
 									width: widthPercentage,
 									padding: "0 4px",
@@ -89,6 +94,7 @@ export function TimelineView({
 									eventId={eventId}
 									isInAgenda={talk.is_in_my_agenda}
 									hasConflict={talk.total_conflicts ? talk.total_conflicts > 1 : false}
+									isCompact={isCompact}
 								/>
 							</div>
 						);

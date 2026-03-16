@@ -227,7 +227,9 @@ export async function getMyEvents(
 		return buildEmptyPaginatedEvents(page);
 	}
 
-	const events: EventWithDetails[] = (data || []).map((event) => mapEventWithDetails(event, user.id, true));
+	const events: EventWithDetails[] = (data || []).map((event) =>
+		mapEventWithDetails(event, user.id, true),
+	);
 
 	const total = count || 0;
 

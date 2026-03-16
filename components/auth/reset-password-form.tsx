@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "@/lib/i18n/navigation";
 import { toast } from "@/lib/hooks/use-toast";
+import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export function ResetPasswordForm() {
@@ -141,9 +141,7 @@ export function ResetPasswordForm() {
 
 					<div>
 						<h1 className="text-3xl font-bold text-foreground mb-2">{t("invalidLink.title")}</h1>
-						<p className="text-muted-foreground">
-							{t("invalidLink.description")}
-						</p>
+						<p className="text-muted-foreground">{t("invalidLink.description")}</p>
 					</div>
 
 					<Link href="/forgot-password" className="block">
@@ -181,9 +179,7 @@ export function ResetPasswordForm() {
 
 					<div>
 						<h1 className="text-3xl font-bold text-foreground mb-2">{t("success.title")}</h1>
-						<p className="text-muted-foreground">
-							{t("success.description")}
-						</p>
+						<p className="text-muted-foreground">{t("success.description")}</p>
 					</div>
 
 					<Link href="/login" className="block">
@@ -206,12 +202,8 @@ export function ResetPasswordForm() {
 			</div>
 
 			<div className="text-center mb-8">
-				<h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
-					{t("form.title")}
-				</h1>
-				<p className="text-muted-foreground">
-					{t("form.subtitle")}
-				</p>
+				<h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{t("form.title")}</h1>
+				<p className="text-muted-foreground">{t("form.subtitle")}</p>
 			</div>
 
 			<form onSubmit={handleSubmit} className="space-y-6">

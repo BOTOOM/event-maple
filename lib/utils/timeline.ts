@@ -60,10 +60,10 @@ export function talksOverlap(talk1: Talk, talk2: Talk): boolean {
 }
 
 // Detectar todos los conflictos y asignar columnas para renderizado
-export function detectConflicts(talks: Talk[]): TalkWithConflict[] {
+export function detectConflicts(talks: Talk[] | TalkWithConflict[]): TalkWithConflict[] {
 	const talksWithConflicts: TalkWithConflict[] = talks.map((talk) => ({
 		...talk,
-		is_in_my_agenda: false,
+		is_in_my_agenda: (talk as TalkWithConflict).is_in_my_agenda || false,
 		conflict_column: 0,
 		total_conflicts: 1,
 	}));

@@ -40,7 +40,9 @@ function ToggleFilter({ id, label, checked, onChange, description }: ToggleFilte
 					/>
 				</button>
 			</div>
-			{description && <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>}
+			{description && (
+				<p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+			)}
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, FileUp, Plus, Trash2, Calendar, Clock, MapPin, User } from "lucide-react";
+import { Calendar, Clock, Edit, FileUp, MapPin, Plus, Trash2, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -20,8 +20,8 @@ import {
 	SheetHeader,
 	SheetTitle,
 } from "@/components/ui/sheet";
-import { deleteTalk } from "@/lib/actions/talks";
 import type { TalkFieldSuggestions } from "@/lib/actions/talks";
+import { deleteTalk } from "@/lib/actions/talks";
 import { Talk } from "@/lib/types/talk";
 import { TalkForm } from "./talk-form";
 import { TalksImport } from "./talks-import";
@@ -147,9 +147,7 @@ export function TalksManager({ eventId, talks, locale, talkSuggestions }: TalksM
 									{(talk.room || talk.floor) && (
 										<div className="flex items-center gap-1">
 											<MapPin className="h-3 w-3" />
-											<span>
-												{[talk.room, talk.floor].filter(Boolean).join(", ")}
-											</span>
+											<span>{[talk.room, talk.floor].filter(Boolean).join(", ")}</span>
 										</div>
 									)}
 									{talk.speaker_name && (
@@ -190,9 +188,7 @@ export function TalksManager({ eventId, talks, locale, talkSuggestions }: TalksM
 				<SheetContent className="sm:max-w-xl overflow-y-auto">
 					<SheetHeader className="mb-6">
 						<SheetTitle>{editingTalk ? t("edit") : t("add")}</SheetTitle>
-						<SheetDescription>
-							{editingTalk ? editingTalk.title : t("subtitle")}
-						</SheetDescription>
+						<SheetDescription>{editingTalk ? editingTalk.title : t("subtitle")}</SheetDescription>
 					</SheetHeader>
 					<TalkForm
 						eventId={eventId}
@@ -208,23 +204,13 @@ export function TalksManager({ eventId, talks, locale, talkSuggestions }: TalksM
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>{t("delete")}</DialogTitle>
-						<DialogDescription>
-							{t("deleteConfirm")}
-						</DialogDescription>
+						<DialogDescription>{t("deleteConfirm")}</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
-						<Button
-							variant="outline"
-							onClick={() => setDeletingTalkId(null)}
-							disabled={isDeleting}
-						>
+						<Button variant="outline" onClick={() => setDeletingTalkId(null)} disabled={isDeleting}>
 							{t("actions.cancel")}
 						</Button>
-						<Button
-							variant="destructive"
-							onClick={confirmDelete}
-							disabled={isDeleting}
-						>
+						<Button variant="destructive" onClick={confirmDelete} disabled={isDeleting}>
 							{isDeleting ? t("actions.deleting") : t("delete")}
 						</Button>
 					</DialogFooter>

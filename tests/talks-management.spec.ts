@@ -1,5 +1,5 @@
-import { expect, test, type Locator, type Page } from "@playwright/test";
 import { randomUUID } from "node:crypto";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 import { loginWithEnvCredentials } from "./utils/test-helpers";
 
 function formatDateForInput(date: Date): string {
@@ -101,7 +101,9 @@ test.describe("Talks management in event edit", () => {
 		await page.locator("#talk-end-time").fill("10:00");
 
 		await page.locator('form:has(#talk-title) button[type="submit"]').click();
-		await expect(page.getByText("End time must be after start time").first()).toBeVisible({ timeout: 10000 });
+		await expect(page.getByText("End time must be after start time").first()).toBeVisible({
+			timeout: 10000,
+		});
 
 		await page.locator('form:has(#talk-title) button[type="button"]').first().click();
 		await expect(page.locator("#talk-title")).not.toBeVisible({ timeout: 10000 });

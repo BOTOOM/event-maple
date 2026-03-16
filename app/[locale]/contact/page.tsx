@@ -38,7 +38,9 @@ export default function ContactPage() {
 					<div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-6">
 						<Mail className="h-12 w-12 text-primary" />
 					</div>
-					<h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{t("header.title")}</h1>
+					<h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+						{t("header.title")}
+					</h1>
 					<p className="text-xl text-muted-foreground max-w-2xl mx-auto">{t("header.subtitle")}</p>
 				</div>
 
@@ -108,7 +110,9 @@ export default function ContactPage() {
 									<h4 className="text-lg font-semibold text-foreground mb-1">
 										{t("methods.github.title")}
 									</h4>
-									<p className="text-foreground/80 font-medium group-hover:text-foreground">@BOTOOM</p>
+									<p className="text-foreground/80 font-medium group-hover:text-foreground">
+										@BOTOOM
+									</p>
 									<p className="text-sm text-muted-foreground mt-1">{t("methods.github.desc")}</p>
 								</div>
 							</a>
@@ -128,7 +132,9 @@ export default function ContactPage() {
 										{t("methods.portfolio.title")}
 									</h4>
 									<p className="text-primary font-medium group-hover:underline">edwardiaz.dev</p>
-									<p className="text-sm text-muted-foreground mt-1">{t("methods.portfolio.desc")}</p>
+									<p className="text-sm text-muted-foreground mt-1">
+										{t("methods.portfolio.desc")}
+									</p>
 								</div>
 							</a>
 						</div>
@@ -195,7 +201,10 @@ export default function ContactPage() {
 
 				{/* Back to Home */}
 				<div className="text-center mt-8">
-					<Link href="/" className="text-muted-foreground hover:text-foreground text-sm font-medium">
+					<Link
+						href="/"
+						className="text-muted-foreground hover:text-foreground text-sm font-medium"
+					>
 						← {t("back")}
 					</Link>
 				</div>

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocalizedTalks } from "@/lib/hooks/useLocalizedTalks";
 import { Talk } from "@/lib/types/talk";
 import { detectConflicts, getTalkColor, TalkWithConflict } from "@/lib/utils/timeline";
 import { DateSelector } from "./date-selector";
@@ -11,8 +12,8 @@ import { TimelineView } from "./timeline-view";
 interface MyAgendaClientProps {
 	readonly talks: Array<Talk & { is_in_my_agenda: boolean }>;
 	readonly eventId: number;
-	readonly selectedDate: string;
-	readonly availableDates: string[];
+	readonly eventTimezone: string;
+	readonly initialDate?: string;
 }
 
 interface RoomLegend {
@@ -24,13 +25,41 @@ interface RoomLegend {
 export function MyAgendaClient({
 	talks,
 	eventId,
-	selectedDate,
-	availableDates,
+	eventTimezone,
+	initialDate,
 }: Readonly<MyAgendaClientProps>) {
 	const router = useRouter();
-	const [currentDate, setCurrentDate] = useState(selectedDate);
 	const [isMobile, setIsMobile] = useState(false);
 	const t = useTranslations("Events.MyAgenda");
+
+	const localizedTalks = useLocalizedTalks(talks, eventTimezone);
+
+	const availableDates = useMemo(
+		() =>
+			Array.from(new Set(localizedTalks.map((talk) => talk.date))).sort((a, b) =>
+				a.localeCompare(b),
+			),
+		[localizedTalks],
+	);
+
+	const [currentDate, setCurrentDate] = useState(() => {
+		if (initialDate && availableDates.includes(initialDate)) {
+			return initialDate;
+		}
+		return availableDates[0] || initialDate || "";
+	});
+
+	useEffect(() => {
+		const nextDate =
+			(initialDate && availableDates.includes(initialDate) && initialDate) ||
+			(availableDates.includes(currentDate) ? currentDate : availableDates[0]) ||
+			initialDate ||
+			"";
+
+		if (nextDate !== currentDate) {
+			setCurrentDate(nextDate);
+		}
+	}, [availableDates, currentDate, initialDate]);
 
 	// Detect mobile on mount and window resize
 	useEffect(() => {
@@ -49,16 +78,21 @@ export function MyAgendaClient({
 		router.push(`/events/${eventId}/my-agenda?date=${newDate}`);
 	};
 
+	const talksForCurrentDate = useMemo(
+		() => localizedTalks.filter((talk) => talk.date === currentDate),
+		[localizedTalks, currentDate],
+	);
+
 	// Detect conflicts
-	const talksWithConflicts: TalkWithConflict[] = detectConflicts(talks);
+	const talksWithConflicts: TalkWithConflict[] = detectConflicts(talksForCurrentDate);
 
 	// Generate dynamic legend based on rooms in talks
 	const roomLegends: RoomLegend[] = [];
 	const roomMap = new Map<string, { colorClasses: string; count: number }>();
 
 	// Count talks per room and get colors
-	talks.forEach((talk) => {
-		const room = talk.room || "Sin sala";
+	talksForCurrentDate.forEach((talk) => {
+		const room = talk.room || t("legend.noRoom");
 		const colorClasses = getTalkColor(talk);
 
 		if (roomMap.has(room)) {
@@ -104,6 +138,7 @@ export function MyAgendaClient({
 							startHour={7}
 							endHour={20}
 							pixelsPerHour={pixelsPerHour}
+							minTalkHeight={isMobile ? 64 : 52}
 						/>
 					</div>
 				</div>

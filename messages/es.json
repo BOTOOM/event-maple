@@ -398,6 +398,8 @@
 			"date": "Fecha",
 			"location": "Ubicación",
 			"organizer": "Organizado por",
+			"createdByEventMapleTeam": "Creado por EventMaple Team",
+			"createdByUnknown": "Usuario de EventMaple",
 			"about": "Acerca del evento",
 			"actions": {
 				"title": "Acciones Rápidas",

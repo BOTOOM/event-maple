@@ -249,7 +249,10 @@ export function RegisterForm() {
 						}
 						required
 					/>
-					<label htmlFor="terms" className="text-sm text-muted-foreground leading-tight cursor-pointer">
+					<label
+						htmlFor="terms"
+						className="text-sm text-muted-foreground leading-tight cursor-pointer"
+					>
 						{t.rich("terms", {
 							terms: TermsLink,
 							privacy: PrivacyLink,

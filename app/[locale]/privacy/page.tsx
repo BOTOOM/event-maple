@@ -241,7 +241,9 @@ export default function PrivacyPage() {
 
 			{/* 7. Tus Derechos */}
 			<section>
-				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.rights.title")}</h2>
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
+					{t("sections.rights.title")}
+				</h2>
 				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.rights.intro")}</p>
 					<RightsGrid
@@ -271,7 +273,9 @@ export default function PrivacyPage() {
 
 			{/* 8. Cookies */}
 			<section>
-				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.cookies.title")}</h2>
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
+					{t("sections.cookies.title")}
+				</h2>
 				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.cookies.intro")}</p>
 					<ul className="list-disc pl-6 space-y-2">
@@ -288,7 +292,9 @@ export default function PrivacyPage() {
 
 			{/* 9. Menores de Edad */}
 			<section>
-				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.minors.title")}</h2>
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
+					{t("sections.minors.title")}
+				</h2>
 				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.minors.text1")}</p>
 					<p>{t("sections.minors.text2")}</p>
@@ -297,7 +303,9 @@ export default function PrivacyPage() {
 
 			{/* 10. Cambios a esta Política */}
 			<section>
-				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.changes.title")}</h2>
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
+					{t("sections.changes.title")}
+				</h2>
 				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.changes.text1")}</p>
 					<p>{t("sections.changes.text2")}</p>
@@ -317,11 +325,15 @@ export default function PrivacyPage() {
 
 			{/* 12. Contacto */}
 			<section>
-				<h2 className="text-2xl font-semibold text-foreground mb-4">{t("sections.contact.title")}</h2>
+				<h2 className="text-2xl font-semibold text-foreground mb-4">
+					{t("sections.contact.title")}
+				</h2>
 				<div className="space-y-3 text-foreground/80 leading-relaxed">
 					<p>{t("sections.contact.intro")}</p>
 					<div className="bg-gradient-to-br from-primary/10 to-winter-100 border border-primary/20 rounded-lg p-6 mt-4">
-						<h3 className="font-semibold text-foreground mb-4">{t("sections.contact.infoTitle")}</h3>
+						<h3 className="font-semibold text-foreground mb-4">
+							{t("sections.contact.infoTitle")}
+						</h3>
 						<div className="space-y-2">
 							<p
 								className="text-foreground/80"

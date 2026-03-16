@@ -83,6 +83,23 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 		notFound();
 	}
 
+	let creatorDisplayName: string | null = event.organizer || null;
+	if (event.created_by_eventmaple_team) {
+		creatorDisplayName = t("createdByEventMapleTeam");
+	} else if (event.created_by) {
+		const { data: creatorProfile } = await supabase
+			.from("user_profiles")
+			.select("display_name, email")
+			.eq("id", event.created_by)
+			.maybeSingle();
+
+		creatorDisplayName =
+			creatorProfile?.display_name ||
+			creatorProfile?.email ||
+			creatorDisplayName ||
+			t("createdByUnknown");
+	}
+
 	// JSON-LD Structure for Google Rich Snippets
 	const jsonLd = {
 		"@context": "https://schema.org",
@@ -104,7 +121,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 		description: event.description,
 		organizer: {
 			"@type": "Organization",
-			name: event.organizer || "EventMaple User",
+			name: creatorDisplayName || event.organizer || "EventMaple User",
 			url: "https://event-maple.edwardiaz.dev",
 		},
 	};
@@ -162,12 +179,12 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
 			<main className="container mx-auto px-0 md:px-4 lg:px-8 pb-8">
 				{/* Hero Image */}
-				<div className="relative w-full h-64 sm:h-80 md:h-96 md:rounded-lg md:mt-6 overflow-hidden bg-gradient-to-br from-winter-700 to-winter-900">
+				<div className="relative w-full h-64 sm:h-80 md:h-96 md:rounded-lg md:mt-6 overflow-hidden bg-[#f5f7fa]">
 					{event.image_url ? (
 						<Image src={event.image_url} alt={eventTitle} fill className="object-cover" priority />
 					) : (
 						<div className="absolute inset-0 flex items-center justify-center">
-							<div className="text-center text-white px-6">
+							<div className="text-center text-muted-foreground px-6">
 								<Calendar className="h-16 w-16 mx-auto mb-4 opacity-50" />
 								<p className="text-lg opacity-75">{eventTitle}</p>
 							</div>
@@ -204,13 +221,11 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 									value={event.location}
 								/>
 							)}
-							{event.organizer && (
-								<InfoRow
-									icon={<Users className="h-5 w-5 text-muted-foreground" />}
-									label={t("organizer")}
-									value={event.organizer}
-								/>
-							)}
+							<InfoRow
+								icon={<Users className="h-5 w-5 text-muted-foreground" />}
+								label={t("organizer")}
+								value={creatorDisplayName || event.organizer || (t("createdByUnknown") as string)}
+							/>
 						</div>
 
 						{/* Right Column: Actions Panel */}

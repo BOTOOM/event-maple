@@ -59,7 +59,9 @@ function TalkTags({ tags }: { readonly tags?: string[] }) {
 				</span>
 			))}
 			{tags.length > 3 && (
-				<span className="inline-block px-2 py-0.5 text-muted-foreground text-xs">+{tags.length - 3}</span>
+				<span className="inline-block px-2 py-0.5 text-muted-foreground text-xs">
+					+{tags.length - 3}
+				</span>
 			)}
 		</div>
 	);
@@ -90,7 +92,9 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 							<h3 className="text-base font-semibold text-foreground">{talk.title}</h3>
 
 							{talk.short_description && (
-								<p className="text-sm text-muted-foreground mt-1 line-clamp-2">{talk.short_description}</p>
+								<p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+									{talk.short_description}
+								</p>
 							)}
 
 							<TalkMeta
@@ -128,7 +132,9 @@ export function TalkCard({ talk, eventId, isInAgenda = false }: TalkCardProps) {
 						</Link>
 
 						{talk.short_description && (
-							<p className="text-sm text-muted-foreground mt-1 line-clamp-2">{talk.short_description}</p>
+							<p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+								{talk.short_description}
+							</p>
 						)}
 
 						<TalkMeta
