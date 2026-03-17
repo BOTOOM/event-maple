@@ -24,13 +24,12 @@ export function TalkTimelineCard({
 
 	return (
 		<Link
-			href={talk.is_fixed ? "#" : `/events/${eventId}/talks/${talk.id}?from=my-agenda`}
+			href={`/events/${eventId}/talks/${talk.id}?from=my-agenda`}
 			title={talk.title}
 			className={cn(
 				"block h-full w-full rounded-lg border-2 hover:shadow-md transition-shadow overflow-hidden",
 				isCompact ? "p-2.5" : "p-3",
 				colorClasses,
-				talk.is_fixed && "cursor-default",
 			)}
 		>
 			{/* Header */}

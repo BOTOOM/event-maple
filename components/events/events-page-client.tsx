@@ -34,7 +34,9 @@ export function EventsPageClient({ initialEvents }: EventsPageClientProps) {
 		// Filter by date
 		if (!showPastEvents) {
 			filtered = filtered.filter((event) => {
-				const eventDate = new Date(event.start_date);
+				// Prefer end_at to determine if event has passed, fallback to start_at or start_date
+				const dateToCompare = event.end_at || event.start_at || event.start_date;
+				const eventDate = new Date(dateToCompare);
 				eventDate.setHours(0, 0, 0, 0);
 				return eventDate >= today;
 			});

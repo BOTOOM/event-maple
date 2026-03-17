@@ -714,7 +714,13 @@
 				"title": "LIVE PREVIEW",
 				"desktop": "Desktop",
 				"hint": "This is an approximate preview of how attendees will see your event in the listing page."
-			}
+			},
+			"saveChanges": "Save Changes",
+			"publishedWarning": "This event is currently published. Changes will be visible to users immediately.",
+			"unpublishConfirmTitle": "Unpublish Event?",
+			"unpublishConfirmDesc": "Are you sure you want to unpublish this event? It will be hidden from the public events list immediately.",
+			"cancel": "Cancel",
+			"confirm": "Confirm"
 		},
 		"Preview": {
 			"title": "LIVE PREVIEW",

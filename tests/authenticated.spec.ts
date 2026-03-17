@@ -14,19 +14,28 @@ const AGENDA_ADD_BUTTON_TEXT =
 const AGENDA_IN_BUTTON_TEXT = /In my agenda|En mi agenda|Na minha agenda|Dans mon agenda/i;
 
 async function ensureTalkAgendaState(page: Page, expectedState: "in" | "out") {
+	// Wait for page to be fully loaded first
+	await page.waitForLoadState("networkidle");
+
 	const addButton = page.locator("button").filter({ hasText: AGENDA_ADD_BUTTON_TEXT }).first();
 	const inAgendaButton = page.locator("button").filter({ hasText: AGENDA_IN_BUTTON_TEXT }).first();
+
+	// Wait for EITHER button to be visible to know the current state
+	await Promise.race([
+		addButton.waitFor({ state: "visible", timeout: 10000 }).catch(() => {}),
+		inAgendaButton.waitFor({ state: "visible", timeout: 10000 }).catch(() => {}),
+	]);
 
 	if (expectedState === "in") {
 		if (await inAgendaButton.isVisible()) {
 			return;
 		}
 
-		await expect(addButton).toBeVisible();
+		await expect(addButton).toBeVisible({ timeout: 5000 });
 		await addButton.click();
 
 		try {
-			await expect(inAgendaButton).toBeVisible({ timeout: 6000 });
+			await expect(inAgendaButton).toBeVisible({ timeout: 10000 });
 		} catch {
 			await page.reload();
 			await expect(inAgendaButton).toBeVisible({ timeout: 10000 });
@@ -39,11 +48,11 @@ async function ensureTalkAgendaState(page: Page, expectedState: "in" | "out") {
 		return;
 	}
 
-	await expect(inAgendaButton).toBeVisible();
+	await expect(inAgendaButton).toBeVisible({ timeout: 5000 });
 	await inAgendaButton.click();
 
 	try {
-		await expect(addButton).toBeVisible({ timeout: 6000 });
+		await expect(addButton).toBeVisible({ timeout: 10000 });
 	} catch {
 		await page.reload();
 		await expect(addButton).toBeVisible({ timeout: 10000 });

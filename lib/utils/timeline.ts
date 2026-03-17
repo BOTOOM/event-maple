@@ -122,23 +122,38 @@ export function calculateHeight(startTime: string, endTime: string, pixelsPerHou
 	return (durationMinutes / 60) * pixelsPerHour;
 }
 
+// Colores predefinidos que combinan con el tema (Winter/Marine Blue)
+const ROOM_COLORS = [
+	"bg-winter-100 border-winter-300 text-winter-900",
+	"bg-blue-100 border-blue-300 text-blue-900",
+	"bg-sky-100 border-sky-300 text-sky-900",
+	"bg-cyan-100 border-cyan-300 text-cyan-900",
+	"bg-teal-100 border-teal-300 text-teal-900",
+	"bg-emerald-100 border-emerald-300 text-emerald-900",
+	"bg-indigo-100 border-indigo-300 text-indigo-900",
+	"bg-slate-100 border-slate-300 text-slate-900",
+];
+
 // Obtener color según tipo de charla o sala
 export function getTalkColor(talk: Talk): string {
-	// Si es evento fijo (is_fixed), usar gris
-	if (talk.is_fixed) {
-		return "bg-gray-200 border-gray-300 text-gray-700";
+	// Si no tiene sala (ej: algunos eventos fijos), asignamos gris si es fijo, o el primer color si es charla.
+	if (!talk.room) {
+		if (talk.is_fixed) {
+			return "bg-gray-200 border-gray-300 text-gray-700";
+		}
+		return ROOM_COLORS[0];
 	}
 
-	// Colores por sala
-	const colorMap: Record<string, string> = {
-		"Auditorio El Cubo": "bg-blue-100 border-blue-300 text-blue-900",
-		"Sala 1A": "bg-green-100 border-green-300 text-green-900",
-		"Sala 1B": "bg-purple-100 border-purple-300 text-purple-900",
-		"Sala 1C": "bg-pink-100 border-pink-300 text-pink-900",
-		"Sala 1D": "bg-orange-100 border-orange-300 text-orange-900",
-	};
+	// Generar un hash consistente basado en el nombre de la sala
+	let hash = 0;
+	for (let i = 0; i < talk.room.length; i++) {
+		hash = (talk.room.codePointAt(i) || 0) + ((hash << 5) - hash);
+	}
 
-	return colorMap[talk.room || ""] || "bg-cyan-100 border-cyan-300 text-cyan-900";
+	// Obtener un índice positivo
+	const index = Math.abs(hash) % ROOM_COLORS.length;
+
+	return ROOM_COLORS[index];
 }
 
 // Filtrar charlas por fecha específica

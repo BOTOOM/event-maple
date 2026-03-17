@@ -714,7 +714,13 @@
 				"title": "PRÉVIA AO VIVO",
 				"desktop": "Desktop",
 				"hint": "Esta é uma prévia aproximada de como os participantes verão seu evento na página de listagem."
-			}
+			},
+			"saveChanges": "Salvar Alterações",
+			"publishedWarning": "Este evento está publicado. As alterações serão visíveis para os usuários imediatamente.",
+			"unpublishConfirmTitle": "Despublicar Evento?",
+			"unpublishConfirmDesc": "Tem certeza de que deseja despublicar este evento? Ele será ocultado da lista de eventos públicos imediatamente.",
+			"cancel": "Cancelar",
+			"confirm": "Confirmar"
 		},
 		"Preview": {
 			"title": "PRÉVIA AO VIVO",
