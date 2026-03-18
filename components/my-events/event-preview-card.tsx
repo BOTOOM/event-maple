@@ -26,6 +26,7 @@ export function EventPreviewCard({
 	location,
 	imageUrl,
 	categoryName,
+	locale,
 }: Readonly<EventPreviewCardProps>) {
 	const t = useTranslations("MyEvents.Preview");
 
