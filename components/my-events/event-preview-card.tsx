@@ -38,8 +38,8 @@ export function EventPreviewCard({
 
 			const startDay = start.getDate();
 			const endDay = end.getDate();
-			const startMonth = start.toLocaleDateString("en-US", { month: "short" });
-			const endMonth = end.toLocaleDateString("en-US", { month: "short" });
+			const startMonth = start.toLocaleDateString(locale, { month: "short" });
+			const endMonth = end.toLocaleDateString(locale, { month: "short" });
 			const startYear = start.getFullYear();
 			const endYear = end.getFullYear();
 
