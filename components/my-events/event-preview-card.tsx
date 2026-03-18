@@ -26,6 +26,7 @@ export function EventPreviewCard({
 	location,
 	imageUrl,
 	categoryName,
+	locale,
 }: Readonly<EventPreviewCardProps>) {
 	const t = useTranslations("MyEvents.Preview");
 
@@ -38,14 +39,28 @@ export function EventPreviewCard({
 
 			const startDay = start.getDate();
 			const endDay = end.getDate();
-			const startMonth = start.toLocaleDateString("en-US", { month: "short" });
-			const endMonth = end.toLocaleDateString("en-US", { month: "short" });
-			const year = start.getFullYear();
+			const startMonth = start.toLocaleDateString(locale, { month: "short" });
+			const endMonth = end.toLocaleDateString(locale, { month: "short" });
+			const startYear = start.getFullYear();
+			const endYear = end.getFullYear();
 
-			if (startMonth === endMonth) {
-				return `${startDay} - ${endDay} ${startMonth}, ${year}`;
+			// Si es el mismo día, mes y año
+			if (startDay === endDay && startMonth === endMonth && startYear === endYear) {
+				return `${startDay} ${startMonth}, ${startYear}`;
 			}
-			return `${startDay} ${startMonth} - ${endDay} ${endMonth}, ${year}`;
+
+			// Si es el mismo mes y año
+			if (startMonth === endMonth && startYear === endYear) {
+				return `${startDay} - ${endDay} ${startMonth}, ${startYear}`;
+			}
+
+			// Diferentes meses, mismo año
+			if (startYear === endYear) {
+				return `${startDay} ${startMonth} - ${endDay} ${endMonth}, ${startYear}`;
+			}
+
+			// Diferentes años
+			return `${startDay} ${startMonth} ${startYear} - ${endDay} ${endMonth} ${endYear}`;
 		} catch {
 			return t("noDate");
 		}

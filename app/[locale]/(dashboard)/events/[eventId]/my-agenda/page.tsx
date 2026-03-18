@@ -1,4 +1,4 @@
-import { AlertCircle, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { AgendaHeader } from "@/components/agenda/agenda-header";
@@ -103,17 +103,6 @@ export default async function MyAgendaPage({ params, searchParams }: MyAgendaPag
 					</div>
 				) : (
 					<>
-						{/* Info Box - Conflicts Warning */}
-						{talksWithStatus.length > 1 && (
-							<div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-								<AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-								<div>
-									<p className="text-sm font-medium text-amber-900 mb-1">{t("conflicts.title")}</p>
-									<p className="text-sm text-amber-700">{t("conflicts.description")}</p>
-								</div>
-							</div>
-						)}
-
 						{/* Timeline View (Client Component) */}
 						<MyAgendaClient
 							talks={talksWithStatus}

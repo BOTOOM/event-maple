@@ -714,7 +714,13 @@
 				"title": "APERÇU EN DIRECT",
 				"desktop": "Bureau",
 				"hint": "Ceci est un aperçu approximatif de la façon dont les participants verront votre événement sur la page de liste."
-			}
+			},
+			"saveChanges": "Enregistrer les modifications",
+			"publishedWarning": "Cet événement est publié. Les modifications seront visibles par les utilisateurs immédiatement.",
+			"unpublishConfirmTitle": "Dépublier l'événement ?",
+			"unpublishConfirmDesc": "Êtes-vous sûr de vouloir dépublier cet événement ? Il sera immédiatement masqué de la liste des événements publics.",
+			"cancel": "Annuler",
+			"confirm": "Confirmer"
 		},
 		"Preview": {
 			"title": "APERÇU EN DIRECT",

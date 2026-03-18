@@ -116,8 +116,40 @@ export function MyAgendaClient({
 	// Adjust pixels per hour based on screen size
 	const pixelsPerHour = isMobile ? 180 : 140;
 
+	// Check if there are any actual conflicts in the current date
+	const hasConflicts = talksWithConflicts.some(
+		(talk) => talk.total_conflicts && talk.total_conflicts > 1,
+	);
+
 	return (
 		<div className="space-y-6">
+			{/* Info Box - Conflicts Warning */}
+			{hasConflicts && (
+				<div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
+					<div className="text-amber-600 flex-shrink-0 mt-0.5">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<circle cx="12" cy="12" r="10" />
+							<line x1="12" y1="8" x2="12" y2="12" />
+							<line x1="12" y1="16" x2="12.01" y2="16" />
+						</svg>
+					</div>
+					<div>
+						<p className="text-sm font-medium text-amber-900 mb-1">{t("conflicts.title")}</p>
+						<p className="text-sm text-amber-700">{t("conflicts.description")}</p>
+					</div>
+				</div>
+			)}
+
 			{/* Date Selector */}
 			{availableDates.length > 1 && (
 				<DateSelector

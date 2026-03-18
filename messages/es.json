@@ -714,7 +714,13 @@
 				"title": "VISTA PREVIA EN VIVO",
 				"desktop": "Escritorio",
 				"hint": "Esta es una vista previa aproximada de cómo los asistentes verán tu evento en la página de listado."
-			}
+			},
+			"saveChanges": "Guardar Cambios",
+			"publishedWarning": "Este evento está publicado. Los cambios serán visibles para los usuarios inmediatamente.",
+			"unpublishConfirmTitle": "¿Despublicar Evento?",
+			"unpublishConfirmDesc": "¿Estás seguro de que deseas despublicar este evento? Se ocultará de la lista pública de eventos inmediatamente.",
+			"cancel": "Cancelar",
+			"confirm": "Confirmar"
 		},
 		"Preview": {
 			"title": "VISTA PREVIA EN VIVO",
