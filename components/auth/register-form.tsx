@@ -14,7 +14,6 @@ import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 // Render functions for t.rich() - extracted to avoid inline component definitions
-const StrongText = (chunks: React.ReactNode) => <strong>{chunks}</strong>;
 const TermsLink = (chunks: React.ReactNode) => (
 	<Link href="/terms" className="text-primary hover:underline font-medium" target="_blank">
 		{chunks}
@@ -144,12 +143,7 @@ export function RegisterForm() {
 				description: (
 					<div className="space-y-2">
 						<p className="font-semibold text-base">{t("success.important")}</p>
-						<p className="text-sm">
-							{t.rich("success.message", {
-								email: normalizedEmail,
-								strong: StrongText,
-							})}
-						</p>
+						<p className="text-sm">{t("success.message", { email: normalizedEmail })}</p>
 						<p className="text-sm">{t("success.spam")}</p>
 					</div>
 				),

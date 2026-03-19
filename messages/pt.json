@@ -270,7 +270,7 @@
 			"success": {
 				"title": "✅ Conta criada com sucesso!",
 				"important": "📧 IMPORTANTE: Verifique seu email",
-				"message": "Enviamos um email para <strong>{email}</strong> com um link para confirmar sua conta.",
+				"message": "Enviamos um email para {email} com um link para confirmar sua conta.",
 				"spam": "Não se esqueça de verificar sua pasta de SPAM se não o vir na caixa de entrada principal."
 			}
 		},

@@ -42,7 +42,7 @@ function LoginFormContent() {
 						? tCommon("errors.invalidCredentials")
 						: authError.message === "Email not confirmed"
 							? tCommon("errors.emailNotConfirmed")
-						: authError.message;
+							: authError.message;
 
 				setError(errorMessage);
 				toast({

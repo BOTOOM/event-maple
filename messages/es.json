@@ -270,7 +270,7 @@
 			"success": {
 				"title": "✅ ¡Cuenta creada exitosamente!",
 				"important": "📧 IMPORTANTE: Revisa tu correo electrónico",
-				"message": "Te hemos enviado un email a <strong>{email}</strong> con un enlace para confirmar tu cuenta.",
+				"message": "Te hemos enviado un email a {email} con un enlace para confirmar tu cuenta.",
 				"spam": "No olvides revisar tu carpeta de SPAM si no lo ves en tu bandeja principal."
 			}
 		},

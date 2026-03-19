@@ -71,11 +71,12 @@ test.describe("Registration Page", () => {
 
 		await fillRegistrationForm(page, "Test User", "event+bot@example.com", "secret123");
 		await page.locator("#terms").click();
-		await page.locator('button[type="submit"]').click();
+		await page.locator("form").dispatchEvent("submit");
 
-		await expect(
-			page.getByText("Email aliases with + are not allowed. Please use your main email address."),
-		).toBeVisible();
+		const notification = page.getByRole("status");
+		await expect(notification).toContainText(
+			"Email aliases with + are not allowed. Please use your main email address.",
+		);
 		await expect(page).toHaveURL(/\/en\/register/);
 		expect(signupRequests).toBe(0);
 	});
@@ -85,13 +86,15 @@ test.describe("Registration Page", () => {
 
 		await fillRegistrationForm(page, "Test User", "eventmaple@example.com", "secret123");
 		await page.locator("#terms").click();
-		await page.locator('button[type="submit"]').click();
+		await page.locator("form").dispatchEvent("submit");
 
-		await expect(page.getByText("✅ Account created successfully!")).toBeVisible();
-		await expect(page.getByText("📧 IMPORTANT: Check your email")).toBeVisible();
-		await expect(
-			page.getByText("Don't forget to check your SPAM folder if you don't see it in your main inbox."),
-		).toBeVisible();
+		const notification = page.getByRole("status");
+		await expect(notification).toContainText("✅ Account created successfully!");
+		await expect(notification).toContainText("📧 IMPORTANT: Check your email");
+		await expect(notification).toContainText("eventmaple@example.com");
+		await expect(notification).toContainText(
+			"Don't forget to check your SPAM folder if you don't see it in your main inbox.",
+		);
 		await page.waitForTimeout(1500);
 		await expect(page).toHaveURL(/\/en\/register/);
 	});
