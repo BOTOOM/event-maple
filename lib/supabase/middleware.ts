@@ -52,7 +52,10 @@ export async function updateSession(request: NextRequest, initialResponse?: Next
 	}
 
 	// Redirect to events if already logged in and trying to access auth pages
-	if (user && (request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/register")) {
+	if (
+		user &&
+		(request.nextUrl.pathname.endsWith("/login") || request.nextUrl.pathname.endsWith("/register"))
+	) {
 		const url = request.nextUrl.clone();
 		url.pathname = "/events";
 		return NextResponse.redirect(url);

@@ -149,7 +149,7 @@ export function RegisterForm() {
 						<p className="text-sm">{t("success.spam")}</p>
 					</div>
 				),
-				duration: 20000, // Más tiempo para que el usuario pueda leerla completa
+				duration: 20000, // More time so the user can read it completely
 			});
 			setFormData(initialFormData);
 			router.refresh();
