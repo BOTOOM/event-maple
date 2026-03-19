@@ -12,6 +12,21 @@ import { toast } from "@/lib/hooks/use-toast";
 import { Link } from "@/lib/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
+function getLoginErrorMessage(
+	authErrorMessage: string,
+	tCommon: ReturnType<typeof useTranslations>,
+) {
+	if (authErrorMessage === "Invalid login credentials") {
+		return tCommon("errors.invalidCredentials");
+	}
+
+	if (authErrorMessage === "Email not confirmed") {
+		return tCommon("errors.emailNotConfirmed");
+	}
+
+	return authErrorMessage;
+}
+
 function LoginFormContent() {
 	const t = useTranslations("Auth.Login");
 	const tCommon = useTranslations("Auth.common");
@@ -37,12 +52,7 @@ function LoginFormContent() {
 			});
 
 			if (authError) {
-				const errorMessage =
-					authError.message === "Invalid login credentials"
-						? tCommon("errors.invalidCredentials")
-						: authError.message === "Email not confirmed"
-							? tCommon("errors.emailNotConfirmed")
-							: authError.message;
+				const errorMessage = getLoginErrorMessage(authError.message, tCommon);
 
 				setError(errorMessage);
 				toast({

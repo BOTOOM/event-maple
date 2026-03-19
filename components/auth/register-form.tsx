@@ -44,7 +44,9 @@ function hasPlusAddressing(email: string) {
 }
 
 function buildEmailConfirmationRedirectUrl(origin: string, locale: string) {
-	return `${origin}/auth/callback?next=${encodeURIComponent(`/${locale}/events`)}`;
+	const nextPath = `/${locale}/events`;
+
+	return `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
 }
 
 export function RegisterForm() {
