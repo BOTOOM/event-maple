@@ -40,6 +40,8 @@ function LoginFormContent() {
 				const errorMessage =
 					authError.message === "Invalid login credentials"
 						? tCommon("errors.invalidCredentials")
+						: authError.message === "Email not confirmed"
+							? tCommon("errors.emailNotConfirmed")
 						: authError.message;
 
 				setError(errorMessage);

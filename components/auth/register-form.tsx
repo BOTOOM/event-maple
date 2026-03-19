@@ -2,7 +2,7 @@
 
 import { ArrowLeft, Calendar } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,18 +26,31 @@ const PrivacyLink = (chunks: React.ReactNode) => (
 	</Link>
 );
 
+const initialFormData = {
+	name: "",
+	email: "",
+	password: "",
+	confirmPassword: "",
+	acceptTerms: false,
+};
+
+function hasPlusAddressing(email: string) {
+	const atIndex = email.indexOf("@");
+
+	if (atIndex <= 0) {
+		return false;
+	}
+
+	return email.slice(0, atIndex).includes("+");
+}
+
 export function RegisterForm() {
 	const t = useTranslations("Auth.Register");
 	const tCommon = useTranslations("Auth.common");
+	const locale = useLocale();
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		password: "",
-		confirmPassword: "",
-		acceptTerms: false,
-	});
+	const [formData, setFormData] = useState(initialFormData);
 	const router = useRouter();
 	const supabase = createClient();
 
@@ -52,6 +65,7 @@ export function RegisterForm() {
 	const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsLoading(true);
+		const normalizedEmail = formData.email.trim().toLowerCase();
 
 		// Validaciones
 		if (formData.password !== formData.confirmPassword) {
@@ -85,13 +99,24 @@ export function RegisterForm() {
 			return;
 		}
 
+		if (hasPlusAddressing(normalizedEmail)) {
+			toast({
+				variant: "destructive",
+				title: "Error",
+				description: t("errors.plusAddressingNotAllowed"),
+			});
+			setIsLoading(false);
+			return;
+		}
+
 		try {
-			const { error } = await supabase.auth.signUp({
-				email: formData.email,
+			const { data, error } = await supabase.auth.signUp({
+				email: normalizedEmail,
 				password: formData.password,
 				options: {
+					emailRedirectTo: `${globalThis.location.origin}/auth/callback?next=${encodeURIComponent(`/${locale}/events`)}`,
 					data: {
-						name: formData.name,
+						name: formData.name.trim(),
 					},
 				},
 			});
@@ -108,6 +133,10 @@ export function RegisterForm() {
 				return;
 			}
 
+			if (data.session) {
+				await supabase.auth.signOut();
+			}
+
 			// Toast más explícito y con mayor duración
 			toast({
 				variant: "success",
@@ -117,20 +146,17 @@ export function RegisterForm() {
 						<p className="font-semibold text-base">{t("success.important")}</p>
 						<p className="text-sm">
 							{t.rich("success.message", {
-								email: formData.email,
+								email: normalizedEmail,
 								strong: StrongText,
 							})}
 						</p>
 						<p className="text-sm">{t("success.spam")}</p>
 					</div>
 				),
-				duration: 15000, // 15 segundos para que el usuario pueda leer
+				duration: 20000, // Más tiempo para que el usuario pueda leerla completa
 			});
-
-			// Redirect to login after showing the toast
-			setTimeout(() => {
-				router.push("/login");
-			}, 1000);
+			setFormData(initialFormData);
+			router.refresh();
 		} catch {
 			toast({
 				variant: "destructive",
