@@ -224,7 +224,8 @@
 			"or": "or",
 			"errors": {
 				"generic": "An unexpected error occurred. Please try again.",
-				"invalidCredentials": "Invalid credentials. Check your email and password."
+				"invalidCredentials": "Invalid credentials. Check your email and password.",
+				"emailNotConfirmed": "Please confirm your email before signing in."
 			}
 		},
 		"Login": {
@@ -263,12 +264,13 @@
 				"passwordMismatch": "Passwords do not match.",
 				"passwordTooShort": "Password must be at least 6 characters.",
 				"termsRequired": "You must accept the terms and conditions to continue.",
-				"userAlreadyRegistered": "This email is already registered."
+				"userAlreadyRegistered": "This email is already registered.",
+				"plusAddressingNotAllowed": "Email aliases with + are not allowed. Please use your main email address."
 			},
 			"success": {
 				"title": "✅ Account created successfully!",
 				"important": "📧 IMPORTANT: Check your email",
-				"message": "We have sent an email to <strong>{email}</strong> with a link to confirm your account.",
+				"message": "We have sent an email to {email} with a link to confirm your account.",
 				"spam": "Don't forget to check your SPAM folder if you don't see it in your main inbox."
 			}
 		},

@@ -224,7 +224,8 @@
 			"or": "ou",
 			"errors": {
 				"generic": "Ocorreu um erro inesperado. Tente novamente.",
-				"invalidCredentials": "Credenciais inválidas. Verifique seu email e senha."
+				"invalidCredentials": "Credenciais inválidas. Verifique seu email e senha.",
+				"emailNotConfirmed": "Confirme seu email antes de entrar."
 			}
 		},
 		"Login": {
@@ -263,12 +264,13 @@
 				"passwordMismatch": "As senhas não coincidem.",
 				"passwordTooShort": "A senha deve ter pelo menos 6 caracteres.",
 				"termsRequired": "Você deve aceitar os termos e condições para continuar.",
-				"userAlreadyRegistered": "Este email já está registrado."
+				"userAlreadyRegistered": "Este email já está registrado.",
+				"plusAddressingNotAllowed": "Aliases de email com + não são permitidos. Use seu email principal."
 			},
 			"success": {
 				"title": "✅ Conta criada com sucesso!",
 				"important": "📧 IMPORTANTE: Verifique seu email",
-				"message": "Enviamos um email para <strong>{email}</strong> com um link para confirmar sua conta.",
+				"message": "Enviamos um email para {email} com um link para confirmar sua conta.",
 				"spam": "Não se esqueça de verificar sua pasta de SPAM se não o vir na caixa de entrada principal."
 			}
 		},

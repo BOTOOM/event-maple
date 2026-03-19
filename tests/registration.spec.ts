@@ -3,6 +3,7 @@ import {
 	assertH1Visible,
 	assertNoUntranslatedKeys,
 	assertVisible,
+	fillRegistrationForm,
 	LOCALES,
 	navigateTo,
 	navigateToLocalized,
@@ -56,6 +57,45 @@ test.describe("Registration Page", () => {
 		// Form should still be visible (not submitted)
 		await assertVisible(page, 'input[id="email"]');
 		await expect(page).toHaveURL(/\/register/);
+	});
+
+	test("should block plus-addressed emails before signup submission", async ({ page }) => {
+		await navigateTo(page, "/en/register");
+
+		let signupRequests = 0;
+		page.on("request", (request) => {
+			if (request.url().includes("/auth/v1/signup")) {
+				signupRequests += 1;
+			}
+		});
+
+		await fillRegistrationForm(page, "Test User", "event+bot@example.com", "secret123");
+		await page.locator("#terms").click();
+		await page.locator("form").dispatchEvent("submit");
+
+		const notification = page.getByRole("status");
+		await expect(notification).toContainText(
+			"Email aliases with + are not allowed. Please use your main email address.",
+		);
+		await expect(page).toHaveURL(/\/en\/register/);
+		expect(signupRequests).toBe(0);
+	});
+
+	test("should keep the confirmation toast visible after successful signup", async ({ page }) => {
+		await navigateTo(page, "/en/register");
+
+		await fillRegistrationForm(page, "Test User", "eventmaple@example.com", "secret123");
+		await page.locator("#terms").click();
+		await page.locator("form").dispatchEvent("submit");
+
+		const notification = page.getByRole("status");
+		await expect(notification).toContainText("✅ Account created successfully!");
+		await expect(notification).toContainText("📧 IMPORTANT: Check your email");
+		await expect(notification).toContainText("eventmaple@example.com");
+		await expect(notification).toContainText(
+			"Don't forget to check your SPAM folder if you don't see it in your main inbox.",
+		);
+		await expect(page).toHaveURL(/\/en\/register/);
 	});
 
 	test.describe("Registration i18n", () => {

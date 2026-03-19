@@ -72,6 +72,13 @@ test.describe("Authenticated User Features", () => {
 	});
 
 	test.describe("User Session", () => {
+		test("should redirect authenticated users away from login", async ({ page }) => {
+			await navigateTo(page, "/en/login");
+
+			await expect(page).toHaveURL(/\/en\/events|\/events/);
+			await assertPageLoaded(page);
+		});
+
 		test("should display user email in header when logged in", async ({ page }) => {
 			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
 			await expect(userMenuTrigger).toBeVisible();
