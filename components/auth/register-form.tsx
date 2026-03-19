@@ -43,6 +43,10 @@ function hasPlusAddressing(email: string) {
 	return email.slice(0, atIndex).includes("+");
 }
 
+function buildEmailConfirmationRedirectUrl(origin: string, locale: string) {
+	return `${origin}/auth/callback?next=${encodeURIComponent(`/${locale}/events`)}`;
+}
+
 export function RegisterForm() {
 	const t = useTranslations("Auth.Register");
 	const tCommon = useTranslations("Auth.common");
@@ -66,7 +70,6 @@ export function RegisterForm() {
 		setIsLoading(true);
 		const normalizedEmail = formData.email.trim().toLowerCase();
 
-		// Validaciones
 		if (formData.password !== formData.confirmPassword) {
 			toast({
 				variant: "destructive",
@@ -113,7 +116,7 @@ export function RegisterForm() {
 				email: normalizedEmail,
 				password: formData.password,
 				options: {
-					emailRedirectTo: `${globalThis.location.origin}/auth/callback?next=${encodeURIComponent(`/${locale}/events`)}`,
+					emailRedirectTo: buildEmailConfirmationRedirectUrl(globalThis.location.origin, locale),
 					data: {
 						name: formData.name.trim(),
 					},
@@ -136,7 +139,6 @@ export function RegisterForm() {
 				await supabase.auth.signOut();
 			}
 
-			// Toast más explícito y con mayor duración
 			toast({
 				variant: "success",
 				title: t("success.title"),

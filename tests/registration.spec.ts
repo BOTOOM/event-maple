@@ -95,7 +95,6 @@ test.describe("Registration Page", () => {
 		await expect(notification).toContainText(
 			"Don't forget to check your SPAM folder if you don't see it in your main inbox.",
 		);
-		await page.waitForTimeout(1500);
 		await expect(page).toHaveURL(/\/en\/register/);
 	});
 
