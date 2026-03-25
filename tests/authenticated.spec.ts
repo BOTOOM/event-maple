@@ -122,7 +122,7 @@ test.describe("Authenticated User Features", () => {
 			const signOutButton = page.locator('[data-testid="header-user-menu-signout"]');
 			await signOutButton.click();
 
-			await page.waitForURL(/\/login|\/$/, { timeout: 15000 }).catch(() => undefined);
+			await page.waitForURL(/(?:\/login|\/$)/, { timeout: 15000 }).catch(() => undefined);
 
 			const signInButton = page.locator('button:has-text("Sign In"), a:has-text("Sign In")');
 			await expect(signInButton.first()).toBeVisible({ timeout: 15000 });

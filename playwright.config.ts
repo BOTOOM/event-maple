@@ -2,7 +2,11 @@ import { defineConfig, devices } from "@playwright/test";
 
 process.env.PLAYWRIGHT_BROWSERS_PATH ??= "0";
 
-const PLAYWRIGHT_PORT = Number(process.env.PLAYWRIGHT_PORT || 3100);
+const DEFAULT_PLAYWRIGHT_PORT = 3100;
+const envPortRaw = process.env.PLAYWRIGHT_PORT;
+const envPort = envPortRaw === undefined ? DEFAULT_PLAYWRIGHT_PORT : Number(envPortRaw);
+const PLAYWRIGHT_PORT =
+	Number.isFinite(envPort) && envPort > 0 && envPort <= 65535 ? envPort : DEFAULT_PLAYWRIGHT_PORT;
 const PLAYWRIGHT_BASE_URL = `http://localhost:${PLAYWRIGHT_PORT}`;
 
 /**
@@ -31,7 +35,7 @@ export default defineConfig({
 	],
 
 	webServer: {
-		command: `pnpm exec next dev --port ${PLAYWRIGHT_PORT} --hostname localhost`,
+		command: `pnpm run dev --port ${PLAYWRIGHT_PORT} --hostname localhost`,
 		url: PLAYWRIGHT_BASE_URL,
 		reuseExistingServer: !process.env.CI,
 		timeout: 120 * 1000,

@@ -275,7 +275,7 @@ export async function loginWithEnvCredentials(page: Page, locale: string = "en")
 			await page.waitForTimeout(800 * (attempt + 1));
 			continue;
 		}
-		await page.fill('input[type="email"]', email);
+		await emailInput.fill(email);
 		await passwordInput.fill(password);
 		await page.click('button[type="submit"]');
 

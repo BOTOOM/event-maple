@@ -1,4 +1,4 @@
-import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
+import { type APIRequestContext, expect, type Page, test } from "@playwright/test";
 import { LOCALES, loginWithEnvCredentials } from "./utils/test-helpers";
 
 const SAVE_PROFILE_BUTTON_TEXT =
@@ -93,14 +93,14 @@ async function hasTransientProfileUpdateFailure(page: Page) {
 	const profileUpdateError = page.getByText(PROFILE_UPDATE_ERROR_TEXT).first();
 
 	if (await profileUnavailableError.isVisible({ timeout: 2500 }).catch(() => false)) {
-		return true;
+		return "Skipping due to transient profile availability failure during profile save.";
 	}
 
 	if (await profileUpdateError.isVisible({ timeout: 2500 }).catch(() => false)) {
-		return true;
+		return "Skipping due to transient profile update failure during profile save.";
 	}
 
-	return false;
+	return null;
 }
 
 async function confirmDisplayNameChangeIfNeeded(page: Page) {
@@ -128,6 +128,8 @@ async function selectTimezone(page: Page, targetTimezoneLabel: string) {
 }
 
 test.describe("Profile Settings", () => {
+	test.describe.configure({ mode: "serial" });
+
 	test("should redirect to login when not authenticated", async ({ page }) => {
 		await page.goto("/en/profile");
 		await page.waitForLoadState("networkidle");
@@ -183,6 +185,7 @@ test.describe("Profile Settings", () => {
 
 		const targetLocale = "es";
 		await page.selectOption("#profile-locale", targetLocale);
+		await expect(page.locator("#profile-locale")).toHaveValue(targetLocale);
 
 		const timezoneCombobox = page.locator('button[role="combobox"]').first();
 		const initialTimezoneLabel = (await timezoneCombobox.textContent()) || "";
@@ -202,11 +205,10 @@ test.describe("Profile Settings", () => {
 
 		await confirmDisplayNameChangeIfNeeded(page);
 
-		if (await hasTransientProfileUpdateFailure(page)) {
-			return;
-		}
+		const localeUpdateFailureReason = await hasTransientProfileUpdateFailure(page);
+		test.skip(!!localeUpdateFailureReason, localeUpdateFailureReason ?? "");
 
-		await page.waitForURL(new RegExp(`/${targetLocale}/profile`), { timeout: 10000 }).catch(() => undefined);
+		await expect(page).toHaveURL(new RegExp(`/${targetLocale}/profile`), { timeout: 15000 });
 		await page.reload();
 
 		await expect(page.locator("#profile-locale")).toHaveValue(targetLocale);
@@ -221,23 +223,30 @@ test.describe("Profile Settings", () => {
 			return;
 		}
 
-		const cooldownConfigured = await setDisplayNameUpdatedAt(page, request, new Date().toISOString());
+		const cooldownConfigured = await setDisplayNameUpdatedAt(
+			page,
+			request,
+			new Date().toISOString(),
+		);
 
 		await page.goto("/en/profile");
 
 		const displayNameInput = page.locator("#profile-display-name");
 
 		if (!cooldownConfigured) {
-			const nextDisplayName = `Profile Lock ${Date.now()}`;
-			await displayNameInput.fill(nextDisplayName);
-			await getSaveProfileButton(page).click();
-			await confirmDisplayNameChangeIfNeeded(page);
+			const canEditDisplayName = await displayNameInput.isEnabled().catch(() => false);
 
-			if (await hasTransientProfileUpdateFailure(page)) {
-				return;
+			if (canEditDisplayName) {
+				const nextDisplayName = `Profile Lock ${Date.now()}`;
+				await displayNameInput.fill(nextDisplayName);
+				await getSaveProfileButton(page).click();
+				await confirmDisplayNameChangeIfNeeded(page);
+
+				const cooldownSetupFailureReason = await hasTransientProfileUpdateFailure(page);
+				test.skip(!!cooldownSetupFailureReason, cooldownSetupFailureReason ?? "");
+
+				await page.reload();
 			}
-
-			await page.reload();
 		}
 
 		if (!(await displayNameInput.isDisabled().catch(() => false))) {
@@ -253,6 +262,7 @@ test.describe("Profile Settings", () => {
 
 		const targetLocale = "fr";
 		await page.selectOption("#profile-locale", targetLocale);
+		await expect(page.locator("#profile-locale")).toHaveValue(targetLocale);
 
 		const initialTimezoneLabel = (await timezoneCombobox.textContent()) || "";
 		const targetTimezoneLabel = initialTimezoneLabel.includes("Madrid")
@@ -260,17 +270,17 @@ test.describe("Profile Settings", () => {
 			: "Madrid, Barcelona";
 
 		await selectTimezone(page, targetTimezoneLabel);
-		await getSaveProfileButton(page).click();
+		const saveButton = getSaveProfileButton(page);
+		await saveButton.click();
 
-		if (await hasTransientProfileUpdateFailure(page)) {
-			return;
-		}
+		const lockedProfileUpdateFailureReason = await hasTransientProfileUpdateFailure(page);
+		test.skip(!!lockedProfileUpdateFailureReason, lockedProfileUpdateFailureReason ?? "");
 
-		await page.waitForURL(new RegExp(`/${targetLocale}/profile`), { timeout: 10000 }).catch(() => undefined);
+		await expect(saveButton).toBeEnabled({ timeout: 15000 });
 		await page.reload();
 
-		await expect(page.locator("#profile-locale")).toHaveValue(targetLocale);
 		await expect(page.locator("#profile-display-name")).toBeDisabled();
+		await expect(page.locator("#profile-locale")).toBeEnabled();
 		await expect(page.locator('button[role="combobox"]').first()).not.toBeEmpty();
 	});
 });

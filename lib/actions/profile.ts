@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { TIMEZONES } from "@/lib/data/timezones";
+import { isMissingColumnError } from "@/lib/supabase/errors";
 import { getCurrentUserProfile } from "@/lib/supabase/server";
 import {
 	DEFAULT_PROFILE_LOCALE,
@@ -47,15 +48,6 @@ function normalizeAvatarUrl(avatarUrl: string): { value: string | null; isValid:
 	} catch {
 		return { value: null, isValid: false };
 	}
-}
-
-function isMissingColumnError(error: unknown): boolean {
-	if (!error || typeof error !== "object") {
-		return false;
-	}
-
-	const code = "code" in error ? (error.code as string | undefined) : undefined;
-	return code === "42703";
 }
 
 export interface UpdateProfileInput {
@@ -113,8 +105,8 @@ export async function updateCurrentUserProfile(
 		timezone: normalizedTimezone,
 		...(hasDisplayNameChanged
 			? {
-				display_name_updated_at: new Date().toISOString(),
-			}
+					display_name_updated_at: new Date().toISOString(),
+				}
 			: {}),
 	};
 

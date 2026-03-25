@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isMissingColumnError, isMissingTableError } from "@/lib/supabase/errors";
 import {
 	DEFAULT_PROFILE_LOCALE,
 	DEFAULT_PROFILE_TIMEZONE,
@@ -57,24 +58,6 @@ function normalizeProfileLocale(locale: string | null | undefined): ProfileLocal
 	return DEFAULT_PROFILE_LOCALE;
 }
 
-function isMissingTableError(error: unknown): boolean {
-	if (!error || typeof error !== "object") {
-		return false;
-	}
-
-	const code = "code" in error ? (error.code as string | undefined) : undefined;
-	return code === "42P01";
-}
-
-function isMissingColumnError(error: unknown): boolean {
-	if (!error || typeof error !== "object") {
-		return false;
-	}
-
-	const code = "code" in error ? (error.code as string | undefined) : undefined;
-	return code === "42703";
-}
-
 function buildFallbackProfile(user: { id: string; email?: string | null }): UserProfile {
 	return {
 		id: user.id,
@@ -113,9 +96,9 @@ export async function getCurrentUserProfile() {
 
 		data = fallbackQuery.data
 			? {
-				...fallbackQuery.data,
-				display_name_updated_at: null,
-			}
+					...fallbackQuery.data,
+					display_name_updated_at: null,
+				}
 			: null;
 		error = fallbackQuery.error;
 	}

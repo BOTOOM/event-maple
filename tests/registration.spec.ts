@@ -95,7 +95,7 @@ test.describe("Registration Page", () => {
 
 		const notificationText = await notification.innerText();
 		if (/rate limit exceeded/i.test(notificationText)) {
-			return;
+			test.skip(true, `Skipped due to signup rate limiting: "${notificationText}"`);
 		}
 
 		await expect(notification).toContainText("Account created successfully!");

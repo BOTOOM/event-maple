@@ -2,8 +2,8 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Autocomplete } from "@/components/ui/autocomplete";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -145,11 +145,12 @@ export function ProfileSettingsForm({ initialProfile }: Readonly<ProfileSettings
 
 			toast({
 				title: t("Form.messages.successTitle"),
-				description: submittedDisplayNameChange && result.nextDisplayNameChangeAt
-					? t("Form.messages.successDescriptionWithNameCooldown", {
-							hours: DISPLAY_NAME_CHANGE_COOLDOWN_HOURS,
-						})
-					: t("Form.messages.successDescription"),
+				description:
+					submittedDisplayNameChange && result.nextDisplayNameChangeAt
+						? t("Form.messages.successDescriptionWithNameCooldown", {
+								hours: DISPLAY_NAME_CHANGE_COOLDOWN_HOURS,
+							})
+						: t("Form.messages.successDescription"),
 			});
 
 			if (preferredLocale !== locale) {
@@ -279,8 +280,8 @@ export function ProfileSettingsForm({ initialProfile }: Readonly<ProfileSettings
 						<DialogTitle>{t("Form.confirmDisplayName.title")}</DialogTitle>
 						<DialogDescription>
 							{t("Form.confirmDisplayName.description", {
-									hours: DISPLAY_NAME_CHANGE_COOLDOWN_HOURS,
-								})}
+								hours: DISPLAY_NAME_CHANGE_COOLDOWN_HOURS,
+							})}
 						</DialogDescription>
 					</DialogHeader>
 
