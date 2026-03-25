@@ -745,6 +745,21 @@
 		"Form": {
 			"title": "Votre profil",
 			"subtitle": "Ces préférences seront utilisées dans toute votre expérience EventMaple.",
+			"displayName": {
+				"status": {
+					"available": "Disponible maintenant",
+					"locked": "Verrouillé pour le moment"
+				},
+				"helper": {
+					"available": "Vous pouvez modifier votre nom affiché maintenant. Après l'enregistrement, le prochain changement sera de nouveau disponible dans {hours} heures.",
+					"locked": "Vous pouvez continuer à modifier le reste de votre profil, mais votre nom affiché sera de nouveau débloqué dans {time}."
+				},
+				"cooldown": {
+					"minutesOnly": "{minutes, plural, one {# minute} other {# minutes}}",
+					"hoursOnly": "{hours, plural, one {# heure} other {# heures}}",
+					"hoursAndMinutes": "{hours, plural, one {# heure} other {# heures}} {minutes, plural, one {# minute} other {# minutes}}"
+				}
+			},
 			"fields": {
 				"email": "Email",
 				"displayName": "Nom affiché",
@@ -769,13 +784,22 @@
 				"save": "Enregistrer les modifications",
 				"saving": "Enregistrement..."
 			},
+			"confirmDisplayName": {
+				"title": "Confirmer le changement du nom affiché",
+				"description": "Vous êtes sur le point de mettre à jour votre nom affiché. Une fois enregistré, vous ne pourrez plus le modifier pendant les {hours} prochaines heures.",
+				"notice": "Cette fenêtre de sécurité aide à réduire les usurpations et à garder les changements de profil traçables.",
+				"cancel": "Annuler",
+				"confirm": "Enregistrer le nom affiché"
+			},
 			"messages": {
 				"successTitle": "Profil mis à jour",
 				"successDescription": "Vos préférences de profil ont été enregistrées avec succès.",
+				"successDescriptionWithNameCooldown": "Votre profil a été mis à jour. Votre prochain changement de nom affiché sera de nouveau disponible dans {hours} heures.",
 				"errorTitle": "Erreur",
 				"error": "Impossible de mettre à jour votre profil. Veuillez réessayer.",
 				"profileUnavailable": "Votre profil n'est pas encore disponible. Veuillez réessayer dans un instant.",
-				"invalidAvatar": "L'URL de l'avatar doit être valide et utiliser http ou https."
+				"invalidAvatar": "L'URL de l'avatar doit être valide et utiliser http ou https.",
+				"displayNameCooldown": "Vous pourrez modifier à nouveau votre nom affiché dans {time}."
 			},
 			"validation": {
 				"titleRequired": "Le titre est obligatoire",
