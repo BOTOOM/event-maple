@@ -11,42 +11,6 @@ import {
 const TEST_USER = process.env.PW_USER || "";
 const TEST_PASS = process.env.PW_PSS || "";
 
-function buildMockSessionCookieValue(email: string) {
-	const accessTokenPayload = {
-		exp: Math.floor(Date.now() / 1000) + 3600,
-		sub: "test-user-id",
-		email,
-	};
-	const accessTokenHeader = {
-		alg: "HS256",
-		typ: "JWT",
-	};
-	const accessToken = `${Buffer.from(JSON.stringify(accessTokenHeader)).toString("base64url")}.${Buffer.from(
-		JSON.stringify(accessTokenPayload),
-	).toString("base64url")}.mock-signature`;
-
-	return `base64-${Buffer.from(
-		JSON.stringify({
-			access_token: accessToken,
-			refresh_token: "mock-refresh-token",
-			user: {
-				id: "test-user-id",
-				email,
-			},
-			token_type: "bearer",
-			expires_in: 3600,
-			expires_at: Math.floor(Date.now() / 1000) + 3600,
-		}),
-	).toString("base64url")}`;
-}
-
-function getSupabaseSessionCookieName() {
-	const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "http://localhost:54321";
-	const projectRef = new URL(supabaseUrl).hostname.split(".")[0];
-
-	return `sb-${projectRef}-auth-token`;
-}
-
 test.describe("Authentication", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.context().clearCookies();
@@ -100,14 +64,11 @@ test.describe("Authentication", () => {
 	});
 
 	test("should redirect to events when a remembered session already exists", async ({ page }) => {
-		await page.context().addCookies([
-			{
-				name: getSupabaseSessionCookieName(),
-				value: buildMockSessionCookieValue("remembered@example.com"),
-				domain: "localhost",
-				path: "/",
-			},
-		]);
+		test.skip(!TEST_USER || !TEST_PASS, "PW_USER and PW_PSS environment variables are required");
+
+		await navigateTo(page, "/en/login");
+		await login(page, TEST_USER, TEST_PASS);
+		await page.waitForURL(/\/events/, { timeout: 15000 });
 
 		await navigateTo(page, "/en/login");
 

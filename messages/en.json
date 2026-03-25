@@ -745,6 +745,21 @@
 		"Form": {
 			"title": "Your profile",
 			"subtitle": "These preferences will be used across your EventMaple experience.",
+			"displayName": {
+				"status": {
+					"available": "Available now",
+					"locked": "Locked for now"
+				},
+				"helper": {
+					"available": "You can change your display name now. After saving, the next change will be available again in {hours} hours.",
+					"locked": "You can keep editing the rest of your profile, but your display name will unlock again in {time}."
+				},
+				"cooldown": {
+					"minutesOnly": "{minutes, plural, one {# minute} other {# minutes}}",
+					"hoursOnly": "{hours, plural, one {# hour} other {# hours}}",
+					"hoursAndMinutes": "{hours, plural, one {# hour} other {# hours}} {minutes, plural, one {# minute} other {# minutes}}"
+				}
+			},
 			"fields": {
 				"email": "Email",
 				"displayName": "Display name",
@@ -769,13 +784,22 @@
 				"save": "Save changes",
 				"saving": "Saving..."
 			},
+			"confirmDisplayName": {
+				"title": "Confirm display name change",
+				"description": "You are about to update your display name. Once you save, you will not be able to change it again for the next {hours} hours.",
+				"notice": "This security window helps reduce impersonation and keeps profile changes traceable.",
+				"cancel": "Cancel",
+				"confirm": "Save display name"
+			},
 			"messages": {
 				"successTitle": "Profile updated",
 				"successDescription": "Your profile preferences were saved successfully.",
+				"successDescriptionWithNameCooldown": "Your profile was updated. Your next display name change will be available again in {hours} hours.",
 				"errorTitle": "Error",
 				"error": "We could not update your profile. Please try again.",
 				"profileUnavailable": "Your profile is not available yet. Please try again in a moment.",
-				"invalidAvatar": "Avatar URL must be a valid http or https URL."
+				"invalidAvatar": "Avatar URL must be a valid http or https URL.",
+				"displayNameCooldown": "You can change your display name again in {time}."
 			},
 			"validation": {
 				"titleRequired": "Title is required",

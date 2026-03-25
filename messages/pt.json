@@ -745,6 +745,21 @@
 		"Form": {
 			"title": "Seu perfil",
 			"subtitle": "Estas preferências serão usadas em toda a sua experiência no EventMaple.",
+			"displayName": {
+				"status": {
+					"available": "Disponível agora",
+					"locked": "Bloqueado por enquanto"
+				},
+				"helper": {
+					"available": "Você pode alterar seu nome de exibição agora. Depois de salvar, a próxima alteração ficará disponível novamente em {hours} horas.",
+					"locked": "Você pode continuar editando o restante do seu perfil, mas seu nome de exibição será desbloqueado novamente em {time}."
+				},
+				"cooldown": {
+					"minutesOnly": "{minutes, plural, one {# minuto} other {# minutos}}",
+					"hoursOnly": "{hours, plural, one {# hora} other {# horas}}",
+					"hoursAndMinutes": "{hours, plural, one {# hora} other {# horas}} {minutes, plural, one {# minuto} other {# minutos}}"
+				}
+			},
 			"fields": {
 				"email": "Email",
 				"displayName": "Nome de exibição",
@@ -769,13 +784,22 @@
 				"save": "Salvar alterações",
 				"saving": "Salvando..."
 			},
+			"confirmDisplayName": {
+				"title": "Confirmar alteração do nome de exibição",
+				"description": "Você está prestes a atualizar seu nome de exibição. Depois de salvar, não poderá alterá-lo novamente nas próximas {hours} horas.",
+				"notice": "Esta janela de segurança ajuda a reduzir impersonações e mantém as alterações de perfil rastreáveis.",
+				"cancel": "Cancelar",
+				"confirm": "Salvar nome de exibição"
+			},
 			"messages": {
 				"successTitle": "Perfil atualizado",
 				"successDescription": "Suas preferências de perfil foram salvas com sucesso.",
+				"successDescriptionWithNameCooldown": "Seu perfil foi atualizado. Sua próxima alteração de nome de exibição ficará disponível novamente em {hours} horas.",
 				"errorTitle": "Erro",
 				"error": "Não foi possível atualizar seu perfil. Tente novamente.",
 				"profileUnavailable": "Seu perfil ainda não está disponível. Tente novamente em instantes.",
-				"invalidAvatar": "A URL do avatar deve ser válida e usar http ou https."
+				"invalidAvatar": "A URL do avatar deve ser válida e usar http ou https.",
+				"displayNameCooldown": "Você poderá alterar seu nome de exibição novamente em {time}."
 			},
 			"validation": {
 				"titleRequired": "O título é obrigatório",

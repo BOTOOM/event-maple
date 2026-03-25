@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isMissingColumnError, isMissingTableError } from "@/lib/supabase/errors";
 import {
 	DEFAULT_PROFILE_LOCALE,
 	DEFAULT_PROFILE_TIMEZONE,
@@ -57,20 +58,12 @@ function normalizeProfileLocale(locale: string | null | undefined): ProfileLocal
 	return DEFAULT_PROFILE_LOCALE;
 }
 
-function isMissingTableError(error: unknown): boolean {
-	if (!error || typeof error !== "object") {
-		return false;
-	}
-
-	const code = "code" in error ? (error.code as string | undefined) : undefined;
-	return code === "42P01";
-}
-
 function buildFallbackProfile(user: { id: string; email?: string | null }): UserProfile {
 	return {
 		id: user.id,
 		email: user.email ?? null,
 		display_name: null,
+		display_name_updated_at: null,
 		avatar_url: null,
 		locale: DEFAULT_PROFILE_LOCALE,
 		timezone: DEFAULT_PROFILE_TIMEZONE,
@@ -83,11 +76,32 @@ export async function getCurrentUserProfile() {
 	const { supabase, user } = await requireAuthenticatedUser();
 	const fallbackProfile = buildFallbackProfile(user);
 
-	const { data, error } = await supabase
+	const initialQuery = await supabase
 		.from("user_profiles")
-		.select("id, email, display_name, avatar_url, locale, timezone, created_at, updated_at")
+		.select(
+			"id, email, display_name, display_name_updated_at, avatar_url, locale, timezone, created_at, updated_at",
+		)
 		.eq("id", user.id)
 		.maybeSingle();
+
+	let data = initialQuery.data;
+	let error = initialQuery.error;
+
+	if (error && isMissingColumnError(error)) {
+		const fallbackQuery = await supabase
+			.from("user_profiles")
+			.select("id, email, display_name, avatar_url, locale, timezone, created_at, updated_at")
+			.eq("id", user.id)
+			.maybeSingle();
+
+		data = fallbackQuery.data
+			? {
+					...fallbackQuery.data,
+					display_name_updated_at: null,
+				}
+			: null;
+		error = fallbackQuery.error;
+	}
 
 	if (error) {
 		if (isMissingTableError(error)) {
@@ -109,6 +123,7 @@ export async function getCurrentUserProfile() {
 			id: data.id,
 			email: data.email ?? user.email ?? null,
 			display_name: data.display_name,
+			display_name_updated_at: data.display_name_updated_at ?? null,
 			avatar_url: data.avatar_url,
 			locale: normalizeProfileLocale(data.locale),
 			timezone: data.timezone || DEFAULT_PROFILE_TIMEZONE,
