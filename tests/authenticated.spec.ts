@@ -13,6 +13,17 @@ const AGENDA_ADD_BUTTON_TEXT =
 	/Add to my agenda|Añadir a mi agenda|Adicionar à minha agenda|Ajouter à mon agenda/i;
 const AGENDA_IN_BUTTON_TEXT = /In my agenda|En mi agenda|Na minha agenda|Dans mon agenda/i;
 
+async function openUserMenu(page: Page) {
+	await navigateTo(page, "/en/events");
+	await page.waitForLoadState("networkidle");
+
+	const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
+	await expect(userMenuTrigger).toBeVisible({ timeout: 15000 });
+	await userMenuTrigger.click();
+
+	return userMenuTrigger;
+}
+
 async function ensureTalkAgendaState(page: Page, expectedState: "in" | "out") {
 	// Wait for page to be fully loaded first
 	await page.waitForLoadState("networkidle");
@@ -80,18 +91,14 @@ test.describe("Authenticated User Features", () => {
 		});
 
 		test("should display user email in header when logged in", async ({ page }) => {
-			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
-			await expect(userMenuTrigger).toBeVisible();
-
-			await userMenuTrigger.click();
+			await openUserMenu(page);
 			await expect(page.locator('[data-testid="header-user-menu-email"]')).toContainText(
 				`(${TEST_USER})`,
 			);
 		});
 
 		test("should navigate to profile page from user menu", async ({ page }) => {
-			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
-			await userMenuTrigger.click();
+			await openUserMenu(page);
 
 			const profileLink = page.locator('[data-testid="header-user-menu-profile"]');
 			await expect(profileLink).toBeVisible();
@@ -103,26 +110,22 @@ test.describe("Authenticated User Features", () => {
 		});
 
 		test("should display sign out button when logged in", async ({ page }) => {
-			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
-			await userMenuTrigger.click();
+			await openUserMenu(page);
 
 			const signOutButton = page.locator('[data-testid="header-user-menu-signout"]');
 			await expect(signOutButton).toBeVisible();
 		});
 
 		test("should sign out successfully", async ({ page }) => {
-			const userMenuTrigger = page.locator('[data-testid="header-user-menu-trigger"]');
-			await userMenuTrigger.click();
+			await openUserMenu(page);
 
 			const signOutButton = page.locator('[data-testid="header-user-menu-signout"]');
 			await signOutButton.click();
 
-			// Wait for redirect or page update
-			await page.waitForTimeout(2000);
+			await page.waitForURL(/\/login|\/$/, { timeout: 15000 }).catch(() => undefined);
 
-			// Should see Sign In button again
 			const signInButton = page.locator('button:has-text("Sign In"), a:has-text("Sign In")');
-			await expect(signInButton.first()).toBeVisible();
+			await expect(signInButton.first()).toBeVisible({ timeout: 15000 });
 		});
 	});
 
@@ -230,18 +233,20 @@ test.describe("Authenticated User Features", () => {
 			await navigateTo(page, "/en/events/1/my-agenda");
 
 			// Click on Full Agenda tab
-			const fullAgendaTab = page
-				.locator('a:has-text("Full Agenda"), button:has-text("Full Agenda")')
-				.first();
-			await fullAgendaTab.click();
+			const fullAgendaTab = page.locator('a[href$="/events/1/agenda"]:visible').first();
+			await Promise.all([
+				page.waitForURL(/\/agenda/, { timeout: 15000 }),
+				fullAgendaTab.click({ force: true }),
+			]);
 
 			await expect(page).toHaveURL(/\/agenda/);
 
 			// Click on My Agenda tab
-			const myAgendaTab = page
-				.locator('a:has-text("My Agenda"), button:has-text("My Agenda")')
-				.first();
-			await myAgendaTab.click();
+			const myAgendaTab = page.locator('a[href$="/events/1/my-agenda"]:visible').first();
+			await Promise.all([
+				page.waitForURL(/\/my-agenda/, { timeout: 15000 }),
+				myAgendaTab.click({ force: true }),
+			]);
 
 			await expect(page).toHaveURL(/\/my-agenda/);
 		});

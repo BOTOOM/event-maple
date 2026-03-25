@@ -2,6 +2,9 @@ import { defineConfig, devices } from "@playwright/test";
 
 process.env.PLAYWRIGHT_BROWSERS_PATH ??= "0";
 
+const PLAYWRIGHT_PORT = Number(process.env.PLAYWRIGHT_PORT || 3100);
+const PLAYWRIGHT_BASE_URL = `http://localhost:${PLAYWRIGHT_PORT}`;
+
 /**
  * Playwright configuration for Event Planner
  * @see https://playwright.dev/docs/test-configuration
@@ -15,7 +18,7 @@ export default defineConfig({
 	reporter: [["html"], ["list"]],
 
 	use: {
-		baseURL: "http://localhost:3000",
+		baseURL: PLAYWRIGHT_BASE_URL,
 		trace: "on-first-retry",
 		screenshot: "only-on-failure",
 	},
@@ -28,8 +31,8 @@ export default defineConfig({
 	],
 
 	webServer: {
-		command: "pnpm run dev",
-		url: "http://localhost:3000",
+		command: `pnpm exec next dev --port ${PLAYWRIGHT_PORT} --hostname localhost`,
+		url: PLAYWRIGHT_BASE_URL,
 		reuseExistingServer: !process.env.CI,
 		timeout: 120 * 1000,
 	},

@@ -258,8 +258,25 @@ export async function loginWithEnvCredentials(page: Page, locale: string = "en")
 
 	for (let attempt = 0; attempt < 3; attempt++) {
 		await page.goto(`/${locale}/login`);
+		await page.waitForLoadState("domcontentloaded");
+
+		if (/\/(events|my-events)(?:\?|$)/.test(page.url())) {
+			return true;
+		}
+
+		const emailInput = page.locator('input[type="email"]');
+		const passwordInput = page.locator('input[type="password"]');
+
+		if (!(await emailInput.isVisible().catch(() => false))) {
+			if (attempt === 2) {
+				return false;
+			}
+
+			await page.waitForTimeout(800 * (attempt + 1));
+			continue;
+		}
 		await page.fill('input[type="email"]', email);
-		await page.fill('input[type="password"]', password);
+		await passwordInput.fill(password);
 		await page.click('button[type="submit"]');
 
 		try {
