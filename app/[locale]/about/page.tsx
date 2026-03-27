@@ -3,13 +3,21 @@ import { ArrowLeft, Calendar, CheckCircle, Heart, Sparkles, Target, Users } from
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "Static.About.metadata" });
 	return {
-		title: t("title"),
-		description: t("description"),
+		...buildPageMetadata({
+			locale,
+			path: "/about",
+			title: t("title"),
+			description: t("description"),
+		}),
+		title: {
+			absolute: t("title"),
+		},
 	};
 }
 

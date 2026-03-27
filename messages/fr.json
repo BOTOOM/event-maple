@@ -365,6 +365,10 @@
 			}
 		},
 		"List": {
+			"metadata": {
+				"title": "Explorez les événements publics - EventMaple",
+				"description": "Découvrez les événements publics publiés, consultez leurs détails et organisez votre agenda avec EventMaple."
+			},
 			"titleUpcoming": "Événements à Venir",
 			"titleAll": "Tous les Événements",
 			"searchPlaceholder": "Rechercher des événements par nom, description ou lieu...",

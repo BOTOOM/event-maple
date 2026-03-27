@@ -6,13 +6,21 @@ import { getTranslations } from "next-intl/server";
 import { CopyEmailButton } from "@/components/contact/copy-email-button";
 import { InfoCard, InfoCardGrid } from "@/components/ui/info-card";
 import { Link } from "@/lib/i18n/navigation";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "Static.Contact.metadata" });
 	return {
-		title: t("title"),
-		description: t("description"),
+		...buildPageMetadata({
+			locale,
+			path: "/contact",
+			title: t("title"),
+			description: t("description"),
+		}),
+		title: {
+			absolute: t("title"),
+		},
 	};
 }
 

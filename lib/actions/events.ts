@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { routing } from "@/lib/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
 import {
 	EventCategoryWithTranslation,
@@ -133,6 +134,19 @@ function buildEventWritePayload(formData: Partial<EventFormData>) {
 	if (formData.status !== undefined) payload.status = formData.status;
 
 	return payload;
+}
+
+function revalidatePublicEventRoutes(eventId?: number) {
+	for (const locale of routing.locales) {
+		revalidatePath(`/${locale}/events`);
+
+		if (eventId !== undefined) {
+			revalidatePath(`/${locale}/events/${eventId}`);
+			revalidatePath(`/${locale}/events/${eventId}/agenda`);
+		}
+	}
+
+	revalidatePath("/sitemap.xml");
 }
 
 // Get categories with translations for a specific locale
@@ -291,6 +305,7 @@ export async function createEvent(
 	}
 
 	revalidatePath("/[locale]/my-events", "page");
+	revalidatePublicEventRoutes(data.id);
 
 	return { success: true, eventId: data.id };
 }
@@ -322,6 +337,7 @@ export async function updateEvent(
 
 	revalidatePath("/[locale]/my-events", "page");
 	revalidatePath(`/[locale]/my-events/${eventId}`, "page");
+	revalidatePublicEventRoutes(eventId);
 
 	return { success: true };
 }
@@ -347,6 +363,7 @@ export async function deleteEvent(eventId: number): Promise<{ success: boolean; 
 	}
 
 	revalidatePath("/[locale]/my-events", "page");
+	revalidatePublicEventRoutes(eventId);
 
 	return { success: true };
 }

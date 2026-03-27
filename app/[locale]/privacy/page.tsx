@@ -8,13 +8,21 @@ import { LegalFooterSection } from "@/components/ui/legal-section";
 import { SectionHeader } from "@/components/ui/section-header";
 import { RightsGrid, UsageGrid } from "@/components/ui/usage-grid";
 import { Link } from "@/lib/i18n/navigation";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "Privacy.metadata" });
 	return {
-		title: t("title"),
-		description: t("description"),
+		...buildPageMetadata({
+			locale,
+			path: "/privacy",
+			title: t("title"),
+			description: t("description"),
+		}),
+		title: {
+			absolute: t("title"),
+		},
 	};
 }
 
