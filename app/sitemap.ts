@@ -46,20 +46,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 		if (supabaseUrl && supabaseKey) {
-			const response = await fetch(`${supabaseUrl}/rest/v1/events?select=id,start_date`, {
-				headers: {
-					apikey: supabaseKey,
-					Authorization: `Bearer ${supabaseKey}`,
+			const response = await fetch(
+				`${supabaseUrl}/rest/v1/events?select=id,start_date,created_at,updated_at,status&status=eq.published`,
+				{
+					headers: {
+						apikey: supabaseKey,
+						Authorization: `Bearer ${supabaseKey}`,
+					},
+					next: { revalidate: 3600 }, // Revalidar cada hora
 				},
-				next: { revalidate: 3600 }, // Revalidar cada hora
-			});
+			);
 
 			if (response.ok) {
 				const events: Partial<Event>[] = await response.json();
 
 				eventSitemapEntries = events.map((event) => ({
 					url: `${baseUrl}/${defaultLocale}/events/${event.id}`,
-					lastModified: new Date(event.start_date || now),
+					lastModified: new Date(
+						event.updated_at || event.created_at || event.start_date || now.toISOString(),
+					),
 					changeFrequency: "weekly" as const,
 					priority: 0.7,
 					alternates: generateAlternates(`/events/${event.id}`),

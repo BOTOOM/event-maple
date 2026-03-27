@@ -22,7 +22,7 @@
 		"About": {
 			"metadata": {
 				"title": "About EventMaple - Manage your events intelligently",
-				"description": "Discover how EventMaple helps the community manage events and personalized agendas efficiently and for free."
+				"description": "Discover how EventMaple helps the community manage events and personalized agendas efficiently. Core features always free — premium options available to support sustainability and unlock additional capabilities."
 			},
 			"back": "Back to home",
 			"header": {
@@ -31,7 +31,7 @@
 			},
 			"mission": {
 				"title": "Our Mission",
-				"text1": "EventMaple was born with a <strong>clear and simple purpose</strong>: to empower the community to create, organize, and participate in events of any kind, completely free and accessible to everyone.",
+				"text1": "EventMaple was born with a <strong>clear and simple purpose</strong>: to empower the community to create, organize, and participate in events of any kind. Our platform's core features are and will always be free. Optional premium features are available to support platform sustainability and unlock additional capabilities.",
 				"text2": "Whether it's a tech event, a conference, a community workshop, or any other type of gathering, EventMaple gives you the tools you need for both organizers and attendees to manage all information in one place."
 			},
 			"offer": {
@@ -57,7 +57,7 @@
 			},
 			"vision": {
 				"title": "Made for the Community",
-				"text1": "EventMaple is designed with <strong>you</strong> and the whole community in mind. We believe managing events shouldn't be complicated or expensive. That's why we offer a completely free platform that puts the power of organization in your hands.",
+				"text1": "EventMaple is designed with <strong>you</strong> and the whole community in mind. We believe managing events shouldn't be complicated or expensive. Our core platform is and always will be free for essential features. Premium options are available for those who need advanced capabilities, helping us maintain and improve the service sustainably.",
 				"text2": "Whether you're an organizer looking to facilitate your attendees' experience, or a participant wanting to make the most of every event, EventMaple is here to help you keep everything structured, accessible, and under control.",
 				"highlight": "💡 <strong>Our vision:</strong> A world where any person or group can organize and participate in events simply, intuitively, and effectively, strengthening community ties and facilitating access to shared knowledge and experiences."
 			},
@@ -71,15 +71,15 @@
 					"title": "Simplicity",
 					"desc": "An easy-to-use, intuitive, and accessible tool for everyone"
 				},
-				"free": {
-					"title": "Always Free",
-					"desc": "We believe in free access to knowledge and digital tools"
+				"accessible": {
+					"title": "Accessible to All",
+					"desc": "Core features always free for everyone — premium options available to support platform growth"
 				}
 			},
 			"cta": {
 				"title": "Ready to Start?",
 				"text": "Join EventMaple and start managing your events intelligently",
-				"createAccount": "Create Free Account",
+				"createAccount": "Create Account",
 				"explore": "Explore Events"
 			}
 		},
@@ -154,7 +154,7 @@
 			"titleMobile": "Organize your event experience.",
 			"subtitle": "Your event agenda, simplified. Manage and enjoy every moment without complications.",
 			"subtitleMobile": "Create your event agenda, get notifications and don't miss any activity.",
-			"cta": "Start now for free",
+			"cta": "Start now — core features free forever",
 			"ctaMobile": "Start"
 		},
 		"Benefits": {
@@ -365,6 +365,10 @@
 			}
 		},
 		"List": {
+			"metadata": {
+				"title": "Explore public events - EventMaple",
+				"description": "Discover published public events, explore their details, and organize your agenda with EventMaple."
+			},
 			"titleUpcoming": "Upcoming Events",
 			"titleAll": "All Events",
 			"searchPlaceholder": "Search events by name, description or location...",

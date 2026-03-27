@@ -27,7 +27,8 @@ export default async function AgendaPage({ params }: AgendaPageProps) {
 		.from("events")
 		.select("*")
 		.eq("id", eventId)
-		.single();
+		.eq("status", "published")
+		.maybeSingle();
 
 	if (eventError || !event) {
 		notFound();

@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { Toaster } from "@/components/ui/toaster";
 import { routing } from "@/lib/i18n/routing";
+import { getLocalizedUrl, siteConfig } from "@/lib/seo";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -26,10 +27,10 @@ export async function generateMetadata(
 	const t = await getTranslations({ locale, namespace: "Metadata" });
 
 	return {
-		metadataBase: new URL("https://event-maple.edwardiaz.dev"),
+		metadataBase: new URL(siteConfig.url),
 		title: {
 			default: t("title"),
-			template: "%s | EventMaple",
+			template: `%s | ${siteConfig.name}`,
 		},
 		description: t("description"),
 		manifest: "/manifest.webmanifest",
@@ -43,23 +44,14 @@ export async function generateMetadata(
 			"EventMaple",
 			"Open Source",
 		],
-		authors: [{ name: "Edward Díaz", url: "https://edwardiaz.dev" }],
-		creator: "Edward Díaz",
-		publisher: "EventMaple",
-		alternates: {
-			canonical: "/",
-			languages: {
-				en: "/en",
-				es: "/es",
-				fr: "/fr",
-				pt: "/pt",
-			},
-		},
+		authors: [{ name: siteConfig.authorName, url: siteConfig.authorUrl }],
+		creator: siteConfig.authorName,
+		publisher: siteConfig.name,
 		openGraph: {
 			type: "website",
 			locale: locale,
-			url: "https://event-maple.edwardiaz.dev/",
-			siteName: "EventMaple",
+			url: getLocalizedUrl(locale),
+			siteName: siteConfig.name,
 			title: t("title"),
 			description: t("description"),
 			images: [
@@ -67,7 +59,7 @@ export async function generateMetadata(
 					url: "/opengraph-image",
 					width: 1200,
 					height: 630,
-					alt: "EventMaple",
+					alt: siteConfig.name,
 				},
 			],
 		},
@@ -76,7 +68,7 @@ export async function generateMetadata(
 			title: t("title"),
 			description: t("description"),
 			images: ["/opengraph-image"],
-			creator: "@edwardiaz",
+			creator: siteConfig.twitterHandle,
 		},
 		robots: {
 			index: true,
@@ -116,7 +108,7 @@ export default async function LocaleLayout({
 					Skip to main content
 				</a>
 				<NextIntlClientProvider messages={messages}>
-					<JsonLd />
+					<JsonLd locale={locale} />
 					<ServiceWorkerRegister />
 					{children}
 					<Toaster />

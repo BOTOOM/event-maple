@@ -1,5 +1,5 @@
 import { ArrowLeft, Calendar, CalendarDays, MapPin, Users } from "lucide-react";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -8,6 +8,13 @@ import { FavoriteButton } from "@/components/events/favorite-button";
 import { Button } from "@/components/ui/button";
 import { InfoRow } from "@/components/ui/info-row";
 import { Link } from "@/lib/i18n/navigation";
+import {
+	getLanguageAlternates,
+	getLocalizedPath,
+	getLocalizedUrl,
+	sanitizeJsonLd,
+	siteConfig,
+} from "@/lib/seo";
 import { createClient } from "@/lib/supabase/server";
 import { getEventTitle } from "@/lib/types/event";
 
@@ -19,40 +26,66 @@ interface EventDetailPageProps {
 }
 
 // Generate Metadata for SEO
-export async function generateMetadata(
-	{ params }: EventDetailPageProps,
-	parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: EventDetailPageProps): Promise<Metadata> {
 	const resolvedParams = await params;
 	const eventId = Number.parseInt(resolvedParams.eventId, 10);
 	const t = await getTranslations({ locale: resolvedParams.locale, namespace: "Events.Detail" });
+	const eventPath = `/events/${resolvedParams.eventId}`;
 
 	if (Number.isNaN(eventId)) {
 		return {
 			title: t("notFound"),
+			robots: {
+				index: false,
+				follow: false,
+			},
 		};
 	}
 
 	const supabase = await createClient();
-	const { data: event } = await supabase.from("events").select("*").eq("id", eventId).single();
+	const { data: event } = await supabase
+		.from("events")
+		.select("*")
+		.eq("id", eventId)
+		.eq("status", "published")
+		.maybeSingle();
 
 	if (!event) {
 		return {
 			title: t("notFound"),
+			robots: {
+				index: false,
+				follow: false,
+			},
 		};
 	}
 
 	const eventTitle = getEventTitle(event);
-	const previousImages = (await parent).openGraph?.images || [];
+	const description = event.description?.substring(0, 160) || `${t("about")} ${eventTitle}`;
+	const imageUrl = event.image_url || "/opengraph-image";
 
 	return {
-		title: `${eventTitle} | EventMaple`,
-		description: event.description?.substring(0, 160) || `${t("about")} ${eventTitle}`,
+		title: eventTitle,
+		description: description,
+		alternates: {
+			canonical: getLocalizedPath(resolvedParams.locale, eventPath),
+			languages: getLanguageAlternates(eventPath),
+		},
 		openGraph: {
 			title: eventTitle,
-			description: event.description?.substring(0, 160),
-			images: event.image_url ? [event.image_url, ...previousImages] : previousImages,
+			description: description,
+			url: getLocalizedUrl(resolvedParams.locale, eventPath),
+			siteName: siteConfig.name,
+			locale: resolvedParams.locale,
+			images: [imageUrl],
 			type: "website",
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: eventTitle,
+			description: description,
+			images: [imageUrl],
+			creator: siteConfig.twitterHandle,
 		},
 	};
 }
@@ -77,7 +110,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 		.from("events")
 		.select("*")
 		.eq("id", eventId)
-		.single();
+		.eq("status", "published")
+		.maybeSingle();
 
 	if (error || !event) {
 		notFound();
@@ -104,14 +138,17 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "Event",
+		url: getLocalizedUrl(resolvedParams.locale, `/events/${eventId}`),
 		name: getEventTitle(event),
 		startDate: event.start_date,
 		endDate: event.end_date,
 		eventStatus: "https://schema.org/EventScheduled",
 		eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+		inLanguage: resolvedParams.locale,
+		isAccessibleForFree: true,
 		location: {
 			"@type": "Place",
-			name: event.location || "Ubicación por definir",
+			name: event.location || siteConfig.name,
 			address: {
 				"@type": "PostalAddress",
 				addressLocality: event.location || "",
@@ -121,8 +158,8 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 		description: event.description,
 		organizer: {
 			"@type": "Organization",
-			name: creatorDisplayName || event.organizer || "EventMaple User",
-			url: "https://event-maple.edwardiaz.dev",
+			name: creatorDisplayName || event.organizer || t("createdByUnknown"),
+			url: siteConfig.url,
 		},
 	};
 
@@ -147,7 +184,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 			{/* Structured Data for SEO */}
 			<script
 				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				dangerouslySetInnerHTML={{ __html: sanitizeJsonLd(jsonLd) }}
 			/>
 
 			{/* Mobile Header */}
