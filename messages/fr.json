@@ -22,7 +22,7 @@
 		"About": {
 			"metadata": {
 				"title": "À propos d'EventMaple - Gérez vos événements intelligemment",
-				"description": "Découvrez comment EventMaple aide la communauté à gérer efficacement et gratuitement des événements et des agendas personnalisés."
+				"description": "Découvrez comment EventMaple aide la communauté à gérer efficacement des événements et des agendas personnalisés. Actuellement gratuit pendant notre croissance — tarifs abordables à venir pour assurer la viabilité à long terme."
 			},
 			"back": "Retour à l'accueil",
 			"header": {
@@ -31,7 +31,7 @@
 			},
 			"mission": {
 				"title": "Notre Mission",
-				"text1": "EventMaple est né avec un <strong>objectif clair et simple</strong> : permettre à la communauté de créer, organiser et participer à des événements de tout type, totalement gratuitement et accessible à tous.",
+				"text1": "EventMaple est né avec un <strong>objectif clair et simple</strong> : permettre à la communauté de créer, organiser et participer à des événements de tout type. Notre plateforme est actuellement gratuite pendant notre croissance, et nous introduirons bientôt des tarifs abordables pour garantir que le service soit viable et continue de s'améliorer.",
 				"text2": "Qu'il s'agisse d'un événement technologique, d'une conférence, d'un atelier communautaire ou de tout autre type de rassemblement, EventMaple vous donne les outils dont vous avez besoin pour que les organisateurs et les participants puissent gérer toutes les informations en un seul endroit."
 			},
 			"offer": {
@@ -57,7 +57,7 @@
 			},
 			"vision": {
 				"title": "Fait pour la Communauté",
-				"text1": "EventMaple est conçu en pensant à <strong>vous</strong> et à toute la communauté. Nous pensons que la gestion d'événements ne devrait pas être compliquée ou coûteuse. C'est pourquoi nous offrons une plateforme totalement gratuite qui met le pouvoir de l'organisation entre vos mains.",
+				"text1": "EventMaple est conçu en pensant à <strong>vous</strong> et à toute la communauté. Nous pensons que la gestion d'événements ne devrait pas être compliquée ou coûteuse. Notre plateforme est actuellement gratuite pendant notre établissement, et nous introduirons bientôt des tarifs minimaux pour assurer la viabilité à long terme sans compromettre l'accessibilité.",
 				"text2": "Que vous soyez un organisateur cherchant à faciliter l'expérience de vos participants, ou un participant voulant tirer le meilleur parti de chaque événement, EventMaple est là pour vous aider à garder tout structuré, accessible et sous contrôle.",
 				"highlight": "💡 <strong>Notre vision :</strong> Un monde où toute personne ou groupe peut organiser et participer à des événements de manière simple, intuitive et efficace, renforçant les liens communautaires et facilitant l'accès aux connaissances et expériences partagées."
 			},
@@ -71,15 +71,15 @@
 					"title": "Simplicité",
 					"desc": "Un outil facile à utiliser, intuitif et accessible pour tous"
 				},
-				"free": {
-					"title": "Toujours Gratuit",
-					"desc": "Nous croyons en l'accès gratuit à la connaissance et aux outils numériques"
+				"accessible": {
+					"title": "Accessible à Tous",
+					"desc": "Tarifs accessibles — gratuit actuellement pendant notre croissance, avec des tarifs minimaux durables à venir"
 				}
 			},
 			"cta": {
 				"title": "Prêt à Commencer ?",
 				"text": "Rejoignez EventMaple et commencez à gérer vos événements intelligemment",
-				"createAccount": "Créer un Compte Gratuit",
+				"createAccount": "Créer un Compte",
 				"explore": "Explorer les Événements"
 			}
 		},
@@ -154,7 +154,7 @@
 			"titleMobile": "Organisez votre expérience événementielle.",
 			"subtitle": "Votre agenda d'événements, simplifié. Gérez et profitez de chaque instant sans complications.",
 			"subtitleMobile": "Créez votre agenda d'événements, recevez des notifications et ne manquez aucune activité.",
-			"cta": "Commencez maintenant gratuitement",
+			"cta": "Commencez maintenant — gratuit pour le moment",
 			"ctaMobile": "Commencer"
 		},
 		"Benefits": {

@@ -1,10 +1,10 @@
 import { getLocalizedUrl, sanitizeJsonLd, siteConfig } from "@/lib/seo";
 
 const localeDescriptions: Record<string, string> = {
-	en: "Free platform to manage public events, talks, and personal agendas in one place.",
-	es: "Plataforma gratuita para gestionar eventos públicos, charlas y agendas personales en un solo lugar.",
-	fr: "Plateforme gratuite pour gérer des événements publics, des conférences et des agendas personnels en un seul endroit.",
-	pt: "Plataforma gratuita para gerenciar eventos públicos, palestras e agendas pessoais em um só lugar.",
+	en: "Platform for managing public events, talks, and personal agendas. Currently free while we grow — affordable pricing coming soon for long-term sustainability.",
+	es: "Plataforma para gestionar eventos públicos, charlas y agendas personales. Actualmente gratuita mientras crecemos — precios accesibles próximamente para asegurar la sostenibilidad a largo plazo.",
+	fr: "Plateforme pour gérer des événements publics, des conférences et des agendas personnels. Actuellement gratuite pendant notre croissance — tarifs abordables à venir pour assurer la viabilité à long terme.",
+	pt: "Plataforma para gerenciar eventos públicos, palestras e agendas pessoais. Atualmente gratuita enquanto crescemos — preços acessíveis em breve para garantir a sustentabilidade a longo prazo.",
 };
 
 interface JsonLdProps {
