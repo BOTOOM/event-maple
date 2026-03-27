@@ -82,6 +82,10 @@
 						"Respecter les obligations légales"
 					]
 				},
+				"analytics": {
+					"title": "Analytique et Utilisation des Données",
+					"text": "Nous pouvons utiliser des données agrégées et anonymisées à des fins analytiques pour comprendre les modèles d'utilisation de la plateforme, améliorer nos services et générer des informations sur les tendances d'événements. Ces données analytiques ne vous identifient pas personnellement et sont utilisées uniquement pour l'amélioration de la plateforme et la recherche."
+				},
 				"commitment": "<strong>Engagement :</strong> Nous ne vendons, ne louons ni ne partageons JAMAIS vos informations personnelles avec des tiers à des fins commerciales ou marketing."
 			},
 			"storage": {
@@ -156,7 +160,7 @@
 			},
 			"minors": {
 				"title": "9. Confidentialité des Mineurs",
-				"text1": "EventMaple ne s'adresse pas aux enfants de moins de 16 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 16 ans.",
+				"text1": "EventMaple ne s'adresse pas aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans.",
 				"text2": "Si vous êtes parent ou tuteur et découvrez que votre enfant nous a fourni des informations personnelles, veuillez nous contacter immédiatement afin que nous puissions les supprimer de nos systèmes."
 			},
 			"changes": {
@@ -200,7 +204,7 @@
 			"acceptance": {
 				"title": "1. Acceptation des Conditions",
 				"text1": "En accédant et en utilisant EventMaple (ci-après, \"la Plateforme\" ou \"le Service\"), vous acceptez de respecter et d'être lié par ces Conditions Générales. Si vous n'êtes pas d'accord avec une partie de ces conditions, veuillez ne pas utiliser nos services.",
-				"text2": "EventMaple est un projet personnel non commercial qui fournit des outils de gestion d'événements et d'agendas. Le service est actuellement gratuit pendant notre croissance; des tarifs abordables seront bientôt introduits pour assurer la viabilité à long terme."
+				"text2": "EventMaple est un projet personnel non commercial qui fournit des outils de gestion d'événements et d'agendas. Les fonctions principales de la plateforme sont et resteront toujours gratuites. Des fonctions premium optionnelles sont disponibles pour soutenir la viabilité de la plateforme et débloquer des capacités additionnelles."
 			},
 			"description": {
 				"title": "2. Description du Service",
@@ -213,6 +217,24 @@
 					"Créer et personnaliser leur agenda personnel d'événements"
 				],
 				"text": "Le service est fourni \"tel quel\" et peut être soumis à des modifications, améliorations ou interruptions sans préavis."
+			},
+			"payments": {
+				"title": "3. Paiements et Fonctionnalités Premium",
+				"intro": "EventMaple offre des fonctionnalités premium optionnelles pour soutenir la viabilité de la plateforme. Tout le traitement des paiements est géré par des fournisseurs de paiement externes (tels que Stripe). En vous abonnant aux fonctionnalités premium, vous reconnaissez et acceptez que:",
+				"items": [
+					"Toutes les informations de paiement sont collectées, traitées et stockées exclusivement par le fournisseur de paiement externe",
+					"EventMaple ne stocke pas et n'a pas accès à vos détails de paiement complets (numéros de cartes de crédit, informations bancaires, etc.)",
+					"Les transactions de paiement sont soumises aux conditions de service et politiques de confidentialité du fournisseur de paiement externe",
+					"Tout litige lié à la facturation, au traitement des paiements ou aux remboursements doit être adressé au fournisseur de paiement externe conformément à ses politiques"
+				],
+				"cancellation": {
+					"title": "3.1. Politique d'Annulation",
+					"text": "Vous pouvez annuler votre abonnement premium à tout moment. L'annulation empêchera le prochain cycle de facturation de débiter votre moyen de paiement. Aucun remboursement ne sera émis pour la période de facturation en cours déjà payée. Vous continuerez à avoir accès aux fonctionnalités premium jusqu'à la fin de votre période de facturation actuelle."
+				},
+				"refunds": {
+					"title": "3.2. Politique de Remboursement",
+					"text": "En raison de la nature des services numériques et du modèle freemium d'EventMaple, nous n'offrons pas de remboursements pour les abonnements premium. L'annulation arrête uniquement les cycles de facturation futurs."
+				}
 			},
 			"account": {
 				"title": "3. Inscription et Compte Utilisateur",
@@ -284,13 +306,54 @@
 					"text": "EventMaple se réserve le droit, à sa seule discrétion, de supprimer tout événement ou contenu violant ces conditions sans préavis. Les utilisateurs publiant du contenu interdit peuvent faire face à une suspension ou résiliation immédiate et permanente de leur compte. Dans les cas de violations graves, EventMaple peut signaler les informations de l'utilisateur aux autorités compétentes. En utilisant cette Plateforme, vous reconnaissez que ces mesures d'application sont nécessaires pour maintenir un environnement communautaire sûr et respectueux."
 				}
 			},
+			"impersonation": {
+				"title": "7. Politique Anti-Usurpation",
+				"intro": "EventMaple interdit strictement l'usurpation d'identité de personnes, organisations ou événements. Cela comprend:",
+				"items": [
+					"Créer des événements qui prétendent faussement être organisés par une organisation sans autorisation",
+					"Utiliser l'identité ou les identifiants d'une autre personne sans son consentement explicite",
+					"Créer des profils ou événements faux conçus pour tromper les utilisateurs sur l'identité de l'organisateur",
+					"Utiliser des marques commerciales, logos ou identité visuelle d'organisations sans permission"
+				],
+				"consequences": {
+					"title": "7.1. Conséquences de l'Usurpation",
+					"text": "Si nous détectons qu'un utilisateur usurpe une organisation ou crée un événement frauduleux, nous nous réservons le droit de supprimer immédiatement l'événement, bannir définitivement l'utilisateur de la plateforme, et signaler l'incident aux autorités compétentes si nécessaire."
+				},
+				"reporting": {
+					"title": "7.2. Signalement d'Usurpation",
+					"intro": "Si vous pensez que votre événement ou organisation est usurpé, veuillez le signaler à notre email de contact avec les informations suivantes:",
+					"items": [
+						"Votre nom et coordonnées",
+						"Preuve que vous êtes le propriétaire légitime de l'événement ou de l'organisation",
+						"Détails de l'événement ou utilisateur usurpateur",
+						"Toute preuve étayant votre réclamation"
+					],
+					"process": "Lors de la réception d'un signalement valide, nous examinerons l'affaire et prendrons les mesures appropriées, qui peuvent inclure la suppression du contenu frauduleux et la suspension du compte usurpateur. Vous devez vérifier votre identité en tant que propriétaire légitime de l'événement ou de l'organisation pour que nous traitions votre demande."
+				}
+			},
+			"security": {
+				"title": "8. Politique de Sécurité et Anti-Hacking",
+				"intro": "Pour maintenir la sécurité et l'intégrité de la plateforme, les activités suivantes sont strictement interdites:",
+				"items": [
+					"Tenter de pirater, violer ou contourner toute mesure de sécurité de la Plateforme",
+					"Utiliser des outils automatisés, bots, scrapers ou scripts pour accéder à la Plateforme sans autorisation",
+					"S'engager dans des activités qui pourraient endommager, désactiver ou surcharger nos serveurs ou infrastructure",
+					"Tenter d'accéder à des données ou comptes qui ne vous appartiennent pas",
+					"Exploiter des bugs ou vulnérabilités dans la Plateforme à quelque fin que ce soit",
+					"Distribuer des logiciels malveillants, virus ou autre code nuisible via la Plateforme"
+				],
+				"consequences": {
+					"title": "8.1. Conséquences des Violations de Sécurité",
+					"text": "Toute tentative de compromettre la sécurité de la plateforme entraînera la résiliation immédiate et permanente du compte. Nous pouvons également poursuivre des actions légales contre les personnes s'engageant dans des tentatives de piratage ou violations de sécurité, et signaler de telles activités aux autorités policières."
+				}
+			},
 			"ip": {
-				"title": "7. Propriété Intellectuelle",
-				"text1": "Tout le contenu de la Plateforme, y compris, mais sans s'y limiter, le texte, les graphiques, les logos, les icônes, les images, les clips audio, les téléchargements numériques et les compilations de données, est la propriété d'EventMaple ou de ses fournisseurs de contenu et est protégé par les lois internationales sur le droit d'auteur.",
+				"title": "9. Propriété Intellectuelle",
+				"text1": "Tout le contenu de la Plateforme, y compris, mais sans s'y limiter, le texte, les graphiques, les logos, les icônes, les images, les clips audio, les téléchargements numériques et les compilations de données, est la propriété d'Edwar Diaz Ruiz (https://edwardiaz.dev/, https://github.com/BOTOOM) et est protégé par les lois internationales sur le droit d'auteur. Le logiciel, la conception et tous les éléments originaux d'EventMaple sont la propriété intellectuelle exclusive du créateur.",
 				"text2": "Les informations sur des événements spécifiques peuvent être la propriété des organisateurs respectifs et sont affichées à titre informatif."
 			},
 			"liability": {
-				"title": "8. Limitation de Responsabilité",
+				"title": "10. Limitation de Responsabilité",
 				"intro": "EventMaple est fourni en tant que projet personnel sans garantie d'aucune sorte. Dans toute la mesure permise par la loi applicable :",
 				"items": [
 					"Nous ne garantissons pas que le Service sera ininterrompu, opportun, sécurisé ou exempt d'erreurs",
@@ -301,27 +364,40 @@
 				"text": "L'utilisateur est responsable de vérifier directement auprès des organisateurs d'événements toute information critique avant de prendre des décisions basées sur les informations affichées sur la Plateforme."
 			},
 			"modifications": {
-				"title": "9. Modifications du Service",
+				"title": "11. Modifications du Service",
 				"text1": "Nous nous réservons le droit de modifier, suspendre ou interrompre le Service (ou toute partie de celui-ci) à tout moment, avec ou sans préavis. Nous ne serons pas responsables envers vous ou des tiers pour toute modification, suspension ou interruption du Service.",
 				"text2": "En tant que projet personnel, EventMaple peut connaître des périodes d'inactivité ou des changements importants dans ses fonctionnalités sans préavis."
 			},
+			"backup": {
+				"title": "12. Sauvegarde de Données et Perte",
+				"text1": "Bien que nous mettions en œuvre des mesures raisonnables pour protéger et sauvegarder les données, nous ne garantissons pas la récupération des données utilisateur en cas de suppression accidentelle, défaillances techniques ou autres circonstances imprévues.",
+				"text2": "Les utilisateurs sont responsables de maintenir leurs propres sauvegardes des informations critiques d'événements et du contenu. EventMaple ne sera pas responsable de toute perte de données, y compris mais sans s'y limiter les détails d'événements, images, préférences utilisateur ou informations de compte."
+			},
+			"thirdPartyLinks": {
+				"title": "13. Liens Tiers",
+				"text": "La Plateforme peut contenir des liens vers des sites web ou services externes qui ne sont pas détenus ou contrôlés par EventMaple. Nous n'avons aucun contrôle sur, et n'assumons aucune responsabilité pour, le contenu, les politiques de confidentialité ou pratiques de sites web ou services tiers. Vous reconnaissez et acceptez qu'EventMaple ne sera pas responsable, directement ou indirectement, de tout dommage ou perte causé ou prétendument causé par l'utilisation de ou la confiance en tout contenu, biens ou services disponibles sur ou via de tels sites web ou services."
+			},
+			"forceMajeure": {
+				"title": "14. Force Majeure",
+				"text": "EventMaple ne sera pas responsable de tout manquement ou retard dans l'exécution de ses obligations aux termes des présentes Conditions lorsqu'un tel manquement ou retard résulte de circonstances indépendantes de notre volonté raisonnable, y compris mais sans s'y limiter les catastrophes naturelles, guerre, terrorisme, émeutes, embargos, actes d'autorités civiles ou militaires, incendies, inondations, accidents, grèves, pandémies ou pénuries de transport, installations, carburant, énergie, main-d'œuvre ou matériaux."
+			},
 			"termination": {
-				"title": "10. Résiliation",
+				"title": "15. Résiliation",
 				"text1": "Nous pouvons résilier ou suspendre votre accès à la Plateforme immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris, sans limitation, si vous enfreignez ces Conditions.",
 				"text2": "Vous pouvez fermer votre compte à tout moment en nous contactant ou en supprimant votre profil depuis les paramètres de votre compte. Lors de la résiliation, votre droit d'utiliser le Service cessera immédiatement."
 			},
 			"law": {
-				"title": "11. Loi Applicable et Juridiction",
+				"title": "16. Loi Applicable, Juridiction et Résolution des Litiges",
 				"text1": "Ces Conditions seront régies et interprétées conformément aux lois applicables, sans tenir compte de ses dispositions relatives aux conflits de lois.",
-				"text2": "Tout litige lié à ces Conditions ou à l'utilisation de la Plateforme sera résolu par une négociation de bonne foi entre les parties."
+				"text2": "Tout litige lié à ces Conditions ou à l'utilisation de la Plateforme sera d'abord tenté d'être résolu par une négociation de bonne foi entre les parties. Si la négociation échoue, les litiges seront résolus par arbitrage contraignant ou devant les tribunaux de la juridiction applicable, à la discrétion d'EventMaple."
 			},
 			"changes": {
-				"title": "12. Modifications des Conditions",
+				"title": "17. Modifications des Conditions",
 				"text1": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Lorsque nous apportons des modifications, nous mettrons à jour la date de \"dernière mise à jour\" en haut de cette page.",
 				"text2": "Votre utilisation continue de la Plateforme après tout changement constitue votre acceptation des nouvelles Conditions. Nous vous recommandons de consulter régulièrement ces Conditions pour rester informé de toute mise à jour."
 			},
 			"contact": {
-				"title": "13. Informations de Contact",
+				"title": "18. Informations de Contact",
 				"intro": "Si vous avez des questions, des commentaires ou des préoccupations concernant ces Conditions Générales, vous pouvez nous contacter via :",
 				"email": "E-mail :"
 			}
