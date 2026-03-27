@@ -22,7 +22,7 @@
 		"About": {
 			"metadata": {
 				"title": "Acerca de EventMaple - Gestiona tus eventos de forma inteligente",
-				"description": "Descubre cómo EventMaple ayuda a la comunidad a gestionar eventos y agendas personalizadas de manera eficiente. Actualmente gratuita mientras crecemos — precios accesibles próximamente para asegurar la sostenibilidad a largo plazo."
+				"description": "Descubre cómo EventMaple ayuda a la comunidad a gestionar eventos y agendas personalizadas de manera eficiente. Funciones principales siempre gratuitas — opciones premium disponibles para apoyar la sostenibilidad y desbloquear capacidades adicionales."
 			},
 			"back": "Volver al inicio",
 			"header": {
@@ -31,7 +31,7 @@
 			},
 			"mission": {
 				"title": "Nuestra Misión",
-				"text1": "EventMaple nació con un <strong>propósito claro y simple</strong>: empoderar a la comunidad para crear, organizar y participar en eventos de cualquier tipo. Nuestra plataforma es gratuita actualmente mientras crecemos, y próximamente introduciremos precios accesibles para garantizar que el servicio sea sostenible y siga mejorando.",
+				"text1": "EventMaple nació con un <strong>propósito claro y simple</strong>: empoderar a la comunidad para crear, organizar y participar en eventos de cualquier tipo. Las funciones principales de nuestra plataforma son y siempre serán gratuitas. Hay funciones premium opcionales disponibles para apoyar la sostenibilidad de la plataforma y desbloquear capacidades adicionales.",
 				"text2": "Ya sea un evento tecnológico, una conferencia, un taller comunitario o cualquier otro tipo de reunión, EventMaple te brinda las herramientas necesarias para que tanto organizadores como asistentes puedan gestionar toda la información en un solo lugar."
 			},
 			"offer": {
@@ -57,7 +57,7 @@
 			},
 			"vision": {
 				"title": "Hecho para la Comunidad",
-				"text1": "EventMaple está diseñado pensando en <strong>ti</strong> y en toda la comunidad. Creemos que gestionar eventos no debería ser complicado ni costoso. Nuestra plataforma es gratuita actualmente mientras nos establecemos, y próximamente introduciremos precios mínimos para asegurar la sostenibilidad a largo plazo sin comprometer la accesibilidad.",
+				"text1": "EventMaple está diseñado pensando en <strong>ti</strong> y en toda la comunidad. Creemos que gestionar eventos no debería ser complicado ni costoso. Nuestra plataforma principal es y siempre será gratuita para funciones esenciales. Hay opciones premium disponibles para quienes necesiten capacidades avanzadas, ayudándonos a mantener y mejorar el servicio de forma sostenible.",
 				"text2": "Ya seas un organizador que busca facilitar la experiencia de sus asistentes, o un participante que quiere aprovechar al máximo cada evento, EventMaple está aquí para ayudarte a mantener todo estructurado, accesible y bajo control.",
 				"highlight": "💡 <strong>Nuestra visión:</strong> Un mundo donde cualquier persona o grupo pueda organizar y participar en eventos de forma simple, intuitiva y efectiva, fortaleciendo los lazos comunitarios y facilitando el acceso al conocimiento y experiencias compartidas."
 			},
@@ -73,7 +73,7 @@
 				},
 				"accesible": {
 					"title": "Accesible para Todos",
-					"desc": "Precios accesibles — gratuita actualmente mientras crecemos, con precios sostenibles mínimos próximamente"
+					"desc": "Funciones principales siempre gratuitas para todos — opciones premium disponibles para apoyar el crecimiento de la plataforma"
 				}
 			},
 			"cta": {
@@ -154,7 +154,7 @@
 			"titleMobile": "Organiza tu experiencia en el evento.",
 			"subtitle": "Tu agenda de eventos, simplificada. Gestiona y disfruta de cada momento sin complicaciones.",
 			"subtitleMobile": "Crea tu agenda de eventos, recibe notificaciones y no te pierdas ninguna actividad.",
-			"cta": "Empieza ahora — gratuita por tiempo limitado",
+			"cta": "Empieza ahora — funciones principales gratis para siempre",
 			"ctaMobile": "Empezar"
 		},
 		"Benefits": {
